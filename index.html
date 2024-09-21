@@ -26,7 +26,7 @@
             padding: 20px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 0 0 20px 20px;
+            border-radius: 0 0 15px 15px;
             /* 圆角效果 */
         }
 
@@ -83,7 +83,7 @@
             height: auto;
             border-radius: 20px;
             /* 圆角效果 */
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .header h1 {
@@ -154,6 +154,9 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
         }
 
         .card:hover {
@@ -203,6 +206,24 @@
         .footer p {
             margin-bottom: 0;
             font-size: 1rem;
+        }
+
+        .card-container {
+            position: relative;
+        }
+
+        .card-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: -1;
+            border-radius: 20px;
+            /* 圆角效果 */
         }
 
         @media (max-width: 768px) {
@@ -301,32 +322,38 @@
                 <h2 data-aos="fade-up" data-aos-duration="1000">我是帅比</h2>
                 <div class="row">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                        <div class="card p-4">
-                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
-                            <div class="card-body">
-                                <h5 class="card-title">卡片标题1</h5>
-                                <p class="card-text">我是帅比</p>
-                                <a href="#" class="btn btn-primary">了解更多</a>
+                        <div class="card-container">
+                            <div class="card p-4">
+                                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
+                                <div class="card-body">
+                                    <h5 class="card-title">卡片标题1</h5>
+                                    <p class="card-text">我是帅比</p>
+                                    <a href="#" class="btn btn-primary">了解更多</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                        <div class="card p-4">
-                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
-                            <div class="card-body">
-                                <h5 class="card-title">卡片标题2</h5>
-                                <p class="card-text">我是帅比</p>
-                                <a href="#" class="btn btn-primary">了解更多</a>
+                        <div class="card-container">
+                            <div class="card p-4">
+                                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
+                                <div class="card-body">
+                                    <h5 class="card-title">卡片标题2</h5>
+                                    <p class="card-text">我是帅比</p>
+                                    <a href="#" class="btn btn-primary">了解更多</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                        <div class="card p-4">
-                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
-                            <div class="card-body">
-                                <h5 class="card-title">卡片标题3</h5>
-                                <p class="card-text">我是帅比</p>
-                                <a href="#" class="btn btn-primary">了解更多</a>
+                        <div class="card-container">
+                            <div class="card p-4">
+                                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
+                                <div class="card-body">
+                                    <h5 class="card-title">卡片标题3</h5>
+                                    <p class="card-text">我是帅比</p>
+                                    <a href="#" class="btn btn-primary">了解更多</a>
+                                </div>
                             </div>
                         </div>
                     </div>
