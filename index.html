@@ -21,15 +21,18 @@
         }
 
         .navbar {
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* 半透明背景 */
+            backdrop-filter: blur(10px);
+            /* 毛玻璃效果 */
             padding: 20px 0;
+            transition: background-color 0.3s ease;
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.7rem;
             color: #1246ff;
-            font-family: 'Poppins', sans-serif; 
         }
 
         .nav-link {
@@ -115,6 +118,7 @@
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            overflow: hidden;
         }
 
         .card:hover {
@@ -147,8 +151,8 @@
         }
 
         .btn-primary:hover {
-            background-color: #1246ff;
-            border-color: #1246ff;
+            background-color: #0d38e0;
+            border-color: #0d38e0;
         }
 
         .footer {
@@ -174,7 +178,7 @@
         }
 
         .nav-link.forum-button:hover {
-            background-color: #1246ff;
+            background-color: #0d38e0;
         }
 
         @media (max-width: 768px) {
