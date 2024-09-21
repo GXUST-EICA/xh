@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌入式智控协会评论区</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">嵌入式智控协会文章</h2>
+    <p class="text-center">欢迎阅读我们的内容，下面可以进行评论。</p>
+
+    <section class="additional-content mt-5">
+        <div id="disqus_thread"></div>
+        <script>
+            var disqus_config = function () {
+                this.page.url = window.location.href;  // 当前页面的 URL
+                this.page.identifier = 'embedded-control-basics'; // 替换为该页面的唯一标识符
+            };
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://eica.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>请启用 JavaScript 来查看 <a href="https://disqus.com/?ref_noscript">Disqus 评论</a>.</noscript>
+    </section>
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
