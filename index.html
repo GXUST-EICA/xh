@@ -21,12 +21,21 @@
         }
 
         .navbar {
-            background-color: rgba(255, 255, 255, 0.8);
-            /* 半透明背景 */
+            background-color: rgba(255, 255, 255, 0.9);
+            /* 更加显眼的背景色 */
             backdrop-filter: blur(10px);
             /* 毛玻璃效果 */
             padding: 20px 0;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* 添加阴影 */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: #1246ff;
+            /* 滚动后的背景颜色 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            /* 增加滚动后的阴影效果 */
         }
 
         .navbar-brand {
@@ -46,8 +55,21 @@
             color: #1246ff;
         }
 
+        .nav-link.forum-button {
+            color: white;
+            background-color: #1246ff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link.forum-button:hover {
+            background-color: #0d38e0;
+        }
+
         .header {
-            background: linear-gradient(to bottom, #6d7bff, #1246ff);
+            background: linear-gradient(to bottom, #75b3fa, #1246ff);
             height: 80vh;
             display: flex;
             flex-direction: column;
@@ -99,6 +121,20 @@
             60% {
                 transform: translateY(-7px);
             }
+        }
+
+        .notification-bar {
+            background-color: #b1fa81;
+            color: #333;
+            padding: 10px 0;
+            text-align: center;
+            position: relative;
+            font-size: 1rem;
+        }
+
+        .notification-bar a {
+            color: #333;
+            text-decoration: underline;
         }
 
         .content-section {
@@ -166,19 +202,6 @@
         .footer p {
             margin-bottom: 0;
             font-size: 1rem;
-        }
-
-        .nav-link.forum-button {
-            color: white;
-            background-color: #1246ff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
-
-        .nav-link.forum-button:hover {
-            background-color: #0d38e0;
         }
 
         @media (max-width: 768px) {
@@ -249,6 +272,10 @@
         </div>
     </nav>
 
+    <div class="notification-bar">
+        <p>📢 欢迎新同学参观嵌入式智控协会！</p>
+    </div>
+
     <header class="header">
         <div>
             <img src="https://pic.imgdb.cn/item/66ee1f3cf21886ccc0bcfe11.png" alt="图片">
@@ -258,43 +285,52 @@
         <img class="arrow" src="https://pic.imgdb.cn/item/66ee33b3f21886ccc0cf4358.png" alt="Arrow">
     </header>
 
-    <section class="content-section">
-        <div class="container">
-            <h2 data-aos="fade-up">我是帅比</h2>
-            <div class="row">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card p-4">
-                        <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
-                        <div class="card-body">
-                            <h5 class="card-title">卡片标题1</h5>
-                            <p class="card-text">我是帅比</p>
-                            <a href="#" class="btn btn-primary">了解更多</a>
+    <main>
+        <section class="content-section">
+            <div class="container">
+                <h2 data-aos="fade-up">我是帅比</h2>
+                <div class="row">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card p-4">
+                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
+                            <div class="card-body">
+                                <h5 class="card-title">卡片标题1</h5>
+                                <p class="card-text">我是帅比</p>
+                                <a href="#" class="btn btn-primary">了解更多</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card p-4">
-                        <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
-                        <div class="card-body">
-                            <h5 class="card-title">卡片标题2</h5>
-                            <p class="card-text">我是帅比</p>
-                            <a href="#" class="btn btn-primary">了解更多</a>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card p-4">
+                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
+                            <div class="card-body">
+                                <h5 class="card-title">卡片标题2</h5>
+                                <p class="card-text">我是帅比</p>
+                                <a href="#" class="btn btn-primary">了解更多</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="card p-4">
-                        <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
-                        <div class="card-body">
-                            <h5 class="card-title">卡片标题3</h5>
-                            <p class="card-text">我是帅比</p>
-                            <a href="#" class="btn btn-primary">了解更多</a>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card p-4">
+                            <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="图片">
+                            <div class="card-body">
+                                <h5 class="card-title">卡片标题3</h5>
+                                <p class="card-text">我是帅比</p>
+                                <a href="#" class="btn btn-primary">了解更多</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="additional-content">
+            <div class="container">
+                <h2 class="text-center">更多信息</h2>
+                <p class="text-center">这里可以添加一些额外的正文内容，例如活动通知、最新动态等。您可以使用这部分内容来展示协会的其他信息或新闻。</p>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -308,6 +344,15 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init();
+        // 滚动时改变导航栏背景颜色
+        window.addEventListener('scroll', function () {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
     </script>
 </body>
 
