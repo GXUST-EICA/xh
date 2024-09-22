@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waline Comment System</title>
+    <title>嵌入式智控协会留言板</title>
     <link href="https://cdn.staticfile.org/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Waline CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css">
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <!-- Custom CSS for additional styling -->
     <style>
         html,
@@ -70,18 +72,18 @@
         }
 
         .notification-bar {
-            position: fixed;
-            top: 95px;
-            /* Adjust this to make sure it's below the navbar */
-            left: 0;
-            width: 100%;
-            background-color: #ffdd57;
-            color: #333;
-            padding: 10px;
+            background-color: #f1ecff;
+            color: #3f532f;
+            padding: 5px 0;
             text-align: center;
-            font-weight: bold;
-            z-index: 999;
-            /* Ensure it's above main content but below navbar */
+            position: relative;
+            font-size: 1rem;
+            font-weight: 1000;
+        }
+
+        .notification-bar a {
+            color: #3700ff;
+            text-decoration: underline;
         }
 
         .main-content {
@@ -215,34 +217,30 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
-            <a class="navbar-brand" href="#">嵌入式智控协会</a>
+            <a class="navbar-brand" href="/" data-aos="fade-right" data-aos-duration="1000">嵌入式智控协会</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" data-aos="fade-left"
+                data-aos-duration="1000">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#home">首页</a>
+                        <a class="nav-link active" aria-current="page" href="/" data-aos="fade-up"
+                            data-aos-duration="1000">首页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">关于我们</a>
-                    </li>
+                        <a class="nav-link" href="https://www.jnjnjnn.cn" data-aos="fade-up" data-aos-duration="1000">小东同学工具箱</a>
                     <li class="nav-item">
-                        <a class="nav-link" href="#events">活动</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">联系我们</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link forum-button" href="#forum">论坛</a>
+                        <a class="nav-link forum-button" href="/404" data-aos="fade-up"
+                            data-aos-duration="1000">嵌入式智控论坛</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="notification-bar">
+    <div class="notification-bar"data-aos="fade-up" data-aos-duration="1000">
         📢为了主站的美观与易用性，留言板分开成新页面❤️<br>🎉不用登录即可留言，昵称、邮箱、网站均为选填🎉</a>
     </div>
 
@@ -259,7 +257,12 @@
     <!-- 引入阿里云 CDN 的 Bootstrap JS (including Popper.js and jQuery) -->
     <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.staticfile.org/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
     <script type="module">
         import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js';
