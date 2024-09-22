@@ -8,7 +8,7 @@
     <!-- 替换 Bootstrap CSS 为 BootCDN -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Waline CSS 替换为 BootCDN -->
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/waline/3.0.0/waline.css">
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
     <!-- AOS CSS 替换为 BootCDN -->
     <link href="https://cdn.bootcdn.net/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
@@ -267,7 +267,7 @@
 
     <!-- Waline JS 替换为 BootCDN -->
     <script type="module">
-        import { init } from 'https://cdn.bootcdn.net/ajax/libs/waline/3.0.0/waline.js';
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.css';
         init({
             el: '#waline',
             serverURL: 'https://lyb.jnjnjnn.cn/',
