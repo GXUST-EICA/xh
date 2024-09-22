@@ -3,25 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="keywords" content="嵌入式智控协会">
+    <meta name="description" content="嵌入式智控协会">
+    <meta name="author" content="嵌入式智控协会">
+    <meta name="copyright" content="嵌入式智控协会">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta itemprop="name" content="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" />
+    <meta itemprop="image" content="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" />
+    <meta name="description" itemprop="description" content="Sun's Homepage" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
+    <link rel="icon" href="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" type="image/x-icon" />
+    <meta name="robots" content="index,follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waline Comment System</title>
-    <!-- 引入中国大陆 CDN 的 Bootstrap 5 CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Waline CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css">
-    <!-- Custom CSS for additional styling -->
+    <title>嵌入式智控协会期待您的加入</title>
+    <!-- 引入阿里云 CDN 的 Poppins 字体 -->
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-poppins@3.0.9/index.min.css" rel="stylesheet">
+    <!-- 引入腾讯云 CDN 的 Bootstrap 5 CSS -->
+    <link href="https://imgcache.qq.com/tencentcdn/tns/css/bootstrap/5.3.0/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入阿里云 CDN 的 AOS CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
     <style>
-        html,
         body {
-            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f9ff;
+            color: #333;
             margin: 0;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-            display: flex;
-            flex-direction: column;
+            padding: 0;
         }
 
         .navbar {
@@ -31,13 +40,19 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             border-radius: 0 0 15px 15px;
-            z-index: 1000;
-            /* Ensure it's above other content */
         }
 
         .navbar.scrolled {
             background-color: #1246ff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: 600;
         }
 
         .navbar-brand {
@@ -70,110 +85,185 @@
             background-color: #0d38e0;
         }
 
-        .notification-bar {
-            position: fixed;
-            top: 95px;
-            /* Adjust this to make sure it's below the navbar */
-            left: 0;
-            width: 100%;
-            background-color: #ffdd57;
-            color: #333;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            z-index: 999;
-            /* Ensure it's above main content but below navbar */
-        }
-
-        .main-content {
-            flex: 1;
+        .header {
+            background: linear-gradient(to bottom, #75b3fa, #1246ff);
+            height: 80vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px 0;
-            margin-top: 20px;
-            /* Add space for the notification bar */
+            justify-content: center;
+            padding: 0 15px;
+            color: #fff;
+            text-align: center;
+            position: relative;
         }
 
-        #waline {
-            max-width: 1500px;
-            width: 100%;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 3rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .header img {
+            max-width: 250px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 15px;
         }
 
-        #waline:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+        }
+
+        .arrow {
+            position: absolute;
+            bottom: 20px;
+            width: 40px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-15px);
+            }
+
+            60% {
+                transform: translateY(-7px);
+            }
+        }
+
+        .notification-bar {
+            background-color: #f1ecff;
+            color: #3f532f;
+            padding: 5px 0;
+            text-align: center;
+            position: relative;
+            font-size: 1rem;
+            font-weight: 1000;
+        }
+
+        .notification-bar a {
+            color: #3700ff;
+            text-decoration: underline;
+
+        }
+
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+            font-weight: 600;
         }
 
         .card {
             border: none;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
         }
 
-        .btn-custom {
-            background-color: #007bff;
-            color: white;
-            border-radius: 50px;
-            padding: 0.5rem 1.5rem;
-            transition: background-color 0.3s ease;
+        .card:hover {
+            transform: scale(1.05);
         }
 
-        .btn-custom:hover {
-            background-color: #0056b3;
+        .card img {
+            border-radius: 20px 20px 0 0;
+            max-width: 100%;
         }
 
-        /* Animation for card content */
-        .animate-fade-in {
-            opacity: 0;
-            animation: fadeIn 1s forwards;
+        .card-body {
+            background-color: #fff3e0;
+            border-radius: 0 0 20px 20px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .card-title {
+            color: #1246ff;
+            font-size: 1.5rem;
         }
 
-        .animate-slide-in {
-            transform: translateY(20px);
-            opacity: 0;
-            animation: slideIn 1s forwards;
+        .card-text {
+            color: #666;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        .btn-primary {
+            background-color: #1246ff;
+            border-color: #1246ff;
+            border-radius: 20px;
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .btn-primary:hover {
+            background-color: #0d38e0;
+            border-color: #0d38e0;
         }
 
         .footer {
             background-color: #1246ff;
             color: white;
-            padding: 20px 0;
+            padding: 40px 0;
             text-align: center;
-            border-radius: 10px;
-            margin-top: 20px;
+            margin-top: 40px;
+            border-radius: 20px;
         }
 
         .footer p {
             margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .card-container {
+            position: relative;
+        }
+
+        .card-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            z-index: -1;
+            border-radius: 20px;
         }
 
         @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1.2rem;
+            }
+
+            .content-section h2 {
+                font-size: 2rem;
+            }
+
+            .card {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
             .navbar-brand {
                 font-size: 1.5rem;
             }
@@ -187,91 +277,107 @@
                 font-size: 0.9rem;
             }
 
-            .notification-bar {
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .navbar-brand {
-                font-size: 1.2rem;
+            .header h1 {
+                font-size: 2rem;
             }
 
-            .nav-link {
-                font-size: 0.8rem;
-            }
-
-            .forum-button {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-
-            .notification-bar {
-                font-size: 0.8rem;
+            .header p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
             <a class="navbar-brand" href="#">嵌入式智控协会</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#home">首页</a>
+                        <a class="nav-link active" href="#">首页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">关于我们</a>
+                        <a class="nav-link" href="#">关于我们</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#events">活动</a>
+                        <a class="nav-link" href="#">活动</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">联系我们</a>
+                        <a class="nav-link" href="#">联系我们</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link forum-button" href="#forum">论坛</a>
+                        <a class="nav-link forum-button" href="#">加入论坛</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <header class="header" data-aos="fade-up" data-aos-duration="1500">
+        <img src="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" alt="协会标志">
+        <h1>欢迎加入嵌入式智控协会</h1>
+        <p>我们致力于推动嵌入式系统和智能控制技术的发展和应用</p>
+        <img class="arrow" src="https://img.icons8.com/ios-filled/50/ffffff/long-arrow-down.png" alt="向下箭头">
+    </header>
+
     <div class="notification-bar">
-        📢为了主站的美观与易用性，留言板分开成新页面❤️<br>🎉不用登录即可留言，昵称、邮箱、网站均为选填🎉</a>
+        <p>注意：新的论坛正在筹备中，请关注最新消息！<a href="#">点击这里</a></p>
     </div>
 
-    <div class="main-content">
-        <div id="waline" class="card animate-fade-in animate-slide-in">
-            <!-- Waline comments will be injected here -->
+    <div class="container content-section">
+        <h2 class="section-heading" data-aos="fade-up" data-aos-duration="1500">我们的活动</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-container" data-aos="fade-up" data-aos-duration="2000">
+                    <img src="https://picsum.photos/500/300" class="card-img-top" alt="活动图片">
+                    <div class="card-body">
+                        <h5 class="card-title">活动标题一</h5>
+                        <p class="card-text">这是活动的简要介绍。欢迎来参加我们的活动，了解更多细节和信息。</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-container" data-aos="fade-up" data-aos-duration="2500">
+                    <img src="https://picsum.photos/500/300" class="card-img-top" alt="活动图片">
+                    <div class="card-body">
+                        <h5 class="card-title">活动标题二</h5>
+                        <p class="card-text">这是活动的简要介绍。欢迎来参加我们的活动，了解更多细节和信息。</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-container" data-aos="fade-up" data-aos-duration="3000">
+                    <img src="https://picsum.photos/500/300" class="card-img-top" alt="活动图片">
+                    <div class="card-body">
+                        <h5 class="card-title">活动标题三</h5>
+                        <p class="card-text">这是活动的简要介绍。欢迎来参加我们的活动，了解更多细节和信息。</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer class="footer">
-        <p>© 2024 广西科技大学 嵌入式智控协会</p>
+        <p>© 2024 嵌入式智控协会. 版权所有.</p>
     </footer>
 
-    <!-- 引入中国大陆 CDN 的 Bootstrap JS (including Popper.js and jQuery) -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.5.3/umd/popper.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
-
-    <script type="module">
-        import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js';
-
-        init({
-            el: '#waline',
-            serverURL: 'https://weline-rouge.vercel.app/',
-        });
-    </script>
+    <!-- 引入腾讯云 CDN 的 jQuery -->
+    <script src="https://imgcache.qq.com/tencentcdn/tns/js/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 引入腾讯云 CDN 的 Bootstrap 5 JS -->
+    <script src="https://imgcache.qq.com/tencentcdn/tns/js/bootstrap/5.3.0/bootstrap.bundle.min.js"></script>
+    <!-- 引入阿里云 CDN 的 AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        // Change navbar background on scroll
+        AOS.init();
         window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
