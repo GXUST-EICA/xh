@@ -87,7 +87,7 @@
 
         .header {
             background: linear-gradient(to bottom, #75b3fa, #1246ff);
-            height: 80vh;
+            height: 88vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -232,6 +232,43 @@
             position: relative;
         }
 
+        .notification-carousel {
+            background-color: #f1ecff;
+            color: #3f532f;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px; /* 可调整高度 */
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #1246ff;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .notification-carousel {
+                font-size: 1rem;
+            }
+
+            .notification-item {
+                height: 50px; /* 针对较小设备调整高度 */
+            }
+        }
+
+
         .card-container::before {
             content: "";
             position: absolute;
@@ -320,8 +357,7 @@
     </nav>
 
     <div class="notification-bar" data-aos="fade-up" data-aos-duration="1000">
-        <p>🌟 欢迎新同学参观嵌入式智控协会！🌟<br>📢领到的书签纪念品NFC怎么用？<a href="/404">了解更多</a>
-        </p>
+        🌟 欢迎新同学参观嵌入式智控协会！🌟
     </div>
 
     <header class="header">
@@ -335,11 +371,29 @@
         <img src="https://pic.imgdb.cn/item/66ee4007f21886ccc0da7c32.png" alt="向下箭头" class="arrow">
     </header>
 
-    <section class="content-section">
-        <h2 class="section-heading" data-aos="fade-up" data-aos-duration="1000">通知栏</h2>
-        <h3 class="section-heading" data-aos="fade-up" data-aos-duration="1000" style="font-size: 1.8rem; color: #ff4500; text-align: center; font-weight: bold;">
-            🔔 本协会将于2024年9月28日举办协会成立大会，欢迎大家参加！
-        </h3>
+    <section class="notification-carousel" data-aos="fade-up" data-aos-duration="1000">
+        <div id="notificationCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="notification-item">
+                        <p>📢领到的书签纪念品NFC怎么用？<a href="/404">了解更多</a></p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="notification-item">
+                        <p>🔔 我们的协会正式成立！</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#notificationCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#notificationCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </section>
 
     <section class="content-section" style="padding: 40px 0;">
@@ -402,9 +456,10 @@
 
                 <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="card">
-                        <img src="https://pic.imgdb.cn/item/66ee6101f21886ccc0fdb6c0.png" class="card-img-top" alt="协会近期动态">
+                        <img src="https://pic.imgdb.cn/item/66fb744af21886ccc0997ae3.png" class="card-img-top"
+                            alt="协会动态">
                         <div class="card-body">
-                            <h5 class="card-title">协会近期动态</h5>
+                            <h5 class="card-title">协会动态</h5>
                             <p class="card-text">规划中~<br>敬请期待</p>
                             <a href="#" class="btn btn-primary">了解更多</a>
                         </div>
@@ -427,10 +482,10 @@
 
                 <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="card">
-                        <img src="https://pic.imgdb.cn/item/66ee6101f21886ccc0fdb6c0.png" class="card-img-top"
-                            alt="培训活动安排">
+                        <img src="https://pic.imgdb.cn/item/66fb6fc1f21886ccc095ffea.png" class="card-img-top"
+                            alt="培训活动中心">
                         <div class="card-body">
-                            <h5 class="card-title">培训活动安排</h5>
+                            <h5 class="card-title">培训活动中心</h5>
                             <p class="card-text">规划中~<br>敬请期待</p>
                             <a href="#" class="btn btn-primary">了解更多</a>
                         </div>
@@ -439,7 +494,8 @@
 
                 <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="card">
-                        <img src="https://pic.imgdb.cn/item/66ee6101f21886ccc0fdb6c0.png" class="card-img-top" alt="比赛项目安排与列表">
+                        <img src="https://pic.imgdb.cn/item/66fb7152f21886ccc0971dbe.png" class="card-img-top"
+                            alt="比赛项目安排与列表">
                         <div class="card-body">
                             <h5 class="card-title">比赛安排与大学生竞赛榜单</h5>
                             <p class="card-text">有很多比赛等着你！~<br>快来参加吧！</p>
@@ -450,8 +506,8 @@
 
                 <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="card">
-                        <img src="https://pic.imgdb.cn/item/66ee6101f21886ccc0fdb6c0.png" class="card-img-top"
-                            alt="协会成员">
+                        <img src="https://pic.imgdb.cn/item/66fb7201f21886ccc0979896.png" class="card-img-top"
+                            alt="协会的实验室地点与外观展示">
                         <div class="card-body">
                             <h5 class="card-title">协会的实验室地点与外观展示</h5>
                             <p class="card-text">规划中~<br>敬请期待</p>
