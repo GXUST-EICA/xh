@@ -17,7 +17,6 @@
             height: 100%;
             margin: 0;
             position: relative;
-            /* 确保内容可以正常显示 */
         }
 
         body {
@@ -36,13 +35,13 @@
             border-radius: 0 0 15px 15px;
             z-index: 1000;
             position: relative;
-            /* 设置为relative，以便内容能正确显示 */
         }
 
         .navbar.scrolled {
             background-color: #1246ff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.7rem;
@@ -95,7 +94,6 @@
             align-items: center;
             padding: 20px 0;
             margin-top: 100px;
-            /* 增加顶部间距以避免被fixed导航栏遮挡 */
         }
 
         .animate-fade-in {
@@ -120,28 +118,26 @@
             text-align: center;
             border-radius: 10px;
             margin-top: auto;
-            /* 页脚固定在页面底部 */
         }
 
-
         .custom-text {
-            font-family: Arial, sans-serif; /* 更改字体 */
-            color: #000000; /* 设置字体颜色，可以根据需要更改 */
-            text-align: left; /* 向左对齐 */
+            font-family: Arial, sans-serif;
+            color: #000000;
+            text-align: left;
         }
 
         .btn-custom {
-            background-color: #ec6767; /* 更改按钮背景颜色 */
-            color: #fff; /* 设置按钮字体颜色 */
-            font-family: Arial, sans-serif; /* 按钮字体 */
-            padding: 5px 10px; /* 设置按钮大小 */
-            border-radius: 10px; /* 按钮圆角 */
-            text-decoration: none; /* 去掉下划线 */
-            font-size: 14px; /* 设置按钮字体大小 */
+            background-color: #ec6767;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 5px 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 14px;
         }
 
         .btn-custom:hover {
-            background-color: #d9dadd; /* 鼠标悬停时更改按钮颜色 */
+            background-color: #d9dadd;
         }
 
         .footer p {
@@ -192,7 +188,7 @@
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
-            <a class="navbar-brand" href="/">嵌入式智控协会</a>
+            <a class="navbar-brand" href="#">嵌入式智控协会</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -200,7 +196,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/index.html" data-aos="fade-right" data-aos-duration="1000">主页</a>
+                        <a class="nav-link active" href="/index.html" data-aos="fade-right"
+                            data-aos-duration="1000">主页</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://jnjnjnn.cn" data-aos="fade-right" data-aos-duration="1000"
@@ -221,24 +218,30 @@
 
     <!-- 主要内容 -->
     <div class="main-content">
-        <!-- 大图片和文字跳转链接 -->
-        <div class="container text-center"data-aos="fade-up" data-aos-duration="1000">
+        <div class="container text-center" data-aos="fade-up" data-aos-duration="1000">
             <div class="row animate-fade-in">
                 <div class="col-lg-6">
-                    <a href="/contest/1.html">
-                    <img src="https://pic.imgdb.cn/item/66fb5fc0f21886ccc0882174.png" alt="Placeholder Image" class="img-fluid mb-3">
+                    <a href="/1.html">
+                        <img src="https://pic.imgdb.cn/item/66fb5fc0f21886ccc0882174.png" alt="Placeholder Image"
+                            class="img-fluid mb-3">
                     </a>
                 </div>
-                <div class="col-lg-6 custom-text">
-                    <h2>广西科技大学大学生竞赛时间表</h2>
-                    <br>
-                    <h4>1.“粤嵌杯” </h4><br>
-                    <h5>时间待定</h5><br>
-                    <a href="#forum" class="btn btn-custom">立即了解更多</a><br><br>
-                    <h4>2.全国大学生电子设计竞赛</h4><br>
-                    <h5>时间待定</h5><br>
-                    <a href="https://www.nuedc-training.com.cn/" class="btn btn-custom">立即了解更多</a><br><br>
-                    <h5>更新中。。。</h5>
+                <div class="col-lg-6">
+                    <div class="card shadow-sm" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">广西科技大学大学生竞赛时间表</h2>
+                            <h4>1. “粤嵌杯”</h4>
+                            <p>时间待定</p>
+                            <a href="#forum" class="btn btn-custom mb-3">立即了解更多</a>
+                            <hr>
+                            <h4>2. 全国大学生电子设计竞赛</h4>
+                            <p>时间待定</p>
+                            <a href="https://www.nuedc-training.com.cn/" class="btn btn-custom mb-3">立即了解更多</a>
+                            <hr>
+                            <h4>更新中。。。</h4>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -246,7 +249,7 @@
 
     <!-- 页脚 -->
     <div class="footer">
-        <p>&copy;2024  广西科技大学嵌入式智控协会</p>
+        <p>&copy;2024 广西科技大学嵌入式智控协会</p>
     </div>
 
     <!-- 使用 BootCDN 引入 jQuery 和 Bootstrap 5 Bundle JS -->
@@ -256,6 +259,16 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         AOS.init(); // 初始化AOS动画
+
+        // 确保滚动时navbar效果
+        const navbar = document.querySelector('.navbar');
+        window.onscroll = function () {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
     </script>
 </body>
 
