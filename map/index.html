@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,37 +7,36 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe-ar.js"></script>
     <style>
-        body {
-            margin: 0;
-        }
-
-        a-scene {
-            height: 100vh;
-        }
+        body { margin: 0; }
+        a-scene { height: 100vh; }
     </style>
 </head>
-
 <body>
     <a-scene embedded arjs>
+        <!-- 摄像头 -->
         <a-entity camera></a-entity>
-    </a-scene>
 
-    <script>
-        // 获取用户位置
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                // 用户位置经纬度
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
+        <!-- AR 标记 -->
+        <a-marker preset="hiro">
+            <!-- 在标记上放置一个立方体 -->
+            <a-box position="0 0.5 0" material="color: red;"></a-box>
+        </a-marker>
 
-                // 在这里使用经纬度设置AR对象的位置
-                console.log('Latitude: ' + latitude + ', Longitude: ' + longitude);
-                // TODO: 根据经纬度将对象放置到适当的位置
+        <!-- 用户点击事件 -->
+        <script>
+            const scene = document.querySelector('a-scene');
+
+            scene.addEventListener('click', function (event) {
+                const intersection = event.detail.intersection; // 获取点击位置
+                if (intersection) {
+                    // 创建一个蓝色方块
+                    const box = document.createElement('a-box');
+                    box.setAttribute('position', `${intersection.point.x} ${intersection.point.y} ${intersection.point.z}`);
+                    box.setAttribute('material', 'color: blue;');
+                    scene.appendChild(box); // 将方块添加到场景中
+                }
             });
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-    </script>
+        </script>
+    </a-scene>
 </body>
-
 </html>
