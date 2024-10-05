@@ -1,28 +1,158 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>实验室导航</title>
+    <title>卡通导航定位</title>
     <style>
         body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
-            overflow: hidden;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
 
-        /* 隐藏滚动条，防止页面溢出 */
-        canvas {
-            display: block;
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        #map {
+            width: 100%;
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #FF6F61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FF3D2E;
+        }
+
+        .cartoon-icon {
+            width: 40px;
+            height: 40px;
+            background-image: url('https://example.com/cartoon-character.png');
+            /* 替换为你的卡通图标URL */
+            background-size: cover;
+            position: absolute;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
     </style>
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=3175169b1a2311716bcf9dc0de248daf"></script>
 </head>
 
 <body>
-    <!-- 引入国内的Three.js和OrbitControls CDN -->
-    <script src="https://cdn.bootcdn.net/ajax/libs/three.js/110/three.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.min.js"></script>
-    <script src="main.js"></script>
+
+    <h1>当前位置定位</h1>
+    <div id="map"></div>
+    <button class="btn" onclick="getLocation()">获取位置并导航</button>
+
+    <script>
+        let map;
+        let cartoonIcon;
+        const destination = [108.450104, 21.699401]; // 目的地坐标
+
+        function initMap() {
+            map = new AMap.Map('map', {
+                resizeEnable: true,
+                zoom: 14,
+                center: [108.44937, 21.699429] // 默认中心点（北京）
+            });
+            cartoonIcon = document.createElement('div');
+            cartoonIcon.className = 'cartoon-icon';
+            map.getOverlayLayer().appendChild(cartoonIcon);
+        }
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("你的浏览器不支持地理定位功能。");
+            }
+        }
+
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            map.setCenter([lon, lat]); // 设置地图中心
+            cartoonIcon.style.left = `${map.lngLatToContainer([lon, lat]).getX() - 20}px`;
+            cartoonIcon.style.top = `${map.lngLatToContainer([lon, lat]).getY() - 40}px`;
+            // 开始导航
+            navigateToDestination(lon, lat);
+        }
+
+        function navigateToDestination(lon, lat) {
+            const driving = new AMap.Driving({
+                map: map,
+                panel: 'panel',
+                policy: AMap.DrivingPolicy.LEAST_TIME
+            });
+            driving.search([lon, lat], destination, function (status, result) {
+                if (status === 'complete') {
+                    console.log('导航成功', result);
+                } else {
+                    console.error('导航失败', result);
+                }
+            });
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("用户拒绝了地理定位请求。");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("位置信息不可用。");
+                    break;
+                case error.TIMEOUT:
+                    alert("请求超时。");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("发生未知错误。");
+                    break;
+            }
+        }
+
+        window.onload = initMap; // 页面加载时初始化地图
+    </script>
+
 </body>
 
 </html>
