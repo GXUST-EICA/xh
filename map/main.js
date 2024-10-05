@@ -1,8 +1,12 @@
-// 基本变量设置
-let scene, camera, renderer, controls;
+let scene, camera, renderer, controls, manager;
 
 function init() {
     // 创建场景
+        // 检测WebGL支持
+    if (!WEBGL.isWebGLAvailable()) {
+        alert('WebGL is not supported on this device!');
+        return; // 停止初始化流程
+    }
     scene = new THREE.Scene();
     
     // 设置相机
@@ -14,8 +18,9 @@ function init() {
     );
     camera.position.set(0, 2, 5);
     
-    // 创建渲染器
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    // 渲染器 - 关闭抗锯齿并降低像素比例以提升性能
+    renderer = new THREE.WebGLRenderer({ antialias: false }); 
+    renderer.setPixelRatio(window.devicePixelRatio); // 使用设备像素比
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     
@@ -45,6 +50,18 @@ function init() {
 
     // 添加家具
     createFurniture();
+
+    // 异步加载管理器
+    manager = new THREE.LoadingManager();
+    manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+        console.log( '开始加载: ', url );
+    };
+    manager.onLoad = function () {
+        console.log( '所有资源加载完成！' );
+    };
+    manager.onError = function ( url ) {
+        console.log( '加载错误: ', url );
+    };
 
     // 渲染场景
     animate();
