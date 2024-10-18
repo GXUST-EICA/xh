@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>协会实验室引导</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #e0f7fa;
+            /* 浅蓝色背景 */
+            color: #333;
+            /* 深色字体 */
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            /* 卡通风格的字体 */
+        }
+
+        /* 自定义样式 */
+        .map-container {
+            height: 300px;
+            border: 5px solid #ff7043;
+            /* 科技风格的橙色边框 */
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+            /* 防止地图溢出 */
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            /* 垂直居中图标和文本 */
+            flex-wrap: wrap;
+            /* 在小屏幕上换行 */
+        }
+
+        .guide-step:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .guide-step img {
+            width: 50px;
+            /* 小图标 */
+            margin-right: 10px;
+            /* 图标与文字之间的间距 */
+        }
+
+        /* 自定义导航栏样式 */
+        .navbar {
+            background-color: #ffffff;
+            /* 白色背景 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* 加强阴影效果 */
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            /* 加粗品牌名称 */
+            color: #ff7043 !important;
+            /* 卡通风格的品牌颜色 */
+        }
+
+        .nav-link {
+            color: #333 !important;
+            /* 深色链接 */
+            transition: color 0.3s;
+            /* 过渡效果 */
+        }
+
+        .nav-link:hover {
+            color: #ff7043 !important;
+            /* 悬停时改变颜色 */
+        }
+
+        footer {
+            background-color: #ffffff;
+            /* 白色背景 */
+            color: #ff7043;
+            /* 卡通风格的颜色 */
+            padding: 10px 0;
+        }
+
+        .footer-cartoon {
+            position: relative;
+            bottom: 20px;
+            /* 让图像悬浮在底部上方 */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 576px) {
+            .map-container {
+                height: 200px;
+                /* 移动端地图高度 */
+            }
+
+            .guide-step img {
+                width: 40px;
+                /* 在移动端图标更小 */
+            }
+
+            .guide-step {
+                font-size: 14px;
+                /* 移动端字体更小 */
+                padding: 10px;
+                /* 移动端内边距调整 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">嵌入式智控协会</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#map">地图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#steps">步骤</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">联系我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" style="margin-top: 70px;">
+        <div class="map-container" id="map">
+            <iframe
+                src="https://webrd02.is.autonavi.com/appmap/frame.html?center=109.525697,24.386759&zoom=18"
+                width="100%" height="100%" frameborder="0" style="border:0;"></iframe>
+        </div>
+
+        <h2 id="steps">前往实验室的步骤：</h2>
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <img src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="方向箭头">1. 从大门口出发，朝右转。
+        </div>
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <img src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="方向箭头">2. 走过停车场，沿着人行道直行。
+        </div>
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <img src="https://img.icons8.com/ios-filled/50/000000/arrow.png" alt="方向箭头">3. 到达实验室大楼，按门铃即可进入。
+        </div>
+    </main>
+
+    <footer id="footer" class="text-center mt-4">
+        <p>© 2024 协会版权所有</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
