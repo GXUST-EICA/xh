@@ -20,37 +20,48 @@
         /* 自定义样式 */
         .map-container {
             height: 300px;
+            /* 高度 */
             border: 5px solid #ff7043;
             /* 科技风格的橙色边框 */
             border-radius: 10px;
+            /* 边角圆润 */
             margin: 20px 0;
+            /* 上下边距 */
             overflow: hidden;
             /* 防止地图溢出 */
         }
 
         .guide-step {
             background: rgba(255, 255, 255, 0.9);
+            /* 背景透明 */
             margin: 10px 0;
+            /* 上下边距 */
             padding: 15px;
+            /* 内边距 */
             border-radius: 15px;
+            /* 边角圆润 */
             transition: transform 0.3s, background 0.3s;
+            /* 动画效果 */
             display: flex;
+            /* Flex布局 */
             align-items: center;
-            /* 垂直居中图标和文本 */
+            /* 垂直居中 */
             flex-wrap: wrap;
-            /* 在小屏幕上换行 */
+            /* 换行 */
         }
 
         .guide-step:hover {
             transform: scale(1.05);
+            /* 悬停缩放 */
             background: rgba(255, 255, 255, 1);
+            /* 悬停背景 */
         }
 
         .guide-step img {
             width: 50px;
             /* 小图标 */
             margin-right: 10px;
-            /* 图标与文字之间的间距 */
+            /* 图标与文字间距 */
         }
 
         /* 自定义导航栏样式 */
@@ -86,14 +97,7 @@
             color: #ff7043;
             /* 卡通风格的颜色 */
             padding: 10px 0;
-        }
-
-        .footer-cartoon {
-            position: relative;
-            bottom: 20px;
-            /* 让图像悬浮在底部上方 */
-            left: 50%;
-            transform: translateX(-50%);
+            /* 上下内边距 */
         }
 
         @media (max-width: 576px) {
@@ -144,7 +148,7 @@
     <main class="container" style="margin-top: 70px;">
         <div class="map-container" id="map">
             <iframe
-                src="https://webrd02.is.autonavi.com/appmap/frame.html?center=109.525697,24.386759&zoom=18"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=109.521249%2C24.389462%2C109.521249%2C24.389662&layer=mapnik&marker=24.389682%2C109.521249"
                 width="100%" height="100%" frameborder="0" style="border:0;"></iframe>
         </div>
 
