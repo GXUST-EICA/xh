@@ -171,11 +171,10 @@
         // 添加 ArcGIS 世界影像图层
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 20,
-            attribution: '地图数据：<a href="https://www.esri.com/">Esri</a>'
         }).addTo(map);
 
         // 添加标记
-        L.marker([24.389662, 109.5212499]).addTo(map).bindPopup('实验室位置').openPopup();
+        L.marker([24.389662, 109.5212499]).addTo(map).bindPopup('实验室位置:L2-413').openPopup();
     </script>
 </body>
 
