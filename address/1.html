@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>协会实验室引导</title>
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.7.1/leaflet.css" />
     <style>
         body {
@@ -168,10 +168,10 @@
         // 初始化地图
         var map = L.map('map').setView([24.389662, 109.521249], 18); // 设置中心点和缩放级别
 
-
-        var BMap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: '&copy; <a href="https://map.baidu.com">百度地图</a>'
+        // 添加 OpenStreetMap 图层
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         // 添加标记
