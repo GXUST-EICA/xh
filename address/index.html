@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>协会实验室引导</title>
+    <link href="https://cdn.staticfile.org/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/lightbox2/2.11.3/css/lightbox.min.css" />
+    <!-- 引入Lightbox -->
+    <style>
+        /* 让html和body的高度占满整个页面 */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            background: #e0f7fa;
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* 主体内容区域 */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-container {
+            height: 300px;
+            border: 5px solid #ff7043;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .guide-step {
+            background: rgba(255, 255, 255, 0.9);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+            /* 将步骤内容设置为纵向排列 */
+        }
+
+        .guide-step:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 1);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 15px;
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .guide-step img {
+            max-width: 100%;
+            /* 图片自适应容器宽度 */
+            height: auto;
+            margin-top: 10px;
+            /* 增加与文字的间距 */
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #1246ff !important;
+        }
+
+        .nav-link {
+            color: #333 !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #ff7043 !important;
+        }
+
+        footer {
+            background-color: #ffffff;
+            color: #1246ff;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 576px) {
+            .map-container {
+                height: 200px;
+            }
+
+            .guide-step img {
+                max-width: 80%;
+                /* 更小的屏幕上缩略图稍微小一点 */
+            }
+
+            .guide-step {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top animate__animated animate__fadeInDown">
+        <div class="container">
+            <a class="navbar-brand" href="#">嵌入式智控协会</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.jnjnjnn.cn">小东同学工具箱</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体内容部分 -->
+    <main class="container animate__animated animate__fadeInUp" style="margin-top: 70px;">
+        <div class="map-container animate__animated animate__zoomIn" id="map"></div>
+
+        <h2 id="steps" class="animate__animated animate__fadeInUp">前往L2-413嵌入式智控实验室路线</h2>
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <h4>按照地图走到L2楼，走进去就是二楼，直走左手边有电梯。</h4>
+            <!-- 添加放大图片的效果 -->
+            <a href="https://pic.imgdb.cn/item/671239f4d29ded1a8cbbbc7a.jpg" data-lightbox="step1"
+                data-title="按照地图走到L2楼，走进去就是二楼，直走左手边有电梯。">
+                <img src="https://pic.imgdb.cn/item/671239f4d29ded1a8cbbbc7a.jpg" alt="步骤1图片" />
+            </a>
+        </div>
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <h4>L2四楼部分略缩图</h4>
+            <a href="https://pic.imgdb.cn/item/67124027d29ded1a8cc39fb5.png" data-lightbox="step2"
+                data-title="L2四楼部分略缩图">
+                <img src="https://pic.imgdb.cn/item/67124027d29ded1a8cc39fb5.png" alt="步骤2图片" />
+            </a>
+        </div>
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <h4>在乘坐L2电梯到4楼后，出电梯门往左走，可以看到上述图片的走廊。</h4>
+            <a href="https://pic.imgdb.cn/item/67123b1ed29ded1a8cbceb5a.png" data-lightbox="step2"
+                data-title="在乘坐L2电梯到4楼后，出电梯门往左走，可以看到上述图片的走廊">
+                <img src="https://pic.imgdb.cn/item/67123b1ed29ded1a8cbceb5a.png" alt="步骤3图片" />
+            </a>
+        </div>
+
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <h4>往走廊继续前进看到L2-413即为嵌入式智控实验室</h4>
+            <a href="https://pic.imgdb.cn/item/67111acdd29ded1a8c5bd6f5.jpg" data-lightbox="step3" data-title="到达实验室大楼">
+                <img src="https://pic.imgdb.cn/item/67111acdd29ded1a8c5bd6f5.jpg" alt="步骤4图片" />
+            </a>
+        </div>
+    </main>
+
+    <!-- 页脚部分 -->
+    <footer id="footer" class="text-center mt-4">
+        <p>© 广西科技大学 嵌入式智控协会</p>
+    </footer>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.5.2/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://cdn.staticfile.org/lightbox2/2.11.3/js/lightbox.min.js"></script> <!-- 引入Lightbox JS -->
+
+    <script>
+        // 初始化地图
+        var map = L.map('map').setView([24.389662, 109.521249], 17); // 设置中心点和缩放级别
+
+        // 添加 ArcGIS 世界影像图层
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: '这是一个动态地图'
+        }).addTo(map);
+
+        // 添加标记
+        L.marker([24.389662, 109.5212499]).addTo(map).bindPopup('实验室位置：L2-413').openPopup();
+    </script>
+</body>
+
+</html>
