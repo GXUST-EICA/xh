@@ -171,6 +171,7 @@
         // 添加 ArcGIS 世界影像图层
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             maxZoom: 20,
+            attribution: '这是一个动态地图'
         }).addTo(map);
 
         // 添加标记
