@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>协会成员</title>
+    <!-- 引入 Bootstrap、AOS 和 Waline -->
+    <link href="https://cdn.staticfile.org/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
+    <link href="https://cdn.bootcdn.net/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0 0 15px 15px;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background-color: #1246ff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: #1246ff;
+        }
+
+        .nav-link {
+            font-size: 1rem;
+            margin-left: 15px;
+            color: #333;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            color: #1246ff;
+        }
+
+        .nav-link.forum-button {
+            color: white;
+            background-color: #1246ff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-link.forum-button:hover {
+            background-color: #0d38e0;
+        }
+
+        .footer {
+            background-color: #1246ff;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .chart-container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            padding: 20px 40px;
+            text-align: center;
+            color: #333;
+            line-height: 1.5;
+            margin: 20px auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            padding: 10px 20px;
+            background-color: #e8f0fe;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .president-group,
+        .department {
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            background-color: #f9fafc;
+            position: relative;
+        }
+
+        .president-title,
+        .department-title {
+            font-size: 25px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .president-main,
+        .department .members {
+            color: #333;
+            font-size: 20px;
+        }
+
+        .department {
+            width: 200px;
+            font-size: 25px;
+        }
+
+        .level-group {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .members div {
+            margin: 3px 0;
+        }
+
+        .members .position-title {
+            font-weight: bold;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* 手机端优化 */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+            }
+
+            .forum-button {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            .chart-container {
+                padding: 15px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .level-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .department {
+                width: 100%;
+                padding: 10px;
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">嵌入式智控协会</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-aos="fade-right" data-aos-duration="1000">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://jnjnjnn.cn" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="100">小东同学工具箱</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link forum-button" href="/lyb" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="200">嵌入式智控协会留言板</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主体内容 -->
+    <div class="chart-container">
+        <div class="logo" data-aos="zoom-in">协会成员</div>
+
+        <!-- 会长团 -->
+        <div class="president-group" data-aos="fade-up">
+            <div class="president-title">会长团</div>
+            <div class="president-main">
+                <div class="level-title">黄海东</div>
+                <div class="members">
+                    <div>廖俊峰 陈健锋 </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 四个部门 -->
+        <div class="level-group">
+            <div class="department" data-aos="fade-up">
+                <div class="department-title">技术部</div>
+                <div class="members">
+                    <div class="position-title">干部</div>
+                    <div>胡志勇</div>
+                    <div>黄泉清</div>
+                    <div class="position-title">干事</div>
+                    <div>王旭晖</div>
+                    <div>徐潇潇</div>
+                    <div>李金科</div>
+                    <div>哈士丽</div>
+                    <div>韦雄</div>
+                    <div>毛睿</div>
+                    <div>黄思琦</div>
+                </div>
+            </div>
+
+            <div class="department" data-aos="fade-up" data-aos-delay="100">
+                <div class="department-title">组织部</div>
+                <div class="members">
+                    <div class="position-title">干部</div>
+                    <div>黄永幸</div>
+                    <div>庞儿茗</div>
+                    <div>叶倩茹</div>
+                    <div class="position-title">干事</div>
+                    <div>李建香</div>
+                    <div>翟诗雨</div>
+                    <div>范滨豪</div>
+                    <div>邹霖栩</div>
+                    <div>陀灿明</div>
+                    <div>廖应涛</div>
+                    <div>梁邦健</div>
+                    <div>杨发崧</div>
+                </div>
+            </div>
+
+            <div class="department" data-aos="fade-up" data-aos-delay="200">
+                <div class="department-title">宣传部</div>
+                <div class="members">
+                    <div class="position-title">干部</div>
+                    <div>廖渔紫</div>
+                    <div>覃章澜</div>
+                    <div class="position-title">干事</div>
+                    <div>覃彩梅</div>
+                    <div>袁诗琪</div>
+                    <div>张家裕</div>
+                    <div>刘宇森</div>
+                    <div>李同洲</div>
+                    <div>徐州业</div>
+                    <div>施杨裕</div>
+                    <div>蔡鹏燊</div>
+                </div>
+            </div>
+
+            <div class="department" data-aos="fade-up" data-aos-delay="300">
+                <div class="department-title">实验室成员</div>
+                <div class="members">
+                    <div>黄海东 廖俊峰</div>
+                    <div>陈健锋 黄永幸</div>
+                    <div>庞儿茗 李浩</div>
+                    <div>叶倩茹 覃章澜</div>
+                    <div>廖渔紫</div>
+                    <div>甘东琳 伍师宝</div>
+                    <div>陈奕扬 曹俊</div>
+                    <div>黄泉清 胡志勇</div>
+                    <div>玉振烨 覃增鑫</div>
+                    <div>孙起恒 罗威</div>
+                    <div>商昌民 姚水成</div>
+                    <div>马银隆 陈信安</div>
+                    <div>温武胜 林华为</div>
+                    <div>覃彩梅 蓝巧</div>
+                    <div>黄长乐 唐农霁</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <p>© 广西科技大学 嵌入式智控协会</p>
+    </footer>
+
+    <!-- 引入 JavaScript -->
+    <script src="https://cdn.staticfile.org/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://unpkg.com/@waline/client@v3"></script>
+
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
