@@ -182,66 +182,28 @@
         </div>
     </div>
 
-    <!-- 视频介绍 -->
-    <div class="container my-5">
-        <div class="card text-center">
-            <div class="card-body">
-                <h2>协会介绍视频<i class="fas fa-video"></i><br>（没弄，随便拿视频充数） </h2>
-                <video width="100%" controls style="border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);">
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    您的浏览器不支持视频标签。
-                </video>
+<!-- 视频介绍 -->
+<div class="container my-5">
+    <div class="card text-center">
+        <div class="card-body">
+            <h2>协会介绍视频<i class="fas fa-video"></i><br>（嵌套哔哩哔哩视频）</h2>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);">
+                <iframe 
+                    src="https://player.bilibili.com/player.html?bvid=BV1XX4y1X7gh&cid=123456789&page=1" 
+                    scrolling="no" 
+                    border="0" 
+                    frameborder="no" 
+                    framespacing="0" 
+                    allowfullscreen="true" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                </iframe>
             </div>
         </div>
     </div>
+</div>
 
 
-    <!-- 雪花效果 -->
-    <div id="snow-container"></div>
 
-    <!-- JavaScript 实现 -->
-    <script>
-        // 点击“查看更多”按钮的功能
-        function goToLab(url) {
-            window.location.href = url;
-        }
-
-        // 雪花下雪效果
-        const snowContainer = document.getElementById('snow-container');
-
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.innerHTML = '❄'; // 雪花字符
-            snowflake.style.left = Math.random() * 100 + 'vw'; // 随机位置
-            snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em'; // 随机大小
-            snowContainer.appendChild(snowflake);
-
-            // 动画效果
-            let fallDuration = Math.random() * 5 + 5; // 随机下落时间
-            snowflake.style.animation = `fall ${fallDuration}s linear forwards`;
-
-            // 移除雪花
-            snowflake.addEventListener('animationend', () => {
-                snowflake.remove();
-            });
-        }
-
-        // 创建雪花
-        setInterval(createSnowflake, 200); // 每200毫秒生成一个雪花
-
-        // CSS动画
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fall {
-                to {
-                    transform: translateY(100vh);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
     <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
