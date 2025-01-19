@@ -359,7 +359,7 @@
                     <div>
                      </div>
                     <div class="card-footer text-muted">
-                        <small>更新于：2024-12-19</small>
+                        <small>更新于：2025-01-19</small>
                     </div>
 
                 </div>
@@ -629,11 +629,130 @@
                         </div>
                     </div>
                 </div>
+            <hr>
+            <h2>机器视觉</h2>
+            <div class="accordion" id="accordionExample6">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSix1">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix1"
+                            aria-expanded="false" aria-controls="collapseSix">
+                            基础视觉处理:OpenCV与Matlab
+                        </button>   
+                    </h2>
+                    <div id="collapseSix1" class="accordion-collapse collapse" aria-labelledby="headingSix1"
+                        data-bs-parent="#accordionExample6">
+                        <div class="accordion-body">
+                            视觉处理，顾名思义是指对视觉图像进行预处理，以获得我们想要的目标，并将其提供给计算机进行处理。图像就是数据。常见的视觉处理可以有python、matlab、c++进行对图像进行提取图像、图像裁剪、灰度变换、二值化处理、均值滤波、特征提取、边缘检测、大金算法等等等的图像操作。这个时候我们就要用python的opencv或者matlab来对图像的处理了。
+                            这时候我们就需要学习python或者Matlab了，当然，我们也可以用c++来进行图像处理，但是c++的库比较少，所以用python或者matlab来处理图像是比较方便。<br>
+                            <p>opencv-python学习教程：<a href="https://www.runoob.com/opencv/opencv-tutorial.html"
+                                    class="custom-link">菜鸟教程的opencv文字教程</a></p>
+                            <p>opencv-python学习教程：<a href="https://www.bilibili.com/video/BV1Fo4y1d7JL/?p=7&share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
+                                    class="custom-link">黑马程序员图像处理OpenCV入门教程</a></p>
+                            <p>matlab学习教程：<a
+                                    href="https://www.bilibili.com/video/BV1ci4y1b7NY/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
+                                    class="custom-link">MATLAB图像处理教程</a></p>
+                            <p>matlab学习教程：<a
+                                    href="https://blog.csdn.net/qq_49030808/article/details/108690293"
+                                    class="custom-link">matlab图像处理基础文字版</a></p>
+                        
+                        </p>
+                        </div>
+                    </div>
+                    </div>
+            
+                    <h2 class="accordion-header" id="headingSix2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSix2" aria-expanded="false" aria-controls="collapseSix">
+                            OpenMV
+                        </button>
+                    </h2>
+                    <div id="collapseSix2" class="accordion-collapse collapse" aria-labelledby="headingSix2"
+                        data-bs-parent="#accordionExample6">
+                        <div class="accordion-body">
+                            OpenMV是一个开源的机器视觉模块，它集成了摄像头、处理器和传感器，可以用于图像处理和机器视觉任务。OpenMV模块具有以下特点：
+                            <p>1. 开源：OpenMV模块的源代码是开源的，用户可以根据自己的需求进行修改和定制。</p>
+                            <p>2. 低成本：OpenMV模块的价格相对较低，适合预算有限的用户。</p>
+                            <p>3. 高性能：OpenMV模块集成了高性能的处理器和摄像头，可以处理复杂的图像处理任务。</p>
+                            <p>4. 灵活：OpenMV模块可以连接到各种传感器和执行器，实现更复杂的机器视觉任务。</p>
+                            <p>5. 简单易用：OpenMV模块提供了丰富的API和示例代码，用户可以轻松地开始使用。</p>
+                            
+                            但是最好不要买某瞳的Openmv,溢价太严重，我的建议是去淘宝买一个STM32H750的开发板，商家并提供Openmv的固件，自己烧录进去，再买一个二十出头的OV5640摄像头，这样性价比更高。（或者自己做一个OpenMV这个更便宜）
+                            </p>
+                            协会在2024-2025学期进行了OpenMV的培训，大家都或多或少的懂了一些怎么视觉处理，作为一款入门级的视觉模块，它不需要很复杂的部署环境，只需要下载好python环境和OpenMVIDE就可以直接使用。<p>OpenMVIDE下载链接：
+                                <a href="https://singtown.com/openmv-download/"class="custom-link">星瞳国内下载</a>
+                                <a href="https://openmv.io/pages/download" class="custom-link">OPENMV官方下载</a></p>
+                            虽然星瞳溢价严重但是他们的教程还是不错的：<a href="https://book.openmv.cc/" class="custom-link">星瞳教程</a></p>
+                            </p>
+                            我们学习完openmv就可以考虑让他和stm32串口连接实时传输数据，这样就可以实现openmv负责视觉处理，得到处理结果并预期的让openmv传输命令让stm32负责控制，这样就可以实现一个简单的视觉系统了。但是要怎么实现他们之间的通信呢？<a href="https://blog.csdn.net/2401_87555310/article/details/143197859" class="custom-link">OpenMV与STM32单片机通信</a></p>
+                        </div>
+                    </div>
+                    <h2 class="accordion-header" id="headingSix3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSix3" aria-expanded="false" aria-controls="collapseSix">
+                            Linux与OpenCV
+                        </button>
+                    </h2>
+                    <div id="collapseSix3" class="accordion-collapse collapse" aria-labelledby="headingSix3"
+                        data-bs-parent="#accordionExample6">
+                        <div class="accordion-body">
+                            在嵌入式系统和计算机视觉领域，OpenMV和OpenCV代表了两种不同的技术路径。OpenMV作为一个集成了摄像头和微控制器的硬件模块，主要面向初学者和简单的嵌入式应用，使用Python编程语言，提供了简化的API和内置的例程，适合基本的图像处理任务。然而，其功能和性能相对有限，难以应对复杂的计算机视觉需求。
+                            相比之下，OpenCV作为一款开源的计算机视觉库，具有强大的功能和广泛的应用场景。它支持多种编程语言，如C++和Python，并能在Linux等操作系统上高效运行。OpenCV不仅提供了丰富的图像处理和计算机视觉算法，还支持深度学习模块，使其在处理复杂任务时表现出色。特别是，OpenCV可以与Linux操作系统紧密结合，利用Linux的强大计算能力和灵活性，运行诸如YOLO（You
+                            Only Look Once）等先进的实时目标检测模型。这种组合不仅能够实现高效的图像处理和目标识别，还能根据具体需求进行高度定制和优化，为复杂的计算机视觉应用提供了强大的支持。
+                            </p>
+                            接触嵌入式Linux我们需要了解一些基本知识，如树莓派、香橙派、鲁班猫、jetson、立创泰山派类似的linux开发板，我们称为微电脑，他们就是一个独立的系统，接上鼠标键盘显示器就可以使用（甚至可以使用他们打游戏），大多Linux开发板出厂自带的是Ubuntu，这个系统很适合在嵌入式Linux上使用，结合我们之前学习的opencv就可以在Linux开发板上使用opencv进行图像处理了。
+                            如何流畅的使用这个系统，我们就需要学会如何使用Ubuntu的操作，如安装软件、使用终端、文件管理、网络配置等操作。<a href="https://blog.csdn.net/qq_45277212/article/details/120834748" class="custom-link">Linux Ubuntu 入门基本命令</a></p>
+                            还有比如opencv在Ubuntu上的安装<a href="https://walnutpi.com/docs/walnutpi_1/opencv/install" class="custom-link">使用pip安装OpenCV-python</a></p>
+                            如果我们不想用额外的显示器显示那个linux开发板的界面怎么办？很简单，使用串口连接Linux开发板配置wifi网络，并使用Windows的Realvnc（VNC Viewer）与Linux开发板连接。我们以树莓派为例：<a href="https://blog.csdn.net/u011198687/article/details/120954860"
+                                class="custom-link">用串口登陆树莓派配置wifi网络</a></p><a href="https://blog.csdn.net/qq_44214671/article/details/110581282" class="custom-link">使用 VNC 远程访问树莓派</a>（注意，其他linux开发板可能不会自带vnc，所以需要自己安装）
+                                （还没写完，暂时不想写了，后面再说）
+                    </div>
+                    </div>
+                    <h2 class="accordion-header" id="headingSix4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix4"
+                            aria-expanded="false" aria-controls="collapseSix">
+                            YOLO算法
+                        </button>
+                    </h2>
+                    <div id="collapseSix4" class="accordion-collapse collapse" aria-labelledby="headingSix4"
+                        data-bs-parent="#accordionExample6">
+                        <div class="accordion-body">
+                            YOLO（You Only Look
+                            Once）算法是一种先进的实时目标检测方法，通过将图像划分为网格单元，并在每个单元内预测边界框和类别概率，实现了高效的目标检测。与传统的两步检测方法不同，YOLO将目标检测视为一个回归问题，从而大幅提升了检测速度。其核心思想是利用一个单一的卷积神经网络（CNN）直接预测目标的类别和位置，这使得YOLO能够在保持高准确率的同时，处理速度极快，适合实时应用场景，如自动驾驶、视频监控和机器人视觉等。此外，YOLO的架构经过多次迭代优化，最新版本在精度和速度上均有显著提升，进一步巩固了其在目标检测领域的领先地位。（还没写完，暂时不想写了，后面再说）
+                        </div>
+                    </div>
+                </div>
+
+                <h2>乐鑫ESP32与Arduino</h2>
+                <div class="accordion" id="accordionExample7">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven1">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSeven1" aria-expanded="false" aria-controls="collapseSeven">
+                                ESP32与Arduino基础
+                            </button>
+                        </h2>
+                        <div id="collapseSeven1" class="accordion-collapse collapse" aria-labelledby="headingSeven1"
+                            data-bs-parent="#accordionExample6">
+                            <div class="accordion-body">
+                            （还没写完，暂时不想写了，后面再说）
+                            </div>
+                        </div>
+
+                        <h2 class="accordion-header" id="headingSeven2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven2"
+                                aria-expanded="false" aria-controls="collapseSeven">
+                                ESP32 MQTT联网
+                            </button>
+                        </h2>
+                        <div id="collapseSeven2" class="accordion-collapse collapse" aria-labelledby="headingSeven2"
+                            data-bs-parent="#accordionExample6">
+                            <div class="accordion-body">
+                                （还没写完，暂时不想写了，后面再说）
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 还在更新中...
-            </div>
-
-
-
 
         </div>
     </div>
