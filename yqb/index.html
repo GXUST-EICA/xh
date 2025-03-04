@@ -26,22 +26,25 @@
 
 		body {
 			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-			background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+			background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
 			display: flex;
 			flex-direction: column;
 		}
 
 		.navbar {
-			background-color: rgba(255, 255, 255, 0.95);
-			padding: 15px 0;
+			background-color: rgba(255, 255, 255, 0.9);
+			backdrop-filter: blur(10px);
+			padding: 20px 0;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			transition: background-color 0.3s ease, box-shadow 0.3s ease;
+			border-radius: 0 0 15px 15px;
+			z-index: 1000;
 		}
 
 		.navbar-brand {
-			background: linear-gradient(45deg, #1246ff, #4d7fff);
-			-webkit-background-clip: text;
-			background-clip: text;
-			-webkit-text-fill-color: transparent;
-			font-weight: 800;
+			font-weight: 700;
+			font-size: 1.7rem;
+			color: #1246ff;
 		}
 
 		.nav-link {
@@ -69,9 +72,18 @@
 		}
 
 		.competition-card {
-			background: rgba(255, 255, 255, 0.98);
-			border: none;
-			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 15px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			padding: 2rem;
+			margin-bottom: 2rem;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			border: 1px solid rgba(0, 0, 0, 0.1);
+		}
+
+		.competition-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 		}
 
 		.timeline {
@@ -86,13 +98,13 @@
 		.timeline-item {
 			position: relative;
 			padding: 20px 20px 20px 2rem;
-			border-left: 4px solid #1246ff;
-			background: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.95));
+			border-left: 3px solid #1246ff;
+			background: white;
 			border-radius: 10px;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			transition: transform 0.3s ease, box-shadow 0.3s ease;
 			width: 100%;
-			margin: 15px 0;
+			margin: 10px 0;
 			text-align: center;
 		}
 
@@ -115,10 +127,8 @@
 		.prize-card {
 			position: relative;
 			overflow: hidden;
-			background: white;
-			border: 1px solid rgba(18, 70, 255, 0.1);
-			transform-style: preserve-3d;
-			padding: 2.5rem;
+			background: linear-gradient(145deg, #ffffff, #f0f0f0);
+			padding: 2rem;
 			border-radius: 15px;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 			transition: all 0.3s ease;
@@ -148,26 +158,24 @@
 			font-size: 1.5rem;
 		}
 
-		.prize-card.gold {
-			background: linear-gradient(145deg, #ffffff, #fff9f0);
+		.prize-card.gold::after {
+			content: '🥇';
 		}
 
-		.prize-card.silver {
-			background: linear-gradient(145deg, #ffffff, #f5f5f5);
+		.prize-card.silver::after {
+			content: '🥈';
 		}
 
-		.prize-card.bronze {
-			background: linear-gradient(145deg, #ffffff, #fff5f0);
+		.prize-card.bronze::after {
+			content: '🥉';
 		}
 
 		h2 {
 			color: #1246ff;
 			font-weight: 700;
-			margin-bottom: 2rem;
+			margin-bottom: 1.5rem;
 			position: relative;
 			display: inline-block;
-			font-size: 2rem;
-			letter-spacing: 1px;
 		}
 
 		h2::after {
@@ -176,21 +184,20 @@
 			bottom: -5px;
 			left: 0;
 			width: 100%;
-			height: 3px;
+			height: 2px;
 			background: linear-gradient(90deg, #1246ff, transparent);
-			border-radius: 3px;
 		}
 
 		.lead {
-			font-size: 1.15rem;
-			line-height: 1.9;
-			color: #495057;
+			font-size: 1.1rem;
+			line-height: 1.8;
+			color: #444;
 		}
 
 		.footer {
-			background: linear-gradient(45deg, #1246ff, #4d7fff);
+			background-color: #1246ff;
 			color: white;
-			padding: 30px 0;
+			padding: 20px 0;
 			text-align: center;
 			border-radius: 10px 10px 0 0;
 		}
@@ -211,12 +218,12 @@
 				width: 200px;
 				display: block;
 			}
-			
+
 			.competition-card {
 				padding: 1.5rem;
 				margin-bottom: 1.5rem;
 			}
-			
+
 			.prize-card {
 				margin-bottom: 1.5rem;
 			}
@@ -229,32 +236,27 @@
 
 		.register-btn {
 			display: inline-block;
-			padding: 15px 45px;
-			background: linear-gradient(45deg, #1246ff, #4d7fff);
+			padding: 15px 40px;
+			background: linear-gradient(45deg, #ff4646, #ff6b6b);
 			color: white;
 			text-decoration: none;
 			border-radius: 30px;
 			font-weight: bold;
-			font-size: 1.2rem;
-			letter-spacing: 1px;
-			box-shadow: 0 10px 20px rgba(18, 70, 255, 0.2);
+			font-size: 1.1rem;
+			box-shadow: 0 4px 15px rgba(255, 70, 70, 0.3);
 			transition: all 0.3s ease;
-			border: none;
 		}
 
 		.register-btn:hover {
-			background: linear-gradient(45deg, #0035ff, #3d6eff);
-			transform: translateY(-5px);
-			box-shadow: 0 15px 25px rgba(18, 70, 255, 0.3);
+			transform: translateY(-3px);
+			box-shadow: 0 6px 20px rgba(255, 70, 70, 0.4);
+			color: white;
+			background: linear-gradient(45deg, #ff3636, #ff5b5b);
 		}
 
 		.register-btn:active {
 			transform: translateY(-1px);
 			box-shadow: 0 4px 15px rgba(255, 70, 70, 0.4);
-		}
-
-		html {
-			scroll-behavior: smooth;
 		}
 	</style>
 </head>
@@ -305,7 +307,7 @@
 					<a href="https://kdocs.cn/l/cjQ2YHM7ggGx" class="register-btn">立即报名</a>
 				</div>
 			</div>
-			
+
 			<div class="row" data-aos="fade-up" id="prizes">
 				<h2 class="text-center mb-4">奖项设置</h2>
 				<div class="col-md-4">
@@ -331,7 +333,8 @@
 				</div>
 			</div>
 
-			<hr class="my-5" style="border: 0; height: 1px; background: linear-gradient(to right, transparent, #1246ff, transparent);">
+			<hr class="my-5"
+				style="border: 0; height: 1px; background: linear-gradient(to right, transparent, #1246ff, transparent);">
 
 			<div class="competition-card" data-aos="fade-up" id="about">
 				<div class="text-center mt-4">
@@ -340,14 +343,16 @@
 				</div>
 				<h2 class="text-center mb-4">活动背景</h2>
 				<p class="lead">
-					当前21世纪，在全球新能源汽车、通信、消费类电子、工业、医疗、军事等行业的巨大智能化装备市场需求下，全球嵌入式产业得到了快速发展。无论是生活中常用的手机、电脑、智能手环、电视等消费类电子领域，还是智能制造、智慧物流、仿生机器人等工业制造领域，以及国防军工领域，无不采用嵌入式技术。同时巨大的市场需求，也使得嵌入式行业对人才的需求极度旺盛。				</p>
+					当前21世纪，在全球新能源汽车、通信、消费类电子、工业、医疗、军事等行业的巨大智能化装备市场需求下，全球嵌入式产业得到了快速发展。无论是生活中常用的手机、电脑、智能手环、电视等消费类电子领域，还是智能制造、智慧物流、仿生机器人等工业制造领域，以及国防军工领域，无不采用嵌入式技术。同时巨大的市场需求，也使得嵌入式行业对人才的需求极度旺盛。
+				</p>
 				<h2 class="text-center mb-4">大赛目的</h2>
 				<p class="lead">
 					科技是人类智慧的伟大结晶，创新是文明进步的不竭动力。大赛针对当前我院学生的实际情况，推广我院嵌入式电子技术，检验专业学生在嵌入式技术应用方面的职业能力以及质量、效率、成本和安全意识；培养学生的创新实践意识与科研动手能力、团队协作的人文精神和理论联系实际的学风，鼓励更多学生踊跃参加课外科技学术活动，为优秀人才提供良好的平台，让他们更好的脱颖而出。此次竞赛将推动培养学院学生的实践创新意识、基本能力与团队协作的人文精神和理论联系实际的学风。
 				</p>
 			</div>
 
-			<hr class="my-5" style="border: 0; height: 1px; background: linear-gradient(to right, transparent, #1246ff, transparent);">
+			<hr class="my-5"
+				style="border: 0; height: 1px; background: linear-gradient(to right, transparent, #1246ff, transparent);">
 
 			<div class="competition-card mt-4" data-aos="fade-up">
 				<h2 class="text-center mb-4">竞赛主题方向</h2>
