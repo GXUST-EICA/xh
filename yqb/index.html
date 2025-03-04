@@ -115,12 +115,91 @@
 
 		@media (max-width: 768px) {
 			.navbar-brand {
-				font-size: 1.5rem;
+				font-size: 1.3rem;
 			}
 
 			.nav-link {
 				font-size: 0.9rem;
+				margin: 5px 0;
+				text-align: center;
 			}
+
+			.nav-link.register-button {
+				margin: 10px auto;
+				width: 200px;
+				display: block;
+			}
+			
+			.competition-card {
+				padding: 1.5rem;
+				margin-bottom: 1.5rem;
+			}
+			
+			.prize-card {
+				margin-bottom: 1.5rem;
+			}
+		}
+
+		/* 增加卡片样式 */
+		.competition-card {
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			background: rgba(255, 255, 255, 0.95);
+		}
+
+		.prize-card {
+			position: relative;
+			overflow: hidden;
+			transition: all 0.3s ease;
+		}
+
+		.prize-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+		}
+
+		.prize-card h4 {
+			color: #1246ff;
+			margin-bottom: 1.5rem;
+		}
+
+		/* 时间线优化 */
+		.timeline-item {
+			position: relative;
+			padding-left: 2rem;
+			border-left: 3px solid #1246ff;
+			margin-left: 20px;
+		}
+
+		.timeline-item:before {
+			content: '';
+			position: absolute;
+			left: -10px;
+			top: 25px;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background: #1246ff;
+		}
+
+		/* 主题方向卡片优化 */
+		.competition-card .col-md-6 {
+			padding: 1rem;
+		}
+
+		.competition-card h5 {
+			color: #1246ff;
+			margin-bottom: 1rem;
+		}
+
+		/* 页脚优化 */
+		.footer {
+			margin-top: 2rem;
+			background: linear-gradient(135deg, #1246ff, #0033cc);
+		}
+
+		.footer p {
+			margin-bottom: 0.5rem;
+			opacity: 0.9;
 		}
 	</style>
 </head>
