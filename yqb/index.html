@@ -72,12 +72,13 @@
 		}
 
 		.competition-card {
-			background: white;
+			background: rgba(255, 255, 255, 0.95);
 			border-radius: 15px;
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 			padding: 2rem;
 			margin-bottom: 2rem;
 			transition: transform 0.3s ease;
+			border: 1px solid rgba(0, 0, 0, 0.1);
 		}
 
 		.competition-card:hover {
@@ -98,11 +99,20 @@
 		}
 
 		.prize-card {
+			position: relative;
+			overflow: hidden;
 			background: linear-gradient(145deg, #ffffff, #f0f0f0);
-			border-radius: 15px;
-			padding: 1.5rem;
-			margin-bottom: 1rem;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease;
+		}
+
+		.prize-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+		}
+
+		.prize-card h4 {
+			color: #1246ff;
+			margin-bottom: 1.5rem;
 		}
 
 		.footer {
@@ -140,28 +150,6 @@
 			}
 		}
 
-		/* 增加卡片样式 */
-		.competition-card {
-			border: 1px solid rgba(0, 0, 0, 0.1);
-			background: rgba(255, 255, 255, 0.95);
-		}
-
-		.prize-card {
-			position: relative;
-			overflow: hidden;
-			transition: all 0.3s ease;
-		}
-
-		.prize-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-		}
-
-		.prize-card h4 {
-			color: #1246ff;
-			margin-bottom: 1.5rem;
-		}
-
 		/* 时间线优化 */
 		.timeline-item {
 			position: relative;
@@ -182,10 +170,6 @@
 		}
 
 		/* 主题方向卡片优化 */
-		.competition-card .col-md-6 {
-			padding: 1rem;
-		}
-
 		.competition-card h5 {
 			color: #1246ff;
 			margin-bottom: 1rem;
