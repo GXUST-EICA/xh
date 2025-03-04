@@ -215,7 +215,8 @@
 				text-align: center;
 			}
 
-			.nav-link.register-button {
+			.nav-link.register-button,
+			.nav-link.join-qq-button {
 				margin: 10px auto;
 				width: 200px;
 				display: block;
@@ -260,6 +261,21 @@
 			transform: translateY(-1px);
 			box-shadow: 0 4px 15px rgba(255, 70, 70, 0.4);
 		}
+
+		.join-qq-button {
+			background: linear-gradient(45deg, #1246ff, #4e7bff);
+			color: white !important;
+			border-radius: 20px;
+			padding: 8px 20px !important;
+			transition: all 0.3s ease;
+			margin-left: 10px;
+		}
+
+		.join-qq-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 15px rgba(18, 70, 255, 0.3);
+			background: linear-gradient(45deg, #0035e0, #3d6dff);
+		}
 	</style>
 </head>
 
@@ -283,6 +299,9 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link register-button" href="https://kdocs.cn/l/cjQ2YHM7ggGx">立即报名</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link join-qq-button" href="https://qm.qq.com/q/1qouA2FIoo" target="_blank">加入比赛QQ群</a>
 					</li>
 				</ul>
 			</div>
@@ -476,7 +495,7 @@
 							<div class="card-body">
 								<div class="alert alert-light border">
 									<i class="fas fa-info-circle text-danger me-2"></i>
-									使用通晓开发板进行作品的开发与设计
+									使用通晓开发板进行作品的开发设计
 								</div>
 								
 								<h5 class="mt-4 text-danger">
