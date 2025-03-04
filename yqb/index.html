@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="粤嵌杯嵌入式设计大赛">
+	<meta name="description" content="粤嵌杯嵌入式设计大赛官方网站">
+	<meta name="author" content="粤嵌杯嵌入式设计大赛组委会">
+	<meta name="copyright" content="粤嵌杯嵌入式设计大赛组委会">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta itemprop="name" content="粤嵌杯嵌入式设计大赛" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
+	<meta name="robots" content="index,follow">
+	<title>粤嵌杯嵌入式设计大赛</title>
+	<link href="assets\css\bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/aos.css" rel="stylesheet">
+
+	<style>
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+		}
+
+		body {
+			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+			background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+			display: flex;
+			flex-direction: column;
+		}
+
+		.navbar {
+			background-color: rgba(255, 255, 255, 0.9);
+			backdrop-filter: blur(10px);
+			padding: 20px 0;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			transition: background-color 0.3s ease, box-shadow 0.3s ease;
+			border-radius: 0 0 15px 15px;
+			z-index: 1000;
+		}
+
+		.navbar-brand {
+			font-weight: 700;
+			font-size: 1.7rem;
+			color: #1246ff;
+		}
+
+		.nav-link {
+			font-size: 1rem;
+			margin-left: 15px;
+			color: #333;
+		}
+
+		.nav-link.register-button {
+			color: white;
+			background-color: #ff4646;
+			padding: 10px 20px;
+			border-radius: 20px;
+			font-weight: 700;
+			transition: background-color 0.3s ease;
+		}
+
+		.nav-link.register-button:hover {
+			background-color: #e03838;
+		}
+
+		.main-content {
+			flex: 1;
+			padding: 40px 0;
+		}
+
+		.competition-card {
+			background: white;
+			border-radius: 15px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			padding: 2rem;
+			margin-bottom: 2rem;
+			transition: transform 0.3s ease;
+		}
+
+		.competition-card:hover {
+			transform: translateY(-5px);
+		}
+
+		.timeline {
+			position: relative;
+			padding: 20px 0;
+		}
+
+		.timeline-item {
+			padding: 20px;
+			margin-bottom: 20px;
+			background: white;
+			border-radius: 10px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		.prize-card {
+			background: linear-gradient(145deg, #ffffff, #f0f0f0);
+			border-radius: 15px;
+			padding: 1.5rem;
+			margin-bottom: 1rem;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.footer {
+			background-color: #1246ff;
+			color: white;
+			padding: 20px 0;
+			text-align: center;
+			border-radius: 10px 10px 0 0;
+		}
+
+		@media (max-width: 768px) {
+			.navbar-brand {
+				font-size: 1.5rem;
+			}
+
+			.nav-link {
+				font-size: 0.9rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
+		<div class="container">
+			<a class="navbar-brand" href="/">粤嵌杯大赛</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#about">大赛简介</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#schedule">赛程安排</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#prizes">奖项设置</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link register-button" href="/register">立即报名</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="main-content">
+		<div class="container">
+			<div class="competition-card" data-aos="fade-up" id="about">
+				<h2 class="text-center mb-4">大赛简介</h2>
+				<p class="lead">
+					"粤嵌杯"嵌入式设计大赛是面向全国高校大学生的综合性科技竞赛，旨在培养学生的创新能力和实践技能。大赛以"创新引领未来，技术改变生活"为主题，鼓励参赛者运用嵌入式技术解决实际问题。
+				</p>
+				<div class="text-center mt-4">
+					<h4>参赛对象</h4>
+					<p>全国高等院校在校学生（含高职高专、本科、研究生）</p>
+				</div>
+			</div>
+
+			<div class="timeline" data-aos="fade-up" id="schedule">
+				<h2 class="text-center mb-4">赛程安排</h2>
+				<div class="timeline-item">
+					<h5>报名阶段</h5>
+					<p>2024年3月1日 - 2024年4月15日</p>
+				</div>
+				<div class="timeline-item">
+					<h5>初赛阶段</h5>
+					<p>2024年4月20日 - 2024年5月20日</p>
+				</div>
+				<div class="timeline-item">
+					<h5>决赛阶段</h5>
+					<p>2024年6月10日 - 2024年6月12日</p>
+				</div>
+			</div>
+
+			<div class="row" data-aos="fade-up" id="prizes">
+				<h2 class="text-center mb-4">奖项设置</h2>
+				<div class="col-md-4">
+					<div class="prize-card">
+						<h4 class="text-center">一等奖</h4>
+						<p class="text-center">奖金：10000元</p>
+						<p class="text-center">获奖证书</p>
+						<p class="text-center">企业实习机会</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="prize-card">
+						<h4 class="text-center">二等奖</h4>
+						<p class="text-center">奖金：5000元</p>
+						<p class="text-center">获奖证书</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="prize-card">
+						<h4 class="text-center">三等奖</h4>
+						<p class="text-center">奖金：3000元</p>
+						<p class="text-center">获奖证书</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="competition-card mt-4" data-aos="fade-up">
+				<h2 class="text-center mb-4">竞赛主题方向</h2>
+				<div class="row">
+					<div class="col-md-6">
+						<h5>智能家居创新设计</h5>
+						<p>运用嵌入式技术，设计创新的智能家居解决方案</p>
+					</div>
+					<div class="col-md-6">
+						<h5>工业物联网应用</h5>
+						<p>结合物联网技术，开发工业自动化控制系统</p>
+					</div>
+					<div class="col-md-6">
+						<h5>智能机器人设计</h5>
+						<p>设计具有特定功能的智能机器人系统</p>
+					</div>
+					<div class="col-md-6">
+						<h5>智慧农业解决方案</h5>
+						<p>应用嵌入式技术，开发智慧农业监控系统</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p>主办单位：广西科技大学</p>
+			<p>承办单位：计算机科学与工程学院</p>
+			<p>协办单位：粤嵌科技</p>
+			<p>&copy; 2024 粤嵌杯嵌入式设计大赛组委会</p>
+		</div>
+	</footer>
+
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<script src="assets/js/aos.js"></script>
+	<script>
+		AOS.init();
+	</script>
+</body>
+
+</html>
