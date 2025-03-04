@@ -657,53 +657,53 @@
             <div class="accordion" id="accordionExample6">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingSix1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix1"
-                            aria-expanded="false" aria-controls="collapseSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#collapseSix1" aria-expanded="false" aria-controls="collapseSix1">
                             基础视觉处理:OpenCV与Matlab
                         </button>   
                     </h2>
                     <div id="collapseSix1" class="accordion-collapse collapse" aria-labelledby="headingSix1"
                         data-bs-parent="#accordionExample6">
                         <div class="accordion-body">
-                            视觉处理，顾名思义是指对视觉图像进行预处理，以获得我们想要的目标，并将其提供给计算机进行处理。图像就是数据。常见的视觉处理可以有python、matlab、c++进行对图像进行提取图像、图像裁剪、灰度变换、二值化处理、均值滤波、特征提取、边缘检测、大金算法等等等的图像操作。这个时候我们就要用python的opencv或者matlab来对图像的处理了。
-                            这时候我们就需要学习python或者Matlab了，当然，我们也可以用c++来进行图像处理，但是c++的库比较少，所以用python或者matlab来处理图像是比较方便。<br>
-                            <p>opencv-python学习教程：<a href="https://www.runoob.com/opencv/opencv-tutorial.html"
-                                    class="custom-link">菜鸟教程的opencv文字教程</a></p>
-                            <p>opencv-python学习教程：<a href="https://www.bilibili.com/video/BV1Fo4y1d7JL/?p=7&share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
-                                    class="custom-link">黑马程序员图像处理OpenCV入门教程</a></p>
-                            <p>matlab学习教程：<a
-                                    href="https://www.bilibili.com/video/BV1ci4y1b7NY/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
-                                    class="custom-link">MATLAB图像处理教程</a></p>
-                            <p>matlab学习教程：<a
-                                    href="https://blog.csdn.net/qq_49030808/article/details/108690293"
-                                    class="custom-link">matlab图像处理基础文字版</a></p>
-                        
-                        </p>
+                            视觉处理，顾名思义是指对视觉图像进行预处理，以获得我们想要的目标，并将其提供给计算机进行处理。图像就是数据。常见的视觉处理可以有python、matlab、c++进行对图像进行提取图像、图像裁剪、灰度变换、二值化处理、均值滤波、特征提取、边缘检测、大金算法等等等的图像操作。这时候我们就要用python的opencv或者matlab来对图像的处理了。
+                            这时候我们就需要学习python或者Matlab了，当然，我们也可以用c++来进行图像处理，但是c++的库比较少，所以用python或者matlab来处理图像是比较方便。
+                            
+                            <p>opencv学习教程：<a href="https://www.runoob.com/opencv/opencv-tutorial.html" 
+                                class="custom-link">菜鸟教程的opencv文字教程</a></p>
+                            
+                            <p>opencv-python学习教程：<a href="https://www.bilibili.com/video/BV1Fo4y1d7JL/?p=7&share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" 
+                                class="custom-link">黑马程序员图像处理OpenCV入门教程</a></p>
+                            
+                            <p>matlab学习教程：<a href="https://www.bilibili.com/video/BV1ci4y1b7NY/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" 
+                                class="custom-link">MATLAB图像处理教程</a></p>
+                            
+                            <p>matlab学习教程：<a href="https://blog.csdn.net/qq_49030808/article/details/108690293" 
+                                class="custom-link">matlab图像处理基础文字版</a></p>
                         </div>
                     </div>
-                    </div>
+                </div>
             
-                    <h2 class="accordion-header" id="headingSix2">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseSix2" aria-expanded="false" aria-controls="collapseSix">
-                            OpenMV
-                        </button>
-                    </h2>
-                    <div id="collapseSix2" class="accordion-collapse collapse" aria-labelledby="headingSix2"
-                        data-bs-parent="#accordionExample6">
-                        <div class="accordion-body">
-                            OpenMV是一个开源的机器视觉模块，它集成了摄像头、处理器和传感器，可以用于图像处理和机器视觉任务。OpenMV模块具有以下特点：
-                            <p>1. 开源：OpenMV模块的源代码是开源的，用户可以根据自己的需求进行修改和定制。</p>
-                            <p>2. 低成本：OpenMV模块的价格相对较低，适合预算有限的用户。</p>
-                            <p>3. 高性能：OpenMV模块集成了高性能的处理器和摄像头，可以处理复杂的图像处理任务。</p>
-                            <p>4. 灵活：OpenMV模块可以连接到各种传感器和执行器，实现更复杂的机器视觉任务。</p>
-                            <p>5. 简单易用：OpenMV模块提供了丰富的API和示例代码，用户可以轻松地开始使用。</p>
-                            
-                            但是最好不要买某瞳的Openmv,溢价太严重，我的建议是去淘宝买一个STM32H750的开发板，商家并提供Openmv的固件，自己烧录进去，再买一个二十出头的OV5640摄像头，这样性价比更高。（或者自己做一个OpenMV这个更便宜）
-                            </p>
-                            协会在2024-2025学期进行了OpenMV的培训，大家都或多或少的懂了一些怎么视觉处理，作为一款入门级的视觉模块，它不需要很复杂的部署环境，只需要下载好python环境和OpenMVIDE就可以直接使用。<p>OpenMVIDE下载链接：
-                                <a href="https://singtown.com/openmv-download/"class="custom-link">星瞳国内下载</a>
-                                <a href="https://openmv.io/pages/download" class="custom-link">OPENMV官方下载</a></p>
+                <h2 class="accordion-header" id="headingSix2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSix2" aria-expanded="false" aria-controls="collapseSix">
+                        OpenMV
+                    </button>
+                </h2>
+                <div id="collapseSix2" class="accordion-collapse collapse" aria-labelledby="headingSix2"
+                    data-bs-parent="#accordionExample6">
+                    <div class="accordion-body">
+                        OpenMV是一个开源的机器视觉模块，它集成了摄像头、处理器和传感器，可以用于图像处理和机器视觉任务。OpenMV模块具有以下特点：
+                        <p>1. 开源：OpenMV模块的源代码是开源的，用户可以根据自己的需求进行修改和定制。</p>
+                        <p>2. 低成本：OpenMV模块的价格相对较低，适合预算有限的用户。</p>
+                        <p>3. 高性能：OpenMV模块集成了高性能的处理器和摄像头，可以处理复杂的图像处理任务。</p>
+                        <p>4. 灵活：OpenMV模块可以连接到各种传感器和执行器，实现更复杂的机器视觉任务。</p>
+                        <p>5. 简单易用：OpenMV模块提供了丰富的API和示例代码，用户可以轻松地开始使用。</p>
+                        
+                        但是最好不要买某瞳的Openmv,溢价太严重，我的建议是去淘宝买一个STM32H750的开发板，商家并提供Openmv的固件，自己烧录进去，再买一个二十出头的OV5640摄像头，这样性价比更高。（或者自己做一个OpenMV这个更便宜）
+                        </p>
+                        协会在2024-2025学期进行了OpenMV的培训，大家都或多或少的懂了一些怎么视觉处理，作为一款入门级的视觉模块，它不需要很复杂的部署环境，只需要下载好python环境和OpenMVIDE就可以直接使用。<p>OpenMVIDE下载链接：
+                            <a href="https://singtown.com/openmv-download/"class="custom-link">星瞳国内下载</a>
+                            <a href="https://openmv.io/pages/download" class="custom-link">OPENMV官方下载</a></p>
                             虽然星瞳溢价严重但是他们的教程还是不错的：<a href="https://book.openmv.cc/" class="custom-link">星瞳教程</a></p>
                             </p>
                             我们学习完openmv就可以考虑让他和stm32串口连接实时传输数据，这样就可以实现openmv负责视觉处理，得到处理结果并预期的让openmv传输命令让stm32负责控制，这样就可以实现一个简单的视觉系统了。但是要怎么实现他们之间的通信呢？<a href="https://blog.csdn.net/2401_87555310/article/details/143197859" class="custom-link">OpenMV与STM32单片机通信</a></p>
