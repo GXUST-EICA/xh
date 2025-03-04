@@ -233,6 +233,42 @@
             color: #0056b3;
             text-decoration: underline;
         }
+
+        .training-table {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .training-table th,
+        .training-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        .training-table th {
+            background-color: #f9f9f9;
+            font-weight: bold;
+        }
+
+        .training-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .training-table tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #e7f1ff;
+            color: #1246ff;
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(18, 70, 255, 0.25);
+        }
     </style>
 </head>
 
@@ -275,66 +311,65 @@
 				下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看哦~
                 <div class="card-body">
                     <div class="container" style="width: 100%; overflow-x: auto;">
-                        <table border="1" style="border-collapse: collapse; width: 100%; text-align: center; font-size: 16px;">
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9; font-weight: bold;">培训内容
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9; font-weight: bold;">预计时间
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9; font-weight: bold;">负责人
-                                </td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9; font-weight: bold;">培训地点
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">引导培训见面会</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年10月18日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">陈健锋</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">T3-307</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">万用表使用基础与基本电路认识培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年10月25日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">黄海东</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">T3-307</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">C语言与STM32基础培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年11月2日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">黄泉清</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">L2-413、L2-403</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">GPIO——按键、红外传感器循迹培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年11月9日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">庞儿茗</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">L2-413、L2-403</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">STM32与HC05蓝牙串口通信培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年11月15日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">王旭晖</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">L2-413、L2-403</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">TB6612电机驱动直流电机培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年11月22日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">陈健锋</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">L2-413、L2-403</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">I2C-OLED的显示培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">2024年11月29日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">胡志勇</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #ffffff;">L2-413、L2-403</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9;">绘制PCB-立创EDA培训计划</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9;">2024年12月2日19:30</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9;">黄海东</td>
-                                <td style="border: 1px solid #ddd; padding: 12px; background-color: #f9f9f9;">L2-413、L2-403</td>
-                            </tr>
-
+                        <table class="training-table">
+                            <thead>
+                                <tr>
+                                    <th>培训内容</th>
+                                    <th>预计时间</th>
+                                    <th>负责人</th>
+                                    <th>培训地点</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>引导培训见面会</td>
+                                    <td>2024年10月18日19:30</td>
+                                    <td>陈健锋</td>
+                                    <td>T3-307</td>
+                                </tr>
+                                <tr>
+                                    <td>万用表使用基础与基本电路认识培训计划</td>
+                                    <td>2024年10月25日19:30</td>
+                                    <td>黄海东</td>
+                                    <td>T3-307</td>
+                                </tr>
+                                <tr>
+                                    <td>C语言与STM32基础培训计划</td>
+                                    <td>2024年11月2日19:30</td>
+                                    <td>黄泉清</td>
+                                    <td>L2-413、L2-403</td>
+                                </tr>
+                                <tr>
+                                    <td>GPIO——按键、红外传感器循迹培训计划</td>
+                                    <td>2024年11月9日19:30</td>
+                                    <td>庞儿茗</td>
+                                    <td>L2-413、L2-403</td>
+                                </tr>
+                                <tr>
+                                    <td>STM32与HC05蓝牙串口通信培训计划</td>
+                                    <td>2024年11月15日19:30</td>
+                                    <td>王旭晖</td>
+                                    <td>L2-413、L2-403</td>
+                                </tr>
+                                <tr>
+                                    <td>TB6612电机驱动直流电机培训计划</td>
+                                    <td>2024年11月22日19:30</td>
+                                    <td>陈健锋</td>
+                                    <td>L2-413、L2-403</td>
+                                </tr>
+                                <tr>
+                                    <td>I2C-OLED的显示培训计划</td>
+                                    <td>2024年11月29日19:30</td>
+                                    <td>胡志勇</td>
+                                    <td>L2-413、L2-403</td>
+                                </tr>
+                                <tr>
+                                    <td>绘制PCB-立创EDA培训计划</td>
+                                    <td>2024年12月2日19:30</td>
+                                    <td>黄海东</td>
+                                    <td>L2-413、L2-403</td>
+                                </tr>
+                            </tbody>
                         </table>
                 </div>
                     <h5 class="card-title text-primary fw-bold">后续更新时间表，敬请期待！</h5>
