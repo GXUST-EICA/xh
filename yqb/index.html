@@ -89,21 +89,38 @@
 		.timeline {
 			position: relative;
 			padding: 20px 0;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
 		}
 
 		.timeline-item {
 			position: relative;
 			padding: 20px 20px 20px 2rem;
 			border-left: 3px solid #1246ff;
-			margin-left: 20px;
 			background: white;
 			border-radius: 10px;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			width: 80%;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		.timeline-item h5 {
+			color: #1246ff;
+			margin-bottom: 0.5rem;
+			font-weight: bold;
+		}
+
+		.timeline-item p {
+			margin-bottom: 0;
+			color: #666;
 		}
 
 		.timeline-item:hover {
-			transform: translateX(5px);
+			transform: translateY(-5px);
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 		}
 
