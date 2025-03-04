@@ -77,12 +77,13 @@
 			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 			padding: 2rem;
 			margin-bottom: 2rem;
-			transition: transform 0.3s ease;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
 			border: 1px solid rgba(0, 0, 0, 0.1);
 		}
 
 		.competition-card:hover {
 			transform: translateY(-5px);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 		}
 
 		.timeline {
@@ -91,28 +92,69 @@
 		}
 
 		.timeline-item {
-			padding: 20px;
-			margin-bottom: 20px;
+			position: relative;
+			padding: 20px 20px 20px 2rem;
+			border-left: 3px solid #1246ff;
+			margin-left: 20px;
 			background: white;
 			border-radius: 10px;
 			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.timeline-item:hover {
+			transform: translateX(5px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 		}
 
 		.prize-card {
 			position: relative;
 			overflow: hidden;
 			background: linear-gradient(145deg, #ffffff, #f0f0f0);
+			padding: 2rem;
+			border-radius: 15px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 			transition: all 0.3s ease;
+			margin-bottom: 1.5rem;
 		}
 
 		.prize-card:hover {
 			transform: translateY(-5px);
-			box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 		}
 
-		.prize-card h4 {
+		.prize-card::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 4px;
+			background: linear-gradient(90deg, #1246ff, #4d7fff);
+		}
+
+		h2 {
 			color: #1246ff;
+			font-weight: 700;
 			margin-bottom: 1.5rem;
+			position: relative;
+			display: inline-block;
+		}
+
+		h2::after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background: linear-gradient(90deg, #1246ff, transparent);
+		}
+
+		.lead {
+			font-size: 1.1rem;
+			line-height: 1.8;
+			color: #444;
 		}
 
 		.footer {
@@ -148,42 +190,6 @@
 			.prize-card {
 				margin-bottom: 1.5rem;
 			}
-		}
-
-		/* 时间线优化 */
-		.timeline-item {
-			position: relative;
-			padding-left: 2rem;
-			border-left: 3px solid #1246ff;
-			margin-left: 20px;
-		}
-
-		.timeline-item:before {
-			content: '';
-			position: absolute;
-			left: -10px;
-			top: 25px;
-			width: 16px;
-			height: 16px;
-			border-radius: 50%;
-			background: #1246ff;
-		}
-
-		/* 主题方向卡片优化 */
-		.competition-card h5 {
-			color: #1246ff;
-			margin-bottom: 1rem;
-		}
-
-		/* 页脚优化 */
-		.footer {
-			margin-top: 2rem;
-			background: linear-gradient(135deg, #1246ff, #0033cc);
-		}
-
-		.footer p {
-			margin-bottom: 0.5rem;
-			opacity: 0.9;
 		}
 	</style>
 </head>
