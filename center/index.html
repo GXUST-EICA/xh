@@ -269,6 +269,44 @@
         .accordion-button:focus {
             box-shadow: 0 0 0 0.25rem rgba(18, 70, 255, 0.25);
         }
+
+        .code-block {
+            position: relative;
+            background: #1e1e1e;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        .copy-button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            padding: 5px 10px;
+            background: #1246ff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #0d38e0;
+        }
     </style>
 </head>
 
@@ -309,7 +347,7 @@
                 </div>
                 <div class="card-body">
                     <h3 class="card-text">
-                        下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看哦~
+                        下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看<br><h3 style="color: red;">蓝色字都是跳转教程的链接</h3>
                     </h3>
                     <div class="container" style="width: 100%; overflow-x: auto;">
                         <table class="training-table">
@@ -713,35 +751,78 @@
                     <h2 class="accordion-header" id="headingSix3">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseSix3" aria-expanded="false" aria-controls="collapseSix">
-                            Linux与OpenCV
+                            Linux与OpenCV（初识篇）
                         </button>
                     </h2>
                     <div id="collapseSix3" class="accordion-collapse collapse" aria-labelledby="headingSix3"
                         data-bs-parent="#accordionExample6">
                         <div class="accordion-body">
-                            在嵌入式系统和计算机视觉领域，OpenMV和OpenCV代表了两种不同的技术路径。OpenMV作为一个集成了摄像头和微控制器的硬件模块，主要面向初学者和简单的嵌入式应用，使用Python编程语言，提供了简化的API和内置的例程，适合基本的图像处理任务。然而，其功能和性能相对有限，难以应对复杂的计算机视觉需求。
+						&emsp;&emsp;    在嵌入式系统和计算机视觉领域，OpenMV和OpenCV代表了两种不同的技术路径。OpenMV作为一个集成了摄像头和微控制器的硬件模块，主要面向初学者和简单的嵌入式应用，使用Python编程语言，提供了简化的API和内置的例程，适合基本的图像处理任务。然而，其功能和性能相对有限，难以应对复杂的计算机视觉需求。
                             相比之下，OpenCV作为一款开源的计算机视觉库，具有强大的功能和广泛的应用场景。它支持多种编程语言，如C++和Python，并能在Linux等操作系统上高效运行。OpenCV不仅提供了丰富的图像处理和计算机视觉算法，还支持深度学习模块，使其在处理复杂任务时表现出色。特别是，OpenCV可以与Linux操作系统紧密结合，利用Linux的强大计算能力和灵活性，运行诸如YOLO（You
                             Only Look Once）等先进的实时目标检测模型。这种组合不仅能够实现高效的图像处理和目标识别，还能根据具体需求进行高度定制和优化，为复杂的计算机视觉应用提供了强大的支持。
                             </p>
-                            接触嵌入式Linux我们需要了解一些基本知识，如树莓派、香橙派、鲁班猫、jetson、立创泰山派类似的linux开发板，我们称为微电脑，他们就是一个独立的系统，接上鼠标键盘显示器就可以使用（甚至可以使用他们打游戏），大多Linux开发板出厂自带的是Ubuntu，这个系统很适合在嵌入式Linux上使用，结合我们之前学习的opencv就可以在Linux开发板上使用opencv进行图像处理了。
+						&emsp;&emsp;   接触嵌入式Linux我们需要了解一些基本知识，如树莓派、香橙派、鲁班猫、jetson、立创泰山派类似的linux开发板，我们称为微电脑，他们就是一个独立的系统，接上鼠标键盘显示器就可以使用（甚至可以使用他们打游戏），大多Linux开发板都支持Ubuntu，这个系统很适合在嵌入式Linux上使用，结合我们之前学习的opencv就可以在Linux开发板上使用opencv进行图像处理了。
                             如何流畅的使用这个系统，我们就需要学会如何使用Ubuntu的操作，如安装软件、使用终端、文件管理、网络配置等操作。<a href="https://blog.csdn.net/qq_45277212/article/details/120834748" class="custom-link">Linux Ubuntu 入门基本命令</a></p>
-							<p>或者有我们粤嵌线上平台账号的同学，可以看里面的课程，讲的真的很好。</p>
-                            还有比如opencv在Ubuntu上的安装<a href="https://walnutpi.com/docs/walnutpi_1/opencv/install" class="custom-link">使用pip安装OpenCV-python</a></p>
-                            如果我们不想用额外的显示器显示那个linux开发板的界面怎么办？很简单，使用串口连接Linux开发板配置wifi网络，并使用Windows的Realvnc（VNC Viewer）与Linux开发板连接。我们以树莓派为例：<a href="https://blog.csdn.net/u011198687/article/details/120954860"
-                                class="custom-link">用串口登陆树莓派配置wifi网络</a></p><a href="https://blog.csdn.net/qq_44214671/article/details/110581282" class="custom-link">使用 VNC 远程访问树莓派</a>（注意，其他linux开发板可能不会自带vnc，所以需要自己安装）
-                                （还没写完。。。）
+							<p>&emsp;&emsp;或者有我们粤嵌线上平台账号的同学，可以看里面的课程，讲的真的很好。</p>
+							
+
                     </div>
+
+					</div>
+					<h2 class="accordion-header" id="headingSix4">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix4"
+							aria-expanded="false" aria-controls="collapseSix">
+							Linux与OpenCV（注重Linux篇）
+						</button>
+					</h2>
+					<div id="collapseSix4" class="accordion-collapse collapse" aria-labelledby="headingSix4"
+						data-bs-parent="#accordionExample6">
+						<div class="accordion-body">
+                        <h3 style="color: red;">蓝色字都是跳转教程的链接</h3>
+						&emsp;&emsp;	我们学习Linux首先是需要了解Linux是什么，我们一般指的是GUN/linux ,它是一种免费使用和自由传播的类UNIX操作系统，它是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。<br>
+						&emsp;&emsp;嵌入式Linux开发板，大多都可以使用Ubuntu，他是由Debian衍生而来，Ubuntu的版本号是根据年月来命名的，而你问我Debian是什么，它由Linux内核衍生而来。少数的Linux开发板使用的是其他系统，如树莓派使用的是Raspbian OS（基于Debian)，香橙派使用的是Orange Pi OS(基于arch Linux)。说了这么多Linux，其实他们几乎是通用的，少部分的命令可能跟其他Linux开发板不一样。<br>
+						比如基于debian的Linux开发板，使用apt-get来安装软件，而基于arch的Linux开发板使用pacman来安装软件。<br>
+						&emsp;&emsp;一般购买的嵌入式Linux开发板（无emmc版本），都有选择有无储存卡（SD卡）的套餐，储存卡是用来装系统的，有没有都可以自己准备，发到货的时候都是一张空的SD卡，需要自己烧录系统，下面是常见嵌入式Linux开发板烧录系统的教程：<br><a href="https://blog.csdn.net/lx_nhs/article/details/124859914" class="custom-link">树莓派烧录系统及其配置新系统教程</a><br>
+						<a href="https://doc.embedfire.com/linux/rk356x/quick_start/zh/latest/quick_start/flash_img/flash_img.html#id2" class="custom-link">鲁班猫烧录系统及其其他完整教程</a><br>
+						<a href="https://blog.csdn.net/v13111329954/article/details/140795351"
+							class="custom-link">香橙派烧录系统教程</a><br>
+							<hr>
+						&emsp;&emsp;进去之后就是连接开发板，如果我们不想用额外的显示器显示那个linux开发板的界面怎么办？很简单，使用串口连接Linux开发板配置wifi网络，并使用Windows的Realvnc（VNC
+						Viewer）与Linux开发板连接。我们以树莓派为例：<a href="https://blog.csdn.net/u011198687/article/details/120954860"
+							class="custom-link">用串口登陆树莓派配置wifi网络</a>&emsp;&emsp;<a href="https://blog.csdn.net/qq_44214671/article/details/110581282"
+							class="custom-link">使用 VNC 远程访问树莓派</a>（注意，其他linux开发板可能不会自带vnc，所以需要自己安装）如果不想使用串口连接，也可以使用网线连接，使用ssh连接，<a href="https://blog.csdn.net/weixin_73546700/article/details/135931466"
+								class="custom-link">香橙派首次通过网线SSH连接</a><br>
+						&emsp;&emsp;Ubuntu这类的系统毕竟是系统，所以让你的开发板保证软件最新版本很重要，我们以Ubuntu为例子，apt是Ubuntu的包管理器，apt-get update是更新软件包列表，apt-get upgrade是更新软件包，apt-get install是安装软件包，apt-get remove是删除软件包，apt-get autoremove是删除不需要的软件包，apt-get clean是清理软件包缓存,而这个支持它的软件源默认是官方自带的软件园，所以需要更换软件源，使用阿里源，清华源，中科大源，网易源，阿里源，腾讯源，华为源，这些源都是免费的，但是需要自己手动配置，不同版本有不同的软件源版本，这里网上有教程，可以自己搜索，我就不放出来了，在Ubuntu24.04之前都可以采用更改/etc/apt/sources.list文件，在Ubuntu24.04之后，需要使用apt-get install software-properties-common，然后使用add-apt-repository命令添加源，最后使用apt-get update更新软件包列表。<br>
+						&emsp;&emsp;不同芯片框架的软件源的也不一样，一般有X86、ARM、RISC-V，MIPS这些框架，但是arm框架很乱，一般在嵌入式Linux的框架为aarch64,可以在命令行输入： uname -a 查看，进而更换对应的软件源。更换完软件源再输入apt-get update更新软件包列表。<br><hr>
+						&emsp;&emsp;我们如果需要一些开发的话，可能需要不同的版本软件，比如numpy的版本需要不同的版本，我们需要那个版本的话，我们再主环境需要更换版本，只能卸载了之后才能更换，这样跟麻烦，那我们有什么方法可以快捷的同时使用不同版本的软件呢？<br>答案是有的，我们可以使用虚拟环境，但是虚拟环境有很多，比如python自带的env，还有conda，甚至类似docker的虚拟环境，但是这些虚拟环境都有不同的使用方法，这里我们使用conda，conda是python的包管理器，可以用来管理python的包，也可以用来管理python的虚拟环境，还可以用来管理python的版本，这里我们使用conda来管理python的虚拟环境，而嵌入式Linux就不需要使用anaconda这么全的conda，我们只需要使用它的虚拟环境就可以，所以我们推荐使用miniconda。<br>
+						miniconda是conda的轻量级版本，因为篇幅太长了，我就丢出教程了<a href="https://blog.csdn.net/2301_76831056/article/details/143165738" class="custom-link">Ubuntu 20.04版本快速安装 Miniconda</a><br>希望大家能熟练使用miniconda。
+						<hr>
+						&emsp;&emsp;在Linux上，我们可以使用pip来安装python的包，一些常见的pip命令，可以看教程<a href="https://www.runoob.com/python3/python3-pip.html" class="custom-link">菜鸟教程的pip教程</a><br>
+
+						我这里还是建议大家更换pip源为阿里源，直接
+
+
+
+
+
+
+						
+						还有比如opencv在Ubuntu上的安装<a href="https://walnutpi.com/docs/walnutpi_1/opencv/install"
+							class="custom-link">使用pip安装OpenCV-python</a></p>
+						</div>
+					</div>
+
                     </div>
-                    <h2 class="accordion-header" id="headingSix4">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix4"
+                    <h2 class="accordion-header" id="headingSix5">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix5"
                             aria-expanded="false" aria-controls="collapseSix">
                             YOLO算法
                         </button>
                     </h2>
-                    <div id="collapseSix4" class="accordion-collapse collapse" aria-labelledby="headingSix4"
+                    <div id="collapseSix5" class="accordion-collapse collapse" aria-labelledby="headingSix5"
                         data-bs-parent="#accordionExample6">
                         <div class="accordion-body">
-                            YOLO（You Only Look
+						&emsp; YOLO（You Only Look
                             Once）算法是一种先进的实时目标检测方法，通过将图像划分为网格单元，并在每个单元内预测边界框和类别概率，实现了高效的目标检测。与传统的两步检测方法不同，YOLO将目标检测视为一个回归问题，从而大幅提升了检测速度。其核心思想是利用一个单一的卷积神经网络（CNN）直接预测目标的类别和位置，这使得YOLO能够在保持高准确率的同时，处理速度极快，适合实时应用场景，如自动驾驶、视频监控和机器人视觉等。此外，YOLO的架构经过多次迭代优化，最新版本在精度和速度上均有显著提升，进一步巩固了其在目标检测领域的领先地位。<p>
 							搭建部署YOLOv8的教程：<a href="https://www.bilibili.com/video/BV1qtHeeMEnC/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" class="custom-link">从0开始搭建部署YOLOv8系列教程
 							</a></p>
@@ -799,15 +880,16 @@
 							data-bs-parent="#accordionExample7">
 							<div class="accordion-body">
 								由于ESP32-C3采用开源的RISC-V指令集架构，与ESP32-S系列使用的ARM Cortex-M3架构不同，因此在使用PlatformIO进行烧录时，需要在配置文件添加一行代码。
-								在platformio.ini文件中添加一行代码（红色标红这段）：
-								<pre><code class="language-ini">
-								[env:esp32-c3-devkitm-1]
-								platform = espressif32
-								<span style="color:red;">board_build.flash_mode = dio</span>
-								board = esp32-c3-devkitm-1
-								framework = arduino
-								lib_deps =
-									</code></pre>
+								在platformio.ini文件中添加一行代码：
+								<div class="code-block">
+									<button class="copy-button" onclick="copyCode(this)">复制</button>
+									<pre><code>[env:esp32-c3-devkitm-1]
+platform = espressif32
+board_build.flash_mode = dio
+board = esp32-c3-devkitm-1
+framework = arduino
+lib_deps =</code></pre>
+								</div>
 							</div>
 						</div>
                     </div>
@@ -825,6 +907,23 @@
     <script src="assets\js\aos.js"></script>
     <script>
         AOS.init();
+    </script>
+    <script>
+    function copyCode(button) {
+        const pre = button.nextElementSibling;
+        const code = pre.querySelector('code');
+        const textArea = document.createElement('textarea');
+        textArea.value = code.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        button.textContent = '已复制!';
+        setTimeout(() => {
+            button.textContent = '复制';
+        }, 2000);
+    }
     </script>
 </body>
 
