@@ -966,13 +966,13 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							&emsp;&emsp;这篇教程我们使用的是香橙派zero3，为什么使用这个呢？因为便宜，99块钱1G运存版本（当然，可以买2G运存版本）加上32G闪迪储存卡和二十来块的USB摄像头，就可以使用在你的项目搭载上opencv了（doge），当然，可能还有其他便宜的方案，但是这个作为入门设备我觉得也是不错的选择，香橙派zero3是全志H618的芯片，自带千兆网口，蓝牙五等等，具体可以去官网了解。
 							<a href="http://www.orangepi.cn/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-3.html" class="custom-link">香橙派zero3官网</a><br>
 							&emsp;&emsp;看到这里大家都是一脸懵的，第一次我也不会配置这些啊，好多我都要自己配置好难怎么办？你放心咧，我这已经配置好有Ubuntu的镜像了，几乎就是烧录镜像进去就可以用了，但是我配置了什么呢？答案是有：<br>
-							1.安装Ubuntu22.04镜像<br>
+							<strong>1.安装Ubuntu22.04镜像<br>
 							2.香橙派zero3第一次配网<br>
 							3.安装miniconda<br>
 							4.创造虚拟环境名为"cv"，python版本为3.10<br>
 							5.配置pip源为阿里源<br>
 							7.安装了jupyter<br>
-							8.安装了opencv-python,ultralytics(YOLOv8)和onnx<br><hr>
+							8.安装了opencv-python,ultralytics(YOLOv8)和onnx</strong><br><hr>
 							&emsp;&emsp;<h3><strong>那我们要怎么烧录已经配置好的镜像呢？</strong></h3><br>
 							1.下载镜像：选用32G的闪迪储存卡，但是因为镜像太大了，我就没有放上云盘，而放在实验室的电脑上，文件夹目录在D盘的Orangepi文件夹，大家可以拷贝下来或者在电脑上烧录。<br>
 							2.烧录镜像：使用win32diskimager，这个软件在下载中心有，大家可以下载下来，然后打开软件，检查插入储存卡的盘符，选择镜像文件，然后点击写入，等待完成即可。读卡器可以自己准备也可以询问学长借用。<br>
