@@ -928,10 +928,10 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 						<hr>
 						&emsp;&emsp;说了这么多，使用的顺序就是：<br>
 						1.创建虚拟环境
-						2.激活虚拟环境
+						2.激活虚拟环境<br>
 						3.安装opencv
 						4.使用opencv
-						<br>
+						<br><br>
 						第一步：创建名字叫cv的虚拟环境：<br>
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
@@ -951,17 +951,42 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 						第四步：使用opencv：<br>
 						但是怎么在嵌入式Linux使用opencv呢？我们可以看下一节教程。
 
-                   	</div>
-</div>
+                   		</div>
+					</div>
 
-					<h2 class="accordion-header" id="headingSix6">
+					<h2 class="accordion-header" id="headingSix6"></h2>
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix6"
 							aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV（CV与算法篇）
+							Linux番外篇-配置香橙派zero3并使用opencv-python
 						</button>
 					</h2>
 					<div id="collapseSix6" class="accordion-collapse collapse" aria-labelledby="headingSix6"
 						data-bs-parent="#accordionExample6">
+						<div class="accordion-body">
+							&emsp;&emsp;这篇教程我们使用的是香橙派zero3，为什么使用这个呢？因为便宜，99块钱1G运存版本（当然，可以买2G运存版本）加上32G闪迪储存卡和二十来块的USB摄像头，就可以使用在你的项目搭载上opencv了（doge），当然，可能还有其他便宜的方案，但是这个作为入门设备我觉得也是不错的选择，香橙派zero3是全志H618的芯片，自带千兆网口，蓝牙五等等，具体可以去官网了解。
+							<a href="http://www.orangepi.cn/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-3.html" class="custom-link">香橙派zero3官网</a><br>
+							&emsp;&emsp;看到这里大家都是一脸懵的，第一次我也不会配置这些啊，好多我都要自己配置好难怎么办？你放心咧，我这已经配置好有Ubuntu的镜像了，几乎就是烧录镜像进去就可以用了，但是我配置了什么呢？答案是有：<br>
+							1.安装Ubuntu22.04镜像<br>
+							2.香橙派zero3第一次配网<br>
+							3.安装miniconda<br>
+							4.创造虚拟环境名为“cv”，python版本为3.10<br>
+							5.配置pip源为阿里源<br>
+							7.安装了jupyter<br>
+							8.安装了opencv-python,ultralytics(YOLOv8)和onnx<br>
+							&emsp;&emsp;那我们要怎么烧录已经配置好的镜像呢？<br>
+							1.下载镜像：
+
+						</div>
+					</div>
+
+					<h2 class="accordion-header" id="headingSix7">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix7"
+							aria-expanded="false" aria-controls="collapseSix">
+							Linux与OpenCV（CV与算法篇）
+						</button>
+					</h2>
+					<div id="collapseSix7" class="accordion-collapse collapse" aria-labelledby="headingSix7"
+						data-bs-parent="#accordionExample7">
 						<div class="accordion-body">
 							&emsp; YOLO（You Only Look
 							Once）算法是一种先进的实时目标检测方法，通过将图像划分为网格单元，并在每个单元内预测边界框和类别概率，实现了高效的目标检测。与传统的两步检测方法不同，YOLO将目标检测视为一个回归问题，从而大幅提升了检测速度。其核心思想是利用一个单一的卷积神经网络（CNN）直接预测目标的类别和位置，这使得YOLO能够在保持高准确率的同时，处理速度极快，适合实时应用场景，如自动驾驶、视频监控和机器人视觉等。此外，YOLO的架构经过多次迭代优化，最新版本在精度和速度上均有显著提升，进一步巩固了其在目标检测领域的领先地位。
