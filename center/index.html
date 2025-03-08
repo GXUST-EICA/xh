@@ -1030,7 +1030,8 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							然后复制并修改以下代码：<br>
 							<div class="code-block">
 								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>#!/bin/bash
+								<pre><code>
+								#!/bin/bash
 								# 加载Conda环境变量，orangepi是香橙派zero3的用户名，miniconda3是miniconda的安装目录
 								source /home/orangepi/miniconda3/etc/profile.d/conda.sh
 								
@@ -1054,7 +1055,8 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							然后复制并修改以下代码：<br>
 							<div class="code-block">
 								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>[Unit]
+								<pre><code>
+								[Unit]
 								Description=Run pi.py in cv Conda Environment
 								After=network.target
 								
@@ -1076,7 +1078,7 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 								<pre><code>sudo systemctl status pi.service</code></pre>
 							</div>
 							如果服务启动成功，会显示active (running)，如果服务启动失败，会显示inactive (dead)。<br>
-							如果服务启动成功，我们就可以使用代码自启动了。
+							我们就可以使用代码自启动了。
 						</div>
 					</div>
 
