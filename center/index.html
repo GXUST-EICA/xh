@@ -962,19 +962,35 @@ lib_deps =</code></pre>
     </script>
     <script>
     function copyCode(button) {
-        const pre = button.nextElementSibling;
-        const code = pre.querySelector('code');
+        // 获取代码内容
+        const codeElement = button.parentElement.querySelector('code');
+        const textToCopy = codeElement.textContent.trim(); // 使用 trim() 去除首尾空白
+        
+        // 创建临时文本区域
         const textArea = document.createElement('textarea');
-        textArea.value = code.textContent;
+        textArea.value = textToCopy;
+        textArea.style.position = 'fixed';  // 避免页面滚动
+        textArea.style.opacity = '0';       // 隐藏文本区域
+        
         document.body.appendChild(textArea);
         textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
         
-        button.textContent = '已复制!';
-        setTimeout(() => {
-            button.textContent = '复制';
-        }, 2000);
+        try {
+            // 执行复制
+            document.execCommand('copy');
+            button.textContent = '已复制!';
+            
+            // 2秒后恢复按钮文字
+            setTimeout(() => {
+                button.textContent = '复制';
+            }, 2000);
+        } catch (err) {
+            console.error('复制失败:', err);
+            button.textContent = '复制失败!';
+        } finally {
+            // 清理临时文本区域
+            document.body.removeChild(textArea);
+        }
     }
     </script>
 </body>
