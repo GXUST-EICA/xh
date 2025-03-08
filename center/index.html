@@ -1031,15 +1031,15 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							<div class="code-block">
 								<button class="copy-button" onclick="copyCode(this)">复制</button>
 								<pre><code>
-								#!/bin/bash
-								# 加载Conda环境变量，orangepi是香橙派zero3的用户名，miniconda3是miniconda的安装目录
-								source /home/orangepi/miniconda3/etc/profile.d/conda.sh
+#!/bin/bash
+# 加载Conda环境变量，orangepi是香橙派zero3的用户名，miniconda3是miniconda的安装目录
+source /home/orangepi/miniconda3/etc/profile.d/conda.sh
 								
-								# 激活虚拟环境，cv是虚拟环境的名字，/home/orangepi/code是代码的目录，pi.py是代码的文件名
-								conda activate cv
+# 激活虚拟环境，cv是虚拟环境的名字，/home/orangepi/code是代码的目录，pi.py是代码的文件名
+conda activate cv
 								
-								# 运行Python脚本
-								/home/orangepi/miniconda3/envs/cv/bin/python /home/orangepi/code/pi.py</code></pre>
+# 运行Python脚本
+/home/orangepi/miniconda3/envs/cv/bin/python /home/orangepi/code/pi.py</code></pre>
 							</div>
 							
 							按下ctrl+s保存，然后按下ctrl+x退出，然后给这个脚本给予权限，输入以下命令：<br>
@@ -1055,22 +1055,22 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							然后复制并修改以下代码：<br>
 							<div class="code-block">
 								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>
-								[Unit]
-								Description=Run pi.py in cv Conda Environment
-								After=network.target
+								<pre>
+									<code>[Unit]
+Description=Run pi.py in cv Conda Environment
+After=network.target
 								
-								[Service]
-								Type=simple
-								ExecStart=/home/orangepi/code/start_pi.sh
-								WorkingDirectory=/home/orangepi/code
-								StandardOutput=inherit
-								StandardError=inherit
-								Restart=always
-								User=orangepi
+[Service]
+Type=simple
+ExecStart=/home/orangepi/code/start_pi.sh
+WorkingDirectory=/home/orangepi/code
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=orangepi
 								
-								[Install]
-								WantedBy=multi-user.target</code></pre>
+[Install]
+WantedBy=multi-user.target</code></pre>
 							</div>
 							重新上电一下，输入以下命令，查看服务是否启动成功：<br>
 							<div class="code-block">
