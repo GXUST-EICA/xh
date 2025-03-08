@@ -783,7 +783,7 @@
 					<h2 class="accordion-header" id="headingSix4">
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix4"
 							aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV（Linux篇）
+							Linux与OpenCV-Linux篇（一）
 						</button>
 					</h2>
 					<div id="collapseSix4" class="accordion-collapse collapse" aria-labelledby="headingSix4"
@@ -858,31 +858,119 @@
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
 							<pre><code>pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
 pip config set install.trusted-host mirrors.aliyun.com</code></pre>
-						</div>
-						<br>
-						opencv在Ubuntu上的安装<a href="https://walnutpi.com/docs/walnutpi_1/opencv/install"
-							class="custom-link">使用pip安装OpenCV-python</a></p>
-						（未完待续。。。）
-						</div>
-					</div>
 
                     </div>
                     <h2 class="accordion-header" id="headingSix5">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix5"
                             aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV（CV与算法篇）
+							Linux与OpenCV-Linux篇（二）
                         </button>
                     </h2>
                     <div id="collapseSix5" class="accordion-collapse collapse" aria-labelledby="headingSix5"
                         data-bs-parent="#accordionExample6">
                         <div class="accordion-body">
-						&emsp; YOLO（You Only Look
-                            Once）算法是一种先进的实时目标检测方法，通过将图像划分为网格单元，并在每个单元内预测边界框和类别概率，实现了高效的目标检测。与传统的两步检测方法不同，YOLO将目标检测视为一个回归问题，从而大幅提升了检测速度。其核心思想是利用一个单一的卷积神经网络（CNN）直接预测目标的类别和位置，这使得YOLO能够在保持高准确率的同时，处理速度极快，适合实时应用场景，如自动驾驶、视频监控和机器人视觉等。此外，YOLO的架构经过多次迭代优化，最新版本在精度和速度上均有显著提升，进一步巩固了其在目标检测领域的领先地位。<p>
-							搭建部署YOLOv8的教程：<a href="https://www.bilibili.com/video/BV1qtHeeMEnC/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" class="custom-link">从0开始搭建部署YOLOv8系列教程
-							</a></p>
-						（未完待续。。。）
-                        </div>
-                    </div>
+						上节讲了Linux的一些命令基础以及miniconda的安装，如何使用conda创建虚拟环境，并使用虚拟环境安装opencv。<br>
+						我们下载完miniconda之后，打开终端，输入以下命令，查看conda是否安装成功，以及conda的版本。<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda --version</code></pre>
+						</div>
+						如果安装成功，会显示conda的版本号，如果安装失败，会显示conda not found。<hr>
+						接下来，我们了解一些conda的命令：<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda create -n myenv python=3.10</code></pre>
+						</div>
+						为创建一个名为“myenv”的虚拟环境，并使用python3.10作为解释器，python版本可以根据自己项目来选择。这其中，“myenv”是可以自己定义的名字。<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda activate myenv</code></pre>
+						</div>
+						激活“myenv”虚拟环境。<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda deactivate</code></pre>
+						</div>
+						退出“myenv”虚拟环境。<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda remove -n myenv --all</code></pre>
+						</div>
+						删除“myenv”虚拟环境。<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda update --all</code></pre>
+						</div>
+						升级全部库
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda update package_name</code></pre>
+						</div>
+						升级一个包,package_name是包的名字
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda list</code></pre>
+						</div>
+						查看已安装的包
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda remove opencv</code></pre>
+						</div>
+						移除一个包，package_name是包的名字
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda install opencv</code></pre>
+						</div>
+						安装一个包，当然，也可以用pip安装,安装与卸载的前提是你需要进到那个环境中再执行响应的命令。
+						<hr>
+						&emsp;&emsp;说了这么多，使用的顺序就是：<br>
+						1.创建虚拟环境
+						2.激活虚拟环境
+						3.安装opencv
+						4.使用opencv
+						<br>
+						第一步：创建名字叫cv的虚拟环境：<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda create -n cv python=3.10</code></pre>
+						</div>
+						第二步：激活虚拟环境：<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>conda activate cv</code></pre>
+						</div>
+						第三步：安装opencv-python：<br>
+						<div class="code-block">
+							<button class="copy-button" onclick="copyCode(this)">复制</button>
+							<pre><code>pip install opencv-contrib-python</code></pre>
+						</div>
+						在这之前需要把opencv的源更换为阿里源或者其他源，更换源步骤可以看上一节教程。opencv-contrib-python和opencv-python的区别是opencv-contrib-python包含了opencv的contrib模块，而opencv-python只包含了opencv的python模块。<br>
+						第四步：使用opencv：<br>
+						但是怎么在嵌入式Linux使用opencv呢？我们可以看下一节教程。
+
+                   		</div>
+					</div>
+					<h2 class="accordion-header" id="headingSix6">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix6"
+							aria-expanded="false" aria-controls="collapseSix">
+							Linux与OpenCV（CV与算法篇）
+						</button>
+					</h2>
+					<div id="collapseSix6" class="accordion-collapse collapse" aria-labelledby="headingSix6"
+						data-bs-parent="#accordionExample6">
+						<div class="accordion-body">
+							&emsp; YOLO（You Only Look
+							Once）算法是一种先进的实时目标检测方法，通过将图像划分为网格单元，并在每个单元内预测边界框和类别概率，实现了高效的目标检测。与传统的两步检测方法不同，YOLO将目标检测视为一个回归问题，从而大幅提升了检测速度。其核心思想是利用一个单一的卷积神经网络（CNN）直接预测目标的类别和位置，这使得YOLO能够在保持高准确率的同时，处理速度极快，适合实时应用场景，如自动驾驶、视频监控和机器人视觉等。此外，YOLO的架构经过多次迭代优化，最新版本在精度和速度上均有显著提升，进一步巩固了其在目标检测领域的领先地位。
+							<p>
+								搭建部署YOLOv8的教程：<a
+									href="https://www.bilibili.com/video/BV1qtHeeMEnC/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
+									class="custom-link">从0开始搭建部署YOLOv8系列教程
+								</a></p>
+							（未完待续。。。）
+						</div>
+					</div>
+
+
                 </div>
 			<hr>
                 <h2>乐鑫ESP32物联网</h2>
