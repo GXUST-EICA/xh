@@ -995,19 +995,6 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							<img src="assets\img\cv.png" alt="cv.ipynb" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
 							<hr>
 							&emsp;&emsp;我们在代码中使用cv2.VideoCapture(0)，0表示使用第一个摄像头，如果想要使用第二个摄像头，可以改为1，以此类推，但是怎么知道呢？我们只需要在终端输入<strong>ls /dev/video*</strong>，就可以看到摄像头对应的设备号。<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>import cv2
-								
-								cap = cv2.VideoCapture(0)
-								while True:
-									ret, frame = cap.read()
-									cv2.imshow('frame', frame)
-									if cv2.waitKey(1) & 0xFF == ord('q'):
-										break
-								cap.release()
-								cv2.destroyAllWindows()</code></pre>
-							</div>
 							<hr>
 							&emsp;&emsp;写到了本篇最后，很明显嵌入式Linux是一个系统，跟Windows一样，如果我们直接关机的话，可能会造成系统崩溃，所以我们需要使用<strong>halt</strong>命令来关机，halt命令会等待所有进程结束，然后关闭系统。<br>
 							<div class="code-block">
