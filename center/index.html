@@ -983,6 +983,31 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							<img src="assets\img\wifi.png" alt="orangepi连接WiFi" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
 							4.连接成功之后，我们在下面看到我这个香橙派的ip地址是192.168.137.115，我们打开jupyter需要知道orangepi的ip地址，在浏览器输入192.168.137.115:8888就可以看到jupyter的界面了,如果需要密码的话，<strong>jupyter默认密码是12345678</strong>。<br>
 							<img src="assets\img\jupyter.png" alt="jupyter界面" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
+							<hr>
+							&emsp;&emsp;这个就需要我们自己去学jupyter的基本用法了：这里有几个文章可以参考一下<br>
+							jupyter opencv的用法：<a href="https://blog.csdn.net/weixin_44155966/article/details/112688909" class="custom-link">Jupyter Notebook + OpenCV 完美组合</a><br>
+							Jupyter Notebook 使用技巧：<a href="https://zhuanlan.zhihu.com/p/256039090" class="custom-link">15个应该掌握的Jupyter Notebook 使用技巧</a><br>
+							这个我们只需要看它的使用方法部分就好：<a href="https://blog.csdn.net/weixin_38556197/article/details/139426996" class="custom-link">一文弄懂Jupyter的配置与使用</a><br>
+							Jupyter Notebook 保姆级别教程：<a href="https://blog.csdn.net/cainiao_python/article/details/125567913" class="custom-link">良心总结！Jupyter Notebook 从小白到高手</a><br>
+							<hr>
+							&emsp;&emsp;我们想要USB摄像头能不能用怎么办？我已经在code文件夹放cv.ipynb，打开那个文件，然后点击运行，就可以看到实时显示的视频流了。<br>
+							<img src="assets\img\cv.png" alt="cv.ipynb" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
+							<hr>
+							&emsp;&emsp;我们在代码中使用cv2.VideoCapture(0)，0表示使用第一个摄像头，如果想要使用第二个摄像头，可以改为1，以此类推，但是怎么知道呢？我们只需要在终端输入<strong>ls /dev/video*</strong>，就可以看到摄像头对应的设备号。<br>
+							<div class="code-block">
+								<button class="copy-button" onclick="copyCode(this)">复制</button>
+								<pre><code>import cv2
+								
+								cap = cv2.VideoCapture(0)
+								while True:
+									ret, frame = cap.read()
+									cv2.imshow('frame', frame)
+									if cv2.waitKey(1) & 0xFF == ord('q'):
+										break
+								cap.release()
+								cv2.destroyAllWindows()</code></pre>
+							</div>
+							
 						</div>
 					</div>
 
