@@ -957,7 +957,7 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 					<h2 class="accordion-header" id="headingSix6"></h2>
 						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix6"
 							aria-expanded="false" aria-controls="collapseSix">
-							Linux番外篇-配置香橙派zero3并使用opencv-python
+							Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）
 						</button>
 					</h2>
 					<div id="collapseSix6" class="accordion-collapse collapse" aria-labelledby="headingSix6"
@@ -969,13 +969,17 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							1.安装Ubuntu22.04镜像<br>
 							2.香橙派zero3第一次配网<br>
 							3.安装miniconda<br>
-							4.创造虚拟环境名为“cv”，python版本为3.10<br>
+							4.创造虚拟环境名为"cv"，python版本为3.10<br>
 							5.配置pip源为阿里源<br>
 							7.安装了jupyter<br>
 							8.安装了opencv-python,ultralytics(YOLOv8)和onnx<br>
 							&emsp;&emsp;那我们要怎么烧录已经配置好的镜像呢？<br>
-							1.下载镜像：
-
+							1.下载镜像：选用32G的闪迪储存卡，但是因为镜像太大了，我就没有放上云盘，而放在实验室的电脑上，文件夹目录在D盘的Orangepi文件夹，大家可以拷贝下来或者在电脑上烧录。<br>
+							2.烧录镜像：使用win32diskimager，这个软件在下载中心有，大家可以下载下来，然后打开软件，检查插入储存卡的盘符，选择镜像文件，然后点击写入，等待完成即可。读卡器可以自己准备也可以询问学长借用。<br>
+							<img src="assets\img\win32.png" alt="win32diskimager使用界面" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;">
+							3.烧录完成之后，储存卡插入香橙派zero3，将15W或者以上的type-c充电器保证香橙派供电（这个需要自己准备，购买的开发板没有，一般自己手机都会有符合这个的充电器）。<hr>
+							&emsp;&emsp;我们配置的镜像不需要使用显示器再配置，直接使用网页连接jupyter就可以了。<br>
+							配置的镜像中，默认连接的WiFi名称为orangepi，密码也是orangepi。所以我们需要在电脑打开热点，将热点名称设置为orangepi，密码:orangepi。<br>
 						</div>
 					</div>
 
