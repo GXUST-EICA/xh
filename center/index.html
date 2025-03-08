@@ -996,7 +996,8 @@ pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 							<hr>
 							&emsp;&emsp;我们在代码中使用cv2.VideoCapture(0)，0表示使用第一个摄像头，如果想要使用第二个摄像头，可以改为1，以此类推，但是怎么知道呢？我们只需要在终端输入<strong>ls /dev/video*</strong>，就可以看到摄像头对应的设备号。<br>
 							<hr>
-							&emsp;&emsp;写到了本篇最后，很明显嵌入式Linux是一个系统，跟Windows一样，如果我们直接关机的话，可能会造成系统崩溃，所以我们需要使用<strong>halt</strong>命令来关机，halt命令会等待所有进程结束，然后关闭系统。<br>
+							&emsp;&emsp;写到了本篇教程的最后，很明显，嵌入式Linux是一个系统，跟Windows一样，如果我们直接关机的话，可能会造成系统崩溃，所以我们需要使用<strong>halt</strong>命令来关机，halt命令会等待所有进程结束，然后关闭系统。打开终端，输入以下命令就可以关机了，等待香橙派的灯不再闪烁就可以拔掉电源
+						    <br>
 							<div class="code-block">
 								<button class="copy-button" onclick="copyCode(this)">复制</button>
 								<pre><code>sudo halt</code></pre>
