@@ -803,64 +803,46 @@
 						&emsp;&emsp;Ubuntu这类的系统毕竟是系统，所以让你的开发板保证软件最新版本很重要，我们以Ubuntu为例子，apt是Ubuntu的包管理器，
 						<div class="code-block">
 								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>
-apt-get update
-									</code></pre>
+								<pre><code>apt-get update</code></pre>
 						</div>
 						是更新软件包列表
 												<div class="code-block">
 													<button class="copy-button" onclick="copyCode(this)">复制</button>
-													<pre><code>
-apt-get upgrade
-																					</code></pre>
+													<pre><code>apt-get upgrade</code></pre>
 												</div>
 						是更新软件包
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-apt-get install
-															</code></pre>
+							<pre><code>apt-get install</code></pre>
 						</div>
 						是安装软件包
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-apt-get remove
-															</code></pre>
+							<pre><code>apt-get remove</code></pre>
 						</div>
 						是删除软件包
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-apt-get autoremove
-						</code></pre>
+							<pre><code>apt-get autoremove</code></pre>
 						</div>
 						是删除不需要的软件
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-apt-get clean
-						</code></pre>
+							<pre><code>apt-get clean</code></pre>
 						</div>
 						是清理软件包缓存<br><br>这个支持它的软件源默认是官方自带的软件园，所以需要更换软件源，使用阿里源，清华源，中科大源，网易源，阿里源，腾讯源，华为源，这些源都是免费的，但是需要自己手动配置，不同版本有不同的软件源版本，这里网上有教程，可以自己搜索，我就不放出来了，在Ubuntu24.04之前都可以采用更改/etc/apt/sources.list文件，在Ubuntu24.04之后，需要使用
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-apt-get install software-properties-common
-							</code></pre>
+							<pre><code>apt-get install software-properties-common</code></pre>
 						</div>
 						，然后使用<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-add-apt-repository
-															</code></pre>
+							<pre><code>add-apt-repository</code></pre>
 						</div>命令添加源，最后使用apt-get update更新软件包列表。<br>
 						&emsp;&emsp;不同芯片框架的软件源的也不一样，一般有X86、ARM、RISC-V，MIPS这些框架，但是arm框架很乱，一般在嵌入式Linux的框架为aarch64,可以在命令行输入： 
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-uname -a
-							</code></pre>
+							<pre><code>uname -a</code></pre>
 						</div>
  查看，进而更换对应的软件源。更换完软件源再输入apt-get update更新软件包列表。<br><hr>
 						&emsp;&emsp;我们如果需要一些开发的话，可能需要不同的版本软件，比如numpy的版本需要不同的版本，我们需要那个版本的话，我们再主环境需要更换版本，只能卸载了之后才能更换，这样跟麻烦，那我们有什么方法可以快捷的同时使用不同版本的软件呢？<br>答案是有的，我们可以使用虚拟环境，但是虚拟环境有很多，比如python自带的env，还有conda，甚至类似docker的虚拟环境，但是这些虚拟环境都有不同的使用方法，这里我们使用conda，conda是python的包管理器，可以用来管理python的包，也可以用来管理python的虚拟环境，还可以用来管理python的版本，这里我们使用conda来管理python的虚拟环境，而嵌入式Linux就不需要使用anaconda这么全的conda，我们只需要使用它的虚拟环境就可以，所以我们推荐使用miniconda。<br>
@@ -871,10 +853,8 @@ uname -a
 						我这里还是建议大家更换pip源为阿里源，直接在命令窗口输入
 						<div class="code-block">
 							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>
-pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
-pip config set install.trusted-host mirrors.aliyun.com
-							</code></pre>
+							<pre><code>pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
+pip config set install.trusted-host mirrors.aliyun.com</code></pre>
 						</div>
 						<br>
 						opencv在Ubuntu上的安装<a href="https://walnutpi.com/docs/walnutpi_1/opencv/install"
@@ -955,14 +935,12 @@ pip config set install.trusted-host mirrors.aliyun.com
 								在platformio.ini文件中添加一行代码：
 								<div class="code-block">
 									<button class="copy-button" onclick="copyCode(this)">复制</button>
-									<pre><code>
-[env:esp32-c3-devkitm-1]
+									<pre><code>[env:esp32-c3-devkitm-1]
 platform = espressif32
 board_build.flash_mode = dio
 board = esp32-c3-devkitm-1
 framework = arduino
-lib_deps =
-									</code></pre>
+lib_deps =</code></pre>
 								</div>
 							</div>
 						</div>
