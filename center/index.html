@@ -275,30 +275,31 @@
             background: #1e1e1e;
             border-radius: 6px;
             margin: 15px 0;
+            display: flex;  /* 使用 flex 布局 */
+            align-items: center;  /* 垂直居中 */
         }
 
         .code-block pre {
             margin: 0;
-            padding: 15px;  /* 统一内边距 */
-            padding-right: 80px;  /* 为复制按钮留出空间 */
+            padding: 12px 15px;  /* 调整内边距 */
+            flex-grow: 1;  /* 占据剩余空间 */
             overflow-x: auto;
         }
 
         .code-block code {
             font-family: Consolas, Monaco, 'Andale Mono', monospace;
-            font-size: 15px;
-            line-height: 1.3;
+            font-size: 14px;
+            line-height: 1.4;
             color: #ffffff;
             display: block;
             white-space: pre;
         }
 
         .copy-button {
-            position: absolute;
-            right: 10px;
-            top: 50%;  /* 垂直居中 */
-            transform: translateY(-50%);  /* 精确垂直居中 */
+            position: static;  /* 取消绝对定位 */
+            margin-right: 10px;  /* 右侧间距 */
             padding: 6px 12px;
+            height: fit-content;  /* 适应内容高度 */
             background: #1246ff;
             color: white;
             border: none;
@@ -307,6 +308,7 @@
             font-size: 13px;
             transition: background 0.3s ease;
             font-weight: 500;
+            white-space: nowrap;  /* 防止按钮文字换行 */
         }
 
         .copy-button:hover {
