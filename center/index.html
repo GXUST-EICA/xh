@@ -2,1221 +2,1770 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="嵌入式智控协会培训活动中心">
-    <meta name="description" content="嵌入式智控协会培训活动中心">
-    <meta name="author" content="嵌入式智控协会培训活动中心">
-    <meta name="copyright" content="嵌入式智控协会培训活动中心">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta itemprop="name" content="嵌入式智控协会培训活动中心" />
-    <meta itemprop="image" content="https://pic.imgdb.cn/item/66fb7183f21886ccc097445b.png" />
-    <link rel="icon" href="https://pic.imgdb.cn/item/66feb15f335a200d6ad36a35.png" type="image/x-icon" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
-    <meta name="robots" content="index,follow">
-    <title>协会培训活动中心</title>
-    <!-- 替换 Bootstrap CSS 为 BootCDN -->
-    <link href="assets\css\bootstrap.min.css" rel="stylesheet">
-    <!-- AOS CSS 替换为 BootCDN -->
-    <link href="assets\css\aos.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="max-age=604800, public">
+	<link rel="preload" href="style/marked.min.js" as="script">
+	<link rel="preload" href="test/md/index.md" as="fetch">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<title>嵌入式智控协会培训中心</title>
+	<style>
+		:root {
+			--primary: #6c5ce7;
+			--secondary: #a8a4e6;
+			--accent: #ff6b6b;
+			--background: linear-gradient(160deg, #f8f9ff 0%, #f3f5ff 100%);
+			--glass: rgba(255, 255, 255, 0.95);
+			--shadow: 0 12px 40px rgba(108, 92, 231, 0.1);
+			--radius: 16px;
+			/* 统一圆角 */
+			--tap-highlight: rgba(108, 92, 231, 0.1);
+			/* 点击反馈色 */
+		}
 
-    <!-- Custom CSS for additional styling -->
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
+		/* 动态目录生成样式 */
+		/* 合并.toc-category样式 */
+		.toc-category {
+			background: var(--glass);
+			backdrop-filter: blur(12px);
+			border-radius: var(--radius);
+			margin: 1rem 0;
+			padding: 1rem;
+			box-shadow: var(--shadow);
+			transition: transform 0.2s ease;
+			position: relative;
+			-webkit-tap-highlight-color: var(--tap-highlight);
+		}
 
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-            display: flex;
-            flex-direction: column;
-        }
+		/* 合并后的媒体查询 */
+		@media (max-width: 768px) {
+			.toc-category {
+				margin: 0.5rem 0;
+				background: rgba(255, 255, 255, 0.9);
+			}
+		}
 
-        .navbar {
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 0 0 15px 15px;
-            z-index: 1000;
-        }
+		@media (min-width: 769px) {
+			.toc-category {
+				margin: 0.5rem 1rem;
+			}
+		}
 
-        .navbar.scrolled {
-            background-color: #1246ff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
+		/* 移动端优化 */
+		@media (max-width: 768px) {
+			.sidebar {
+				display: none;
+				/* 隐藏原始侧边栏 */
+			}
 
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.7rem;
-            color: #1246ff;
-        }
+			/* 新增浮动目录按钮 */
+			.floating-toc {
+				position: fixed;
+				bottom: 2rem;
+				right: 1.5rem;
+				z-index: 1000;
+				width: 56px;
+				height: 56px;
+				border-radius: 50%;
+				background: var(--primary);
+				box-shadow: 0 8px 24px rgba(108, 92, 231, 0.3);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			}
 
-        .nav-link {
-            font-size: 1rem;
-            margin-left: 15px;
-            color: #333;
-        }
+			.floating-toc::after {
+				content: '📚';
+				font-size: 1.8rem;
+				filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+			}
 
-        .nav-link.active,
-        .nav-link:hover {
-            color: #1246ff;
-        }
+			.floating-toc.active {
+				transform: rotate(135deg);
+				background: var(--accent);
+			}
 
-        .nav-link.forum-button {
-            color: white;
-            background-color: #1246ff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 700;
-            transition: background-color 0.3s ease;
-        }
+			/* 目录弹出层 */
+			.toc-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: rgba(0, 0, 0, 0.4);
+				backdrop-filter: blur(8px);
+				z-index: 999;
+				opacity: 0;
+				visibility: hidden;
+				transition: 0.3s ease;
+			}
 
-        .nav-link.forum-button:hover {
-            background-color: #0d38e0;
-        }
+			.toc-overlay.active {
+				opacity: 1;
+				visibility: visible;
+			}
 
-        .notification-bar {
-            background-color: #f1ecff;
-            color: #3f532f;
-            padding: 5px 0;
-            text-align: center;
-            position: relative;
-            font-size: 1rem;
-            font-weight: 700;
-        }
+			/* 目录容器 */
+			.mobile-toc {
+				position: absolute;
+				bottom: calc(56px + 2rem);
+				right: 1.5rem;
+				width: 86vw;
+				max-width: 320px;
+				background: var(--glass);
+				border-radius: 24px;
+				padding: 1.5rem;
+				box-shadow: var(--shadow);
+				transform: translateY(20px);
+				transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+					opacity 0.2s ease;
+				max-height: 70vh;
+				overflow-y: auto;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: thin;
+				/* Firefox */
+				scrollbar-color: var(--primary) rgba(0, 0, 0, 0.1);
+				overflow-x: hidden;
+				/* 新增横向滚动隐藏 */
+				width: calc(100% - 2rem);
+				/* 确保宽度适配 */
+				will-change: transform;
+			}
 
-        .notification-bar a {
-            color: #3700ff;
-            text-decoration: underline;
-        }
+			.toc-overlay.active .mobile-toc {
+				transform: translateY(0);
+			}
 
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
-            margin-top: 20px;
-            flex-direction: column;
-        }
+			/* 移动端目录项优化 */
+			.toc-category {
+				margin: 0.5rem 0;
+				background: rgba(255, 255, 255, 0.9);
+				width: 100%;
+				box-sizing: border-box;
+			}
 
-        #waline {
-            max-width: 1500px;
-            width: 100%;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 3rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+			.toc-subitem {
+				padding: 1rem;
+				font-size: 0.95rem;
+				border-radius: 12px;
+				margin: 4px 0;
+				white-space: normal;
+				/* 确保文本换行 */
+				max-width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 
-        #waline:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-        }
+			/* 搜索框优化 */
+			.mobile-toc .search-box {
+				padding: 0 1rem 1rem;
+				margin: 0 -1rem;
+			}
 
-        .card {
-            border: none;
-        }
+			.mobile-toc #search {
+				font-size: 1rem;
+				padding: 1rem;
+			}
 
-        .btn-custom {
-            background-color: #007bff;
-            color: white;
-            border-radius: 50px;
-            padding: 0.5rem 1.5rem;
-            transition: background-color 0.3s ease;
-        }
+			/* 保证内容足够高度 */
+			.toc {
+				min-height: 120%;
+			}
 
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
+			/* 优化滚动条样式 */
+			.mobile-toc::-webkit-scrollbar {
+				width: 8px;
+				/* 增大滚动条宽度 */
+				background: rgba(0, 0, 0, 0.05);
+			}
 
-        .accordion-button {
-            background-color: #f9fafb;
-            font-weight: bold;
-            border: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }
+			.mobile-toc::-webkit-scrollbar-thumb {
+				background: var(--primary);
+				border-radius: 4px;
+				border: 2px solid rgba(255, 255, 255, 0.2);
+				/* 添加边框增强可视性 */
+			}
 
-        .accordion-button:hover {
-            background-color: #e5e7eb;
-        }
+			/* 增强触摸反馈 */
+			.toc-category,
+			.toc-subitem {
+				padding: 16px !important;
+				/* 增大点击区域 */
+				min-height: 56px;
+				/* 最小触摸高度 */
+				-webkit-tap-highlight-color: var(--tap-highlight);
+			}
 
-        .accordion-body {
-            background-color: #f1f5f9;
-            padding: 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            line-height: 1.6;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
+			/* 隐藏横向滚动条 */
+			.mobile-toc::-webkit-scrollbar:horizontal {
+				display: none;
+				height: 0;
+			}
+		}
 
-        .accordion-body a {
-            color: #1246ff;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+		/* PC端布局优化 */
+		@media (min-width: 769px) {
+			body {
+				display: flex;
+				min-height: 100vh;
+			}
 
-        .accordion-body a:hover {
-            color: #0d38e0;
-            text-decoration: underline;
-        }
+			.sidebar {
+				width: 300px;
+				height: 100vh;
+				position: sticky;
+				top: 0;
+				overflow-y: auto;
+				/* 确保侧边栏有独立的滚动条 */
+				transform: none !important;
+				box-shadow: 8px 0 40px rgba(108, 92, 231, 0.1);
+				border-right: 1px solid var(--secondary);
+				scrollbar-width: thin;
+				/* Firefox */
+				-ms-overflow-style: none;
+				/* IE/Edge */
+			}
 
-        .footer {
-            background-color: #1246ff;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
+			.sidebar::-webkit-scrollbar {
+				display: block;
+				/* 显示滚动条 */
+				width: 8px;
+				/* 滚动条宽度 */
+			}
 
-        .footer p {
-            margin-bottom: 0;
-        }
+			.sidebar::-webkit-scrollbar-thumb {
+				background: var(--primary);
+				border-radius: 4px;
+				/* 圆角 */
+			}
 
-        @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1.5rem;
-            }
+			.content {
+				flex: 1;
+				padding: 2rem 4rem;
+				max-width: calc(100vw - 300px);
+				overflow-y: auto;
+				/* 添加独立滚动 */
+				height: calc(100vh - 3px);
+				/* 留出进度条空间 */
+			}
 
-            .nav-link {
-                font-size: 0.9rem;
-            }
+			.menu-toggle {
+				display: none;
+				/* 隐藏移动端菜单按钮 */
+			}
 
-            .forum-button {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
+			.search-box {
+				position: sticky;
+				top: 0;
+				padding: 1.5rem;
+				margin: 0 -1.5rem;
+				/* 抵消容器padding */
+				z-index: 200;
+				background: var(--glass);
+				backdrop-filter: blur(10px);
+			}
 
-            .notification-bar {
-                font-size: 0.9rem;
-            }
-        }
+			.toc-category {
+				margin: 0.5rem 1rem;
+				transition: 0.2s all ease;
+			}
 
-        @media (max-width: 576px) {
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
+			.toc-subitem {
+				padding: 0.8rem 1.5rem;
+				cursor: pointer;
+				border-radius: 8px;
+				transition: 0.2s all ease;
+			}
 
-            .nav-link {
-                font-size: 0.8rem;
-            }
+			.toc-subitem:hover {
+				background: rgba(108, 92, 231, 0.1);
+			}
+		}
 
-            .forum-button {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
+		/* 搜索框现代化样式 */
+		.search-box {
+			position: sticky;
+			top: 0;
+			background: var(--glass);
+			backdrop-filter: blur(10px);
+			z-index: 200;
+			padding: 1rem;
+			transition: all 0.3s ease;
+			width: calc(100% - 3rem);
+			margin: 0 auto;
+			box-sizing: border-box;
+		}
 
-            .notification-bar {
-                font-size: 0.8rem;
-            }
-        }
+		#mobile-search {
+			width: 100%;
+			padding: 1rem 2rem;
+			border: 1px solid var(--secondary) !important;
+			border-radius: 50px;
+			background: rgba(255, 255, 255, 0.9);
+			box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1) !important;
+			font-size: 1rem;
+			transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%236c5ce7' d='M18.031 16.617l4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617zm-2.006-.742A6.977 6.977 0 0 0 18 11c0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7a6.977 6.977 0 0 0 4.875-1.975l.15-.15z'/%3E%3C/svg%3E");
+			background-repeat: no-repeat;
+			background-position: 1rem center;
+			background-size: 1.2em;
+			padding-left: 2.8rem;
+			max-width: 100%;
+			box-sizing: border-box;
+		}
 
-        /* 添加链接样式 */
-        .custom-link {
-            color: #007bff;
-            font-weight: 700;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+		#mobile-search:focus {
+			outline: none;
+			box-shadow: 0 6px 16px rgba(108, 92, 231, 0.2);
+			background: rgba(255, 255, 255, 0.95);
+		}
 
-        .custom-link:hover {
-            color: #0056b3;
-            text-decoration: underline;
-        }
+		#mobile-search::placeholder {
+			color: #a8a4e6;
+			opacity: 0.8;
+		}
 
-        .training-table {
-            border-collapse: collapse;
-            width: 100%;
-            text-align: center;
-            font-size: 16px;
-            margin: 20px 0;
-        }
+		/* 移动端优化 */
+		@media (max-width: 768px) {
+			#mobile-search {
+				font-size: 0.95rem;
+				padding: 0.8rem 1.5rem;
+				padding-left: 2.5rem;
+				background-size: 1em;
+			}
+		}
 
-        .training-table th,
-        .training-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-        }
+		/* 移动端菜单按钮优化 */
+		.menu-toggle {
+			position: fixed;
+			top: 1rem;
+			left: 1rem;
+			z-index: 300;
+			background: var(--glass);
+			border: none;
+			padding: 0.8rem;
+			border-radius: 50%;
+			box-shadow: var(--shadow);
+			-webkit-tap-highlight-color: var(--tap-highlight);
+		}
 
-        .training-table th {
-            background-color: #f9f9f9;
-            font-weight: bold;
-        }
+		/* 新增阅读进度条 */
+		.progress-bar {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 3px;
+			background: var(--accent);
+			z-index: 500;
+			transition: width 0.2s ease-out;
+		}
 
-        .training-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+		/* 优化移动端目录交互 */
+		.toc-category h3 {
+			cursor: pointer;
+			padding: 12px;
+			margin: -12px;
+			border-radius: var(--radius);
+			-webkit-tap-highlight-color: var(--tap-highlight);
+		}
 
-        .training-table tr:hover {
-            background-color: #f5f5f5;
-        }
+		.toc-category[data-fold="true"] .toc-subitem {
+			display: none;
+		}
 
-        .accordion-button:not(.collapsed) {
-            background-color: #e7f1ff;
-            color: #1246ff;
-        }
-        
-        .accordion-button:focus {
-            box-shadow: 0 0 0 0.25rem rgba(18, 70, 255, 0.25);
-        }
+		/* 增强搜索高亮 */
+		.highlight {
+			background: linear-gradient(90deg, #ffd70033, #ffd70000);
+			border-radius: 4px;
+		}
 
-        .code-block {
-            position: relative;
-            background: #1e1e1e;
-            border-radius: 6px;
-            margin: 15px 0;
-            display: flex;  /* 使用 flex 布局 */
-            align-items: center;  /* 垂直居中 */
-        }
+		/* 新增Markdown内容样式 */
+		.markdown-content {
+			padding: 2rem;
+			margin: 1rem auto;
+			max-width: 800px;
+			background: var(--glass);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+		}
 
-        .code-block pre {
-            margin: 0;
-            padding: 12px 15px;  /* 调整内边距 */
-            flex-grow: 1;  /* 占据剩余空间 */
-            overflow-x: auto;
-        }
+		/* 标题样式 */
+		.markdown-content h1,
+		.markdown-content h2,
+		.markdown-content h3 {
+			color: var(--primary);
+			margin-top: 1.5rem;
+			margin-bottom: 0.5rem;
+			border-bottom: 2px solid var(--secondary);
+			/* 增加底部边框 */
+			padding-bottom: 0.5rem;
+			/* 增加底部内边距 */
+		}
 
-        .code-block code {
-            font-family: Consolas, Monaco, 'Andale Mono', monospace;
-            font-size: 14px;
-            line-height: 1.4;
-            color: #ffffff;
-            display: block;
-            white-space: pre;
-        }
+		.markdown-content h1 {
+			font-size: 2.5rem;
+		}
 
-        .copy-button {
-            position: static;  /* 取消绝对定位 */
-            margin-right: 10px;  /* 右侧间距 */
-            padding: 6px 12px;
-            height: fit-content;  /* 适应内容高度 */
-            background: #1246ff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: background 0.3s ease;
-            font-weight: 500;
-            white-space: nowrap;  /* 防止按钮文字换行 */
-        }
+		.markdown-content h2 {
+			font-size: 2rem;
+		}
 
-        .copy-button:hover {
-            background: #0d38e0;
-        }
-    </style>
+		.markdown-content h3 {
+			font-size: 1.5rem;
+		}
+
+		/* 段落样式 */
+		.markdown-content p {
+			margin: 1.2rem 0;
+			/* 增加段落间距 */
+			line-height: 1.6;
+			/* 增加行高 */
+		}
+
+		/* 列表样式 */
+		.markdown-content ul,
+		.markdown-content ol {
+			margin: 1.5rem 0;
+			/* 增加列表间距 */
+			padding-left: 1.5rem;
+		}
+
+		.markdown-content li {
+			margin-bottom: 0.5rem;
+		}
+
+		/* 引用样式 */
+		.markdown-content blockquote {
+			background: rgba(108, 92, 231, 0.05);
+			border-left: 4px solid var(--primary);
+			padding: 1rem;
+			margin: 1.5rem 0;
+			border-radius: 0 8px 8px 0;
+			font-style: italic;
+			/* 引用内容斜体 */
+		}
+
+		/* 代码块样式 */
+		.markdown-content pre {
+			background: rgba(108, 92, 231, 0.05);
+			padding: 1rem;
+			border-radius: 8px;
+			overflow-x: auto;
+			border: 1px solid var(--secondary);
+			/* 添加边框 */
+		}
+
+		.markdown-content code {
+			background: rgba(108, 92, 231, 0.1);
+			padding: 0.2rem 0.4rem;
+			border-radius: 4px;
+		}
+
+		/* 增加链接样式 */
+		.markdown-content a {
+			color: var(--primary);
+			text-decoration: underline;
+		}
+
+		.markdown-content a:hover {
+			text-decoration: none;
+			color: var(--accent);
+		}
+
+		/* 优化移动端目录布局 */
+		.mobile-toc {
+			padding: 1rem;
+			bottom: calc(56px + 1.5rem);
+		}
+
+		.toc-category {
+			margin: 0.5rem -0.5rem;
+			padding: 0.5rem;
+		}
+
+		.toc-subitem {
+			margin: 4px -0.5rem;
+			padding: 0.8rem 1rem !important;
+		}
+
+		/* 添加初始页面的专属样式 */
+		.markdown-content h1 {
+			text-align: center;
+			margin: 2rem 0;
+			font-size: 2.5rem;
+			background: linear-gradient(135deg, var(--primary), var(--accent));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		.markdown-content mermaid {
+			display: block;
+			margin: 2rem auto;
+			max-width: 100%;
+			overflow-x: auto;
+		}
+
+		.markdown-content table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 1.5rem 0;
+			background: var(--glass);
+		}
+
+		.markdown-content td,
+		.markdown-content th {
+			padding: 1rem;
+			border: 1px solid var(--secondary);
+		}
+
+		blockquote {
+			background: rgba(108, 92, 231, 0.05);
+			border-left: 4px solid var(--primary);
+			padding: 1rem;
+			margin: 1.5rem 0;
+			border-radius: 0 8px 8px 0;
+		}
+
+		/* 通用滚动优化 */
+		.toc,
+		.mobile-toc,
+		.sidebar {
+			overflow: overlay;
+			/* 智能滚动条 */
+			scroll-behavior: smooth;
+		}
+
+		/* 修复移动端目录空白问题 */
+		@media (max-width: 768px) {
+			.mobile-toc {
+				width: 90vw;
+				right: 1rem;
+				margin: 0;
+				padding: 1rem;
+			}
+
+			.toc-category,
+			.toc-subitem {
+				margin-left: 0;
+				margin-right: 0;
+				padding: 0.8rem 1rem;
+			}
+		}
+
+		/* 欢迎页专属样式 */
+		.feature-badges {
+			display: flex;
+			gap: 1rem;
+			margin: 1.5rem 0;
+		}
+
+		.badge {
+			padding: 0.5rem 1rem;
+			border-radius: 20px;
+			font-size: 0.9rem;
+		}
+
+		.badge.new {
+			background: var(--accent);
+			color: white;
+		}
+
+		.quick-start-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+			gap: 1.5rem;
+			margin: 2rem 0;
+		}
+
+		.step-card {
+			background: var(--glass);
+			padding: 1.5rem;
+			border-radius: var(--radius);
+			transition: transform 0.2s ease;
+		}
+
+		.step-card:hover {
+			transform: translateY(-5px);
+		}
+
+		.mobile-features {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			margin: 2rem 0;
+		}
+
+		.feature-tag {
+			display: flex;
+			align-items: center;
+			padding: 0.8rem 1.2rem;
+			background: rgba(108, 92, 231, 0.1);
+			border-radius: 8px;
+		}
+
+		/* 加载状态指示器 */
+		.loading-indicator {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 2rem;
+			min-height: 300px;
+		}
+
+		.spinner {
+			width: 40px;
+			height: 40px;
+			border: 4px solid rgba(108, 92, 231, 0.2);
+			border-top-color: var(--primary);
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+		}
+
+		@keyframes spin {
+			to {
+				transform: rotate(360deg);
+			}
+		}
+
+		/* 错误提示样式 */
+		.error-message {
+			text-align: center;
+			padding: 2rem;
+			background: rgba(255, 0, 0, 0.05);
+			border-radius: 8px;
+
+			button {
+				margin-top: 1rem;
+				padding: 0.5rem 1rem;
+				background: var(--primary);
+				color: white;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+		}
+
+		/* Markdown内容渐显动画 */
+		.markdown-content {
+			animation: fadeIn 0.5s ease-out;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* PC端布局优化 */
+		@media (min-width: 769px) {
+			.sidebar {
+				overflow-y: auto !important;
+				/* 强制独立滚动 */
+			}
+
+			.content {
+				overflow-y: auto;
+				/* 添加独立滚动 */
+				height: calc(100vh - 3px);
+				/* 留出进度条空间 */
+			}
+		}
+
+		/* 移动端滚动优化 */
+		@media (max-width: 768px) {
+			.mobile-toc {
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				/* 增加弹性效果 */
+				overscroll-behavior: contain;
+				height: calc(100vh - 120px);
+				/* 确保有足够的高度 */
+				overflow-y: auto;
+			}
+
+			/* 增大触摸区域 */
+			.toc-category,
+			.toc-subitem {
+				min-height: 48px;
+				/* 最小触摸高度 */
+				padding: 12px !important;
+			}
+		}
+
+		/* 通用滚动优化 */
+		.toc,
+		.mobile-toc,
+		.sidebar {
+			overflow: overlay;
+			/* 智能滚动条 */
+			scroll-behavior: smooth;
+		}
+
+		/* 新增mermaid样式优化 */
+		.markdown-content .mermaid {
+			background: rgba(255, 255, 255, 0.9);
+			padding: 1.5rem;
+			border-radius: var(--radius);
+			margin: 2rem 0;
+			overflow: auto;
+		}
+
+		/* 代码块复制按钮 */
+		.copy-btn {
+			position: absolute;
+			right: 1rem;
+			top: 0.5rem;
+			padding: 0.3rem 0.8rem;
+			background: var(--primary);
+			color: white;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			opacity: 0;
+			transition: opacity 0.2s ease;
+		}
+
+		pre:hover .copy-btn {
+			opacity: 1;
+		}
+
+		/* 新增下载按钮样式 */
+		.download-btn {
+			z-index: 1001;
+			/* 提升层级到最高 */
+			bottom: 2rem;
+			right: 2rem;
+			background: var(--primary);
+			color: white;
+			padding: 1rem 1.5rem;
+			border-radius: 30px;
+			box-shadow: 0 8px 24px rgba(108, 92, 231, 0.3);
+			cursor: pointer;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			display: flex;
+			align-items: center;
+			gap: 0.8rem;
+		}
+
+		.download-btn:hover {
+			transform: translateY(-3px);
+			background: var(--accent);
+			box-shadow: 0 12px 32px rgba(255, 107, 107, 0.3);
+		}
+
+		.download-btn::after {
+			content: '⬇️';
+			font-size: 1.2rem;
+		}
+
+		@media (max-width: 768px) {
+			.download-btn {
+				bottom: 8rem;
+				/* 提升到浮动目录按钮上方 */
+				right: 1.5rem;
+				padding: 1rem 1.5rem;
+				/* 增大点击区域 */
+				font-size: 1rem;
+				box-shadow: 0 8px 24px rgba(108, 92, 231, 0.4);
+				/* 增强阴影 */
+				border-radius: 28px;
+				/* 更圆润的形状 */
+			}
+		}
+
+		/* 新增格式菜单 */
+		.format-menu {
+			position: absolute;
+			bottom: 100%;
+			right: 0;
+			background: var(--glass);
+			border-radius: 12px;
+			padding: 0.5rem;
+			box-shadow: var(--shadow);
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease;
+			min-width: 140px;
+		}
+
+		.download-btn:hover .format-menu {
+			opacity: 1;
+			visibility: visible;
+		}
+
+		.format-option {
+			padding: 0.8rem 1rem;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: background 0.2s ease;
+			display: flex;
+			gap: 0.8rem;
+			align-items: center;
+		}
+
+		.format-option:hover {
+			background: rgba(108, 92, 231, 0.1);
+		}
+
+		/* 移动端适配 */
+		@media (max-width: 768px) {
+			.download-btn {
+				bottom: 5rem;
+				/* 避免被浮动按钮遮挡 */
+			}
+
+			.format-menu {
+				right: -50%;
+				bottom: auto;
+				top: 100%;
+			}
+		}
+
+		/* 确保Markdown内容不会覆盖按钮 */
+		.markdown-content {
+			position: relative;
+			z-index: 1;
+			/* 保持默认层级 */
+		}
+
+		/* 新增外层滚动锁定 */
+		body.toc-open {
+			overflow: hidden;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+		}
+
+		.toc-overlay {
+			touch-action: none;
+			/* 完全禁用外层触摸滚动 */
+			overscroll-behavior: none;
+		}
+
+		.mobile-toc {
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+			transform: translateZ(0);
+			/* 强制硬件加速 */
+			backface-visibility: hidden;
+			perspective: 1000px;
+		}
+
+		/* 滚动条视觉优化 */
+		.mobile-toc::-webkit-scrollbar {
+			width: 6px;
+			background: rgba(108, 92, 231, 0.05);
+		}
+
+		.mobile-toc::-webkit-scrollbar-thumb {
+			background: var(--primary);
+			border-radius: 3px;
+		}
+
+		/* 修复内容区域滚动 */
+		.content {
+			overflow-y: auto !important;
+			-webkit-overflow-scrolling: touch;
+			height: calc(100vh - 60px);
+			/* 留出顶部空间 */
+			padding: 1rem !important;
+		}
+
+		.markdown-content {
+			min-height: 120vh;
+			/* 确保可滚动区域 */
+			overflow: visible !important;
+		}
+
+		/* 增强触摸滚动 */
+		.course-content {
+			overscroll-behavior: contain;
+			touch-action: pan-y;
+		}
+
+		@media (max-width: 768px) {
+			.content {
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				/* 增加滚动阻力 */
+				scroll-snap-type: y mandatory;
+				overscroll-behavior-y: contain;
+			}
+
+			.markdown-content {
+				/* 增加滚动惯性 */
+				scroll-snap-stop: always;
+				scroll-snap-align: start;
+
+				/* 优化段落间距 */
+				p,
+				pre,
+				table {
+					margin: 1.2rem 0;
+					scroll-snap-align: start;
+				}
+			}
+		}
+
+		/* 增加动量滚动效果 */
+		@supports (-webkit-overflow-scrolling: touch) {
+			.content {
+				overflow-y: scroll;
+			}
+		}
+
+		/* 重写下载按钮定位 */
+		.download-container {
+			position: fixed;
+			z-index: 9999;
+			/* 最高优先级 */
+			bottom: 2rem;
+			right: 2rem;
+		}
+
+		/* 优化移动端按钮尺寸 */
+		@media (max-width: 768px) {
+			.download-btn {
+				padding: 0.8rem 1.2rem;
+				font-size: 0.9rem;
+				border-radius: 16px;
+				bottom: 6rem;
+				/* 调整位置避免遮挡 */
+			}
+		}
+
+		#error-container {
+			position: fixed;
+			bottom: 1rem;
+			right: 1rem;
+			max-width: 300px;
+			z-index: 9999;
+		}
+
+		.error-toast {
+			background: rgba(255, 0, 0, 0.1);
+			padding: 1rem;
+			border-radius: 8px;
+			margin: 0.5rem;
+			animation: slideIn 0.3s ease;
+		}
+
+		/* 更新字体 */
+		body {
+			font-family: 'Arial', sans-serif;
+			/* 使用更现代的字体 */
+			color: #333;
+			/* 更深的文本颜色 */
+			line-height: 1.6;
+			/* 增加行高 */
+		}
+
+		/* 按钮样式 */
+		.download-btn,
+		.copy-btn {
+			transition: background 0.3s, transform 0.2s;
+			/* 增加过渡效果 */
+		}
+
+		.download-btn:hover,
+		.copy-btn:hover {
+			transform: translateY(-2px);
+			/* 悬停时轻微上移 */
+			background: var(--accent);
+			/* 悬停时背景色变化 */
+		}
+
+		/* 增加阴影效果 */
+		.markdown-content {
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+			/* 增加阴影 */
+			border-radius: 8px;
+			/* 圆角 */
+		}
+
+		/* 更新标题样式 */
+		h1,
+		h2,
+		h3 {
+			color: var(--primary);
+			/* 使用主题色 */
+			margin-bottom: 1rem;
+			/* 增加底部间距 */
+		}
+
+		/* 更新输入框样式 */
+		#mobile-search {
+			border: 1px solid var(--secondary);
+			border-radius: 12px;
+			/* 圆角 */
+			padding: 0.8rem;
+			/* 增加内边距 */
+		}
+
+		/* 更新滚动条样式 */
+		.mobile-toc::-webkit-scrollbar {
+			width: 8px;
+			/* 增加滚动条宽度 */
+		}
+
+		.mobile-toc::-webkit-scrollbar-thumb {
+			background: var(--primary);
+			border-radius: 4px;
+			/* 圆角 */
+		}
+
+		/* 更新错误提示样式 */
+		.error-message {
+			background: rgba(255, 0, 0, 0.1);
+			border: 1px solid red;
+			/* 增加边框 */
+			border-radius: 8px;
+			/* 圆角 */
+		}
+
+		/* 更新加载指示器样式 */
+		.loading-indicator {
+			background: rgba(255, 255, 255, 0.9);
+			/* 背景色 */
+			border-radius: 8px;
+			/* 圆角 */
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			/* 阴影 */
+		}
+
+		/* 目录容器样式 */
+		.toc-category {
+			margin: 0.5rem 0;
+			background: rgba(255, 255, 255, 0.9);
+			width: 100%;
+			box-sizing: border-box;
+			border-radius: 12px;
+			/* 圆角 */
+			padding: 1rem;
+			/* 增加内边距 */
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			/* 添加阴影 */
+		}
+
+		/* 目录项样式 */
+		.toc-subitem {
+			padding: 1rem;
+			font-size: 1rem;
+			border-radius: 8px;
+			/* 圆角 */
+			margin: 4px 0;
+			transition: background 0.3s;
+			/* 增加过渡效果 */
+			cursor: pointer;
+			/* 鼠标悬停时显示为手型 */
+		}
+
+		/* 悬停效果 */
+		.toc-subitem:hover {
+			background: rgba(108, 92, 231, 0.1);
+			/* 悬停时背景色变化 */
+		}
+
+		/* 目录标题样式 */
+		.toc-category h3 {
+			margin: 0;
+			font-size: 1.2rem;
+			color: var(--primary);
+			/* 使用主题色 */
+		}
+	</style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
-        <div class="container">
-            <a class="navbar-brand" href="/" data-aos="fade-right" data-aos-duration="1000">嵌入式智控协会</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" data-aos="fade-left"
-                data-aos-duration="1000">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/" data-aos="fade-up"
-                            data-aos-duration="1000">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.jnjnjnn.cn" data-aos="fade-up"
-                            data-aos-duration="1000">小东同学工具箱</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link forum-button" href="/lyb" data-aos="fade-up"
-                            data-aos-duration="1000">嵌入式智控协会留言板</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<!-- 新增浮动按钮 -->
+	<div class="floating-toc"></div>
 
-    <div class="main-content" data-aos="fade-up" data-aos-duration="1000">
-        <div id="waline" class="animate-fade-in">
-            <div class="card text-center border-primary mb-4" style="border-radius: 15px;">
-                <div class="card-header bg-primary text-white fs-4"
-                    style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                    📢 协会培训计划
-                </div>
-                <div class="card-body">
-                    <h3 class="card-text">
-                        下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看<br><h3 style="color: red;">蓝色字都是跳转教程的链接</h3>
-                    </h3>
-                    <div class="container" style="width: 100%; overflow-x: auto;">
-                        <table class="training-table">
-                            <thead>
-                                <tr>
-                                    <th>培训内容</th>
-                                    <th>预计时间</th>
-                                    <th>负责人</th>
-                                    <th>培训地点</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>引导培训见面会</td>
-                                    <td>2024年10月18日19:30</td>
-                                    <td>陈健锋</td>
-                                    <td>T3-307</td>
-                                </tr>
-                                <tr>
-                                    <td>万用表使用基础与基本电路认识培训计划</td>
-                                    <td>2024年10月25日19:30</td>
-                                    <td>黄海东</td>
-                                    <td>T3-307</td>
-                                </tr>
-                                <tr>
-                                    <td>C语言与STM32基础培训计划</td>
-                                    <td>2024年11月2日19:30</td>
-                                    <td>黄泉清</td>
-                                    <td>L2-413、L2-403</td>
-                                </tr>
-                                <tr>
-                                    <td>GPIO——按键、红外传感器循迹培训计划</td>
-                                    <td>2024年11月9日19:30</td>
-                                    <td>庞儿茗</td>
-                                    <td>L2-413、L2-403</td>
-                                </tr>
-                                <tr>
-                                    <td>STM32与HC05蓝牙串口通信培训计划</td>
-                                    <td>2024年11月15日19:30</td>
-                                    <td>王旭晖</td>
-                                    <td>L2-413、L2-403</td>
-                                </tr>
-                                <tr>
-                                    <td>TB6612电机驱动直流电机培训计划</td>
-                                    <td>2024年11月22日19:30</td>
-                                    <td>陈健锋</td>
-                                    <td>L2-413、L2-403</td>
-                                </tr>
-                                <tr>
-                                    <td>I2C-OLED的显示培训计划</td>
-                                    <td>2024年11月29日19:30</td>
-                                    <td>胡志勇</td>
-                                    <td>L2-413、L2-403</td>
-                                </tr>
-                                <tr>
-                                    <td>绘制PCB-立创EDA培训计划</td>
-                                    <td>2024年12月2日19:30</td>
-                                    <td>黄海东</td>
-                                    <td>L2-413、L2-403</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <h5 class="card-title text-primary fw-bold">后续更新时间表，敬请期待！</h5>
-                    <hr>
-                    <div class="text-center mt-4">
-                        <a href="/download" class="btn btn-primary" style="font-size: 25px; padding: 10px 10px;">下载中心</a>
-                    </div><br>
-
-                    <div class="text-center mt-4">
-                        <a href="http://vm.yueqian.com.cn:8886/index.html" class="btn btn-primary" style="font-size: 25px; padding: 10px 10px;">粤嵌线上学习平台</a>
-                    </div><br>
-					<div class="text-center mt-4">
-						<a href="http://chat.jnjnjnn.cn" class="btn btn-primary"
-							style="font-size: 25px; padding: 10px 10px;">Deepseek-EICA</a>
-					</div><br>
-                    <div class="card-footer text-muted">
-                        <small>更新于：2025-03-05</small>
-                    </div>
-                </div>
-            </div>
-            <h2>编程语言基础</h2>
-            <div class="accordion" id="accordionExample1">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            C语言
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample1">
-                        <div class="accordion-body">
-                            <p>随着嵌入式系统的广泛应用，对系统性能的要求也日益提高。C语言作为嵌入式系统开发的主要编程语言，其优化策略的研究具有重要意义。通过对C语言程序的优化，可以提高系统的执行效率，减少内存占用，降低功耗，从而满足嵌入式系统的实际需求。下面是一些关于学习C语言的网络资源。因人而异，挑选认为合适自己学习的最为适宜。
-                            </p>
-                            <ul>
-                                <li>翁恺C语言: <a
-                                        href="https://www.bilibili.com/video/BV1dr4y1n7vA/?spm_id_from=333.337.search-card.all.click"
-                                        class="custom-link">哔哩哔哩链接</a></li><br>
-                                <li>鱼C-小甲鱼：<a
-                                        href="https://www.bilibili.com/video/BV17s411N78s/?spm_id_from=333.337.search-card.all.click"
-                                        class="custom-link">哔哩哔哩链接</a></li><br>
-                                <li>鹏哥C语言: <a
-                                        href="https://www.bilibili.com/video/BV1Vm4y1r7jY?p=5&vd_source=0bd1e74e0fe7e200ff74a89bbb96cc11"
-                                        class="custom-link">哔哩哔哩链接</a></li><br>
-                                <li>菜鸟教程：<a href="https://www.runoob.com/cprogramming/c-tutorial.html"
-                                        class="custom-link">菜鸟链接</a></li><br>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h2 class="accordion-header" id="headingOne1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne1" aria-expanded="false" aria-controls="collapseOne1">
-                            Python
-                        </button>
-                    </h2>
-                    <div id="collapseOne1" class="accordion-collapse collapse" aria-labelledby="headingOne1"
-                        data-bs-parent="#accordionExample1">
-                        <div class="accordion-body">
-                            <h6 style="color: red;">
-                                大一的小伙伴可以先不学Python，因为Python是面向对象编程，而C语言是面向过程编程，两者有很大的区别。如果想要学习Python，可以等到大二再学习，因为大二一些同学会有Python的课程，那时再学习Python会更容易上手。
-                            </h6>
-                            <p><br>Python 是一个高层次的结合了解释性、编译性、互动性和面向对象的脚本语言。Python
-                                的设计具有很强的可读性，相比其他语言经常使用英文关键字，其他语言的一些标点符号，它具有比其他语言更有特色语法结构。</p>
-                            </p>
-                            <ul>
-                                <li>菜鸟教程: <a href="https://www.runoob.com/python3/python3-tutorial.html"
-                                        class="custom-link">菜鸟链接</a></li><br>
-                                <li>黑马程序员：<a
-                                        href="https://www.bilibili.com/video/BV1qW4y1a7fU/?spm_id_from=333.337.search-card.all.click&vd_source=0bd1e74e0fe7e200ff74a89bbb96cc11"
-                                        class="custom-link">哔哩哔哩链接</a></li><br>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <h2>硬件基础知识</h2>
-            <div class="accordion" id="accordionExample2">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            电路基础
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#accordionExample2">
-                        <div class="accordion-body">
-                            电路基础在嵌入式开发中至关重要，它帮助开发者设计和调试硬件，选择和连接元件，处理模拟与数字信号，排查故障，优化功耗，以及确保电磁兼容性。此外，掌握电路知识还有助于PCB设计和通信接口的实现，从而提高系统的性能和稳定性。整体而言，电路基础是构建高效可靠的嵌入式系统的核心要素。
-                            <ul>
-                                <li>一些基础的嵌入式术语: <br><a
-                                        href="https://blog.csdn.net/2303_77749296/article/details/136688210?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9A%84%E6%9C%AF%E8%AF%AD&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-136688210.142^v100^pc_search_result_base5&spm=1018.2226.3001.4187"
-                                        class="custom-link">CSDN链接1</a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                        href="https://blog.csdn.net/qq_28576837/article/details/125132973?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522B486F909-C424-4776-9A62-5EE4AF0FD476%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=B486F909-C424-4776-9A62-5EE4AF0FD476&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-1-125132973-null-null.142^v100^pc_search_result_base5&utm_term=%E5%B5%8C%E5%85%A5%E5%BC%8F%E7%9A%84%E5%AD%97%E6%AF%8D&spm=1018.2226.3001.4187"
-                                        class="custom-link">CSDN链接2</a></li><br>
-                                <li>基础电路基础：<a
-                                        href="https://blog.csdn.net/feihe0755/article/details/137080351#:~:text=-%20%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"
-                                        class="custom-link">CSDN链接</a></li><br>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h2 class="accordion-header" id="headingTwo1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo">
-                            MCU概念及架构
-                        </button>
-                    </h2>
-                    <div id="collapseTwo1" class="accordion-collapse collapse" aria-labelledby="headingTwo1"
-                        data-bs-parent="#accordionExample2">
-                        <div class="accordion-body">
-                            找到了两篇详细讲述MCU概念及架构的文章，有点长，想要了解的小伙伴可以看一下。
-                            <ul>
-                                <li>一文看懂ARM Cortex-M处理器: <a
-                                        href="https://blog.csdn.net/flyingcys/article/details/115447114#:~:text=Cortex-M"
-                                        class="custom-link">CSDN链接</a></li><br>
-                                <li>MCU的基本概念、原理、分类、特点和应用:<a
-                                        href="https://blog.csdn.net/weixin_45875986/article/details/136694522#:~:text=%E6%9C%AC%E6%96%87%E4%BB%8B%E7%BB%8D%E4%BA%86MCU"
-                                        class="custom-link">CSDN链接</a></li><br>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <hr>
-            <h2>单片机的协议</h2>
-            <div class="accordion" id="accordionExample3">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            STM32
-                        </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                        data-bs-parent="#accordionExample3">
-                        <div class="accordion-body">
-                            <ul>
-                                常见接口技术：
-                                GPIO（通用输入输出接口）、<br>
-                                UART（串口通信协议）、<br>而这个有时候就需要使用串口助手，有网页与本地两种版本，本地版本在下载中心可下载。<br>
-                                I2C、SPI等接口协议的基础学习与应用。<br>
-                                <li>STM32上常用的几个通信协议简介及相关代码: <a
-                                        href="https://blog.csdn.net/lyj456258/article/details/125135919"
-                                        class="custom-link">CSDN链接</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h2 class="accordion-header" id="headingFour1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour1" aria-expanded="false" aria-controls="collapseFour">
-                            串口助手
-                        </button>
-                    </h2>
-                    <div id="collapseFour1" class="accordion-collapse collapse" aria-labelledby="headingFour1"
-                        data-bs-parent="#accordionExample3">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>波特律动在线串口助手: <a href="https://serial.keysking.com/" class="custom-link">链接直达</a></li>
-                                <li>本地版串口助手: <a href="https://jnjnjnn.cn/xzzx/com.html" class="custom-link">下载链接</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-            <h2>开发环境及其固件库</h2>
-            <div class="accordion" id="accordionExample4">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            标准库
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#accordionExample4">
-                        <div class="accordion-body">
-                            <li>标准库是STM32官方提供的软件开发包，它提供了一系列的函数和宏定义，用于简化STM32的开发工作。标准库包含了GPIO、UART、I2C、SPI等接口协议的基础学习与应用,标准库的代码量相对较大，但是它的功能比较全面，适合初学者学习和使用。<br>这时候就需要使用到Keil或者IAR等IDE，我们这里使用的是Keil，Keil是一款非常流行的嵌入式开发工具，它支持多种微控制器和开发板，包括STM32系列。Keil提供了丰富的开发工具和功能，包括代码编辑、编译、调试、仿真等，可以大大提高开发效率。keil在我们的下载中心可以下载到。<br><br>
-                                <p>keil5下载：<a href="https://jnjnjnn.cn/xzzx/Keil5.html" class="custom-link">戳我下载</a></p>
-                            </li>
-                            <li>安装完并配置完了，那教程呢？这肯定少不了江科大，所以....<a
-                                    href="https://www.bilibili.com/video/BV1th411z7sn/?spm_id_from=333.337.search-card.all.click"
-                                    class="custom-link">戳我看哔哩哔哩江科大的STM32教程</a></li>
-                            <li>当然，还有很多人或者团体写了教程，其中嘉立创也写了很多入门教程与移植历程,我给出了STM32F103C8T6的例子：<br><a
-                                    href="https://wiki.lckfb.com/zh-hans/dkx-stm32f103c8t6/beginner/"
-                                    class="custom-link">STM32入门教程</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                    href="https://wiki.lckfb.com/zh-hans/dkx-stm32f103c8t6/module/"
-                                    class="custom-link">STM32模块移植手册</a></li><p></p>
-							<p>或者有我们粤嵌线上平台账号的同学，可以看里面的课程，讲的真的很好。</p>
-                        </div>
-                    </div>
-
-                    <h2 class="accordion-header" id="headingThree1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree1" aria-expanded="false" aria-controls="collapseThree">
-                            HAL库
-                        </button>
-                    </h2>
-                    <div id="collapseThree1" class="accordion-collapse collapse" aria-labelledby="headingThree1"
-                        data-bs-parent="#accordionExample4">
-                        <div class="accordion-body">
-                            HAL库是ST公司目前主力推的开发方式。它的出现比标准库要晚，但其实和标准库一样，都是为了节省程序开发的时期，而且HAL库尤其的有效。自从ST公司推出HAL库来替代原有的标准库，HAL库开始慢慢的被广大STM32开发者所接受，现在已经在实际的项目开发中大量使用，HAL库使得项目的移植变得简单容易，但是对于初学者而言，刚开始接触有些晦涩难懂。建议先把标准库学会。
-                            <br><br>
-                            HAL库的编程环境可以多样，比如Keil、IAR、STM32CubeIDE等，可以使用STM32CubeMX搭配keil和直接使用STM32CubeIDE.这些均可以在我们的下载中心可以下载到。
-                            <br>视频教程必然是KeySking，缺点就是更新有点久，至今都没有更新完：<a
-                                href="https://www.bilibili.com/video/BV12v4y1y7uV/?spm_id_from=333.788"
-                                class="custom-link">哔哩哔哩KeySking</a><br><br>
-                            还有就是野火的，野火的教程比较详细，而野火的教程用的是STM32F103ZET6,STM32F4的，但是原理是一样的，可以参考一下：<a
-                                href="https://www.bilibili.com/video/BV18X4y1M763?p=15&vd_source=0bd1e74e0fe7e200ff74a89bbb96cc11"
-                                class="custom-link">哔哩哔哩野火</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                href="https://doc.embedfire.com/mcu/stm32/f103/hal_general/zh/latest/index.html"
-                                class="custom-link">野火在线文档</a>
-                        </div>
-                    </div>
-                    <h2 class="accordion-header" id="headingThree2">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree2" aria-expanded="false" aria-controls="collapseThree">
-                            LL库
-                        </button>
-                    </h2>
-                    <div id="collapseThree2" class="accordion-collapse collapse" aria-labelledby="headingThree2"
-                        data-bs-parent="#accordionExample4">
-                        <div class="accordion-body">
-                            我们用的比较少，就不再细讲...
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-            <h2>PCB设计与制作</h2>
-            <div class="accordion" id="accordionExample5">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingFive">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                            学习使用EDA工具
-                        </button>
-                    </h2>
-                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                        data-bs-parent="#accordionExample3">
-                        <div class="accordion-body">
-                            这里我们的教程推荐的是立创EDA专业版.其他的EDA工具，如kicad,Altium
-                            Designer等我这也不放出教程了，感兴趣的小伙伴可以了解一下。<br>
-                            <p>立创EDA标准版：<a href="https://lceda.cn/editor" class="custom-link">网页版直达</a></p>
-                            <br>
-                           <p>立创EDA专业版：<a href="https://pro.lceda.cn/editor" class="custom-link">网页版直达</a></p>
-                            <br>
-                            <p>标准版官方教程：<a href="https://docs.lceda.cn/cn/Introduction/Introduction-to-LCEDA/"
-                                    class="custom-link">点我直达</a></p>
-                            <br>
-                            <p>专业版官方视频教程：<a
-                                    href="https://www.bilibili.com/video/BV1x6421f7AT/?spm_id_from=333.999.0.0&vd_source=0bd1e74e0fe7e200ff74a89bbb96cc11"
-                                    class="custom-link">哔哩哔哩视频</a></p>
-                        </div>
-                    </div>
-
-                    <h2 class="accordion-header" id="headingFive1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFive1" aria-expanded="false" aria-controls="collapseFive">
-                            免费打样板
-                        </button>
-                    </h2>
-                    <div id="collapseFive1" class="accordion-collapse collapse" aria-labelledby="headingFive1"
-                        data-bs-parent="#accordionExample5">
-                        <div class="accordion-body">
-                            嘉立创目前是每个月上限领取两张打印PCB的券，工艺为有铅喷锡的，如果通过嘉立创的PCB设计考试，可以把一张有铅喷锡换成沉金工艺的。<br>沉金工艺具有高导电性、耐腐蚀性、美观等优点，适用于高频、高速信号传输的PCB；喷锡工艺成本低，焊接性能良好，适用于一般信号传输和成本敏感型产品。制造商需根据产品要求选择合适工艺。<br>当然，我们了解目前可以不用了解这些，因为目前我们设计的PCB要求的性能不会这么高，所以不太用纠结是沉金还是有铅喷锡(白嫖就完事了！)<br>翻了翻，嘉立创居然有免费打样的教程！<br>
-                            <p>嘉立创官方免费打板攻略：<a href="https://wiki.lceda.cn/zh-hans/design-production/free-pcb.html"
-                                    class="custom-link">免费打板</a></p>
-                            <br>而捷配也有免费打样，2024年9月19日捷配又改革了，个人每月领取一张1-6层免费打样券
-                            单双面板,铝基板,3张 订单总金额≤200元全部减免，
-                            4层板,5张 订单总金额≤300元全部减免，
-                            6层板,5张 订单总金额≤500元全部减免。也算能免费打板了：<a
-                                href="https://www.jiepei.com/Activity/newfree.html#:~:text=%E6%8D%B7%E9%85%8DPCB%E6%8F%90%E4%BE%9B1"
-                                class="custom-link">免费打板</a></p>
-                        </div>
-                    </div>
-                </div>
-            <hr>
-            <h2>机器视觉</h2>
-            <div class="accordion" id="accordionExample6">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingSix1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
-                            data-bs-target="#collapseSix1" aria-expanded="false" aria-controls="collapseSix1">
-                            基础视觉处理:OpenCV与Matlab
-                        </button>   
-                    </h2>
-                    <div id="collapseSix1" class="accordion-collapse collapse" aria-labelledby="headingSix1"
-                        data-bs-parent="#accordionExample6">
-                        <div class="accordion-body">
-                            视觉处理，顾名思义是指对视觉图像进行预处理，以获得我们想要的目标，并将其提供给计算机进行处理。图像就是数据。常见的视觉处理可以有python、matlab、c++进行对图像进行提取图像、图像裁剪、灰度变换、二值化处理、均值滤波、特征提取、边缘检测、大金算法等等等的图像操作。这时候我们就要用python的opencv或者matlab来对图像的处理了。
-                            这时候我们就需要学习python或者Matlab了，当然，我们也可以用c++来进行图像处理，但是c++的库比较少，所以用python或者matlab来处理图像是比较方便。
-                            
-                            <p>opencv学习教程：<a href="https://www.runoob.com/opencv/opencv-tutorial.html" 
-                                class="custom-link">菜鸟教程的opencv文字教程</a></p>
-                            
-                            <p>opencv-python学习教程：<a href="https://www.bilibili.com/video/BV1Fo4y1d7JL/?p=7&share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" 
-                                class="custom-link">黑马程序员图像处理OpenCV入门教程</a></p>
-                            
-                            <p>matlab学习教程：<a href="https://www.bilibili.com/video/BV1ci4y1b7NY/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" 
-                                class="custom-link">MATLAB图像处理教程</a></p>
-                            
-                            <p>matlab学习教程：<a href="https://blog.csdn.net/qq_49030808/article/details/108690293" 
-                                class="custom-link">matlab图像处理基础文字版</a></p>
-                        </div>
-                    </div>
-                </div>
-            
-                <h2 class="accordion-header" id="headingSix2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseSix2" aria-expanded="false" aria-controls="collapseSix">
-                        OpenMV
-                    </button>
-                </h2>
-                <div id="collapseSix2" class="accordion-collapse collapse" aria-labelledby="headingSix2"
-                    data-bs-parent="#accordionExample6">
-                    <div class="accordion-body">
-                        OpenMV是一个开源的机器视觉模块，它集成了摄像头、处理器和传感器，可以用于图像处理和机器视觉任务。OpenMV模块具有以下特点：
-                        <p>1. 开源：OpenMV模块的源代码是开源的，用户可以根据自己的需求进行修改和定制。</p>
-                        <p>2. 低成本：OpenMV模块的价格相对较低，适合预算有限的用户。</p>
-                        <p>3. 高性能：OpenMV模块集成了高性能的处理器和摄像头，可以处理复杂的图像处理任务。</p>
-                        <p>4. 灵活：OpenMV模块可以连接到各种传感器和执行器，实现更复杂的机器视觉任务。</p>
-                        <p>5. 简单易用：OpenMV模块提供了丰富的API和示例代码，用户可以轻松地开始使用。</p>
-                        
-                        但是最好不要买某瞳的Openmv,溢价太严重，我的建议是去淘宝买一个STM32H750的开发板，商家并提供Openmv的固件，自己烧录进去，再买一个二十出头的OV5640摄像头，这样性价比更高。（或者自己做一个OpenMV这个更便宜）
-                        </p>
-                        协会在2024-2025学期进行了OpenMV的培训，大家都或多或少的懂了一些怎么视觉处理，作为一款入门级的视觉模块，它不需要很复杂的部署环境，只需要下载好python环境和OpenMVIDE就可以直接使用。<p>OpenMVIDE下载链接：
-                            <a href="https://singtown.com/openmv-download/"class="custom-link">星瞳国内下载</a>
-                            <a href="https://openmv.io/pages/download" class="custom-link">OPENMV官方下载</a></p>
-                            虽然星瞳溢价严重但是他们的教程还是不错的：<a href="https://book.openmv.cc/" class="custom-link">星瞳教程</a></p>
-                            </p>
-                            我们学习完openmv就可以考虑让他和stm32串口连接实时传输数据，这样就可以实现openmv负责视觉处理，得到处理结果并预期的让openmv传输命令让stm32负责控制，这样就可以实现一个简单的视觉系统了。但是要怎么实现他们之间的通信呢？<a href="https://blog.csdn.net/2401_87555310/article/details/143197859" class="custom-link">OpenMV与STM32单片机通信</a></p>
-                        </div>
-                    </div>
-                    <h2 class="accordion-header" id="headingSix3">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseSix3" aria-expanded="false" aria-controls="collapseSix">
-                            Linux与OpenCV（初识篇）
-                        </button>
-                    </h2>
-                    <div id="collapseSix3" class="accordion-collapse collapse" aria-labelledby="headingSix3"
-                        data-bs-parent="#accordionExample6">
-                        <div class="accordion-body">
-						&emsp;&emsp;    在嵌入式系统和计算机视觉领域，OpenMV和OpenCV代表了两种不同的技术路径。OpenMV作为一个集成了摄像头和微控制器的硬件模块，主要面向初学者和简单的嵌入式应用，使用Python编程语言，提供了简化的API和内置的例程，适合基本的图像处理任务。然而，其功能和性能相对有限，难以应对复杂的计算机视觉需求。
-                            相比之下，OpenCV作为一款开源的计算机视觉库，具有强大的功能和广泛的应用场景。它支持多种编程语言，如C++和Python，并能在Linux等操作系统上高效运行。OpenCV不仅提供了丰富的图像处理和计算机视觉算法，还支持深度学习模块，使其在处理复杂任务时表现出色。特别是，OpenCV可以与Linux操作系统紧密结合，利用Linux的强大计算能力和灵活性，运行诸如YOLO（You
-                            Only Look Once）等先进的实时目标检测模型。这种组合不仅能够实现高效的图像处理和目标识别，还能根据具体需求进行高度定制和优化，为复杂的计算机视觉应用提供了强大的支持。
-                            </p>
-						&emsp;&emsp;   接触嵌入式Linux我们需要了解一些基本知识，如树莓派、香橙派、鲁班猫、jetson、立创泰山派类似的linux开发板，我们称为微电脑，他们就是一个独立的系统，接上鼠标键盘显示器就可以使用（甚至可以使用他们打游戏），大多Linux开发板都支持Ubuntu，这个系统很适合在嵌入式Linux上使用，结合我们之前学习的opencv就可以在Linux开发板上使用opencv进行图像处理了。
-                            如何流畅的使用这个系统，我们就需要学会如何使用Ubuntu的操作，如安装软件、使用终端、文件管理、网络配置等操作。<a href="https://blog.csdn.net/qq_45277212/article/details/120834748" class="custom-link">Linux Ubuntu 入门基本命令</a></p>
-							<p>&emsp;&emsp;或者有我们粤嵌线上平台账号的同学，可以看里面的课程，讲的真的很好。</p>
-							
-
-                    </div>
-
-					</div>
-					<h2 class="accordion-header" id="headingSix4">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix4"
-							aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV-Linux篇（一）
-						</button>
-					</h2>
-					<div id="collapseSix4" class="accordion-collapse collapse" aria-labelledby="headingSix4"
-						data-bs-parent="#accordionExample6">
-						<div class="accordion-body">
-                        <h3 style="color: red;">蓝色字都是跳转教程的链接</h3>
-						&emsp;&emsp;	我们学习Linux首先是需要了解Linux是什么，我们一般指的是GUN/linux ,它是一种免费使用和自由传播的类UNIX操作系统，它是一个基于POSIX和UNIX的多用户、多任务、支持多线程和多CPU的操作系统。<br>
-						&emsp;&emsp;嵌入式Linux开发板，大多都可以使用Ubuntu，他是由Debian衍生而来，Ubuntu的版本号是根据年月来命名的，而你问我Debian是什么，它由Linux内核衍生而来。少数的Linux开发板使用的是其他系统，如树莓派使用的是Raspbian OS（基于Debian)，香橙派使用的是Orange Pi OS(基于arch Linux)。说了这么多Linux，其实他们几乎是通用的，少部分的命令可能跟其他Linux开发板不一样。<br>
-						比如基于debian的Linux开发板，使用apt-get来安装软件，而基于arch的Linux开发板使用pacman来安装软件。<br>
-						&emsp;&emsp;一般购买的嵌入式Linux开发板（无emmc版本），都有选择有无储存卡（SD卡）的套餐，储存卡是用来装系统的，有没有都可以自己准备，发到货的时候都是一张空的SD卡，需要自己烧录系统，下面是常见嵌入式Linux开发板烧录系统的教程：<br><a href="https://blog.csdn.net/lx_nhs/article/details/124859914" class="custom-link">树莓派烧录系统及其配置新系统教程</a><br>
-						<a href="https://doc.embedfire.com/linux/rk356x/quick_start/zh/latest/quick_start/flash_img/flash_img.html#id2" class="custom-link">鲁班猫烧录系统及其其他完整教程</a><br>
-						<a href="https://blog.csdn.net/v13111329954/article/details/140795351"
-							class="custom-link">香橙派烧录系统教程</a><br>
-							<hr>
-						&emsp;&emsp;进去之后就是连接开发板，如果我们不想用额外的显示器显示那个linux开发板的界面怎么办？很简单，使用串口连接Linux开发板配置wifi网络，并使用Windows的Realvnc（VNC
-						Viewer）与Linux开发板连接。我们以树莓派为例：<a href="https://blog.csdn.net/u011198687/article/details/120954860"
-							class="custom-link">用串口登陆树莓派配置wifi网络</a>&emsp;&emsp;<a href="https://blog.csdn.net/qq_44214671/article/details/110581282"
-							class="custom-link">使用 VNC 远程访问树莓派</a>（注意，其他linux开发板可能不会自带vnc，所以需要自己安装）如果不想使用串口连接，也可以使用网线连接，使用ssh连接，<a href="https://blog.csdn.net/weixin_73546700/article/details/135931466"
-								class="custom-link">香橙派首次通过网线SSH连接</a><br>
-						&emsp;&emsp;Ubuntu这类的系统毕竟是系统，所以让你的开发板保证软件最新版本很重要，我们以Ubuntu为例子，apt是Ubuntu的包管理器，
-						<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>apt-get update</code></pre>
-						</div>
-						是更新软件包列表
-												<div class="code-block">
-													<button class="copy-button" onclick="copyCode(this)">复制</button>
-													<pre><code>apt-get upgrade</code></pre>
-												</div>
-						是更新软件包
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>apt-get install</code></pre>
-						</div>
-						是安装软件包
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>apt-get remove</code></pre>
-						</div>
-						是删除软件包
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>apt-get autoremove</code></pre>
-						</div>
-						是删除不需要的软件
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>apt-get clean</code></pre>
-						</div>
-						是清理软件包缓存<br><br>这个支持它的软件源默认是官方自带的软件园，所以需要更换软件源，使用阿里源，清华源，中科大源，网易源，阿里源，腾讯源，华为源，这些源都是免费的，但是需要自己手动配置，不同版本有不同的软件源版本，这里网上有教程，可以自己搜索，我就不放出来了，在Ubuntu24.04之前都可以采用更改/etc/apt/sources.list文件，在Ubuntu24.04之后，需要使用
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>apt-get install software-properties-common</code></pre>
-						</div>
-						，然后使用<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>add-apt-repository</code></pre>
-						</div>命令添加源，最后使用apt-get update更新软件包列表。<br>
-						&emsp;&emsp;不同芯片框架的软件源的也不一样，一般有X86、ARM、RISC-V，MIPS这些框架，但是arm框架很乱，一般在嵌入式Linux的框架为aarch64,可以在命令行输入： 
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>uname -a</code></pre>
-						</div>
- 查看，进而更换对应的软件源。更换完软件源再输入apt-get update更新软件包列表。<br><hr>
-						&emsp;&emsp;我们如果需要一些开发的话，可能需要不同的版本软件，比如numpy的版本需要不同的版本，我们需要那个版本的话，我们再主环境需要更换版本，只能卸载了之后才能更换，这样跟麻烦，那我们有什么方法可以快捷的同时使用不同版本的软件呢？<br>答案是有的，我们可以使用虚拟环境，但是虚拟环境有很多，比如python自带的env，还有conda，甚至类似docker的虚拟环境，但是这些虚拟环境都有不同的使用方法，这里我们使用conda，conda是python的包管理器，可以用来管理python的包，也可以用来管理python的虚拟环境，还可以用来管理python的版本，这里我们使用conda来管理python的虚拟环境，而嵌入式Linux就不需要使用anaconda这么全的conda，我们只需要使用它的虚拟环境就可以，所以我们推荐使用miniconda。<br>
-						miniconda是conda的轻量级版本，因为篇幅太长了，我就丢出教程了<a href="https://blog.csdn.net/2301_76831056/article/details/143165738" class="custom-link">Ubuntu 20.04版本快速安装 Miniconda</a><br>希望大家能熟练使用miniconda。
-						<hr>
-						&emsp;&emsp;在Linux上，我们可以使用pip来安装python的包，一些常见的pip命令，可以看教程<a href="https://www.runoob.com/python3/python3-pip.html" class="custom-link">菜鸟教程的pip教程</a><br>
-
-						我这里还是建议大家更换pip源为阿里源，直接在命令窗口输入
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
-pip config set install.trusted-host mirrors.aliyun.com</code></pre>
-						</div>		
-                    </div>
-				</div>
-
-
-                    <h2 class="accordion-header" id="headingSix5">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix5"
-                            aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV-Linux篇（二）
-                        </button>
-                    </h2>
-                    <div id="collapseSix5" class="accordion-collapse collapse" aria-labelledby="headingSix5"
-                        data-bs-parent="#accordionExample6">
-                        <div class="accordion-body">
-						上节讲了Linux的一些命令基础以及miniconda的安装，如何使用conda创建虚拟环境，并使用虚拟环境安装opencv。<br>
-						我们下载完miniconda之后，打开终端，输入以下命令，查看conda是否安装成功，以及conda的版本。<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda --version</code></pre>
-						</div>
-						如果安装成功，会显示conda的版本号，如果安装失败，会显示conda not found。<hr>
-						接下来，我们了解一些conda的命令：<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda create -n myenv python=3.10</code></pre>
-						</div>
-						为创建一个名为"myenv"的虚拟环境，并使用python3.10作为解释器，python版本可以根据自己项目来选择。这其中，"myenv"是可以自己定义的名字。<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda activate myenv</code></pre>
-						</div>
-						激活"myenv"虚拟环境。<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda deactivate</code></pre>
-						</div>
-						退出"myenv"虚拟环境。<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda remove -n myenv --all</code></pre>
-						</div>
-						删除"myenv"虚拟环境。<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda update --all</code></pre>
-						</div>
-						升级全部库
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda update package_name</code></pre>
-						</div>
-						升级一个包,package_name是包的名字
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda list</code></pre>
-						</div>
-						查看已安装的包
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda remove opencv</code></pre>
-						</div>
-						移除一个包，package_name是包的名字
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda install opencv</code></pre>
-						</div>
-						安装一个包，当然，也可以用pip安装,安装与卸载的前提是你需要进到那个环境中再执行响应的命令。
-						<hr>
-						&emsp;&emsp;说了这么多，使用的顺序就是：<br>
-						1.创建虚拟环境
-						2.激活虚拟环境<br>
-						3.安装opencv
-						4.使用opencv
-						<br><br>
-						第一步：创建名字叫cv的虚拟环境：<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda create -n cv python=3.10</code></pre>
-						</div>
-						第二步：激活虚拟环境：<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>conda activate cv</code></pre>
-						</div>
-						第三步：安装opencv-python：<br>
-						<div class="code-block">
-							<button class="copy-button" onclick="copyCode(this)">复制</button>
-							<pre><code>pip install opencv-contrib-python</code></pre>
-						</div>
-						在这之前需要把opencv的源更换为阿里源或者其他源，更换源步骤可以看上一节教程。opencv-contrib-python和opencv-python的区别是opencv-contrib-python包含了opencv的contrib模块，而opencv-python只包含了opencv的python模块。<br>
-						第四步：使用opencv：<br>
-						<strong>但是怎么在嵌入式Linux使用opencv呢？我们可以看下一节教程。</strong>
-
-                   		</div>
-					</div>
-
-					<h2 class="accordion-header" id="headingSix6"></h2>
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix6"
-							aria-expanded="false" aria-controls="collapseSix">
-							Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）
-						</button>
-					</h2>
-					<div id="collapseSix6" class="accordion-collapse collapse" aria-labelledby="headingSix6"
-						data-bs-parent="#accordionExample6">
-						<div class="accordion-body">
-							&emsp;&emsp;这篇教程我们使用的是香橙派zero3，为什么使用这个呢？因为便宜，99块钱1G运存版本（当然，可以买2G运存版本）加上32G闪迪储存卡和二十来块的USB摄像头，就可以使用在你的项目搭载上opencv了（doge），当然，可能还有其他便宜的方案，但是这个作为入门设备我觉得也是不错的选择，香橙派zero3是全志H618的芯片，自带千兆网口，蓝牙五等等，具体可以去官网了解。
-							<a href="http://www.orangepi.cn/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-3.html" class="custom-link">香橙派zero3官网</a><hr>
-							&emsp;&emsp;看到这里大家都是一脸懵的，第一次我也不会配置这些啊，好多我都要自己配置好难怎么办？你放心咧，我这已经配置好有Ubuntu的镜像了，几乎就是烧录镜像进去就可以用了，但是我配置了什么呢？答案是有：<br>
-							<strong>1.安装Ubuntu22.04镜像<br>
-							2.香橙派zero3第一次配网<br>
-							3.安装miniconda<br>
-							4.创造虚拟环境名为"cv"，python版本为3.10<br>
-							5.配置pip源为阿里源<br>
-							7.安装了jupyter<br>
-							8.安装了opencv-python,ultralytics(YOLOv8)和onnx<br>
-							9.sudo的账号密码都是orangepi</strong><br>
-							<hr>
-							<h3><strong></strong>有需要自己配置的同学也可以等我后面有空更新教程跟着来配置。</strong></h3>
-							<hr>
-							&emsp;&emsp;<h3><strong>那我们要怎么烧录已经配置好的镜像呢？</strong></h3><br>
-							1.下载镜像：选用<strong>32G</strong>的闪迪或者其他读取速度高的储存卡，但是因为镜像太大了，我就没有放上云盘，而放在实验室的电脑上，文件夹目录在D盘的orangepi文件夹，大家可以拷贝下来或者在实验室的电脑上烧录。<br>
-							2.烧录镜像：使用win32diskimager，这个软件在下载中心有，大家可以下载下来，然后打开软件，检查插入储存卡的盘符，选择镜像文件，然后点击写入，等待完成即可。读卡器可以自己准备也可以询问学长借用。<br>
-							<img src="assets\img\win32.png" alt="win32diskimager使用界面" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
-							3.烧录完成之后，储存卡插入香橙派zero3，将15W或者以上的type-c充电器保证香橙派供电（<strong>这个需要自己准备，购买的开发板没有！</strong>，一般自己手机都会有符合这个的充电器）。<hr>
-							&emsp;&emsp;我们配置的镜像不需要使用显示器再配置，直接使用网页连接jupyter就可以了。<br>
-							配置的镜像中，默认连接的WiFi名称为orangepi，密码也是orangepi。所以我们需要在电脑打开热点，将热点名称设置为orangepi，密码:orangepi。后面会教大家怎么改自己连接的WiFi以及香橙派名字，以防大家连接WiFi的时候混淆了。<br>
-							<img src="assets\img\wifi.png" alt="orangepi连接WiFi" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
-							4.连接成功之后，我们在下面看到我这个香橙派的ip地址是192.168.137.115，我们打开jupyter需要知道orangepi的ip地址，在浏览器输入192.168.137.115:8888就可以看到jupyter的界面了,如果需要密码的话，<strong>jupyter默认密码是12345678</strong>。<br>
-							<img src="assets\img\jupyter.png" alt="jupyter界面" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
-							<hr>
-							&emsp;&emsp;这个就需要我们自己去学jupyter的基本用法了：这里有几个文章可以参考一下<br>
-							jupyter opencv的用法：<a href="https://blog.csdn.net/weixin_44155966/article/details/112688909" class="custom-link">Jupyter Notebook + OpenCV 完美组合</a><br>
-							Jupyter Notebook 使用技巧：<a href="https://zhuanlan.zhihu.com/p/256039090" class="custom-link">15个应该掌握的Jupyter Notebook 使用技巧</a><br>
-							这个我们只需要看它的使用方法部分就好：<a href="https://blog.csdn.net/weixin_38556197/article/details/139426996" class="custom-link">一文弄懂Jupyter的配置与使用</a><br>
-							Jupyter Notebook 保姆级别教程：<a href="https://blog.csdn.net/cainiao_python/article/details/125567913" class="custom-link">良心总结！Jupyter Notebook 从小白到高手</a><br>
-							<hr>
-							&emsp;&emsp;我们想要USB摄像头能不能用怎么办？我已经在code文件夹放cv.ipynb，打开那个文件，然后点击运行，就可以看到实时显示的视频流了。<br>
-							<img src="assets\img\cv.png" alt="cv.ipynb" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 20px 0;"><br>
-							<hr>
-							&emsp;&emsp;我们在代码中使用cv2.VideoCapture(0)，0表示使用第一个摄像头，如果想要使用第二个摄像头，可以改为1，以此类推，但是怎么知道呢？我们只需要在终端输入<strong>ls /dev/video*</strong>，就可以看到摄像头对应的设备号。<br>
-							<hr>
-							&emsp;&emsp;写到了本篇教程的最后，很明显，嵌入式Linux是一个系统，跟Windows一样，如果我们直接关机的话，可能会造成系统崩溃，所以我们需要使用<strong>halt</strong>命令来关机，halt命令会等待所有进程结束，然后关闭系统。打开终端，输入以下命令就可以关机了，等待香橙派的灯不再闪烁就可以拔掉电源
-						    <br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>sudo halt</code></pre>
-							</div>
-						</div>
-					</div>
-
-
-					<h2 class="accordion-header" id="headingSix7">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix7"
-							aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV（CV与算法篇）
-						</button>
-					</h2>
-					<div id="collapseSix7" class="accordion-collapse collapse" aria-labelledby="headingSix7"
-						data-bs-parent="#accordionExample7">
-						<div class="accordion-body">
-							&emsp;&emsp;YOLO（You Only Look
-							Once）算法是一种先进的实时目标检测方法，通过将图像划分为网格单元，并在每个单元内预测边界框和类别概率，实现了高效的目标检测。与传统的两步检测方法不同，YOLO将目标检测视为一个回归问题，从而大幅提升了检测速度。其核心思想是利用一个单一的卷积神经网络（CNN）直接预测目标的类别和位置，这使得YOLO能够在保持高准确率的同时，处理速度极快，适合实时应用场景，如自动驾驶、视频监控和机器人视觉等。此外，YOLO的架构经过多次迭代优化，最新版本在精度和速度上均有显著提升，进一步巩固了其在目标检测领域的领先地位。
-							<p>
-								搭建部署YOLOv8的教程，这里已经包含从准备数据集到训练模型，再到部署模型，最后到使用模型的教程了：<a
-									href="https://www.bilibili.com/video/BV1qtHeeMEnC/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
-									class="custom-link">从0开始搭建部署YOLOv8系列教程
-								</a></p><br>
-							<p>
-								这个是yolo的官方文档，<a
-									href="https://docs.ultralytics.com/zh"
-									class="custom-link">Ultralytics YOLO 文档
-								</a></p><br>
-						</div>
-					</div>
-
-					<h2 class="accordion-header" id="headingSix8">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix8"
-							aria-expanded="false" aria-controls="collapseSix">
-							Linux与OpenCV（代码自启动）
-						</button>
-					</h2>
-					<div id="collapseSix8" class="accordion-collapse collapse" aria-labelledby="headingSix8"
-						data-bs-parent="#accordionExample8">
-						<div class="accordion-body">
-							&emsp;&emsp;我们写完代码之后，总是要手动执行，这样很麻烦，所以我们可以使用代码自启动，这样就可以自动执行代码了。<br>
-							&emsp;&emsp;我们以Ubuntu为例，使用代码自启动，需要使用到systemd，systemd是Linux的系统和服务管理器，可以用来管理系统的服务和进程，我们使用systemd来管理代码自启动。<br>
-							&emsp;&emsp;首先，我们需要创建脚本，我们可以用nano创建一个脚本，打开终端，输入以下命令：<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>nano /home/orangepi/code/start_pi.sh</code></pre>
-							</div>
-							然后复制并修改以下代码：<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>
-#!/bin/bash
-# 加载Conda环境变量，orangepi是香橙派zero3的用户名，miniconda3是miniconda的安装目录
-source /home/orangepi/miniconda3/etc/profile.d/conda.sh
-								
-# 激活虚拟环境，cv是虚拟环境的名字，/home/orangepi/code是代码的目录，pi.py是代码的文件名
-conda activate cv
-								
-# 运行Python脚本
-/home/orangepi/miniconda3/envs/cv/bin/python /home/orangepi/code/pi.py</code></pre>
-							</div>
-							
-							按下ctrl+s保存，然后按下ctrl+x退出，然后给这个脚本给予权限，输入以下命令：<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>sudo chmod +x /home/orangepi/code/start_pi.sh</code></pre>
-							</div>
-							代码自启动自然是，创建一个新的 systemd 服务文件，输入以下命令：<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>sudo nano /etc/systemd/system/pi.service</code></pre>
-							</div>
-							然后复制并修改以下代码：<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre>
-									<code>[Unit]
-Description=Run pi.py in cv Conda Environment
-After=network.target
-								
-[Service]
-Type=simple
-ExecStart=/home/orangepi/code/start_pi.sh
-WorkingDirectory=/home/orangepi/code
-StandardOutput=inherit
-StandardError=inherit
-Restart=always
-User=orangepi
-								
-[Install]
-WantedBy=multi-user.target</code></pre>
-							</div>
-							重新上电一下，输入以下命令，查看服务是否启动成功：<br>
-							<div class="code-block">
-								<button class="copy-button" onclick="copyCode(this)">复制</button>
-								<pre><code>sudo systemctl status pi.service</code></pre>
-							</div>
-							如果服务启动成功，会显示active (running)，如果服务启动失败，会显示inactive (dead)。<br>
-							我们就可以使用代码自启动了。
-						</div>
-					</div>
-
-                </div>
-			<hr>
-                <h2>乐鑫ESP32物联网</h2>
-                <div class="accordion" id="accordionExample7">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingSeven1">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseSeven1" aria-expanded="false" aria-controls="collapseSeven">
-								ESP32与Arduino环境基础
-                            </button>
-                        </h2>
-                        <div id="collapseSeven1" class="accordion-collapse collapse" aria-labelledby="headingSeven1"
-                            data-bs-parent="#accordionExample7">
-                            <div class="accordion-body">
-							ESP32是一款功能强大的Wi-Fi和蓝牙双模微控制器，广泛应用于物联网项目。它兼容Arduino
-							IDE，支持使用Arduino代码进行编程。ESP32拥有丰富的外设接口和强大的处理能力，适合开发智能家居、无线传感等应用。<p>Arduino基础非常适合新手的开发、掌握基本编程语法和常用函数，结合ESP32的硬件特性，可以快速上手开发各种创意项目。</p>
-							<p>看完这两个教程并跟着做项目估计就能很流畅的使用ESP32开发项目:<a href="https://www.bilibili.com/video/BV1RM4y1a7J5/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
-								class="custom-link"> 1.ESP32 Arduino 教程
-							</a>-----<a href=" https://www.bilibili.com/video/BV1tv411w74d/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"
-								class="custom-link"> 2.ESP32超详细教程-使用VSCode（基于Arduino框架）</a>
-							<p>当然，使用esp32最重要的是物联网，既然使用esp32连接网络，我们就需要知道STA和AP协议是什么意思，STA是连接WiFi，AP相当于创造一个热点，在ESP32可以让两个模式都共存。当然这里有更详细的文章介绍这个：<a href="https://blog.csdn.net/luolt42/article/details/132663190"
-								class="custom-link"> WIFI模块无线网络工作模式AP和STA的区别</a></p>
-							<p>我们现在就要连接网络进行中国移动OneNet物联网互联：<a href=" https://www.bilibili.com/video/BV1NV411c7VE/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41"class="custom-link">ESP32/ESP8266上云——Onenet物联网平台同步MQTT</a></p>
-							<p>当然，我们也可以使用ESP32阿里云的服务器，这里也有详细的教程：<a href="https://www.bilibili.com/video/BV1Xz4y1n7Uh/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" class="custom-link">STM32+ESP8266(ESP32)+MQTT+阿里云物联网平台</a></p>（还没写完。。。）
-                            </div>
-                        </div>
-
-                        <h2 class="accordion-header" id="headingSeven2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven2"
-                                aria-expanded="false" aria-controls="collapseSeven">
-                               ESP32与ESPIDF环境基础
-                            </button>
-                        </h2>
-                        <div id="collapseSeven2" class="accordion-collapse collapse" aria-labelledby="headingSeven2"
-                            data-bs-parent="#accordionExample7">
-                            <div class="accordion-body">
-								<p>
-								相比Arduino，ESP-IDF提供了更底层的控制和更高的性能，但学习曲线较陡。Arduino则以其简单易用的IDE和广泛的社区支持，适合初学者和快速原型开发。我们就不提供太多的教程。</p>
-								<a href="https://www.bilibili.com/video/BV1eRg7exEcT/?share_source=copy_web&vd_source=d1ac1cf47f7200c9e192c32b7af1fc41" class="custom-link">ESP32教程（基于ESP-IDF）ESP32入门级开发课程</a>
-                            </div>
-                        </div>
-
-						<h2 class="accordion-header" id="headingSeven3">
-							<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven3"
-								aria-expanded="false" aria-controls="collapseSeven">
-								ESP32C3使用PlatformIO烧录的问题
-							</button>
-						</h2>
-						<div id="collapseSeven3" class="accordion-collapse collapse" aria-labelledby="headingSeven3"
-							data-bs-parent="#accordionExample7">
-							<div class="accordion-body">
-								由于ESP32-C3采用开源的RISC-V指令集架构，与ESP32-S系列使用的ARM Cortex-M3架构不同，因此在使用PlatformIO进行烧录时，需要在配置文件添加一行代码。
-								在platformio.ini文件中添加一行代码：
-								<div class="code-block">
-									<button class="copy-button" onclick="copyCode(this)">复制</button>
-									<pre><code>[env:esp32-c3-devkitm-1]
-platform = espressif32
-board_build.flash_mode = dio
-board = esp32-c3-devkitm-1
-framework = arduino
-lib_deps =</code></pre>
-								</div>
-							</div>
-						</div>
-                    </div>
-                </div>
-                还在更新中...
+	<!-- 修改后的目录结构 -->
+	<div class="toc-overlay">
+		<div class="mobile-toc" id="mobile-toc-container">
+			<div class="search-box">
+				<input type="text" id="mobile-search" placeholder="      搜索课程..."
+					style="width:100%; border-radius:12px; border:1px solid var(--secondary)">
 			</div>
-        </div>
-    </div>
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 广西科技大学嵌入式智控协会</p>
-        </div>
-    </footer>
-    <script src="assets\js\bootstrap.bundle.min.js"></script>
-    <script src="assets\js\aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script>
-    function copyCode(button) {
-        // 获取代码内容
-        const codeElement = button.parentElement.querySelector('code');
-        const textToCopy = codeElement.textContent.trim(); // 使用 trim() 去除首尾空白
-        
-        // 创建临时文本区域
-        const textArea = document.createElement('textarea');
-        textArea.value = textToCopy;
-        textArea.style.position = 'fixed';  // 避免页面滚动
-        textArea.style.opacity = '0';       // 隐藏文本区域
-        
-        document.body.appendChild(textArea);
-        textArea.select();
-        
-        try {
-            // 执行复制
-            document.execCommand('copy');
-            button.textContent = '已复制!';
-            
-            // 2秒后恢复按钮文字
-            setTimeout(() => {
-                button.textContent = '复制';
-            }, 2000);
-        } catch (err) {
-            console.error('复制失败:', err);
-            button.textContent = '复制失败!';
-        } finally {
-            // 清理临时文本区域
-            document.body.removeChild(textArea);
-        }
-    }
-    </script>
+			<div class="toc" id="mobile-toc"></div>
+		</div>
+	</div>
+
+	<!-- 内容区域 -->
+	<main class="content">
+		<h1>嵌入式智控协会培训中心</h1>
+		<div class="course-content" style="min-height: 200vh;">
+			<article class="markdown-content" id="welcome-container">
+				<!-- 内容将由JavaScript动态加载 -->
+			</article>
+		</div>
+	</main>
+
+	<!-- Markdown解析 -->
+	<script src="style/marked.min.js"></script>
+
+	<!-- 流程图支持 -->
+	<script src="style/mermaid.min.js"></script>
+
+	<!-- 工具提示库 -->
+	<script src="style/popper.min.js"></script>
+	<script src="style/tippy-bundle.umd.js"></script>
+
+	<div id="error-container" aria-live="polite"></div>
+
+	<script>
+		// 动态生成目录
+		const courseFiles = [
+			// 编程语言基础
+			"center/md/编程语言基础 - C语言.md",
+			"center/md/编程语言基础 - Python.md",
+
+			// 硬件基础
+			"center/md/硬件基础知识 - 电路基础.md",
+			"center/md/硬件基础知识 - MCU概念及架构.md",
+
+			// 单片机协议
+			"center/md/单片机的协议 - STM32.md",
+			"center/md/单片机的协议 - 串口助手.md",
+
+			// 开发环境
+			"center/md/开发环境及其固件库 - 标准库.md",
+			"center/md/开发环境及其固件库 - HAL库.md",
+
+			// PCB设计
+			"center/md/PCB设计与制作 - 学习使用EDA工具.md",
+			"center/md/PCB设计与制作 - 免费打样板.md",
+
+			// 机器视觉
+			"center/md/机器视觉 - 基础视觉处理与Matlab.md",
+			"center/md/机器视觉 - OpenMV.md",
+			"center/md/机器视觉 - Linux与OpenCV（初识篇）.md",
+			"center/md/机器视觉 - Linux与OpenCV-Linux篇(一).md",
+			"center/md/机器视觉 - Linux与OpenCV-Linux篇(二).md",
+			"center/md/机器视觉 - Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）.md",
+			"center/md/机器视觉 - Linux与OpenCV（CV与算法篇）.md",
+			"center/md/机器视觉 - Linux与OpenCV（代码自启动）.md",
+
+			//乐鑫ESP32物联网
+			"center/md/乐鑫ESP32物联网 - ESP32与Arduino环境基础.md",
+			"center/md/乐鑫ESP32物联网 - ESP32与ESPIDF环境基础.md",
+			"center/md/乐鑫ESP32物联网 - ESP32C3使用PlatformIO烧录的问题.md",
+
+		];
+
+		// 动态生成目录结构
+		function generateTOC() {
+			const tocMap = new Map();
+
+			courseFiles.forEach(path => {
+				const [category, filename] = path.split('/').pop().split(' - ');
+				if (!tocMap.has(category)) {
+					tocMap.set(category, []);
+				}
+				tocMap.get(category).push({
+					name: filename.replace('.md', ''),
+					path: path
+				});
+			});
+
+			let tocHTML = '';
+			tocMap.forEach((items, category) => {
+				tocHTML += `
+                    <div class="toc-category">
+                        <h3>${category}</h3>
+                        ${items.map(item => `
+                            <div class="toc-subitem" data-file="${item.path}">
+                                ${item.name}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+			});
+
+			document.getElementById('mobile-toc').innerHTML = tocHTML;
+		}
+
+		// 浮动按钮交互逻辑
+		const floatingToc = document.querySelector('.floating-toc');
+		const tocOverlay = document.querySelector('.toc-overlay');
+
+		floatingToc.addEventListener('click', (e) => {
+			e.stopPropagation();
+			floatingToc.classList.toggle('active');
+			tocOverlay.classList.toggle('active');
+			document.body.classList.toggle('toc-open'); // 新增body状态
+		});
+
+		// 点击外部关闭
+		tocOverlay.addEventListener('click', (e) => {
+			if (e.target === tocOverlay) {
+				floatingToc.classList.remove('active');
+				tocOverlay.classList.remove('active');
+			}
+		});
+
+		// 修改搜索功能，添加防抖和缓存
+		// 修改搜索功能，添加防抖
+		function debounce(func, wait) {
+			let timeout;
+			return function (...args) {
+				clearTimeout(timeout);
+				timeout = setTimeout(() => func.apply(this, args), wait);
+			};
+		}
+
+		document.getElementById('mobile-search').addEventListener('input', debounce((e) => {
+			const term = e.target.value.trim().toLowerCase();
+			document.querySelectorAll('.toc-subitem').forEach(item => {
+				const text = item.textContent;
+				const regex = new RegExp(`(${term})`, 'gi');
+				item.innerHTML = term ?
+					text.replace(regex, '<span class="highlight">$1</span>') :
+					text;
+				item.style.display = term ?
+					(text.toLowerCase().includes(term) ? 'block' : 'none') :
+					'block';
+			});
+		}, 300));
+
+		// 添加文件缓存
+		const fileCache = new Map();
+		async function loadFile(path) {
+			if (fileCache.has(path)) return fileCache.get(path);
+			try {
+				const response = await fetch(path);
+				const content = await response.text();
+				fileCache.set(path, content);
+				return content;
+			} catch (error) {
+				throw error;
+			}
+		}
+
+		// 优化移动端点击体验
+		document.querySelectorAll('.toc-subitem').forEach(item => {
+			item.addEventListener('click', () => {
+				floatingToc.classList.remove('active');
+				tocOverlay.classList.remove('active');
+			});
+		});
+
+		// 新增功能：阅读进度条
+		function setupProgressBar() {
+			const progressBar = document.createElement('div');
+			progressBar.className = 'progress-bar';
+			document.body.prepend(progressBar);
+
+			let rafId;
+			function updateProgress() {
+				const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const progress = Math.min(1, Math.max(0, window.scrollY / scrollHeight));
+				progressBar.style.width = `${progress * 100}%`;
+				rafId = requestAnimationFrame(updateProgress);
+			}
+
+			// 使用IntersectionObserver优化性能
+			const observer = new IntersectionObserver(() => {
+				if (document.documentElement.scrollHeight > window.innerHeight * 2) {
+					rafId = requestAnimationFrame(updateProgress);
+				} else {
+					progressBar.style.width = '0';
+				}
+			}, { threshold: 0.1 });
+
+			observer.observe(document.documentElement);
+
+			// 滚动结束隐藏（可选）
+			let scrollTimeout;
+			window.addEventListener('scroll', () => {
+				clearTimeout(scrollTimeout);
+				scrollTimeout = setTimeout(() => {
+					cancelAnimationFrame(rafId);
+				}, 100);
+			});
+		}
+
+		// 初始化新功能
+		generateTOC();
+		setupProgressBar();
+
+		// 修改内容加载逻辑适配PC端布局
+		document.addEventListener('click', async (e) => {
+			if (e.target.closest('.toc-subitem')) {
+				// 强制所有设备点击后立即滚动到顶部
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+
+				// 新增：PC端额外处理
+				if (window.innerWidth > 768) {
+					// 双保险：直接操作滚动容器
+					document.documentElement.scrollTop = 0;
+					document.scrollingElement.scrollTop = 0;
+					document.querySelector('.content').scrollTop = 0;
+				}
+
+				// 移动端点击后关闭目录
+				if (window.innerWidth <= 768) {
+					floatingToc.classList.remove('active');
+					tocOverlay.classList.remove('active');
+				}
+
+				const contentArea = document.querySelector('.course-content');
+
+				// 修复：使用已定义的loading样式类
+				contentArea.innerHTML = `
+					<div class="loading-indicator">
+						<div class="spinner"></div>
+						<p>正在加载课程内容...</p>
+					</div>
+				`;
+
+				const item = e.target.closest('.toc-subitem');
+				const filePath = item.dataset.file;
+
+				try {
+					const response = await fetch(filePath);
+					const markdown = await response.text();
+					contentArea.innerHTML = `
+                        <article class="markdown-content">
+                            ${marked.parse(markdown)}
+                        </article>
+                    `;
+
+					// 新增mermaid初始化
+					if (typeof mermaid !== 'undefined') {
+						mermaid.init(undefined, '.markdown-content pre code.mermaid');
+					}
+
+					// PC端自动滚动到标题位置
+					if (window.innerWidth > 768) {
+						window.scrollTo({
+							top: contentArea.offsetTop - 20,
+							behavior: 'smooth'
+						});
+					}
+
+					// 确保内容插入后再次定位到顶部
+					requestAnimationFrame(() => {
+						window.scrollTo(0, 0);
+						document.documentElement.scrollTop = 0;
+					});
+
+					// 添加历史记录
+					history.pushState({}, '', `#${encodeURIComponent(filePath)}`);
+				} catch (error) {
+					console.error('内容加载失败:', error);
+				}
+			}
+		});
+
+		// 新增持久化存储
+		window.addEventListener('beforeunload', () => {
+			localStorage.setItem('lastScroll', window.scrollY);
+		});
+		window.addEventListener('load', () => {
+			const lastScroll = localStorage.getItem('lastScroll');
+			if (lastScroll) window.scrollTo(0, lastScroll);
+		});
+
+		// 修改后的移动端点击外部关闭菜单逻辑
+		document.addEventListener('click', (e) => {
+			if (window.innerWidth <= 768 &&
+				!e.target.closest('.mobile-toc') &&
+				!e.target.closest('.floating-toc')) {
+				document.querySelector('.toc-overlay').classList.remove('active');
+				document.body.classList.remove('toc-open');
+			}
+		});
+
+		// 替换为新的滚动处理
+		document.addEventListener('DOMContentLoaded', () => {
+			const mobileToc = document.querySelector('.mobile-toc');
+			if (mobileToc) {
+				// 确保滚动容器正确设置
+				mobileToc.style.overflowY = 'auto';
+				mobileToc.style.webkitOverflowScrolling = 'touch';
+				mobileToc.style.height = 'calc(100vh - 120px)';
+			}
+		});
+
+		// 移除外层滚动锁定
+		document.querySelector('.toc-overlay').removeEventListener('wheel', (e) => {
+			if (e.target.closest('.mobile-toc')) {
+				e.stopPropagation();
+			}
+		}, { passive: true });
+
+		// 配置对象（方便后续维护）
+		const CONFIG = {
+			WELCOME_PAGE_PATH: '/test/md/index.md', // 注意路径前缀
+			CACHE_TTL: 300000, // 5分钟缓存
+			FALLBACK_CONTENT: `# 🎉 欢迎使用\n暂时无法加载最新内容，显示缓存版本`
+		};
+
+		// 增强版内容加载器
+		class ContentLoader {
+			constructor() {
+				this.cache = null;
+				this.lastFetch = 0;
+			}
+
+			async loadWelcomePage() {
+				try {
+					// 优先使用有效缓存
+					if (this._isCacheValid()) {
+						return this.cache;
+					}
+
+					// 发起网络请求
+					const response = await fetch(CONFIG.WELCOME_PAGE_PATH, {
+						mode: 'cors',
+						credentials: 'same-origin', // 明确凭证策略
+						headers: {
+							'Content-Type': 'text/markdown',
+							'X-Requested-With': 'XMLHttpRequest' // 帮助服务器识别AJAX请求
+						}
+					});
+
+					// HTTP状态检查
+					if (!response.ok) {
+						throw new Error(`HTTP错误 ${response.status}`);
+					}
+
+					// 解析内容
+					const markdown = await response.text();
+					const html = marked.parse(markdown);
+
+					// 更新缓存
+					this._updateCache(html);
+					return html;
+
+				} catch (error) {
+					console.error('内容加载失败:', error);
+					return this._handleError(error);
+				}
+			}
+
+			_isCacheValid() {
+				return this.cache && (Date.now() - this.lastFetch < CONFIG.CACHE_TTL);
+			}
+
+			_updateCache(content) {
+				this.cache = content;
+				this.lastFetch = Date.now();
+				localStorage.setItem('welcomeCache', JSON.stringify({
+					content: content,
+					timestamp: this.lastFetch
+				}));
+			}
+
+			_loadFromStorage() {
+				const stored = localStorage.getItem('welcomeCache');
+				if (stored) {
+					const { content, timestamp } = JSON.parse(stored);
+					this.cache = content;
+					this.lastFetch = timestamp;
+				}
+			}
+
+			_handleError(error) {
+				// 尝试加载本地缓存
+				this._loadFromStorage();
+				return this.cache || CONFIG.FALLBACK_CONTENT;
+			}
+		}
+
+		// 修复初始化流程：添加目录生成和欢迎页加载
+		document.addEventListener('DOMContentLoaded', async () => {
+			generateTOC(); // 确保生成目录
+			const container = document.getElementById('welcome-container');
+			const loader = new ContentLoader();
+
+			// 显示加载状态
+			container.innerHTML = `
+				<div class="loading-indicator">
+					<div class="spinner"></div>
+					<p>正在加载最新内容...</p>
+				</div>
+			`;
+
+			try {
+				// 异步加载内容
+				const content = await loader.loadWelcomePage();
+				container.innerHTML = content;
+
+				// 初始化可视化组件
+				initMermaid();  // 移除非必要的this
+				initTooltips(); // 使用独立函数
+
+			} catch (error) {
+				container.innerHTML = `
+					<div class="error-state">
+						<h3>⚠️ 内容加载失败</h3>
+						<p>${error.message}</p>
+						<button class="retry-btn">点击重试</button>
+					</div>
+				`;
+
+				// 绑定重试按钮
+				document.querySelector('.retry-btn').addEventListener('click', () => {
+					location.reload();
+				});
+			}
+		});
+
+		// 修复mermaid初始化逻辑
+		function initMermaid() {
+			if (typeof mermaid !== 'undefined') {
+				mermaid.initialize({
+					theme: 'neutral',
+					startOnLoad: true
+				});
+				// 使用更可靠的选择器
+				mermaid.init(undefined, '.markdown-content pre code.language-mermaid');
+			}
+		}
+
+		// 修改为独立函数
+		function initTooltips() {
+			if (typeof tippy !== 'undefined') {
+				tippy('[data-tippy-content]', {
+					arrow: true,
+					animation: 'fade',
+					theme: 'light-border'
+				});
+			}
+		}
+
+		// 修改marked渲染器确保正确添加mermaid类
+		const renderer = new marked.Renderer();
+		renderer.code = function (code, language) {
+			const isMermaid = language === 'mermaid';
+			return `
+				<div style="position: relative">
+					<pre class="${isMermaid ? 'mermaid' : ''}"><code class="language-${language}">${isMermaid ? code : escape(code)}</code></pre>
+					${!isMermaid ? `<button class="copy-btn" onclick="copyCode(this)">复制</button>` : ''}
+				</div>
+			`;
+		};
+
+		// 添加复制功能
+		function copyCode(button) {
+			const code = button.previousElementSibling.textContent;
+			navigator.clipboard.writeText(code).then(() => {
+				button.textContent = '已复制!';
+				setTimeout(() => button.textContent = '复制', 2000);
+			}).catch(err => {
+				console.error('复制失败:', err);
+				button.textContent = '失败';
+			});
+		}
+
+		// 修改下载功能
+		let currentContent = '';
+		const downloadContainer = document.querySelector('.download-container');
+
+		// 在内容加载时保存原始内容
+		function saveContent(rawMarkdown) {
+			currentContent = rawMarkdown;
+			// 保持下载按钮可见
+			downloadContainer.style.display = 'block';
+		}
+
+		// 添加滚动状态检测
+		let scrollTimeout;
+		mobileToc.addEventListener('scroll', () => {
+			mobileToc.classList.add('scrolling');
+			clearTimeout(scrollTimeout);
+			scrollTimeout = setTimeout(() => {
+				mobileToc.classList.remove('scrolling');
+			}, 500);
+		});
+
+		// 在DOM加载完成后调用
+		document.addEventListener('DOMContentLoaded', () => {
+			initContentScroll();
+		});
+
+		// 在脚本部分添加下载功能
+		document.getElementById('download-md').addEventListener('click', (e) => {
+			const menu = e.currentTarget.querySelector('.format-menu');
+			menu.style.opacity = menu.style.opacity === '1' ? '0' : '1';
+			menu.style.visibility = menu.style.visibility === 'visible' ? 'hidden' : 'visible';
+		});
+
+		// 增强版下载处理
+		document.querySelectorAll('.format-option').forEach(option => {
+			option.addEventListener('click', async (e) => {
+				const btn = document.getElementById('download-md');
+				const originalHTML = btn.innerHTML;
+
+				// 添加加载状态
+				btn.classList.add('loading');
+				btn.querySelector('.btn-text').innerHTML = '⏳ 生成文件中...';
+
+				try {
+					const format = e.currentTarget.dataset.format;
+					const title = document.querySelector('.markdown-content h1')?.textContent.trim() || 'document';
+
+					if (format === 'md') {
+						// Markdown下载
+						const blob = new Blob([currentContent], { type: 'text/markdown' });
+						triggerDownload(blob, `${title}.md`);
+					} else {
+						// Word文档生成
+						const htmlContent = marked.parse(currentContent);
+						const docxBlob = await convertToDocx(htmlContent);
+						triggerDownload(docxBlob, `${title}.docx`);
+					}
+				} catch (error) {
+					showErrorToast('下载失败: ' + error.message);
+				} finally {
+					btn.classList.remove('loading');
+					btn.querySelector('.btn-text').innerHTML = '⬇️ 下载文档';
+				}
+			});
+		});
+
+		// 通用下载触发方法
+		function triggerDownload(blob, filename) {
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = filename;
+			document.body.appendChild(a);
+			a.click();
+			document.body.removeChild(a);
+			URL.revokeObjectURL(url);
+		}
+
+		// 显示错误提示
+		function showErrorToast(message) {
+			const toast = document.createElement('div');
+			toast.className = 'download-toast';
+			toast.textContent = message;
+			document.body.appendChild(toast);
+
+			setTimeout(() => {
+				toast.remove();
+			}, 3000);
+		}
+
+		// 修复格式菜单交互
+		document.getElementById('download-md').addEventListener('click', (e) => {
+			const menu = e.currentTarget.querySelector('.format-menu');
+			menu.style.opacity = menu.style.opacity === '1' ? '0' : '1';
+			menu.style.visibility = menu.style.visibility === 'visible' ? 'hidden' : 'visible';
+		});
+
+		// 修复DOCX转换功能
+		async function convertToDocx(htmlContent) {
+			try {
+				const result = await htmlDocx.asBlob(htmlContent);
+				return result;
+			} catch (error) {
+				throw new Error('DOCX转换失败: ' + error.message);
+			}
+		}
+
+		// 修复移动端菜单交互
+		let menuTimeout;
+		document.getElementById('download-md').addEventListener('touchstart', (e) => {
+			const menu = e.currentTarget.querySelector('.format-menu');
+			clearTimeout(menuTimeout);
+			menu.style.opacity = '1';
+			menu.style.visibility = 'visible';
+			menuTimeout = setTimeout(() => {
+				menu.style.opacity = '0';
+				menu.style.visibility = 'hidden';
+			}, 5000); // 5秒后自动隐藏
+		});
+
+		// 修复事件监听器空指针问题
+		document.addEventListener('DOMContentLoaded', () => {
+			// 确保元素存在再绑定事件
+			const mobileToc = document.querySelector('.mobile-toc');
+			if (mobileToc) {
+				mobileToc.addEventListener('scroll', handleTocScroll);
+				mobileToc.addEventListener('touchstart', handleTouchStart, { passive: true });
+				mobileToc.addEventListener('touchmove', handleTouchMove, { passive: false });
+			}
+		});
+
+		// 优化后的触摸处理函数
+		function handleTouchStart(e) {
+			startY = e.touches[0].pageY;
+		}
+
+		function handleTouchMove(e) {
+			const deltaY = e.touches[0].pageY - startY;
+			const atTop = this.scrollTop <= 0 && deltaY > 0;
+			const atBottom = this.scrollHeight <= this.clientHeight + this.scrollTop && deltaY < 0;
+
+			if (atTop || atBottom) {
+				e.preventDefault();
+			}
+		}
+
+		function handleTocScroll() {
+			this.classList.add('scrolling');
+			clearTimeout(scrollTimeout);
+			scrollTimeout = setTimeout(() => {
+				this.classList.remove('scrolling');
+			}, 500);
+		}
+
+		// 修复空指针错误的核心代码
+		function safeAddEventListener(selector, eventType, handler, options) {
+			const element = document.querySelector(selector);
+			if (element) {
+				element.addEventListener(eventType, handler, options);
+			} else {
+				console.warn(`元素 ${selector} 不存在，无法绑定 ${eventType} 事件`);
+			}
+		}
+
+		// 安全初始化事件监听
+		document.addEventListener('DOMContentLoaded', () => {
+			// 目录相关事件
+			safeAddEventListener('.mobile-toc', 'scroll', handleTocScroll);
+			safeAddEventListener('.mobile-toc', 'touchstart', handleTouchStart, { passive: true });
+			safeAddEventListener('.mobile-toc', 'touchmove', handleTouchMove, { passive: false });
+
+			// 其他关键事件初始化
+			safeAddEventListener('.floating-toc', 'click', toggleTocOverlay);
+			safeAddEventListener('.toc-overlay', 'click', closeTocOnOutsideClick);
+		});
+
+		// 增强型错误处理
+		document.addEventListener('click', async (e) => {
+			if (e.target.closest('.toc-subitem')) {
+				try {
+					// ... 加载逻辑 ...
+				} catch (error) {
+					console.error('内容加载失败:', error);
+					showErrorToast(`加载失败: ${error.message}`);
+				}
+			}
+		});
+
+		// 添加全局错误处理
+		window.onerror = function (message, source, lineno, colno, error) {
+			console.error(`全局错误: ${message}@${source}:${lineno}`);
+			return true; // 阻止默认错误提示
+		};
+	</script>
 </body>
 
 </html>
