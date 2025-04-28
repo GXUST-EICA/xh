@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Cache-Control" content="max-age=604800, public">
 	<link rel="preload" href="style/marked.min.js" as="script">
-	<link rel="preload" href="test/md/index.md" as="fetch">
+	<link rel="preload" href="center/md/index.md" as="fetch">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<title>嵌入式智控协会培训中心</title>
 	<style>
@@ -1416,7 +1416,7 @@
 
 		// 配置对象（方便后续维护）
 		const CONFIG = {
-			WELCOME_PAGE_PATH: '/center/md/index.md', // 修改为绝对路径
+			WELCOME_PAGE_PATH: 'center/md/index.md', // 修改为相对路径
 			CACHE_TTL: 300000, // 5分钟缓存
 			FALLBACK_CONTENT: `# 🎉 欢迎使用\n暂时无法加载最新内容，显示缓存版本`
 		};
@@ -1493,30 +1493,24 @@
 			}
 		}
 
-		// 修复初始化流程：添加目录生成和欢迎页加载
+		// 修改初始化流程
 		document.addEventListener('DOMContentLoaded', async () => {
-			generateTOC(); // 确保生成目录
+			console.log('开始初始化...');
+			generateTOC();
 			const container = document.getElementById('welcome-container');
 			const loader = new ContentLoader();
 
-			// 显示加载状态
-			container.innerHTML = `
-				<div class="loading-indicator">
-					<div class="spinner"></div>
-					<p>正在加载最新内容...</p>
-				</div>
-			`;
-
 			try {
-				// 异步加载内容
+				console.log('正在加载欢迎页面...');
 				const content = await loader.loadWelcomePage();
+				console.log('欢迎页面加载成功');
 				container.innerHTML = content;
-
-				// 初始化可视化组件
-				initMermaid();  // 移除非必要的this
-				initTooltips(); // 使用独立函数
-
+				
+				// 初始化其他组件
+				initMermaid();
+				initTooltips();
 			} catch (error) {
+				console.error('初始化失败:', error);
 				container.innerHTML = `
 					<div class="error-state">
 						<h3>⚠️ 内容加载失败</h3>
@@ -1524,11 +1518,6 @@
 						<button class="retry-btn">点击重试</button>
 					</div>
 				`;
-
-				// 绑定重试按钮
-				document.querySelector('.retry-btn').addEventListener('click', () => {
-					location.reload();
-				});
 			}
 		});
 
