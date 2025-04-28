@@ -1501,15 +1501,30 @@
 			`;
 
 			try {
-				// 异步加载内容
-				const content = await loader.loadWelcomePage();
-				container.innerHTML = content;
+				// 使用预加载的资源
+				const response = await fetch('center/md/index.md', {
+					mode: 'cors',
+					credentials: 'same-origin',
+					headers: {
+						'Content-Type': 'text/markdown',
+						'X-Requested-With': 'XMLHttpRequest'
+					}
+				});
+
+				if (!response.ok) {
+					throw new Error(`HTTP错误 ${response.status}`);
+				}
+
+				const markdown = await response.text();
+				const html = marked.parse(markdown);
+				container.innerHTML = html;
 
 				// 初始化可视化组件
-				initMermaid();  // 移除非必要的this
-				initTooltips(); // 使用独立函数
+				initMermaid();
+				initTooltips();
 
 			} catch (error) {
+				console.error('内容加载失败:', error);
 				container.innerHTML = `
 					<div class="error-state">
 						<h3>⚠️ 内容加载失败</h3>
