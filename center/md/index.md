@@ -78,7 +78,7 @@
 🏫 粤嵌培训中心
 </a>
 
-<a href="https://www.eica.fun/oldtraining" style="display:inline-block;margin:12px 8px;padding:18px 40px;font-size:1.5rem;font-weight:bold;color:#fff;background:linear-gradient(90deg,#636e72 0%,#a29bfe 100%);border:none;border-radius:40px;text-decoration:none;box-shadow:0 4px 16px rgba(99,110,114,0.15);transition:background 0.3s;">
+<a href="https://www.eica.fun/center_old" style="display:inline-block;margin:12px 8px;padding:18px 40px;font-size:1.5rem;font-weight:bold;color:#fff;background:linear-gradient(90deg,#636e72 0%,#a29bfe 100%);border:none;border-radius:40px;text-decoration:none;box-shadow:0 4px 16px rgba(99,110,114,0.15);transition:background 0.3s;">
 📚 旧版培训中心
 </a>
 
