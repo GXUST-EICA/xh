@@ -1242,11 +1242,18 @@
 		async function loadFile(path) {
 			if (fileCache.has(path)) return fileCache.get(path);
 			try {
+				console.log('正在尝试加载文件:', path);
 				const response = await fetch(path);
+				if (!response.ok) {
+					throw new Error(`HTTP错误 ${response.status}: ${response.statusText}`);
+				}
 				const content = await response.text();
+				console.log('文件加载成功:', path);
 				fileCache.set(path, content);
 				return content;
 			} catch (error) {
+				console.error('文件加载失败:', error);
+				showErrorToast(`文件加载失败: ${error.message}`);
 				throw error;
 			}
 		}
@@ -1653,13 +1660,13 @@
 		// 显示错误提示
 		function showErrorToast(message) {
 			const toast = document.createElement('div');
-			toast.className = 'download-toast';
+			toast.className = 'error-toast';
 			toast.textContent = message;
 			document.body.appendChild(toast);
 
 			setTimeout(() => {
 				toast.remove();
-			}, 3000);
+			}, 5000);
 		}
 
 		// 修复格式菜单交互
