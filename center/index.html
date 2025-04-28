@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="Cache-Control" content="max-age=604800, public">
 	<link rel="preload" href="style/marked.min.js" as="script">
-	<link rel="preload" href="center/md/index.md" as="fetch">
+	<link rel="preload" href="test/md/index.md" as="fetch">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<title>嵌入式智控协会培训中心</title>
 	<style>
@@ -1110,30 +1110,19 @@
 		</div>
 	</main>
 
-	<!-- 修改脚本加载顺序 -->
+	<!-- Markdown解析 -->
 	<script src="style/marked.min.js"></script>
+
+	<!-- 流程图支持 -->
 	<script src="style/mermaid.min.js"></script>
+
+	<!-- 工具提示库 -->
 	<script src="style/popper.min.js"></script>
 	<script src="style/tippy-bundle.umd.js"></script>
 
 	<div id="error-container" aria-live="polite"></div>
 
 	<script>
-		// 确保marked已加载
-		if (typeof marked === 'undefined') {
-			console.error('marked库未正确加载');
-			showErrorToast('页面初始化失败：必要的库文件未加载');
-			throw new Error('marked库未正确加载');
-		}
-
-		// 配置marked选项
-		marked.setOptions({
-			breaks: true,
-			gfm: true,
-			headerIds: true,
-			mangle: false
-		});
-
 		// 动态生成目录
 		const courseFiles = [
 			// 编程语言基础
@@ -1253,18 +1242,11 @@
 		async function loadFile(path) {
 			if (fileCache.has(path)) return fileCache.get(path);
 			try {
-				console.log('正在尝试加载文件:', path);
 				const response = await fetch(path);
-				if (!response.ok) {
-					throw new Error(`HTTP错误 ${response.status}: ${response.statusText}`);
-				}
 				const content = await response.text();
-				console.log('文件加载成功:', path);
 				fileCache.set(path, content);
 				return content;
 			} catch (error) {
-				console.error('文件加载失败:', error);
-				showErrorToast(`文件加载失败: ${error.message}`);
 				throw error;
 			}
 		}
@@ -1427,7 +1409,7 @@
 
 		// 配置对象（方便后续维护）
 		const CONFIG = {
-			WELCOME_PAGE_PATH: 'center/md/index.md', // 修改为相对路径
+			WELCOME_PAGE_PATH: 'center/md/index.md', // 注意路径前缀
 			CACHE_TTL: 300000, // 5分钟缓存
 			FALLBACK_CONTENT: `# 🎉 欢迎使用\n暂时无法加载最新内容，显示缓存版本`
 		};
@@ -1504,24 +1486,30 @@
 			}
 		}
 
-		// 修改初始化流程
+		// 修复初始化流程：添加目录生成和欢迎页加载
 		document.addEventListener('DOMContentLoaded', async () => {
-			console.log('开始初始化...');
-			generateTOC();
+			generateTOC(); // 确保生成目录
 			const container = document.getElementById('welcome-container');
 			const loader = new ContentLoader();
 
+			// 显示加载状态
+			container.innerHTML = `
+				<div class="loading-indicator">
+					<div class="spinner"></div>
+					<p>正在加载最新内容...</p>
+				</div>
+			`;
+
 			try {
-				console.log('正在加载欢迎页面...');
+				// 异步加载内容
 				const content = await loader.loadWelcomePage();
-				console.log('欢迎页面加载成功');
 				container.innerHTML = content;
-				
-				// 初始化其他组件
-				initMermaid();
-				initTooltips();
+
+				// 初始化可视化组件
+				initMermaid();  // 移除非必要的this
+				initTooltips(); // 使用独立函数
+
 			} catch (error) {
-				console.error('初始化失败:', error);
 				container.innerHTML = `
 					<div class="error-state">
 						<h3>⚠️ 内容加载失败</h3>
@@ -1529,6 +1517,11 @@
 						<button class="retry-btn">点击重试</button>
 					</div>
 				`;
+
+				// 绑定重试按钮
+				document.querySelector('.retry-btn').addEventListener('click', () => {
+					location.reload();
+				});
 			}
 		});
 
@@ -1660,13 +1653,13 @@
 		// 显示错误提示
 		function showErrorToast(message) {
 			const toast = document.createElement('div');
-			toast.className = 'error-toast';
+			toast.className = 'download-toast';
 			toast.textContent = message;
 			document.body.appendChild(toast);
 
 			setTimeout(() => {
 				toast.remove();
-			}, 5000);
+			}, 3000);
 		}
 
 		// 修复格式菜单交互
