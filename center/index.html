@@ -1599,13 +1599,18 @@
 		}
 
 		// 添加滚动状态检测
-		let scrollTimeout;
-		mobileToc.addEventListener('scroll', () => {
-			mobileToc.classList.add('scrolling');
-			clearTimeout(scrollTimeout);
-			scrollTimeout = setTimeout(() => {
-				mobileToc.classList.remove('scrolling');
-			}, 500);
+		document.addEventListener('DOMContentLoaded', () => {
+			const mobileToc = document.querySelector('.mobile-toc');
+			if (mobileToc) {
+				let scrollTimeout;
+				mobileToc.addEventListener('scroll', () => {
+					mobileToc.classList.add('scrolling');
+					clearTimeout(scrollTimeout);
+					scrollTimeout = setTimeout(() => {
+						mobileToc.classList.remove('scrolling');
+					}, 500);
+				});
+			}
 		});
 
 		// 在DOM加载完成后调用
