@@ -1613,6 +1613,16 @@
 			}
 		});
 
+		// 初始化内容滚动
+		function initContentScroll() {
+			const content = document.querySelector('.content');
+			if (content) {
+				content.style.overflowY = 'auto';
+				content.style.webkitOverflowScrolling = 'touch';
+				content.style.height = 'calc(100vh - 60px)';
+			}
+		}
+
 		// 在DOM加载完成后调用
 		document.addEventListener('DOMContentLoaded', () => {
 			initContentScroll();
