@@ -1110,19 +1110,30 @@
 		</div>
 	</main>
 
-	<!-- Markdown解析 -->
+	<!-- 修改脚本加载顺序 -->
 	<script src="style/marked.min.js"></script>
-
-	<!-- 流程图支持 -->
 	<script src="style/mermaid.min.js"></script>
-
-	<!-- 工具提示库 -->
 	<script src="style/popper.min.js"></script>
 	<script src="style/tippy-bundle.umd.js"></script>
 
 	<div id="error-container" aria-live="polite"></div>
 
 	<script>
+		// 确保marked已加载
+		if (typeof marked === 'undefined') {
+			console.error('marked库未正确加载');
+			showErrorToast('页面初始化失败：必要的库文件未加载');
+			throw new Error('marked库未正确加载');
+		}
+
+		// 配置marked选项
+		marked.setOptions({
+			breaks: true,
+			gfm: true,
+			headerIds: true,
+			mangle: false
+		});
+
 		// 动态生成目录
 		const courseFiles = [
 			// 编程语言基础
