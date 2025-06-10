@@ -3,192 +3,262 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>协会成员</title>
-    <link href="assets\css\bootstrap.min.css" rel="stylesheet">
-    <link href="assets\css\aos.css" rel="stylesheet">
-
+    <meta name="keywords" content="嵌入式智控协会,广西科技大学,协会成员">
+    <meta name="description" content="嵌入式智控协会成员">
+    <meta name="author" content="嵌入式智控协会">
+    <meta name="copyright" content="嵌入式智控协会">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta itemprop="name" content="嵌入式智控协会成员" />
+    <meta itemprop="image" content="/assets/img/logo.png" />
+    <link rel="icon" href="/assets/img/logo.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
+    <meta name="robots" content="index,follow">
+    <title>嵌入式智控协会 - 协会成员</title>
+    <!-- Font Awesome CSS -->
+    <link href="/assets/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <!-- Marked.js -->
+    <script src="/assets/js/marked.min.js"></script>
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
+        :root {
+            --primary-color: #1246ff;
+            --secondary-color: #f0f9ff;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-            display: flex;
-            flex-direction: column;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
         }
 
         .navbar {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
             border-radius: 0 0 15px 15px;
+            position: sticky;
+            top: 0;
             z-index: 1000;
         }
 
         .navbar.scrolled {
-            background-color: #1246ff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background-color: var(--primary-color);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .navbar.scrolled .nav-link,
+        .navbar.scrolled .navbar-brand {
+            color: white !important;
+        }
+
+        .section-heading {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: var(--text-color);
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.7rem;
-            color: #1246ff;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
         }
 
         .nav-link {
-            font-size: 1rem;
-            margin-left: 15px;
-            color: #333;
+            font-size: 1.1rem;
+            margin-left: 20px;
+            color: var(--text-color);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
         }
 
         .nav-link.active,
         .nav-link:hover {
-            color: #1246ff;
+            color: var(--primary-color);
         }
 
-        .nav-link.forum-button {
-            color: white;
-            background-color: #1246ff;
-            padding: 10px 20px;
+        .members-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .members-content {
+            background: white;
+            padding: 40px;
             border-radius: 20px;
-            font-weight: 700;
-            transition: background-color 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
 
-        .nav-link.forum-button:hover {
-            background-color: #0d38e0;
+        .members-content h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .members-content h2 {
+            color: var(--primary-color);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .members-content h3 {
+            color: var(--text-color);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .members-content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .members-content li {
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: var(--secondary-color);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .members-content li:hover {
+            transform: translateX(10px);
+            background: var(--primary-color);
+            color: white;
         }
 
         .footer {
-            background-color: #1246ff;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2a5fff 100%);
             color: white;
-            padding: 20px 0;
+            padding: 50px 0;
             text-align: center;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-
-        .chart-container {
-            width: 90%;
-            max-width: 1200px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            padding: 20px 40px;
-            text-align: center;
-            color: #333;
-            line-height: 1.5;
-            margin: 20px auto;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #007bff;
-            padding: 10px 20px;
-            background-color: #e8f0fe;
-            border-radius: 10px;
-            display: inline-block;
-            margin-bottom: 30px;
-        }
-
-        .president-group,
-        .department {
-            border: 2px solid #007bff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            background-color: #f9fafc;
+            margin-top: 60px;
+            border-radius: 20px 20px 0 0;
             position: relative;
+            overflow: hidden;
         }
 
-        .president-title,
-        .department-title {
-            font-size: 25px;
-            font-weight: bold;
-            color: #007bff;
-            margin-bottom: 10px;
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
         }
 
-        .president-main,
-        .department .members {
-            color: #333;
-            font-size: 20px;
+        .footer p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
-        .department {
-            width: 200px;
-            font-size: 25px;
-        }
-
-        .level-group {
+        .loading {
             display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 30px;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
         }
 
-        .members div {
-            margin: 3px 0;
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .members .position-title {
-            font-weight: bold;
-            color: #555;
-            margin-top: 10px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* 手机端优化 */
+        .error-message {
+            text-align: center;
+            color: var(--accent-color);
+            padding: 20px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
         @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1.4rem;
+            .members-content {
+                padding: 20px;
             }
 
-            .nav-link {
-                font-size: 0.85rem;
+            .members-content h1 {
+                font-size: 2rem;
             }
 
-            .forum-button {
-                padding: 6px 12px;
-                font-size: 0.9rem;
+            .members-content h2 {
+                font-size: 1.6rem;
             }
 
-            .chart-container {
-                padding: 15px;
-                width: 100%;
-                box-sizing: border-box;
-            }
-
-            .level-group {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-
-            .department {
-                width: 100%;
-                padding: 10px;
-                font-size: 25px;
+            .members-content h3 {
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
-            <a class="navbar-brand" href="/">嵌入式智控协会</a>
+            <a class="navbar-brand" href="/">
+                <img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
+                嵌入式智控协会
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -196,133 +266,77 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" data-aos="fade-right" data-aos-duration="1000">主页</a>
+                        <a class="nav-link" href="/" data-aos="fade-right" data-aos-duration="1000">主页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://jnjnjnn.cn" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="100">小东同学工具箱</a>
+                        <a class="nav-link" href="/mentors" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="100">导师团队</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link forum-button" href="/lyb" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="200">嵌入式智控协会留言板</a>
+                        <a class="nav-link" href="/ilt" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="200">赞助企业</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="300">培训中心</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- 主体内容 -->
-    <div class="chart-container">
-        <div class="logo" data-aos="zoom-in">协会成员</div>
-
-        <!-- 会长团 -->
-        <div class="president-group" data-aos="fade-up">
-            <div class="president-title">会长团</div>
-            <div class="president-main">
-                <div class="level-title">黄海东、廖俊峰、陈健锋</div>
-            </div>
-        </div>
-
-        <!-- 四个部门 -->
-        <div class="level-group">
-            <div class="department" data-aos="fade-up">
-                <div class="department-title">技术部</div>
-                <div class="members">
-                    <div class="position-title">干部</div>
-                    <div>胡志勇</div>
-                    <div>黄泉清</div>
-                    <div class="position-title">干事</div>
-                    <div>王旭晖</div>
-                    <div>徐潇潇</div>
-                    <div>李金科</div>
-                    <div>哈士丽</div>
-                    <div>韦雄</div>
-                    <div>毛睿</div>
-                    <div>黄思琦</div>
-                    <div>韦竣嵩</div>
-                    <div>廖应涛</div>
-                    <div>袁诗琪</div>
-                    <div>莫松志</div>
-                </div>
-            </div>
-
-            <div class="department" data-aos="fade-up" data-aos-delay="100">
-                <div class="department-title">组织部</div>
-                <div class="members">
-                    <div class="position-title">干部</div>
-                    <div>黄永幸</div>
-                    <div>庞儿茗</div>
-                    <div>叶倩茹</div>
-                    <div class="position-title">干事</div>
-                    <div>覃彩梅</div>
-                    <div>袁诗琪</div>
-                    <div>张家裕</div>
-                    <div>刘宇森</div>
-                    <div>李同洲</div>
-                    <div>徐州业</div>
-                    <div>施杨裕</div>
-                    <div>蔡鹏燊</div>
-                </div>
-            </div>
-
-            <div class="department" data-aos="fade-up" data-aos-delay="200">
-                <div class="department-title">宣传部</div>
-                <div class="members">
-                    <div class="position-title">干部</div>
-                    <div>廖渔紫</div>
-                    <div>覃章澜</div>
-                    <div class="position-title">干事</div>
-                    <div>李建香</div>
-                    <div>翟诗雨</div>
-                    <div>范滨豪</div>
-                    <div>邹霖栩</div>
-                    <div>陀灿明</div>
-                    <div>廖应涛</div>
-                    <div>梁邦健</div>
-                    <div>杨发崧</div>
-                </div>
-            </div>
-
-            <div class="department" data-aos="fade-up" data-aos-delay="300">
-                <div class="department-title">实验室成员</div>
-                <div class="members">
-                    <div>黄海东 廖俊峰</div>
-                    <div>陈健锋 黄永幸</div>
-                    <div>庞儿茗 李浩</div>
-                    <div>叶倩茹 覃章澜</div>
-                    <div>廖渔紫</div>
-                    
-                    <div>甘东琳 伍师宝</div>
-                    <div>陈奕扬 曹俊</div>
-                    
-                    <div>黄泉清 胡志勇</div>
-                    <div>玉振烨 陈达熙</div>
-                    <div>孙起恒 林华为</div>
-                    <div>覃彩梅 蓝巧</div>
-                    
-                    <div>韦竣嵩 毛睿</div>
-                    <div>徐潇潇 廖应涛</div>
-                    <div>袁诗琪 莫松志</div>
-                    <div>徐州业 李金科</div>
-                    <div>梁邦健 翟诗雨</div>
-                    <div>韦雄 陀灿明</div>
-
+    <div class="container mt-5">
+        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">👥 协会成员 👥</h1>
+        <div class="members-container">
+            <div class="members-content">
+                <div id="membersContent">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 底部 -->
     <footer class="footer">
-        <p>© 广西科技大学 嵌入式智控协会</p>
+        <div class="container">
+            <p>&copy; 广西科技大学 嵌入式智控协会</p>
+        </div>
     </footer>
 
-    <!-- 引入 JavaScript -->
-    <script src="assets\js\bootstrap.bundle.min.js"></script>
-    <script src="assets\js\aos.js"></script>
-
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        window.addEventListener("scroll", function () {
+            var navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+        // 加载成员信息
+        fetch('/friends/members.md')
+            .then(response => response.text())
+            .then(markdown => {
+                const html = marked.parse(markdown);
+                document.getElementById('membersContent').innerHTML = html;
+            })
+            .catch(error => {
+                document.getElementById('membersContent').innerHTML = `
+                    <div class="error-message">
+                        <h3>加载失败</h3>
+                        <p>无法加载成员信息，请稍后重试。</p>
+                    </div>
+                `;
+            });
     </script>
 </body>
 
