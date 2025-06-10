@@ -31,6 +31,11 @@
             --text-color: #333;
             --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            --code-bg: #f8f9fa;
+            --code-border: #e9ecef;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
         }
 
         body {
@@ -40,6 +45,12 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
         .navbar {
@@ -125,12 +136,13 @@
         .course-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 30px;
+            padding: 40px;
+            margin: 30px auto;
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
+            max-width: 900px;
         }
 
         .course-container:hover {
@@ -140,22 +152,12 @@
 
         .course-title {
             color: var(--primary-color);
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: relative;
             padding-bottom: 15px;
-        }
-
-        .course-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-color);
-            border-radius: 1.5px;
+            line-height: 1.3;
         }
 
         .course-content {
@@ -164,90 +166,139 @@
             line-height: 1.8;
         }
 
-        .course-content h1,
-        .course-content h2,
-        .course-content h3,
-        .course-content h4,
-        .course-content h5,
-        .course-content h6 {
+        .course-content h1 {
+            font-size: 2rem;
+            margin-top: 2em;
+            margin-bottom: 1em;
             color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5em;
+        }
+
+        .course-content h2 {
+            font-size: 1.8rem;
+            margin-top: 1.8em;
+            margin-bottom: 0.8em;
+            color: var(--primary-color);
+        }
+
+        .course-content h3 {
+            font-size: 1.5rem;
             margin-top: 1.5em;
-            margin-bottom: 0.5em;
+            margin-bottom: 0.7em;
+            color: var(--primary-color);
         }
 
         .course-content p {
-            margin-bottom: 1em;
+            margin-bottom: 1.2em;
+            text-align: justify;
         }
 
         .course-content ul,
         .course-content ol {
             padding-left: 2em;
-            margin-bottom: 1em;
+            margin-bottom: 1.2em;
         }
 
         .course-content li {
-            margin-bottom: 0.5em;
+            margin-bottom: 0.8em;
         }
 
         .course-content code {
-            background-color: var(--secondary-color);
+            background-color: var(--code-bg);
             padding: 0.2em 0.4em;
-            border-radius: 3px;
-            font-family: 'Courier New', Courier, monospace;
+            border-radius: 4px;
+            font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+            border: 1px solid var(--code-border);
         }
 
         .course-content pre {
-            background-color: var(--secondary-color);
-            padding: 1em;
-            border-radius: 5px;
+            background-color: var(--code-bg);
+            padding: 1.5em;
+            border-radius: 8px;
             overflow-x: auto;
-            margin: 1em 0;
+            margin: 1.5em 0;
+            position: relative;
+            border: 1px solid var(--code-border);
         }
 
         .course-content pre code {
             background-color: transparent;
             padding: 0;
+            border: none;
+            color: #333;
+            font-size: 0.95em;
+            line-height: 1.6;
         }
 
         .course-content blockquote {
             border-left: 4px solid var(--primary-color);
-            padding-left: 1em;
-            margin: 1em 0;
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            background-color: var(--secondary-color);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .course-content blockquote p {
+            margin: 0;
             color: #666;
         }
 
         .course-content img {
             max-width: 100%;
             height: auto;
-            border-radius: 5px;
-            margin: 1em 0;
+            border-radius: 8px;
+            margin: 1.5em 0;
+            box-shadow: var(--card-shadow);
         }
 
         .course-content table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1em 0;
+            margin: 1.5em 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
         }
 
         .course-content th,
         .course-content td {
-            padding: 0.5em;
-            border: 1px solid #ddd;
+            padding: 0.8em 1em;
+            border: 1px solid var(--code-border);
         }
 
         .course-content th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .course-content tr:nth-child(even) {
             background-color: var(--secondary-color);
         }
 
+        .course-content tr:hover {
+            background-color: rgba(18, 70, 255, 0.05);
+        }
+
         .back-button {
-            display: inline-block;
-            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
             background: linear-gradient(90deg, var(--primary-color) 0%, #2a5fff 100%);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
             transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: var(--card-shadow);
+        }
+
+        .back-button i {
+            margin-right: 8px;
         }
 
         .back-button:hover {
@@ -256,48 +307,63 @@
             color: white;
         }
 
-        .footer {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #2a5fff 100%);
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-            margin-top: 60px;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-            overflow: hidden;
+        .alert {
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border: none;
+            box-shadow: var(--card-shadow);
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        .alert-heading {
+            font-size: 1.3rem;
+            margin-bottom: 0.8em;
         }
 
-        .footer p {
-            margin-bottom: 0;
-            font-size: 1.1rem;
-            font-weight: 500;
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid var(--secondary-color);
+            border-top: 6px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
         @media (max-width: 768px) {
             .course-container {
                 padding: 25px;
+                margin: 20px auto;
             }
 
             .course-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
 
             .course-content {
                 font-size: 1rem;
             }
 
-            .section-heading {
-                font-size: 2.2rem;
+            .course-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .course-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .course-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .back-button {
+                padding: 10px 20px;
             }
         }
 
@@ -375,7 +441,7 @@
 
     <div class="container mt-5">
         <a href="/training" class="back-button" data-aos="fade-right" data-aos-duration="1000">
-            <i class="fas fa-arrow-left"></i> 返回课程目录
+            返回课程目录
         </a>
         <div id="course-container" class="course-container" data-aos="fade-up" data-aos-duration="1000">
             <div class="loading">
@@ -425,6 +491,33 @@
                     const html = marked.parse(markdown);
                     const container = document.getElementById('course-container');
                     container.innerHTML = html;
+                    
+                    // 为所有代码块添加复制按钮
+                    document.querySelectorAll('pre code').forEach((block) => {
+                        const pre = block.parentElement;
+                        const button = document.createElement('button');
+                        button.className = 'copy-button';
+                        button.textContent = '复制代码';
+                        pre.appendChild(button);
+
+                        button.addEventListener('click', async () => {
+                            try {
+                                await navigator.clipboard.writeText(block.textContent);
+                                button.textContent = '已复制！';
+                                button.classList.add('copied');
+                                setTimeout(() => {
+                                    button.textContent = '复制代码';
+                                    button.classList.remove('copied');
+                                }, 2000);
+                            } catch (err) {
+                                console.error('复制失败:', err);
+                                button.textContent = '复制失败';
+                                setTimeout(() => {
+                                    button.textContent = '复制代码';
+                                }, 2000);
+                            }
+                        });
+                    });
                     
                     // 设置页面标题
                     document.title = `${courseName} - 嵌入式智控协会培训中心`;
