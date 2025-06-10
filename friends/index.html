@@ -239,6 +239,70 @@
             }
         }
 
+        /* 顶部部门布局样式 */
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .top-column {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .top-column h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .top-column h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .top-column ul {
+            margin-top: 15px;
+        }
+
+        .top-column li {
+            margin: 8px 0;
+            padding: 8px 15px;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .top-column li:hover {
+            transform: translateX(5px);
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .top-section {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .top-column {
+                width: 100%;
+            }
+        }
+
         .footer {
             background: linear-gradient(135deg, var(--primary-color) 0%, #2a5fff 100%);
             color: white;
@@ -379,6 +443,8 @@
                 let newHtml = '';
                 let departmentSection = '';
                 let departmentContent = '';
+                let topSection = '';
+                let topContent = '';
                 
                 sections.forEach((section, index) => {
                     if (index === 0) {
@@ -387,7 +453,22 @@
                     }
                     
                     const title = section.match(/>(.*?)<\/h2>/)?.[1];
-                    if (title === '组织部' || title === '统筹部' || title === '宣传部') {
+                    
+                    // 处理会长团和技术部
+                    if (title === '会长团' || title === '技术部') {
+                        if (title === '会长团') {
+                            topSection = '<div class="top-section">';
+                        }
+                        topContent += `<div class="top-column"><h2${section}</div>`;
+                        if (title === '技术部') {
+                            topSection += topContent + '</div>';
+                            newHtml += topSection;
+                            topSection = '';
+                            topContent = '';
+                        }
+                    }
+                    // 处理组织部、统筹部、宣传部
+                    else if (title === '组织部' || title === '统筹部' || title === '宣传部') {
                         if (title === '组织部') {
                             departmentSection = '<div class="department-section">';
                         }
@@ -403,6 +484,11 @@
                             newHtml += departmentSection;
                             departmentSection = '';
                             departmentContent = '';
+                        }
+                        if (topSection) {
+                            newHtml += topSection;
+                            topSection = '';
+                            topContent = '';
                         }
                         newHtml += `<h2${section}`;
                     }
