@@ -199,7 +199,7 @@
         });
 
         // 加载并解析Markdown文件
-        fetch('jianli/mentors.md')
+        fetch('./jianli/mentors.md')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
