@@ -4,116 +4,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>协会实验室引导</title>
-    <link href="assets\css\bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets\css\leaflet.css" />
-    <link rel="stylesheet" href="assets\css\animate.min.css" />
-    <link rel="stylesheet" href="assets\css\lightbox.min.css" />
-    <!-- 引入Lightbox -->
+    <meta name="description" content="广西科技大学嵌入式智控协会实验室位置导航指南">
+    <meta name="keywords" content="嵌入式智控协会,实验室导航,广西科技大学,L2-413">
+    <title>嵌入式智控协会实验室导航指南</title>
+    
+    <!-- 预加载关键资源 -->
+    <link rel="preload" href="assets/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="assets/css/leaflet.css" as="style">
+    
+    <!-- CSS 文件 -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/leaflet.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/lightbox.min.css">
+    
+    <!-- 添加网站图标 -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    
     <style>
-        /* 让html和body的高度占满整个页面 */
-        html,
-        body {
+        :root {
+            --primary-color: #1246ff;
+            --secondary-color: #ff7043;
+            --background-color: #e0f7fa;
+            --text-color: #333;
+        }
+
+        html, body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
+            scroll-behavior: smooth;
         }
 
         body {
-            background: #e0f7fa;
-            color: #333;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
+            background: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 500;
+            line-height: 1.6;
         }
 
-        /* 主体内容区域 */
         main {
             flex: 1;
             display: flex;
             flex-direction: column;
+            padding: 1rem;
         }
 
         .map-container {
-            height: 300px;
-            border: 5px solid #ff7043;
+            height: 400px;
+            border: 5px solid var(--secondary-color);
             border-radius: 10px;
             margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .guide-step {
-            background: rgba(255, 255, 255, 0.9);
-            margin: 10px 0;
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 15px 0;
+            padding: 20px;
             border-radius: 15px;
-            transition: transform 0.3s, background 0.3s;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            flex-direction: column;
-            /* 将步骤内容设置为纵向排列 */
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .guide-step:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 1);
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 15px;
-            transition: transform 0.3s, background 0.3s;
-            display: flex;
-            align-items: center;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .guide-step img {
             max-width: 100%;
-            /* 图片自适应容器宽度 */
             height: auto;
-            margin-top: 10px;
-            /* 增加与文字的间距 */
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            margin-top: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .guide-step img:hover {
+            transform: scale(1.02);
         }
 
         .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-brand {
-            font-weight: bold;
-            color: #1246ff !important;
+            font-weight: 700;
+            color: var(--primary-color) !important;
         }
 
         .nav-link {
-            color: #333 !important;
-            transition: color 0.3s;
+            color: var(--text-color) !important;
+            transition: color 0.3s ease;
+            position: relative;
         }
 
-        .nav-link:hover {
-            color: #ff7043 !important;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         footer {
             background-color: #ffffff;
-            color: #1246ff;
-            padding: 10px 0;
+            color: var(--primary-color);
+            padding: 15px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .map-container {
+                height: 300px;
+            }
+
+            .guide-step {
+                padding: 15px;
+            }
+
+            .guide-step img {
+                max-width: 90%;
+            }
         }
 
         @media (max-width: 576px) {
             .map-container {
-                height: 200px;
-            }
-
-            .guide-step img {
-                max-width: 80%;
-                /* 更小的屏幕上缩略图稍微小一点 */
+                height: 250px;
             }
 
             .guide-step {
                 font-size: 14px;
-                padding: 10px;
+                padding: 12px;
+            }
+
+            .guide-step img {
+                max-width: 85%;
             }
         }
     </style>
@@ -122,9 +171,12 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top animate__animated animate__fadeInDown">
         <div class="container">
-            <a class="navbar-brand" href="/">嵌入式智控协会</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="/">
+                <img src="assets/images/logo.png" alt="协会logo" height="30" class="d-inline-block align-top me-2">
+                嵌入式智控协会
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="切换导航">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -133,73 +185,87 @@
                         <a class="nav-link" href="/">主页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://www.jnjnjnn.cn">小东同学工具箱</a>
+                        <a class="nav-link" href="http://www.jnjnjnn.cn" target="_blank" rel="noopener">小东同学工具箱</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- 主体内容部分 -->
-    <main class="container animate__animated animate__fadeInUp" style="margin-top: 70px;">
+    <main class="container animate__animated animate__fadeInUp" style="margin-top: 80px;">
         <div class="map-container animate__animated animate__zoomIn" id="map"></div>
 
-        <h2 id="steps" class="animate__animated animate__fadeInUp">前往L2-413嵌入式智控实验室路线</h2>
+        <h2 id="steps" class="text-center my-4 animate__animated animate__fadeInUp">前往L2-413嵌入式智控实验室路线</h2>
+        
         <div class="guide-step animate__animated animate__fadeInUp">
-            <h4>按照地图走到L2楼，走进去就是二楼，直走左手边有电梯。</h4>
-            <!-- 添加放大图片的效果 -->
+            <h4><span class="step-number">1</span>按照地图走到L2楼，走进去就是二楼，直走左手边有电梯。</h4>
             <a href="https://pic.imgdb.cn/item/671239f4d29ded1a8cbbbc7a.jpg" data-lightbox="step1"
                 data-title="按照地图走到L2楼，走进去就是二楼，直走左手边有电梯。">
-                <img src="https://pic.imgdb.cn/item/671239f4d29ded1a8cbbbc7a.jpg" alt="步骤1图片" />
-            </a>
-        </div>
-        <div class="guide-step animate__animated animate__fadeInUp">
-            <h4>L2四楼部分略缩图</h4>
-            <a href="https://pic.imgdb.cn/item/67124027d29ded1a8cc39fb5.png" data-lightbox="step2"
-                data-title="L2四楼部分略缩图">
-                <img src="https://pic.imgdb.cn/item/67124027d29ded1a8cc39fb5.png" alt="步骤2图片" />
-            </a>
-        </div>
-        <div class="guide-step animate__animated animate__fadeInUp">
-            <h4>在乘坐L2电梯到4楼后，出电梯门往左走，可以看到上述图片的走廊。</h4>
-            <a href="https://pic.imgdb.cn/item/67123b1ed29ded1a8cbceb5a.png" data-lightbox="step2"
-                data-title="在乘坐L2电梯到4楼后，出电梯门往左走，可以看到上述图片的走廊">
-                <img src="https://pic.imgdb.cn/item/67123b1ed29ded1a8cbceb5a.png" alt="步骤3图片" />
+                <img src="https://pic.imgdb.cn/item/671239f4d29ded1a8cbbbc7a.jpg" alt="L2楼入口指引" loading="lazy" />
             </a>
         </div>
 
         <div class="guide-step animate__animated animate__fadeInUp">
-            <h4>往走廊继续前进看到L2-413即为嵌入式智控实验室</h4>
-            <a href="https://pic.imgdb.cn/item/67111acdd29ded1a8c5bd6f5.jpg" data-lightbox="step3" data-title="到达实验室大楼">
-                <img src="https://pic.imgdb.cn/item/67111acdd29ded1a8c5bd6f5.jpg" alt="步骤4图片" />
+            <h4><span class="step-number">2</span>L2四楼部分略缩图</h4>
+            <a href="https://pic.imgdb.cn/item/67124027d29ded1a8cc39fb5.png" data-lightbox="step2"
+                data-title="L2四楼部分略缩图">
+                <img src="https://pic.imgdb.cn/item/67124027d29ded1a8cc39fb5.png" alt="L2四楼平面图" loading="lazy" />
+            </a>
+        </div>
+
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <h4><span class="step-number">3</span>在乘坐L2电梯到4楼后，出电梯门往左走，可以看到上述图片的走廊。</h4>
+            <a href="https://pic.imgdb.cn/item/67123b1ed29ded1a8cbceb5a.png" data-lightbox="step3"
+                data-title="在乘坐L2电梯到4楼后，出电梯门往左走，可以看到上述图片的走廊">
+                <img src="https://pic.imgdb.cn/item/67123b1ed29ded1a8cbceb5a.png" alt="四楼走廊指引" loading="lazy" />
+            </a>
+        </div>
+
+        <div class="guide-step animate__animated animate__fadeInUp">
+            <h4><span class="step-number">4</span>往走廊继续前进看到L2-413即为嵌入式智控实验室</h4>
+            <a href="https://pic.imgdb.cn/item/67111acdd29ded1a8c5bd6f5.jpg" data-lightbox="step4" 
+               data-title="到达实验室大楼">
+                <img src="https://pic.imgdb.cn/item/67111acdd29ded1a8c5bd6f5.jpg" alt="实验室门口" loading="lazy" />
             </a>
         </div>
     </main>
 
-    <!-- 页脚部分 -->
-    <footer id="footer" class="text-center mt-4">
-        <p>© 广西科技大学 嵌入式智控协会</p>
+    <footer class="text-center mt-4">
+        <p>© 2024 广西科技大学 嵌入式智控协会</p>
     </footer>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/2.5.2/umd/popper.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <script src="https://cdn.staticfile.org/lightbox2/2.11.3/js/lightbox.min.js"></script> <!-- 引入Lightbox JS -->
+    <!-- 使用最新版本的CDN资源 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js" defer></script>
 
     <script>
-        // 初始化地图
-        var map = L.map('map').setView([24.389662, 109.521249], 17); // 设置中心点和缩放级别
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化地图
+            const map = L.map('map').setView([24.389662, 109.521249], 17);
 
-        // 添加 ArcGIS 世界影像图层
-        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 19,
-            attribution: '这是一个动态地图'
-        }).addTo(map);
+            // 添加 ArcGIS 世界影像图层
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 19,
+                attribution: '© 广西科技大学嵌入式智控协会'
+            }).addTo(map);
 
-        // 添加标记
-        L.marker([24.389662, 109.5212499]).addTo(map).bindPopup('实验室位置：L2-413').openPopup();
+            // 添加标记
+            const marker = L.marker([24.389662, 109.5212499])
+                .addTo(map)
+                .bindPopup('实验室位置：L2-413')
+                .openPopup();
+
+            // 添加平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
     </script>
 </body>
-
 </html>
