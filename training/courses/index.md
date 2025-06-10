@@ -3,75 +3,75 @@
 <div style="text-align:center;margin:30px 0;">
   <h1 style="font-size:2.5rem;color:#1246ff;margin-bottom:20px;">📚 培训课程目录 📚</h1>
   <p style="font-size:1.2rem;color:#666;max-width:800px;margin:0 auto;">
-    下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看。蓝色字都是跳转教程的链接。
+下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看。蓝色字都是跳转教程的链接。
   </p>
 </div>
 
 <!-- 培训计划表 -->
 <div style="background:linear-gradient(135deg,#f8f9ff 0%,#ffffff 100%);padding:30px;border-radius:20px;box-shadow:0 8px 16px rgba(108,92,231,0.08);margin:30px 0;">
   <h2 style="color:#1246ff;text-align:center;margin-bottom:30px;font-size:2rem;">📅 培训计划表</h2>
-  <div style="overflow-x:auto;display:flex;justify-content:center;">
+<div style="overflow-x:auto;display:flex;justify-content:center;">
     <table style="width:100%;max-width:800px;border-collapse:collapse;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(108,92,231,0.08);font-size:1rem;">
-      <thead style="background:linear-gradient(90deg,#a8a4e6 0%,#f3f5ff 100%);color:#333;">
-        <tr>
+  <thead style="background:linear-gradient(90deg,#a8a4e6 0%,#f3f5ff 100%);color:#333;">
+    <tr>
           <th style="padding:15px;text-align:left;">培训内容</th>
           <th style="padding:15px;text-align:center;">预计时间</th>
           <th style="padding:15px;text-align:center;">负责人</th>
           <th style="padding:15px;text-align:center;">培训地点</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background:#fff;">
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#fff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">引导培训见面会</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年10月18日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">陈健锋</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">T3-307</td>
-        </tr>
-        <tr style="background:#f8f9ff;">
+    </tr>
+    <tr style="background:#f8f9ff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">万用表使用基础与基本电路认识培训计划</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年10月25日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">黄海东</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">T3-307</td>
-        </tr>
-        <tr style="background:#fff;">
+    </tr>
+    <tr style="background:#fff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">C语言与STM32基础培训计划</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年11月2日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">黄泉清</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">L2-413、L2-403</td>
-        </tr>
-        <tr style="background:#f8f9ff;">
+    </tr>
+    <tr style="background:#f8f9ff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">GPIO——按键、红外传感器循迹培训计划</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年11月9日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">庞儿茗</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">L2-413、L2-403</td>
-        </tr>
-        <tr style="background:#fff;">
+    </tr>
+    <tr style="background:#fff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">STM32与HC05蓝牙串口通信培训计划</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年11月15日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">王旭晖</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">L2-413、L2-403</td>
-        </tr>
-        <tr style="background:#f8f9ff;">
+    </tr>
+    <tr style="background:#f8f9ff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">TB6612电机驱动直流电机培训计划</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年11月22日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">陈健锋</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">L2-413、L2-403</td>
-        </tr>
-        <tr style="background:#fff;">
+    </tr>
+    <tr style="background:#fff;">
           <td style="padding:12px;border-bottom:1px solid #eee;">I2C-OLED的显示培训计划</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">2024年11月29日 19:30</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">胡志勇</td>
           <td style="padding:12px;text-align:center;border-bottom:1px solid #eee;">L2-413、L2-403</td>
-        </tr>
-        <tr style="background:#f8f9ff;">
+    </tr>
+    <tr style="background:#f8f9ff;">
           <td style="padding:12px;">绘制PCB-立创EDA培训计划</td>
           <td style="padding:12px;text-align:center;">2024年12月2日 19:30</td>
           <td style="padding:12px;text-align:center;">黄海东</td>
           <td style="padding:12px;text-align:center;">L2-413、L2-403</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
 <!-- 课程目录 -->
@@ -305,20 +305,20 @@
 <!-- 底部按钮 -->
 <div style="text-align:center;margin:40px 0;">
   <a href="https://www.eica.fun/download" style="display:inline-block;margin:12px 8px;padding:18px 40px;font-size:1.5rem;font-weight:bold;color:#fff;background:linear-gradient(90deg,#6c5ce7 0%,#00b894 100%);border:none;border-radius:40px;text-decoration:none;box-shadow:0 4px 16px rgba(108,92,231,0.15);transition:all 0.3s ease;">
-    📥 培训资料下载中心
-  </a>
+📥 培训资料下载中心
+</a>
 
   <a href="http://vm.yueqian.com.cn:8886/index.html" style="display:inline-block;margin:12px 8px;padding:18px 40px;font-size:1.5rem;font-weight:bold;color:#fff;background:linear-gradient(90deg,#00b894 0%,#0984e3 100%);border:none;border-radius:40px;text-decoration:none;box-shadow:0 4px 16px rgba(0,184,148,0.15);transition:all 0.3s ease;">
-    🏫 粤嵌培训中心
-  </a>
+🏫 粤嵌培训中心
+</a>
 
   <a href="https://www.eica.fun/center_old" style="display:inline-block;margin:12px 8px;padding:18px 40px;font-size:1.5rem;font-weight:bold;color:#fff;background:linear-gradient(90deg,#636e72 0%,#a29bfe 100%);border:none;border-radius:40px;text-decoration:none;box-shadow:0 4px 16px rgba(99,110,114,0.15);transition:all 0.3s ease;">
-    📚 旧版培训中心
-  </a>
+📚 旧版培训中心
+</a>
 </div>
 
 <div style="text-align:center;margin:20px 0;color:#666;font-size:1.1rem;">
-  后续更新时间表，敬请期待！
+后续更新时间表，敬请期待！
 </div>
 
 <div style="text-align:center;margin:30px 0;color:#666;font-size:1rem;">

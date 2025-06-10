@@ -249,40 +249,187 @@
             font-weight: 500;
         }
 
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            text-align: center;
+            color: var(--accent-color);
+            padding: 20px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .error-message h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .error-message p {
+            margin-bottom: 0;
+            color: var(--text-color);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background: #0d3bcc;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .back-button i {
+            margin-right: 8px;
+        }
+
+        .course-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .course-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .course-content h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+
+        .course-content h2 {
+            color: var(--primary-color);
+            margin: 30px 0 20px;
+            font-size: 1.8rem;
+        }
+
+        .course-content h3 {
+            color: var(--text-color);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .course-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .course-content ul, .course-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .course-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .course-content code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .course-content pre {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .course-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .course-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+        }
+
+        .course-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .course-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .course-content th, .course-content td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .course-content th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .course-content tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
         @media (max-width: 768px) {
-            .course-card {
-                padding: 25px;
+            .course-content {
+                padding: 20px;
             }
 
-            .course-name {
+            .course-content h1 {
+                font-size: 2rem;
+            }
+
+            .course-content h2 {
                 font-size: 1.6rem;
             }
 
-            .course-info {
-                font-size: 1rem;
+            .course-content h3 {
+                font-size: 1.3rem;
             }
-
-            .section-heading {
-                font-size: 2.2rem;
-            }
-        }
-
-        /* 添加滚动条样式 */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--secondary-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0d3bcc;
         }
     </style>
 </head>
@@ -290,7 +437,10 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
-            <a class="navbar-brand" href="/">嵌入式智控协会</a>
+            <a class="navbar-brand" href="/">
+                <img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
+                嵌入式智控协会
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -319,8 +469,10 @@
 
     <div class="container mt-5">
         <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">📚 培训中心 📚</h1>
-        <div id="courses-container" class="row">
-            <!-- 课程目录将通过JavaScript动态加载 -->
+        <div id="courseDirectory">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+            </div>
         </div>
     </div>
 
@@ -348,59 +500,18 @@
             }
         });
 
-        // 加载并解析课程目录
+        // 加载课程目录
         fetch('/training/courses/index.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
+            .then(response => response.text())
             .then(markdown => {
                 const html = marked.parse(markdown);
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = html;
-                
-                const container = document.getElementById('courses-container');
-                
-                // 处理每个课程分类
-                tempDiv.querySelectorAll('h2').forEach((category, categoryIndex) => {
-                    const categoryCol = document.createElement('div');
-                    categoryCol.className = 'col-12 mb-4';
-                    categoryCol.setAttribute('data-aos', 'fade-up');
-                    categoryCol.setAttribute('data-aos-duration', '1000');
-                    categoryCol.setAttribute('data-aos-delay', categoryIndex * 200);
-                    
-                    const categoryCard = document.createElement('div');
-                    categoryCard.className = 'course-card';
-                    
-                    const categoryTitle = document.createElement('h2');
-                    categoryTitle.className = 'course-name';
-                    categoryTitle.textContent = category.textContent;
-                    
-                    const categoryContent = document.createElement('div');
-                    categoryContent.className = 'course-info';
-                    
-                    // 获取该分类下的所有内容
-                    let nextElement = category.nextElementSibling;
-                    while (nextElement && nextElement.tagName !== 'H2') {
-                        categoryContent.appendChild(nextElement.cloneNode(true));
-                        nextElement = nextElement.nextElementSibling;
-                    }
-                    
-                    categoryCard.appendChild(categoryTitle);
-                    categoryCard.appendChild(categoryContent);
-                    categoryCol.appendChild(categoryCard);
-                    container.appendChild(categoryCol);
-                });
+                document.getElementById('courseDirectory').innerHTML = html;
             })
             .catch(error => {
-                console.error('Error loading course index:', error);
-                document.getElementById('courses-container').innerHTML = `
-                    <div class="col-12 text-center">
-                        <div class="alert alert-danger" role="alert">
-                            加载课程目录失败，请稍后重试
-                        </div>
+                document.getElementById('courseDirectory').innerHTML = `
+                    <div class="error-message">
+                        <h3>加载失败</h3>
+                        <p>无法加载课程目录，请稍后重试。</p>
                     </div>
                 `;
             });
