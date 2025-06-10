@@ -3,18 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="嵌入式智控协会,广西科技大学,培训课程">
-    <meta name="description" content="嵌入式智控协会培训课程">
+    <meta name="keywords" content="嵌入式智控协会,广西科技大学,培训中心">
+    <meta name="description" content="嵌入式智控协会培训中心">
     <meta name="author" content="嵌入式智控协会">
     <meta name="copyright" content="嵌入式智控协会">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="cache-control" content="no-cache">
-    <meta itemprop="name" content="嵌入式智控协会培训课程" />
+    <meta itemprop="name" content="嵌入式智控协会培训中心" />
     <meta itemprop="image" content="/assets/img/logo.png" />
     <link rel="icon" href="/assets/img/logo.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
     <meta name="robots" content="index,follow">
-    <title>嵌入式智控协会 - 课程详情</title>
+    <title>嵌入式智控协会 - 培训中心</title>
     <!-- Font Awesome CSS -->
     <link href="/assets/css/all.min.css" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
@@ -64,26 +64,17 @@
             color: white !important;
         }
 
-        .course-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 30px auto;
-            box-shadow: var(--card-shadow);
-            max-width: 1000px;
-        }
-
-        .course-title {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
+        .section-heading {
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            color: var(--text-color);
             text-align: center;
+            font-weight: 700;
             position: relative;
             padding-bottom: 20px;
         }
 
-        .course-title::after {
+        .section-heading::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -95,64 +86,172 @@
             border-radius: 2px;
         }
 
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+            margin-left: 20px;
+            color: var(--text-color);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .course-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .course-container:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .course-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .course-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 1.5px;
+        }
+
         .course-content {
+            color: var(--text-color);
             font-size: 1.1rem;
             line-height: 1.8;
         }
 
-        .course-content h2 {
+        .course-content h1,
+        .course-content h2,
+        .course-content h3,
+        .course-content h4,
+        .course-content h5,
+        .course-content h6 {
             color: var(--primary-color);
-            font-size: 1.8rem;
-            margin: 30px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--secondary-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
         }
 
-        .course-content h3 {
-            color: var(--accent-color);
-            font-size: 1.4rem;
-            margin: 25px 0 15px;
+        .course-content p {
+            margin-bottom: 1em;
         }
 
-        .course-content ul {
-            padding-left: 20px;
-            list-style-type: none;
+        .course-content ul,
+        .course-content ol {
+            padding-left: 2em;
+            margin-bottom: 1em;
         }
 
         .course-content li {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 25px;
+            margin-bottom: 0.5em;
         }
 
-        .course-content li::before {
-            content: '•';
-            color: var(--accent-color);
-            font-size: 1.5em;
-            position: absolute;
-            left: 0;
-            top: -0.2em;
+        .course-content code {
+            background-color: var(--secondary-color);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .course-content pre {
+            background-color: var(--secondary-color);
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1em 0;
+        }
+
+        .course-content pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .course-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1em;
+            margin: 1em 0;
+            color: #666;
+        }
+
+        .course-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 1em 0;
+        }
+
+        .course-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        .course-content th,
+        .course-content td {
+            padding: 0.5em;
+            border: 1px solid #ddd;
+        }
+
+        .course-content th {
+            background-color: var(--secondary-color);
         }
 
         .back-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--primary-color);
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #2a5fff 100%);
             color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             text-decoration: none;
-            box-shadow: var(--card-shadow);
+            border-radius: 5px;
+            margin-bottom: 20px;
             transition: all 0.3s ease;
         }
 
         .back-button:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
             box-shadow: var(--hover-shadow);
             color: white;
         }
@@ -186,25 +285,38 @@
 
         @media (max-width: 768px) {
             .course-container {
-                padding: 20px;
-                margin: 15px;
+                padding: 25px;
             }
 
             .course-title {
-                font-size: 2rem;
+                font-size: 1.6rem;
             }
 
             .course-content {
                 font-size: 1rem;
             }
 
-            .course-content h2 {
-                font-size: 1.5rem;
+            .section-heading {
+                font-size: 2.2rem;
             }
+        }
 
-            .course-content h3 {
-                font-size: 1.2rem;
-            }
+        /* 添加滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0d3bcc;
         }
     </style>
 </head>
@@ -239,18 +351,14 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="course-container" data-aos="fade-up" data-aos-duration="1000">
-            <h1 class="course-title" id="course-title">加载中...</h1>
-            <div class="course-content" id="course-content">
-                <!-- 课程内容将通过JavaScript动态加载 -->
-            </div>
+    <div class="container mt-5">
+        <a href="/training" class="back-button" data-aos="fade-right" data-aos-duration="1000">
+            <i class="fas fa-arrow-left"></i> 返回课程目录
+        </a>
+        <div id="course-container" class="course-container" data-aos="fade-up" data-aos-duration="1000">
+            <!-- 课程内容将通过JavaScript动态加载 -->
         </div>
     </div>
-
-    <a href="/training" class="back-button" data-aos="fade-left" data-aos-duration="1000">
-        <i class="fas fa-arrow-left"></i>
-    </a>
 
     <footer class="footer">
         <div class="container">
@@ -276,13 +384,13 @@
             }
         });
 
-        // 获取URL参数
+        // 获取URL参数中的课程名称
         const urlParams = new URLSearchParams(window.location.search);
-        const courseId = urlParams.get('course');
+        const courseName = urlParams.get('course');
 
-        // 加载课程内容
-        if (courseId) {
-            fetch(`/training/courses/${courseId}.md`)
+        if (courseName) {
+            // 加载课程内容
+            fetch(`/training/courses/${courseName}.md`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -291,33 +399,32 @@
                 })
                 .then(markdown => {
                     const html = marked.parse(markdown);
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = html;
+                    const container = document.getElementById('course-container');
                     
-                    // 设置标题
-                    const title = tempDiv.querySelector('h1');
-                    if (title) {
-                        document.getElementById('course-title').textContent = title.textContent;
-                        title.remove();
-                    }
+                    // 设置课程标题
+                    const title = document.createElement('h1');
+                    title.className = 'course-title';
+                    title.textContent = courseName;
+                    container.appendChild(title);
                     
-                    // 设置内容
-                    document.getElementById('course-content').innerHTML = tempDiv.innerHTML;
+                    // 设置课程内容
+                    const content = document.createElement('div');
+                    content.className = 'course-content';
+                    content.innerHTML = html;
+                    container.appendChild(content);
                 })
                 .catch(error => {
                     console.error('Error loading course:', error);
-                    document.getElementById('course-title').textContent = '加载失败';
-                    document.getElementById('course-content').innerHTML = `
+                    document.getElementById('course-container').innerHTML = `
                         <div class="alert alert-danger" role="alert">
                             加载课程内容失败，请稍后重试
                         </div>
                     `;
                 });
         } else {
-            document.getElementById('course-title').textContent = '课程不存在';
-            document.getElementById('course-content').innerHTML = `
+            document.getElementById('course-container').innerHTML = `
                 <div class="alert alert-warning" role="alert">
-                    未找到指定的课程，请返回课程列表重新选择
+                    未指定课程，请从课程目录中选择一个课程
                 </div>
             `;
         }
