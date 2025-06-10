@@ -191,19 +191,19 @@
 
 <!-- 底部按钮 -->
 <div style="text-align:center;margin:40px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;">
-  <a href="download" style="display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:20px 40px;font-size:1.4rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#6c5ce7 0%,#00b894 100%);border:none;border-radius:50px;text-decoration:none;box-shadow:0 8px 20px rgba(108,92,231,0.2);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;">
+  <a href="download" style="display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:20px 40px;font-size:1.4rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);border:none;border-radius:50px;text-decoration:none;box-shadow:0 8px 20px rgba(44,62,80,0.15);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;">
     <span style="position:relative;z-index:1;">📥 培训资料下载中心</span>
-    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#00b894 0%,#6c5ce7 100%);opacity:0;transition:opacity 0.4s ease;"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);opacity:0;transition:opacity 0.4s ease;"></div>
   </a>
 
-  <a href="http://vm.yueqian.com.cn:8886/index.html" style="display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:20px 40px;font-size:1.4rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#00b894 0%,#0984e3 100%);border:none;border-radius:50px;text-decoration:none;box-shadow:0 8px 20px rgba(0,184,148,0.2);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;">
+  <a href="http://vm.yueqian.com.cn:8886/index.html" style="display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:20px 40px;font-size:1.4rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);border:none;border-radius:50px;text-decoration:none;box-shadow:0 8px 20px rgba(44,62,80,0.15);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;">
     <span style="position:relative;z-index:1;">🏫 粤嵌培训中心</span>
-    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0984e3 0%,#00b894 100%);opacity:0;transition:opacity 0.4s ease;"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);opacity:0;transition:opacity 0.4s ease;"></div>
   </a>
 
-  <a href="center_old" style="display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:20px 40px;font-size:1.4rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#636e72 0%,#a29bfe 100%);border:none;border-radius:50px;text-decoration:none;box-shadow:0 8px 20px rgba(99,110,114,0.2);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;">
+  <a href="center_old" style="display:inline-flex;align-items:center;justify-content:center;min-width:280px;padding:20px 40px;font-size:1.4rem;font-weight:600;color:#fff;background:linear-gradient(135deg,#34495e 0%,#2c3e50 100%);border:none;border-radius:50px;text-decoration:none;box-shadow:0 8px 20px rgba(44,62,80,0.15);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;">
     <span style="position:relative;z-index:1;">📚 旧版培训中心</span>
-    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#a29bfe 0%,#636e72 100%);opacity:0;transition:opacity 0.4s ease;"></div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#2c3e50 0%,#34495e 100%);opacity:0;transition:opacity 0.4s ease;"></div>
   </a>
 </div>
 
@@ -211,7 +211,7 @@
   /* 按钮悬停效果 */
   a:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.25) !important;
+    box-shadow: 0 12px 30px rgba(44,62,80,0.2) !important;
   }
   
   a:hover div {
