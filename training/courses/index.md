@@ -204,10 +204,6 @@
 </a>
 </div>
 
-<div style="text-align:center;margin:20px 0;color:#666;font-size:1.1rem;">
-后续更新时间表，敬请期待！
-</div>
-
 <div style="text-align:center;margin:30px 0;color:#666;font-size:1rem;">
   <p>🎨 文档维护：自231班 黄海东</p>
   <p>📅 最后更新：2025.06.10</p>
