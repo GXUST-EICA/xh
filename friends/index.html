@@ -177,8 +177,8 @@
 
         /* 部门布局样式 */
         .department-section {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
+            justify-content: space-between;
             gap: 30px;
             margin: 30px 0;
             padding: 20px;
@@ -187,15 +187,19 @@
             box-shadow: var(--card-shadow);
         }
 
-        .department-section h2 {
-            grid-column: 1 / -1;
+        .department-column {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .department-column h2 {
             text-align: center;
             margin-bottom: 30px;
             color: var(--primary-color);
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
-        .department-section h3 {
+        .department-column h3 {
             margin-top: 0;
             color: var(--accent-color);
             font-size: 1.4rem;
@@ -203,19 +207,22 @@
             border-bottom: 2px solid var(--accent-color);
         }
 
-        .department-section ul {
+        .department-column ul {
             margin-top: 15px;
         }
 
-        .department-section li {
+        .department-column li {
             margin: 8px 0;
             padding: 8px 15px;
             background: var(--secondary-color);
             border-radius: 8px;
             transition: all 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .department-section li:hover {
+        .department-column li:hover {
             transform: translateX(5px);
             background: var(--primary-color);
             color: white;
@@ -223,15 +230,12 @@
 
         @media (max-width: 1200px) {
             .department-section {
-                grid-template-columns: repeat(2, 1fr);
+                flex-direction: column;
                 gap: 20px;
             }
-        }
 
-        @media (max-width: 768px) {
-            .department-section {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            .department-column {
+                width: 100%;
             }
         }
 
@@ -374,6 +378,7 @@
                 const sections = html.split('<h2');
                 let newHtml = '';
                 let departmentSection = '';
+                let departmentContent = '';
                 
                 sections.forEach((section, index) => {
                     if (index === 0) {
@@ -386,16 +391,18 @@
                         if (title === '组织部') {
                             departmentSection = '<div class="department-section">';
                         }
-                        departmentSection += `<h2${section}`;
+                        departmentContent += `<div class="department-column"><h2${section}</div>`;
                         if (title === '宣传部') {
-                            departmentSection += '</div>';
+                            departmentSection += departmentContent + '</div>';
                             newHtml += departmentSection;
                             departmentSection = '';
+                            departmentContent = '';
                         }
                     } else {
                         if (departmentSection) {
                             newHtml += departmentSection;
                             departmentSection = '';
+                            departmentContent = '';
                         }
                         newHtml += `<h2${section}`;
                     }
