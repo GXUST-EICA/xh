@@ -131,6 +131,9 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         .company-card:hover {
@@ -145,6 +148,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 15px;
+            flex-shrink: 0;
         }
 
         .company-name::after {
@@ -162,6 +166,7 @@
             color: var(--text-color);
             font-size: 1.1rem;
             line-height: 1.8;
+            flex-grow: 1;
         }
 
         .company-info strong {
@@ -353,13 +358,13 @@
                 const container = document.getElementById('companies-container');
                 companies.forEach((company, index) => {
                     const col = document.createElement('div');
-                    col.className = 'col-md-6 col-lg-4';
+                    col.className = 'col-md-6 col-lg-4 mb-4';
                     col.setAttribute('data-aos', 'fade-up');
                     col.setAttribute('data-aos-duration', '1000');
                     col.setAttribute('data-aos-delay', index * 200);
                     
                     const card = document.createElement('div');
-                    card.className = 'company-card';
+                    card.className = 'company-card h-100';
                     
                     const name = document.createElement('h2');
                     name.className = 'company-name';
