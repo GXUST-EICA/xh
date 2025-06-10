@@ -340,15 +340,34 @@
                 
                 // 处理部门布局
                 const sections = html.split('<h2');
-                const newHtml = sections.map((section, index) => {
-                    if (index === 0) return section; // 跳过标题部分
+                let newHtml = '';
+                let departmentSection = '';
+                
+                sections.forEach((section, index) => {
+                    if (index === 0) {
+                        newHtml += section; // 标题部分
+                        return;
+                    }
                     
                     const title = section.match(/>(.*?)<\/h2>/)?.[1];
                     if (title === '组织部' || title === '统筹部' || title === '宣传部') {
-                        return `<div class="department-section"><h2${section}`;
+                        if (title === '组织部') {
+                            departmentSection = '<div class="department-section">';
+                        }
+                        departmentSection += `<h2${section}`;
+                        if (title === '宣传部') {
+                            departmentSection += '</div>';
+                            newHtml += departmentSection;
+                            departmentSection = '';
+                        }
+                    } else {
+                        if (departmentSection) {
+                            newHtml += departmentSection;
+                            departmentSection = '';
+                        }
+                        newHtml += `<h2${section}`;
                     }
-                    return `<h2${section}`;
-                }).join('');
+                });
 
                 document.getElementById('membersContent').innerHTML = newHtml;
             })
