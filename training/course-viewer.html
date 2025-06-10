@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="嵌入式智控协会,广西科技大学,培训中心">
+    <meta name="description" content="嵌入式智控协会培训中心">
+    <meta name="author" content="嵌入式智控协会">
+    <meta name="copyright" content="嵌入式智控协会">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta itemprop="name" content="嵌入式智控协会培训中心" />
+    <meta itemprop="image" content="/assets/img/logo.png" />
+    <link rel="icon" href="/assets/img/logo.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
+    <meta name="robots" content="index,follow">
+    <title>课程内容 - 嵌入式智控协会</title>
+    <!-- Font Awesome CSS -->
+    <link href="/assets/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <!-- Marked.js -->
+    <script src="/assets/js/marked.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #1246ff;
+            --secondary-color: #f0f9ff;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border-radius: 0 0 15px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--primary-color);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .navbar.scrolled .nav-link,
+        .navbar.scrolled .navbar-brand {
+            color: white !important;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .nav-link {
+            font-size: 1.1rem;
+            margin-left: 20px;
+            color: var(--text-color);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active,
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .course-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .course-content h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .course-content h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .course-content h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+        }
+
+        .course-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .course-content ul, .course-content ol {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        .course-content li {
+            margin-bottom: 10px;
+        }
+
+        .course-content code {
+            background: var(--secondary-color);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .course-content pre {
+            background: var(--secondary-color);
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .course-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .course-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .course-content blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        .course-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .course-content th, .course-content td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .course-content th {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .course-content tr:nth-child(even) {
+            background: var(--secondary-color);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2a5fff 100%);
+            color: white;
+            padding: 50px 0;
+            text-align: center;
+            margin-top: 60px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        }
+
+        .footer p {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .course-content {
+                padding: 20px;
+            }
+
+            .course-content h1 {
+                font-size: 2rem;
+            }
+
+            .course-content h2 {
+                font-size: 1.7rem;
+            }
+
+            .course-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .course-content p, .course-content ul, .course-content ol {
+                font-size: 1rem;
+            }
+        }
+
+        /* 添加滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0d3bcc;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
+        <div class="container">
+            <a class="navbar-brand" href="/">嵌入式智控协会</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/" data-aos="fade-right" data-aos-duration="1000">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mentors" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="100">导师团队</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ilt" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="200">赞助企业</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/training" data-aos="fade-left" data-aos-duration="1000"
+                            data-aos-delay="300">培训中心</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="course-content" id="course-content" data-aos="fade-up" data-aos-duration="1000">
+            <!-- 课程内容将通过JavaScript动态加载 -->
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 广西科技大学 嵌入式智控协会</p>
+        </div>
+    </footer>
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        window.addEventListener("scroll", function () {
+            var navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+        // 获取URL参数中的课程路径
+        const urlParams = new URLSearchParams(window.location.search);
+        const coursePath = urlParams.get('path');
+
+        if (coursePath) {
+            // 加载课程内容
+            fetch(coursePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    const html = marked.parse(markdown);
+                    document.getElementById('course-content').innerHTML = html;
+                    
+                    // 更新页面标题
+                    const title = document.querySelector('.course-content h1');
+                    if (title) {
+                        document.title = `${title.textContent} - 嵌入式智控协会`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading course:', error);
+                    document.getElementById('course-content').innerHTML = `
+                        <div class="alert alert-danger" role="alert">
+                            加载课程内容失败，请稍后重试
+                        </div>
+                    `;
+                });
+        } else {
+            document.getElementById('course-content').innerHTML = `
+                <div class="alert alert-warning" role="alert">
+                    未指定课程路径，请从课程目录中选择课程
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html> 

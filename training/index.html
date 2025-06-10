@@ -525,7 +525,7 @@
                             links.forEach(link => {
                                 const li = document.createElement('li');
                                 const courseLink = document.createElement('a');
-                                courseLink.href = link.getAttribute('href');
+                                courseLink.href = `/training/course-viewer.html?path=${encodeURIComponent(link.getAttribute('href'))}`;
                                 courseLink.textContent = link.textContent;
                                 courseLink.className = 'course-link';
                                 li.appendChild(courseLink);
