@@ -2,7 +2,7 @@
 
 ![粤嵌科技](/assets/img/companies/yueqian.png)
 
-## [🔗 访问粤嵌科技官网](http://www.gec-edu.org/)
+## [访问粤嵌科技官网](http://www.gec-edu.org/)
 
 > 成立于2005年，是一家专注于嵌入式技术研发和人才培养的高新技术企业。公司总部位于广州，在全国多个城市设有分支机构。
 
