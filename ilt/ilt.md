@@ -20,13 +20,13 @@
 - **技术竞赛支持**：助力创新人才培养
 - **实习就业对接**：搭建就业桥梁
 
----
+
 
 # 北京软通动力教育科技有限公司
 
-![软通动力](/assets/img/companies/isoftstone.png)
+![软通动力](/assets/img/companies/ruantong.png)
 
-## [🔗 访问软通动力官网](https://www.isoftstone.com)
+## [访问软通教育官网](https://www.issedu.com/)
 
 > 软通动力集团旗下专注于IT教育培训的子公司，致力于为企业和社会培养高素质的IT人才。
 
@@ -44,13 +44,13 @@
 - **技术讲座与分享**：前沿技术交流
 - **就业指导服务**：职业发展指导
 
----
+
 
 # 梧州奥格森电子科技有限公司
 
-![奥格森科技](/assets/img/companies/ogson.png)
+![奥格森科技](/assets/img/companies/aokace.png)
 
-## [🔗 访问奥格森科技官网](https://www.ogson.com)
+## [访问奥格森科技官网](https://www.aokace.com.cn)
 
 > 成立于2015年，是深圳库珀医疗股份有限公司的控股子公司。公司专注于微创医疗设备的研发、生产、销售和服务，深度融合内窥镜设备与泌尿耗材技术，为全球微创医疗行业提供卓越的整体解决方案。
 
