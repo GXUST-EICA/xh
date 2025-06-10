@@ -284,87 +284,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #0d3bcc;
         }
-
-        .course-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-        
-        .course-list li {
-            margin-bottom: 0;
-        }
-        
-        .course-link {
-            display: block;
-            padding: 15px 20px;
-            background: var(--secondary-color);
-            border-radius: 12px;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(18, 70, 255, 0.1);
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-        
-        .course-link:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .course-name {
-            font-size: 1.5rem !important;
-            margin-bottom: 1.5rem !important;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .course-list {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .btn {
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, #6c5ce7 0%, #00b894 100%);
-            border: none;
-        }
-
-        .btn-success {
-            background: linear-gradient(90deg, #00b894 0%, #0984e3 100%);
-            border: none;
-        }
-
-        .btn-secondary {
-            background: linear-gradient(90deg, #636e72 0%, #a29bfe 100%);
-            border: none;
-        }
-
-        .gap-3 {
-            gap: 1rem;
-        }
     </style>
 </head>
 
@@ -400,51 +319,8 @@
 
     <div class="container mt-5">
         <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">📚 培训中心 📚</h1>
-        
-        <!-- 培训计划部分 -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
-                    <h2 class="course-name">📅 协会培训计划</h2>
-                    <div class="course-info" id="training-schedule">
-                        <!-- 培训计划将通过JavaScript动态加载 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 课程目录部分 -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
-                    <h2 class="course-name">📚 课程目录</h2>
-                    <div class="course-info" id="courses-container">
-                        <!-- 课程信息将通过JavaScript动态加载 -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 下载中心链接 -->
-        <div class="row mb-5">
-            <div class="col-12 text-center">
-                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
-                    <h2 class="course-name">📥 下载中心</h2>
-                    <div class="course-info">
-                        <div class="d-flex justify-content-center flex-wrap gap-3">
-                            <a href="https://www.eica.fun/download" class="btn btn-primary btn-lg">
-                                <i class="fas fa-download me-2"></i>培训资料下载中心
-                            </a>
-                            <a href="http://vm.yueqian.com.cn:8886/index.html" class="btn btn-success btn-lg">
-                                <i class="fas fa-school me-2"></i>粤嵌培训中心
-                            </a>
-                            <a href="https://www.eica.fun/center_old" class="btn btn-secondary btn-lg">
-                                <i class="fas fa-history me-2"></i>旧版培训中心
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="courses-container" class="row">
+            <!-- 课程目录将通过JavaScript动态加载 -->
         </div>
     </div>
 
@@ -485,70 +361,45 @@
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = html;
                 
-                // 处理培训计划部分
-                const scheduleSection = Array.from(tempDiv.querySelectorAll('h1')).find(h1 => h1.textContent.includes('协会培训计划'));
-                if (scheduleSection) {
-                    let scheduleContent = '';
-                    let nextElement = scheduleSection.nextElementSibling;
-                    while (nextElement && nextElement.tagName !== 'H1') {
-                        scheduleContent += nextElement.outerHTML;
-                        nextElement = nextElement.nextElementSibling;
-                    }
-                    document.getElementById('training-schedule').innerHTML = scheduleContent;
-                }
-
-                // 处理课程目录部分
-                const coursesContainer = document.getElementById('courses-container');
+                const container = document.getElementById('courses-container');
+                
+                // 处理每个课程分类
                 tempDiv.querySelectorAll('h2').forEach((category, categoryIndex) => {
-                    if (category.textContent.includes('协会培训计划') || category.textContent.includes('协会培训中心使用手册')) {
-                        return;
-                    }
-                    
                     const categoryCol = document.createElement('div');
-                    categoryCol.className = 'mb-4';
+                    categoryCol.className = 'col-12 mb-4';
+                    categoryCol.setAttribute('data-aos', 'fade-up');
+                    categoryCol.setAttribute('data-aos-duration', '1000');
+                    categoryCol.setAttribute('data-aos-delay', categoryIndex * 200);
                     
-                    const name = document.createElement('h3');
-                    name.className = 'course-name';
-                    name.textContent = category.textContent;
+                    const categoryCard = document.createElement('div');
+                    categoryCard.className = 'course-card';
                     
-                    const content = document.createElement('div');
-                    content.className = 'course-info';
+                    const categoryTitle = document.createElement('h2');
+                    categoryTitle.className = 'course-name';
+                    categoryTitle.textContent = category.textContent;
                     
-                    // 获取该分类下的所有课程链接
+                    const categoryContent = document.createElement('div');
+                    categoryContent.className = 'course-info';
+                    
+                    // 获取该分类下的所有内容
                     let nextElement = category.nextElementSibling;
-                    const courseList = document.createElement('ul');
-                    courseList.className = 'course-list';
-                    
                     while (nextElement && nextElement.tagName !== 'H2') {
-                        if (nextElement.tagName === 'UL') {
-                            const links = nextElement.querySelectorAll('a');
-                            links.forEach(link => {
-                                const li = document.createElement('li');
-                                const courseLink = document.createElement('a');
-                                courseLink.href = `/training/course-viewer.html?path=${encodeURIComponent(link.getAttribute('href'))}`;
-                                courseLink.textContent = link.textContent;
-                                courseLink.className = 'course-link';
-                                li.appendChild(courseLink);
-                                courseList.appendChild(li);
-                            });
-                        }
+                        categoryContent.appendChild(nextElement.cloneNode(true));
                         nextElement = nextElement.nextElementSibling;
                     }
                     
-                    if (courseList.children.length > 0) {
-                        content.appendChild(courseList);
-                        categoryCol.appendChild(name);
-                        categoryCol.appendChild(content);
-                        coursesContainer.appendChild(categoryCol);
-                    }
+                    categoryCard.appendChild(categoryTitle);
+                    categoryCard.appendChild(categoryContent);
+                    categoryCol.appendChild(categoryCard);
+                    container.appendChild(categoryCol);
                 });
             })
             .catch(error => {
-                console.error('Error loading markdown:', error);
+                console.error('Error loading course index:', error);
                 document.getElementById('courses-container').innerHTML = `
                     <div class="col-12 text-center">
                         <div class="alert alert-danger" role="alert">
-                            加载课程信息失败，请稍后重试
+                            加载课程目录失败，请稍后重试
                         </div>
                     </div>
                 `;

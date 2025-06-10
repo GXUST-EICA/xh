@@ -1,36 +1,39 @@
-# 嵌入式智控协会培训课程
+# 嵌入式智控协会培训课程目录
 
-## 基础课程
-- [嵌入式基础课程](/training/viewer.html?course=basic)
-  - 嵌入式系统概述
-  - C语言基础
-  - 单片机原理与应用
-  - 基础电路设计
-  - 传感器与执行器
-  - 串口通信
-  - 定时器与中断
-  - LED、按键等基础外设控制
+## 编程语言基础
+- [C语言基础](/training/courses/编程语言基础 - C语言.md)
+- [Python基础](/training/courses/编程语言基础 - Python.md)
 
-## 进阶课程
-- [嵌入式进阶课程](/training/viewer.html?course=advanced)
-  - RTOS实时操作系统
-  - 多任务编程
-  - 通信协议（I2C、SPI、CAN）
-  - 高级传感器应用
-  - 电机控制
-  - 显示设备驱动
-  - 电源管理
-  - 低功耗设计
-  - 系统调试与优化
+## 硬件基础知识
+- [MCU概念及架构](/training/courses/硬件基础知识 - MCU概念及架构.md)
+- [电路基础](/training/courses/硬件基础知识 - 电路基础.md)
 
-## 项目实践
-- [嵌入式项目实践](/training/viewer.html?course=project)
-  - 智能家居控制系统
-  - 工业自动化设备
-  - 机器人控制系统
-  - 物联网应用开发
-  - 智能穿戴设备
-  - 无人机控制系统
+## 开发环境及其固件库
+- [标准库](/training/courses/开发环境及其固件库 - 标准库.md)
+- [HAL库](/training/courses/开发环境及其固件库 - HAL库.md)
+
+## 单片机的协议
+- [STM32](/training/courses/单片机的协议 - STM32.md)
+- [串口助手](/training/courses/单片机的协议 - 串口助手.md)
+
+## PCB设计与制作
+- [学习使用EDA工具](/training/courses/PCB设计与制作 - 学习使用EDA工具.md)
+- [免费打样板](/training/courses/PCB设计与制作 - 免费打样板.md)
+
+## 机器视觉
+- [基础视觉处理与Matlab](/training/courses/机器视觉 - 基础视觉处理与Matlab.md)
+- [OpenMV](/training/courses/机器视觉 - OpenMV.md)
+- [Linux与OpenCV（初识篇）](/training/courses/机器视觉 - Linux与OpenCV（初识篇）.md)
+- [Linux与OpenCV-Linux篇(一)](/training/courses/机器视觉 - Linux与OpenCV-Linux篇(一).md)
+- [Linux与OpenCV-Linux篇(二)](/training/courses/机器视觉 - Linux与OpenCV-Linux篇(二).md)
+- [Linux与OpenCV（CV与算法篇）](/training/courses/机器视觉 - Linux与OpenCV（CV与算法篇）.md)
+- [Linux与OpenCV（代码自启动）](/training/courses/机器视觉 - Linux与OpenCV（代码自启动）.md)
+- [Linux番外篇-配置香橙派zero3并使用opencv-python](/training/courses/机器视觉 - Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）.md)
+
+## 乐鑫ESP32物联网
+- [ESP32与Arduino环境基础](/training/courses/乐鑫ESP32物联网 - ESP32与Arduino环境基础.md)
+- [ESP32与ESPIDF环境基础](/training/courses/乐鑫ESP32物联网 - ESP32与ESPIDF环境基础.md)
+- [ESP32C3使用PlatformIO烧录的问题](/training/courses/乐鑫ESP32物联网 - ESP32C3使用PlatformIO烧录的问题.md)
 
 # 协会培训计划
 
