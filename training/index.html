@@ -311,6 +311,39 @@
             color: white;
             transform: translateX(10px);
         }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #6c5ce7 0%, #00b894 100%);
+            border: none;
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, #00b894 0%, #0984e3 100%);
+            border: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, #636e72 0%, #a29bfe 100%);
+            border: none;
+        }
+
+        .gap-3 {
+            gap: 1rem;
+        }
     </style>
 </head>
 
@@ -346,8 +379,63 @@
 
     <div class="container mt-5">
         <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">📚 培训中心 📚</h1>
-        <div id="courses-container" class="row">
-            <!-- 课程信息将通过JavaScript动态加载 -->
+        
+        <!-- 培训计划部分 -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="course-name">📅 协会培训计划</h2>
+                    <div class="course-info" id="training-schedule">
+                        <!-- 培训计划将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 课程目录部分 -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="course-name">📚 课程目录</h2>
+                    <div class="course-info" id="courses-container">
+                        <!-- 课程信息将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用手册部分 -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="course-name">📖 使用手册</h2>
+                    <div class="course-info" id="user-manual">
+                        <!-- 使用手册将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 下载中心链接 -->
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <div class="course-card" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="course-name">📥 下载中心</h2>
+                    <div class="course-info">
+                        <div class="d-flex justify-content-center flex-wrap gap-3">
+                            <a href="https://www.eica.fun/download" class="btn btn-primary btn-lg">
+                                <i class="fas fa-download me-2"></i>培训资料下载中心
+                            </a>
+                            <a href="http://vm.yueqian.com.cn:8886/index.html" class="btn btn-success btn-lg">
+                                <i class="fas fa-school me-2"></i>粤嵌培训中心
+                            </a>
+                            <a href="https://www.eica.fun/center_old" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-history me-2"></i>旧版培训中心
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -388,20 +476,29 @@
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = html;
                 
-                const container = document.getElementById('courses-container');
-                
-                // 处理每个分类
+                // 处理培训计划部分
+                const scheduleSection = tempDiv.querySelector('h1:contains("协会培训计划")');
+                if (scheduleSection) {
+                    let scheduleContent = '';
+                    let nextElement = scheduleSection.nextElementSibling;
+                    while (nextElement && !nextElement.matches('h1')) {
+                        scheduleContent += nextElement.outerHTML;
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                    document.getElementById('training-schedule').innerHTML = scheduleContent;
+                }
+
+                // 处理课程目录部分
+                const coursesContainer = document.getElementById('courses-container');
                 tempDiv.querySelectorAll('h2').forEach((category, categoryIndex) => {
+                    if (category.textContent === '协会培训计划' || category.textContent === '协会培训中心使用手册') {
+                        return;
+                    }
+                    
                     const categoryCol = document.createElement('div');
-                    categoryCol.className = 'col-12 mb-4';
-                    categoryCol.setAttribute('data-aos', 'fade-up');
-                    categoryCol.setAttribute('data-aos-duration', '1000');
-                    categoryCol.setAttribute('data-aos-delay', categoryIndex * 100);
+                    categoryCol.className = 'mb-4';
                     
-                    const card = document.createElement('div');
-                    card.className = 'course-card';
-                    
-                    const name = document.createElement('h2');
+                    const name = document.createElement('h3');
                     name.className = 'course-name';
                     name.textContent = category.textContent;
                     
@@ -430,11 +527,22 @@
                     }
                     
                     content.appendChild(courseList);
-                    card.appendChild(name);
-                    card.appendChild(content);
-                    categoryCol.appendChild(card);
-                    container.appendChild(categoryCol);
+                    categoryCol.appendChild(name);
+                    categoryCol.appendChild(content);
+                    coursesContainer.appendChild(categoryCol);
                 });
+
+                // 处理使用手册部分
+                const manualSection = tempDiv.querySelector('h1:contains("协会培训中心使用手册")');
+                if (manualSection) {
+                    let manualContent = '';
+                    let nextElement = manualSection.nextElementSibling;
+                    while (nextElement) {
+                        manualContent += nextElement.outerHTML;
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                    document.getElementById('user-manual').innerHTML = manualContent;
+                }
             })
             .catch(error => {
                 console.error('Error loading markdown:', error);
