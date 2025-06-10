@@ -1,11 +1,5 @@
-# 嵌入式智控协会培训中心
 
-<div style="text-align:center;margin:30px 0;">
-  <h1 style="font-size:2.5rem;color:#1246ff;margin-bottom:20px;">📚 培训课程目录 📚</h1>
-  <p style="font-size:1.2rem;color:#666;max-width:800px;margin:0 auto;">
-下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看。蓝色字都是跳转教程的链接。
-  </p>
-</div>
+
 
 <!-- 培训计划表 -->
 <div style="background:linear-gradient(135deg,#f8f9ff 0%,#ffffff 100%);padding:30px;border-radius:20px;box-shadow:0 8px 16px rgba(108,92,231,0.08);margin:30px 0;">
@@ -73,6 +67,10 @@
 </table>
 </div>
 </div>
+
+  <p style="font-size:1.2rem;color:#666;max-width:800px;margin:0 auto;">
+下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看。蓝色字都是跳转教程的链接。
+  </p>
 
 <!-- 课程目录 -->
 <div style="background:linear-gradient(135deg,#ffffff 0%,#f8f9ff 100%);padding:30px;border-radius:20px;box-shadow:0 8px 16px rgba(108,92,231,0.08);margin:30px 0;">
