@@ -53,6 +53,11 @@
             padding: 0 20px;
         }
 
+        .content-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .navbar {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -440,12 +445,14 @@
     </nav>
 
     <div class="container mt-5">
-        <a href="/training" class="back-button" data-aos="fade-right" data-aos-duration="1000">
-            返回课程目录
-        </a>
-        <div id="course-container" class="course-container" data-aos="fade-up" data-aos-duration="1000">
-            <div class="loading">
-                <div class="loading-spinner"></div>
+        <div class="content-wrapper">
+            <a href="/training" class="back-button" data-aos="fade-right" data-aos-duration="1000">
+                返回课程目录
+            </a>
+            <div id="course-container" class="course-container" data-aos="fade-up" data-aos-duration="1000">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                </div>
             </div>
         </div>
     </div>
