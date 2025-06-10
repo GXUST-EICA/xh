@@ -1,3 +1,40 @@
+# 嵌入式智控协会培训课程目录
+
+## 编程语言基础
+- [C语言基础](/training/courses/编程语言基础 - C语言.md)
+- [Python基础](/training/courses/编程语言基础 - Python.md)
+
+## 硬件基础知识
+- [MCU概念及架构](/training/courses/硬件基础知识 - MCU概念及架构.md)
+- [电路基础](/training/courses/硬件基础知识 - 电路基础.md)
+
+## 开发环境及其固件库
+- [标准库](/training/courses/开发环境及其固件库 - 标准库.md)
+- [HAL库](/training/courses/开发环境及其固件库 - HAL库.md)
+
+## 单片机的协议
+- [STM32](/training/courses/单片机的协议 - STM32.md)
+- [串口助手](/training/courses/单片机的协议 - 串口助手.md)
+
+## PCB设计与制作
+- [学习使用EDA工具](/training/courses/PCB设计与制作 - 学习使用EDA工具.md)
+- [免费打样板](/training/courses/PCB设计与制作 - 免费打样板.md)
+
+## 机器视觉
+- [基础视觉处理与Matlab](/training/courses/机器视觉 - 基础视觉处理与Matlab.md)
+- [OpenMV](/training/courses/机器视觉 - OpenMV.md)
+- [Linux与OpenCV（初识篇）](/training/courses/机器视觉 - Linux与OpenCV（初识篇）.md)
+- [Linux与OpenCV-Linux篇(一)](/training/courses/机器视觉 - Linux与OpenCV-Linux篇(一).md)
+- [Linux与OpenCV-Linux篇(二)](/training/courses/机器视觉 - Linux与OpenCV-Linux篇(二).md)
+- [Linux与OpenCV（CV与算法篇）](/training/courses/机器视觉 - Linux与OpenCV（CV与算法篇）.md)
+- [Linux与OpenCV（代码自启动）](/training/courses/机器视觉 - Linux与OpenCV（代码自启动）.md)
+- [Linux番外篇-配置香橙派zero3并使用opencv-python](/training/courses/机器视觉 - Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）.md)
+
+## 乐鑫ESP32物联网
+- [ESP32与Arduino环境基础](/training/courses/乐鑫ESP32物联网 - ESP32与Arduino环境基础.md)
+- [ESP32与ESPIDF环境基础](/training/courses/乐鑫ESP32物联网 - ESP32与ESPIDF环境基础.md)
+- [ESP32C3使用PlatformIO烧录的问题](/training/courses/乐鑫ESP32物联网 - ESP32C3使用PlatformIO烧录的问题.md)
+
 # 协会培训计划
 
 下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看。蓝色字都是跳转教程的链接。
