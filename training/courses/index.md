@@ -85,22 +85,11 @@
       <div style="background:#f8f9ff;padding:20px;border-radius:10px;">
         <h4 style="margin-bottom:15px;"><a href="/training/viewer.html?course=编程语言基础%20-%20C语言" style="color:#1246ff;text-decoration:none;font-weight:600;">C语言基础</a></h4>
         <ul style="margin:0;padding-left:20px;color:#666;">
-          <li>C语言基本语法</li>
-          <li>数据类型和运算符</li>
-          <li>控制流程</li>
-          <li>函数和数组</li>
-          <li>指针和结构体</li>
-          <li>文件操作</li>
         </ul>
       </div>
       <div style="background:#f8f9ff;padding:20px;border-radius:10px;">
         <h4 style="margin-bottom:15px;"><a href="/training/viewer.html?course=编程语言基础%20-%20Python" style="color:#1246ff;text-decoration:none;font-weight:600;">Python基础</a></h4>
         <ul style="margin:0;padding-left:20px;color:#666;">
-          <li>Python环境搭建</li>
-          <li>基本语法和数据类型</li>
-          <li>控制流程和函数</li>
-          <li>模块和包</li>
-          <li>面向对象编程</li>
         </ul>
       </div>
     </div>
