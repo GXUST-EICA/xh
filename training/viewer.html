@@ -318,6 +318,28 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #0d3bcc;
         }
+
+        /* 添加加载动画 */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--secondary-color);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 
@@ -356,7 +378,9 @@
             <i class="fas fa-arrow-left"></i> 返回课程目录
         </a>
         <div id="course-container" class="course-container" data-aos="fade-up" data-aos-duration="1000">
-            <!-- 课程内容将通过JavaScript动态加载 -->
+            <div class="loading">
+                <div class="loading-spinner"></div>
+            </div>
         </div>
     </div>
 
@@ -400,31 +424,29 @@
                 .then(markdown => {
                     const html = marked.parse(markdown);
                     const container = document.getElementById('course-container');
+                    container.innerHTML = html;
                     
-                    // 设置课程标题
-                    const title = document.createElement('h1');
-                    title.className = 'course-title';
-                    title.textContent = courseName;
-                    container.appendChild(title);
-                    
-                    // 设置课程内容
-                    const content = document.createElement('div');
-                    content.className = 'course-content';
-                    content.innerHTML = html;
-                    container.appendChild(content);
+                    // 设置页面标题
+                    document.title = `${courseName} - 嵌入式智控协会培训中心`;
                 })
                 .catch(error => {
                     console.error('Error loading course:', error);
                     document.getElementById('course-container').innerHTML = `
                         <div class="alert alert-danger" role="alert">
-                            加载课程内容失败，请稍后重试
+                            <h4 class="alert-heading">加载失败</h4>
+                            <p>加载课程内容失败，请稍后重试。</p>
+                            <hr>
+                            <p class="mb-0">如果问题持续存在，请联系管理员。</p>
                         </div>
                     `;
                 });
         } else {
             document.getElementById('course-container').innerHTML = `
                 <div class="alert alert-warning" role="alert">
-                    未指定课程，请从课程目录中选择一个课程
+                    <h4 class="alert-heading">未指定课程</h4>
+                    <p>请从课程目录中选择一个课程。</p>
+                    <hr>
+                    <p class="mb-0">点击"返回课程目录"按钮返回。</p>
                 </div>
             `;
         }
