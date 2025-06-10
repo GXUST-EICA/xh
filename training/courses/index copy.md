@@ -1,3 +1,40 @@
+# 嵌入式智控协会培训课程目录
+
+## 编程语言基础
+- [C语言基础](/training/courses/编程语言基础 - C语言.md)
+- [Python基础](/training/courses/编程语言基础 - Python.md)
+
+## 硬件基础知识
+- [MCU概念及架构](/training/courses/硬件基础知识 - MCU概念及架构.md)
+- [电路基础](/training/courses/硬件基础知识 - 电路基础.md)
+
+## 开发环境及其固件库
+- [标准库](/training/courses/开发环境及其固件库 - 标准库.md)
+- [HAL库](/training/courses/开发环境及其固件库 - HAL库.md)
+
+## 单片机的协议
+- [STM32](/training/courses/单片机的协议 - STM32.md)
+- [串口助手](/training/courses/单片机的协议 - 串口助手.md)
+
+## PCB设计与制作
+- [学习使用EDA工具](/training/courses/PCB设计与制作 - 学习使用EDA工具.md)
+- [免费打样板](/training/courses/PCB设计与制作 - 免费打样板.md)
+
+## 机器视觉
+- [基础视觉处理与Matlab](/training/courses/机器视觉 - 基础视觉处理与Matlab.md)
+- [OpenMV](/training/courses/机器视觉 - OpenMV.md)
+- [Linux与OpenCV（初识篇）](/training/courses/机器视觉 - Linux与OpenCV（初识篇）.md)
+- [Linux与OpenCV-Linux篇(一)](/training/courses/机器视觉 - Linux与OpenCV-Linux篇(一).md)
+- [Linux与OpenCV-Linux篇(二)](/training/courses/机器视觉 - Linux与OpenCV-Linux篇(二).md)
+- [Linux与OpenCV（CV与算法篇）](/training/courses/机器视觉 - Linux与OpenCV（CV与算法篇）.md)
+- [Linux与OpenCV（代码自启动）](/training/courses/机器视觉 - Linux与OpenCV（代码自启动）.md)
+- [Linux番外篇-配置香橙派zero3并使用opencv-python](/training/courses/机器视觉 - Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）.md)
+
+## 乐鑫ESP32物联网
+- [ESP32与Arduino环境基础](/training/courses/乐鑫ESP32物联网 - ESP32与Arduino环境基础.md)
+- [ESP32与ESPIDF环境基础](/training/courses/乐鑫ESP32物联网 - ESP32与ESPIDF环境基础.md)
+- [ESP32C3使用PlatformIO烧录的问题](/training/courses/乐鑫ESP32物联网 - ESP32C3使用PlatformIO烧录的问题.md)
+
 # 协会培训计划
 
 下载中心提供了一些提到的软件，以下是个人整理的一些网络资源，仅代表个人观点，有需要的同学可以查看。蓝色字都是跳转教程的链接。
@@ -66,128 +103,6 @@
 </table>
 </div>
 
-
-# 嵌入式智控协会培训课程
-
-## 编程语言基础
-- [C语言基础](/training/viewer.html?course=编程语言基础 - C语言)
-  - C语言基本语法
-  - 数据类型和运算符
-  - 控制流程
-  - 函数和数组
-  - 指针和结构体
-  - 文件操作
-
-- [Python基础](/training/viewer.html?course=编程语言基础 - Python)
-  - Python环境搭建
-  - 基本语法和数据类型
-  - 控制流程和函数
-  - 模块和包
-  - 面向对象编程
-
-## 硬件基础知识
-- [MCU概念及架构](/training/viewer.html?course=硬件基础知识 - MCU概念及架构)
-  - 单片机基本概念
-  - 常见MCU架构
-  - 开发板介绍
-
-- [电路基础](/training/viewer.html?course=硬件基础知识 - 电路基础)
-  - 基本电路元件
-  - 电路分析方法
-  - 常见电路设计
-
-## 开发环境及其固件库
-- [标准库](/training/viewer.html?course=开发环境及其固件库 - 标准库)
-  - STM32标准库介绍
-  - 开发环境搭建
-  - 基本外设使用
-
-- [HAL库](/training/viewer.html?course=开发环境及其固件库 - HAL库)
-  - HAL库架构
-  - 开发环境配置
-  - 外设驱动开发
-
-## 单片机的协议
-- [STM32通信协议](/training/viewer.html?course=单片机的协议 - STM32)
-  - UART通信
-  - I2C通信
-  - SPI通信
-  - CAN通信
-
-- [串口助手使用](/training/viewer.html?course=单片机的协议 - 串口助手)
-  - 串口调试工具
-  - 数据收发测试
-  - 常见问题解决
-
-## PCB设计与制作
-- [EDA工具使用](/training/viewer.html?course=PCB设计与制作 - 学习使用EDA工具)
-  - 立创EDA入门
-  - 原理图设计
-  - PCB布局布线
-
-- [PCB打样](/training/viewer.html?course=PCB设计与制作 - 免费打样板)
-  - 打样流程
-  - 文件导出
-  - 注意事项
-
-## 乐鑫ESP32物联网
-- [ESP32与Arduino环境](/training/viewer.html?course=乐鑫ESP32物联网 - ESP32与Arduino环境基础)
-  - Arduino IDE配置
-  - 基本开发流程
-  - 示例程序
-
-- [ESP32与ESPIDF环境](/training/viewer.html?course=乐鑫ESP32物联网 - ESP32与ESPIDF环境基础)
-  - ESPIDF框架
-  - 开发环境搭建
-  - 项目创建
-
-- [ESP32C3烧录问题](/training/viewer.html?course=乐鑫ESP32物联网 - ESP32C3使用PlatformIO烧录的问题)
-  - 常见问题
-  - 解决方案
-  - 注意事项
-
-## 机器视觉
-- [OpenMV开发](/training/viewer.html?course=机器视觉 - OpenMV)
-  - OpenMV简介
-  - 开发环境
-  - 基础应用
-
-- [Linux与OpenCV初识](/training/viewer.html?course=机器视觉 - Linux与OpenCV（初识篇）)
-  - OpenCV简介
-  - 环境配置
-  - 基础操作
-
-- [Linux与OpenCV-Linux篇(一)](/training/viewer.html?course=机器视觉 - Linux与OpenCV-Linux篇(一))
-  - Linux基础
-  - OpenCV安装
-  - 开发环境
-
-- [Linux与OpenCV-Linux篇(二)](/training/viewer.html?course=机器视觉 - Linux与OpenCV-Linux篇(二))
-  - 图像处理
-  - 视频处理
-  - 实际应用
-
-- [Linux与OpenCV（CV与算法篇）](/training/viewer.html?course=机器视觉 - Linux与OpenCV（CV与算法篇）)
-  - 图像处理算法
-  - 特征提取
-  - 目标检测
-
-- [Linux与OpenCV（代码自启动）](/training/viewer.html?course=机器视觉 - Linux与OpenCV（代码自启动）)
-  - 系统服务
-  - 自启动配置
-  - 后台运行
-
-- [基础视觉处理与Matlab](/training/viewer.html?course=机器视觉 - 基础视觉处理与Matlab)
-  - Matlab基础
-  - 图像处理
-  - 算法实现
-
-- [香橙派zero3配置](/training/viewer.html?course=机器视觉 - Linux番外篇-配置香橙派zero3并使用opencv-python（协会专用）)
-  - 系统安装
-  - 环境配置
-  - OpenCV部署
-
-
 ---
 
 <div align="center">
@@ -207,6 +122,73 @@
 </div>
 
 后续更新时间表，敬请期待！
+
+# 🎓 协会培训中心使用手册
+
+---
+
+## 📱 移动端操作指南
+### 🌟 核心交互流程
+<details open>
+<summary>📖 课程目录操作</summary>
+
+1. **目录唤醒**  
+   🟣 点击右下角悬浮的「📚」图标按钮  
+   🌈 目录将以模态层形式从底部升起（透明度渐变效果）
+
+2. **精准搜索**  
+   🔍 顶部集成智能搜索框支持：  
+   - 实时联想（300ms 防抖处理）
+   - 多关键词「空格分隔」搜索
+   - 动态高亮匹配结果
+
+</details>
+
+---
+
+## 💻 桌面端操作指南
+
+### 1. 导航侧边栏
+- 左侧常驻300px宽侧边栏
+- 滚动时自动粘性定位
+- 支持快捷键操作：
+  - `Ctrl+F` 聚焦搜索框
+  - `↑/↓` 目录导航
+
+### 2. 内容区域
+- 右侧主内容区自适应宽度
+- 支持以下交互：
+  - 代码块悬停显示复制按钮
+  - 表格响应式滚动
+  - 流程图点击放大
+
+### 3. 课程切换
+- 点击侧边栏课程项即时加载
+- 自动记录最后阅读位置
+  - 关闭浏览器后仍保留进度
+  - 支持多标签页同步
+
+## 🌐 通用功能
+
+### 1. 内容高亮
+- 搜索关键词自动标记黄色背景
+- 支持多关键词匹配（空格分隔）
+
+### 2. 进度指示
+- 顶部3px红色进度条实时显示阅读位置
+- 滚动时自动更新进度
+
+### 3. 异常处理
+| 状态     | 表现                    | 解决方案         |
+| -------- | ----------------------- | ---------------- |
+| 加载失败 | 显示红色警告框+重试按钮 | 点击按钮重新加载 |
+| 内容过期 | 显示缓存标识⚠️           | 手动刷新页面     |
+| 空搜索   | 显示「无结果」提示      | 修改搜索关键词   |
+
+### 4. 辅助功能
+- 深色模式自适应（跟随系统）
+- 字体大小响应式调整
+- 触控板/鼠标滚轮优化
 
 <div align="center">
 🎨 文档维护：自231班 黄海东 
