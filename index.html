@@ -23,73 +23,100 @@
     <!-- AOS CSS -->
     <link href="assets/css/aos.css" rel="stylesheet">
     <style>
-
+        :root {
+            --primary-color: #1246ff;
+            --secondary-color: #f0f9ff;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
 
         body {
             font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f0f9ff;
-            color: #333;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
 
+        /* 导航栏样式 */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
             border-radius: 0 0 15px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar.scrolled {
-            background-color: #1246ff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background-color: var(--primary-color);
+            box-shadow: var(--hover-shadow);
         }
 
-        .section-heading {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #333;
-            text-align: center;
-            font-weight: 700;
+        .navbar.scrolled .nav-link,
+        .navbar.scrolled .navbar-brand {
+            color: white !important;
         }
 
         .navbar-brand {
             font-weight: 700;
             font-size: 1.7rem;
-            color: #1246ff;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
         }
 
         .nav-link {
-            font-size: 1rem;
-            margin-left: 15px;
-            color: #333;
+            font-size: 1.1rem;
+            margin-left: 20px;
+            color: var(--text-color);
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
         }
 
         .nav-link.active,
         .nav-link:hover {
-            color: #1246ff;
+            color: var(--primary-color);
         }
 
         .nav-link.forum-button {
             color: white;
-            background-color: #1246ff;
+            background-color: var(--primary-color);
             padding: 10px 20px;
             border-radius: 20px;
             font-weight: 700;
-            transition: background-color 0.3s ease;
-        }
-        h3{
-            font-weight: 700;
+            transition: all 0.3s ease;
         }
 
         .nav-link.forum-button:hover {
             background-color: #0d38e0;
+            transform: translateY(-2px);
         }
 
+        /* 头部区域样式 */
         .header {
-            background: linear-gradient(to bottom, #75b3fa, #1246ff);
+            background: linear-gradient(135deg, #75b3fa 0%, var(--primary-color) 100%);
             height: 88vh;
             display: flex;
             flex-direction: column;
@@ -106,191 +133,138 @@
             height: auto;
             border-radius: 20px;
             margin-bottom: 15px;
+            box-shadow: var(--card-shadow);
         }
 
         .header h1 {
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .header p {
             font-size: 1.4rem;
+            margin-bottom: 1rem;
         }
 
-        .arrow {
-            position: absolute;
-            bottom: 20px;
-            width: 40px;
-            animation: bounce 1s infinite;
+        .header h3 {
+            font-weight: 700;
+            margin-top: 1rem;
         }
 
-        @keyframes bounce {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-15px);
-            }
-
-            60% {
-                transform: translateY(-7px);
-            }
-        }
-
+        /* 通知栏样式 */
         .notification-bar {
             background-color: #f1ecff;
             color: #3f532f;
-            padding: 5px 0;
+            padding: 10px 0;
             text-align: center;
-            position: relative;
-            font-size: 1rem;
-            font-weight: 1000;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: var(--card-shadow);
         }
 
         .notification-bar a {
-            color: #3700ff;
-            text-decoration: underline;
-
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
         }
 
-        .content-section {
-            padding: 60px 0;
+        .notification-bar a:hover {
+            color: var(--accent-color);
         }
 
-        .content-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            color: #333;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .btn-lg-custom {
-            padding: 10px 10px;
-            font-size: 1.25em;
-            width: 100%;
-        }
-
+        /* 卡片样式 */
         .card {
+            background: rgba(255, 255, 255, 0.95);
             border: none;
             border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
             overflow: hidden;
             position: relative;
             z-index: 1;
             margin-bottom: 30px;
+            height: 100%;
         }
 
         .card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
         }
 
         .card img {
             border-radius: 20px 20px 0 0;
             max-width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
 
         .card-body {
-            background-color: #fff3e0;
+            background-color: #fff;
             border-radius: 0 0 20px 20px;
+            padding: 25px;
         }
 
         .card-title {
-            color: #1246ff;
+            color: var(--primary-color);
             font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
 
         .card-text {
-            color: #666;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .btn-primary {
-            background-color: #1246ff;
-            border-color: #1246ff;
-            border-radius: 100px;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             background-color: #0d38e0;
             border-color: #0d38e0;
+            transform: translateY(-2px);
         }
 
+        /* 页脚样式 */
         .footer {
-            background-color: #1246ff;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2a5fff 100%);
             color: white;
-            padding: 40px 0;
+            padding: 50px 0;
             text-align: center;
-            margin-top: 40px;
-            border-radius: 20px;
+            margin-top: 60px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
         }
 
         .footer p {
             margin-bottom: 0;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
-        .card-container {
-            position: relative;
-        }
-
-        .notification-carousel {
-            background-color: #f1ecff;
-            color: #3f532f;
-            padding: 10px 0;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            position: relative;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .notification-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 50px; /* 可调整高度 */
-        }
-
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: #1246ff;
-            border-radius: 50%;
-        }
-
-        @media (max-width: 768px) {
-            .notification-carousel {
-                font-size: 1rem;
-            }
-
-            .notification-item {
-                height: 50px; /* 针对较小设备调整高度 */
-            }
-        }
-
-
-        .card-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            z-index: -1;
-            border-radius: 20px;
-        }
-
+        /* 响应式设计 */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2.5rem;
@@ -300,35 +274,39 @@
                 font-size: 1.2rem;
             }
 
-            .content-section h2 {
-                font-size: 2rem;
-            }
-
-            .card {
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 576px) {
             .navbar-brand {
                 font-size: 1.5rem;
             }
 
             .nav-link {
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
 
-            .forum-button {
-                padding: 8px 16px;
-                font-size: 0.9rem;
+            .card {
+                margin-bottom: 20px;
             }
+        }
 
+        @media (max-width: 576px) {
             .header h1 {
                 font-size: 2rem;
             }
 
             .header p {
                 font-size: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .nav-link.forum-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -595,3 +573,4 @@
 </body>
 
 </html>
+
