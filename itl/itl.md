@@ -75,9 +75,9 @@
 
 # 佛山市威士特激光设备科技有限公司
 
-![威士特激光](/assets/img/companies/wisdom.png)
+![威士特激光](/assets/img/companies/laser.png)
 
-## [访问威士特激光官网](http://www.wisdomlaser.com/)
+## [访问威士特激光官网](http://www.visterlaser.com)
 
 > 始建于2011年，位于佛山市顺德区容桂，是一家专业致力于激光标识设备研发、生产、销售的高科技企业。公司拥有十多年研发/生产激光工业设备的经验，部分产品已通过国际CE认证并远销全球各地。
 
