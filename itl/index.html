@@ -133,9 +133,9 @@
 
         .company-card {
             background: rgba(255, 255, 255, 0.98);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 40px;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
             box-shadow: var(--card-shadow);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -153,11 +153,11 @@
 
         .company-name {
             color: var(--primary-color);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
-            padding-bottom: 15px;
+            padding-bottom: 12px;
             flex-shrink: 0;
             letter-spacing: -0.5px;
         }
@@ -175,8 +175,8 @@
 
         .company-info {
             color: var(--text-color);
-            font-size: 1.05rem;
-            line-height: 1.8;
+            font-size: 0.95rem;
+            line-height: 1.6;
             flex-grow: 1;
         }
 
@@ -209,12 +209,12 @@
 
         .company-info img {
             width: 100%;
-            height: 140px;
+            height: 100px;
             object-fit: contain;
-            margin: 20px 0;
+            margin: 15px 0;
             background-color: white;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
         }
@@ -224,8 +224,8 @@
         }
 
         .company-info h2 {
-            margin: 25px 0 15px;
-            font-size: 1.3rem;
+            margin: 20px 0 12px;
+            font-size: 1.2rem;
             color: var(--primary-color);
             font-weight: 600;
         }
@@ -270,27 +270,49 @@
             font-weight: 500;
         }
 
-        @media (max-width: 768px) {
-            .section-heading {
-                font-size: 2rem;
-                margin: 40px 0 30px;
-            }
-
+        @media (max-width: 1200px) {
             .company-card {
-                padding: 30px;
-                margin-bottom: 30px;
+                padding: 20px;
             }
 
             .company-name {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
             }
 
             .company-info {
-                font-size: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .company-card {
+                padding: 25px;
+            }
+
+            .company-name {
+                font-size: 1.4rem;
+            }
+
+            .company-info {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .company-card {
+                padding: 20px;
+            }
+
+            .company-name {
+                font-size: 1.3rem;
+            }
+
+            .company-info {
+                font-size: 0.9rem;
             }
 
             .company-info img {
-                height: 120px;
+                height: 90px;
             }
         }
 
@@ -300,7 +322,7 @@
             }
 
             .company-card {
-                padding: 25px;
+                padding: 20px;
             }
 
             .section-heading {
