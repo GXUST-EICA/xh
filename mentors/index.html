@@ -74,69 +74,39 @@
         .mentor-card {
             background: white;
             border-radius: 20px;
-            padding: 0;
+            padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
             text-align: center;
-            overflow: hidden;
-            position: relative;
         }
 
         .mentor-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(18, 70, 255, 0.15);
-        }
-
-        .mentor-image-container {
-            position: relative;
-            width: 100%;
-            height: 280px;
-            background: linear-gradient(135deg, #1246ff 0%, #6c8fff 100%);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .mentor-image {
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-        }
-
-        .mentor-card:hover .mentor-image {
-            transform: scale(1.05);
-            border-color: #fff;
+            margin: 0 auto 20px;
+            border: 4px solid #1246ff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .mentor-image-placeholder {
-            width: 220px;
-            height: 220px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            margin: 0 auto;
+            background-color: #e9ecef;
+            margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #1246ff;
-            font-size: 4rem;
-            border: 4px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        .mentor-content {
-            padding: 25px 30px;
-            background: white;
-            position: relative;
+            color: #6c757d;
+            font-size: 3rem;
+            border: 4px solid #1246ff;
         }
 
         .mentor-name {
@@ -144,20 +114,6 @@
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .mentor-name::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: #1246ff;
-            border-radius: 2px;
         }
 
         .mentor-title {
@@ -170,12 +126,10 @@
             color: #333;
             font-size: 1.1rem;
             line-height: 1.6;
-            text-align: left;
         }
 
         .mentor-info strong {
             color: #1246ff;
-            font-weight: 600;
         }
 
         .mentor-info ul {
@@ -201,16 +155,7 @@
         }
 
         @media (max-width: 768px) {
-            .mentor-image-container {
-                height: 240px;
-            }
-
-            .mentor-image, .mentor-image-placeholder {
-                width: 180px;
-                height: 180px;
-            }
-
-            .mentor-content {
+            .mentor-card {
                 padding: 20px;
             }
 
@@ -311,12 +256,18 @@
                     
                     currentMentor = {
                         name: h2.textContent,
+                        image: '',
                         content: []
                     };
                     
                     let nextElement = h2.nextElementSibling;
                     while (nextElement && nextElement.tagName !== 'H2') {
-                        currentMentor.content.push(nextElement.outerHTML);
+                        // 检查是否是图片信息
+                        if (nextElement.textContent.startsWith('**图片**：')) {
+                            currentMentor.image = nextElement.textContent.replace('**图片**：', '').trim();
+                        } else {
+                            currentMentor.content.push(nextElement.outerHTML);
+                        }
                         nextElement = nextElement.nextElementSibling;
                     }
                 });
@@ -337,47 +288,26 @@
                     const card = document.createElement('div');
                     card.className = 'mentor-card';
                     
-                    // 创建图片容器
-                    const imageContainer = document.createElement('div');
-                    imageContainer.className = 'mentor-image-container';
-                    
-                    // 提取图片URL并过滤掉图片信息
-                    let imageUrl = null;
-                    const filteredContent = mentor.content.filter(content => {
-                        const match = content.match(/\*\*图片\*\*：(\/assets\/img\/mentors\/[^"]+)/);
-                        if (match) {
-                            imageUrl = match[1];
-                            return false;
-                        }
-                        return true;
-                    });
-                    
                     // 添加图片
-                    if (imageUrl) {
+                    if (mentor.image) {
                         const img = document.createElement('img');
                         img.className = 'mentor-image';
-                        img.src = imageUrl;
-                        img.alt = `${mentor.name}的照片`;
+                        img.src = mentor.image;
+                        img.alt = mentor.name;
                         img.onerror = function() {
                             this.style.display = 'none';
                             const placeholder = document.createElement('div');
                             placeholder.className = 'mentor-image-placeholder';
                             placeholder.innerHTML = '👨‍🏫';
-                            imageContainer.appendChild(placeholder);
+                            this.parentNode.insertBefore(placeholder, this);
                         };
-                        imageContainer.appendChild(img);
+                        card.appendChild(img);
                     } else {
                         const placeholder = document.createElement('div');
                         placeholder.className = 'mentor-image-placeholder';
                         placeholder.innerHTML = '👨‍🏫';
-                        imageContainer.appendChild(placeholder);
+                        card.appendChild(placeholder);
                     }
-                    
-                    card.appendChild(imageContainer);
-                    
-                    // 创建内容容器
-                    const contentContainer = document.createElement('div');
-                    contentContainer.className = 'mentor-content';
                     
                     const name = document.createElement('h2');
                     name.className = 'mentor-name';
@@ -385,12 +315,10 @@
                     
                     const content = document.createElement('div');
                     content.className = 'mentor-info';
-                    content.innerHTML = filteredContent.join('');
+                    content.innerHTML = mentor.content.join('');
                     
-                    contentContainer.appendChild(name);
-                    contentContainer.appendChild(content);
-                    card.appendChild(contentContainer);
-                    
+                    card.appendChild(name);
+                    card.appendChild(content);
                     col.appendChild(card);
                     container.appendChild(col);
                 });

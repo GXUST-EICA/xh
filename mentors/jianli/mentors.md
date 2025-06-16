@@ -1,12 +1,12 @@
 # 校内导师团队
 
 ## 高远
-**图片**：/assets/img/mentors/gaoyuan.png
+**图片**：/assets/img/mentors/gaoyuan.jpg
 **职位**：教授
 
 
 ## 陈文辉
-**图片**：/assets/img/mentors/chenwenhui.png
+**图片**：/assets/img/mentors/chenwenhui.jpg
 **职位**：高级实验师
 
 
