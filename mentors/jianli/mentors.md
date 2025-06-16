@@ -11,7 +11,7 @@
 
 
 ## 岳汶华
-<!-- 图片：/assets/img/mentors/yuewenhua.jpg -->
+<!-- 图片：/assets/img/mentors/yuewenhua.png -->
 **职位**： 广西科技大学自动化学院校外兼职教师，广州粤嵌通信科技股份有限公司广西区总经理，高级工程师
 
 **研究方向**：嵌入式技术
