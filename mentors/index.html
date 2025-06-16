@@ -127,6 +127,11 @@
             background: white;
             padding: 4px;
             transform: scale(0.9);
+            display: block !important;
+        }
+
+        .mentor-image-wrapper img.mentor-image {
+            border-radius: 12px !important;
         }
 
         .mentor-image-placeholder {
@@ -374,10 +379,6 @@
                         img.className = 'mentor-image';
                         img.src = mentor.image;
                         img.alt = mentor.name;
-                        img.style.borderRadius = '12px';
-                        img.style.width = '100%';
-                        img.style.height = '100%';
-                        img.style.objectFit = 'contain';
                         img.onerror = function() {
                             this.style.display = 'none';
                             const placeholder = document.createElement('div');
