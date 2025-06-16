@@ -341,8 +341,18 @@
                     const imageContainer = document.createElement('div');
                     imageContainer.className = 'mentor-image-container';
                     
+                    // 提取图片URL并过滤掉图片信息
+                    let imageUrl = null;
+                    const filteredContent = mentor.content.filter(content => {
+                        const match = content.match(/\*\*图片\*\*：(\/assets\/img\/mentors\/[^"]+)/);
+                        if (match) {
+                            imageUrl = match[1];
+                            return false;
+                        }
+                        return true;
+                    });
+                    
                     // 添加图片
-                    const imageUrl = mentor.content.find(content => content.includes('**图片**：'))?.match(/\/assets\/img\/mentors\/[^"]+/)?.[0];
                     if (imageUrl) {
                         const img = document.createElement('img');
                         img.className = 'mentor-image';
@@ -375,9 +385,7 @@
                     
                     const content = document.createElement('div');
                     content.className = 'mentor-info';
-                    content.innerHTML = mentor.content
-                        .filter(content => !content.includes('**图片**：'))
-                        .join('');
+                    content.innerHTML = filteredContent.join('');
                     
                     contentContainer.appendChild(name);
                     contentContainer.appendChild(content);
