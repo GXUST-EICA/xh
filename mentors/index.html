@@ -73,48 +73,59 @@
 
         .mentor-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 25px;
             margin-bottom: 30px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(18, 70, 255, 0.08);
+            transition: all 0.3s ease;
             text-align: center;
+            border: 1px solid rgba(18, 70, 255, 0.1);
         }
 
         .mentor-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(18, 70, 255, 0.12);
+        }
+
+        .mentor-image-container {
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto 25px;
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(18, 70, 255, 0.06);
         }
 
         .mentor-image {
             width: 100%;
-            max-width: 300px;
             height: auto;
-            border-radius: 2px;
-            object-fit: contain;
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            object-fit: cover;
+            aspect-ratio: 4/3;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         .mentor-image-placeholder {
             width: 100%;
-            max-width: 300px;
-            height: 200px;
-            border-radius: 2px;
-            background-color: #e9ecef;
-            margin: 0 auto 20px;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e6eeff 100%);
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6c757d;
-            font-size: 3rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #1246ff;
+            font-size: 2.5rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         .mentor-name {
             color: #1246ff;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(18, 70, 255, 0.1);
         }
 
         .mentor-title {
@@ -125,12 +136,14 @@
 
         .mentor-info {
             color: #333;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
+            text-align: left;
         }
 
         .mentor-info strong {
             color: #1246ff;
+            font-weight: 600;
         }
 
         .mentor-info ul {
@@ -290,6 +303,10 @@
                     const card = document.createElement('div');
                     card.className = 'mentor-card';
                     
+                    // 添加图片容器
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'mentor-image-container';
+                    
                     // 添加图片
                     if (mentor.image) {
                         const img = document.createElement('img');
@@ -301,15 +318,17 @@
                             const placeholder = document.createElement('div');
                             placeholder.className = 'mentor-image-placeholder';
                             placeholder.innerHTML = '👨‍🏫';
-                            this.parentNode.insertBefore(placeholder, this);
+                            this.parentNode.appendChild(placeholder);
                         };
-                        card.appendChild(img);
+                        imageContainer.appendChild(img);
                     } else {
                         const placeholder = document.createElement('div');
                         placeholder.className = 'mentor-image-placeholder';
                         placeholder.innerHTML = '👨‍🏫';
-                        card.appendChild(placeholder);
+                        imageContainer.appendChild(placeholder);
                     }
+                    
+                    card.appendChild(imageContainer);
                     
                     const name = document.createElement('h2');
                     name.className = 'mentor-name';

@@ -1,19 +1,19 @@
 # 校内导师团队
 
 ## 高远
-[图片:/assets/img/mentors/gaoyuan.png]
+[图片:https://pic1.imgdb.cn/item/68501fff58cb8da5c8516aac.png]
 
 **职位**：教授
 
 
 ## 陈文辉
-[图片:/assets/img/mentors/chenwenhui.png]
+[图片:https://pic1.imgdb.cn/item/68501fff58cb8da5c8516aaa.png]
 
 **职位**：高级实验师
 
 
 ## 岳汶华
-[图片:/assets/img/mentors/yuewenhua.png]
+[图片:https://pic1.imgdb.cn/item/6850209d58cb8da5c8516c16.png]
 **职位**： 广西科技大学自动化学院校外兼职教师，广州粤嵌通信科技股份有限公司广西区总经理，高级工程师
 
 **研究方向**：嵌入式技术
