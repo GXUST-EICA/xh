@@ -598,13 +598,18 @@
         const closeBtn = document.querySelector('.close-modal');
 
         function showProfile(name) {
+            console.log('Showing profile for:', name); // 调试日志
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
             // 加载成员简介
             fetch(`/friends/profiles/${name}.md`)
-                .then(response => response.text())
+                .then(response => {
+                    console.log('Profile fetch response:', response.status); // 调试日志
+                    return response.text();
+                })
                 .then(markdown => {
+                    console.log('Profile content loaded'); // 调试日志
                     // 解析 frontmatter
                     const frontmatterMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
                     let frontmatter = {};
@@ -680,28 +685,35 @@
                     return name;
                 }) || [];
 
+                console.log('Found members:', memberNames); // 调试日志
+
                 // 检查每个成员是否有对应的简历文件
                 Promise.all(memberNames.map(name => {
                     const pinyinName = name.toLowerCase().replace(/\s+/g, '');
+                    console.log('Checking profile for:', name, 'pinyin:', pinyinName); // 调试日志
                     return fetch(`/friends/profiles/${pinyinName}.md`)
                         .then(response => {
                             if (response.ok) {
-                                return { name, hasProfile: true };
+                                console.log('Found profile for:', name); // 调试日志
+                                return { name, hasProfile: true, pinyinName };
                             }
-                            return { name, hasProfile: false };
+                            console.log('No profile for:', name); // 调试日志
+                            return { name, hasProfile: false, pinyinName };
                         })
-                        .catch(() => ({ name, hasProfile: false }));
+                        .catch(() => {
+                            console.log('Error checking profile for:', name); // 调试日志
+                            return { name, hasProfile: false, pinyinName };
+                        });
                 }))
                 .then(membersWithProfiles => {
+                    console.log('Members with profiles:', membersWithProfiles); // 调试日志
+                    
                     // 为有简历的成员添加点击事件
-                    membersWithProfiles.forEach(({ name, hasProfile }) => {
+                    membersWithProfiles.forEach(({ name, hasProfile, pinyinName }) => {
                         if (hasProfile) {
-                            const pinyinName = name.toLowerCase().replace(/\s+/g, '');
                             const regex = new RegExp(`<li>${name}</li>`, 'g');
-                            html = html.replace(
-                                regex,
-                                `<li><a class="member-link" onclick="showProfile('${pinyinName}')">${name}</a></li>`
-                            );
+                            const replacement = `<li><a href="javascript:void(0)" class="member-link" data-profile="${pinyinName}">${name}</a></li>`;
+                            html = html.replace(regex, replacement);
                         }
                     });
 
@@ -762,6 +774,16 @@
                     });
 
                     document.getElementById('membersContent').innerHTML = newHtml;
+
+                    // 为所有成员链接添加点击事件监听器
+                    document.querySelectorAll('.member-link').forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const profileName = this.getAttribute('data-profile');
+                            console.log('Clicked on profile:', profileName); // 调试日志
+                            showProfile(profileName);
+                        });
+                    });
                 })
                 .catch(error => {
                     console.error('Error checking profiles:', error);
@@ -774,6 +796,7 @@
                 });
             })
             .catch(error => {
+                console.error('Error loading members:', error);
                 document.getElementById('membersContent').innerHTML = `
                     <div class="error-message">
                         <h3>加载失败</h3>
