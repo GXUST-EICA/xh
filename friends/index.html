@@ -597,19 +597,25 @@
         const modalContent = document.getElementById('profileContent');
         const closeBtn = document.querySelector('.close-modal');
 
-        function showProfile(name) {
-            console.log('Showing profile for:', name); // 调试日志
+        function showProfile(profileId) {
+            console.log('Showing profile for ID:', profileId);
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
             // 加载成员简介
-            fetch(`/friends/profiles/${name}.md`)
+            const profileUrl = `/friends/profiles/${profileId}.md`;
+            console.log('Fetching profile from:', profileUrl);
+            
+            fetch(profileUrl)
                 .then(response => {
-                    console.log('Profile fetch response:', response.status); // 调试日志
+                    console.log('Profile response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
                     return response.text();
                 })
                 .then(markdown => {
-                    console.log('Profile content loaded'); // 调试日志
+                    console.log('Profile content loaded');
                     // 解析 frontmatter
                     const frontmatterMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
                     let frontmatter = {};
@@ -635,11 +641,11 @@
                     const profileHtml = `
                         <div class="profile-header">
                             <img src="${frontmatter.avatar || '/assets/img/default-avatar.jpg'}" 
-                                 alt="${frontmatter.name || name}" 
+                                 alt="${frontmatter.name || profileId}" 
                                  class="profile-avatar"
                                  onerror="this.src='/assets/img/default-avatar.jpg'">
                             <div class="profile-info">
-                                <h1 class="profile-name">${frontmatter.name || name}</h1>
+                                <h1 class="profile-name">${frontmatter.name || profileId}</h1>
                                 <p class="profile-title">${frontmatter.title || ''}</p>
                             </div>
                         </div>
@@ -656,6 +662,7 @@
                         <div class="error-message">
                             <h3>加载失败</h3>
                             <p>无法加载成员简介，请稍后重试。</p>
+                            <p>错误信息: ${error.message}</p>
                         </div>
                     `;
                 });
@@ -669,6 +676,7 @@
         closeBtn.onclick = closeModal;
         window.onclick = function(event) {
             if (event.target === modal) {
+                console.log('Modal background clicked');
                 closeModal();
             }
         }
@@ -678,13 +686,20 @@
 
         // 首先加载配置文件
         fetch('/friends/profiles/config.json')
-            .then(response => response.json())
+            .then(response => {
+                console.log('Config response status:', response.status);
+                return response.json();
+            })
             .then(config => {
+                console.log('Loaded config:', config);
                 profileConfig = config;
                 // 然后加载成员列表
                 return fetch('/friends/members.md');
             })
-            .then(response => response.text())
+            .then(response => {
+                console.log('Members response status:', response.status);
+                return response.text();
+            })
             .then(markdown => {
                 let html = marked.parse(markdown);
                 
@@ -695,13 +710,15 @@
                 }) || [];
 
                 console.log('Found members:', memberNames);
+                console.log('Profile config:', profileConfig);
 
                 // 为有简历的成员添加点击事件
                 memberNames.forEach(name => {
                     if (profileConfig.profiles[name]) {
                         const profileId = profileConfig.profiles[name];
+                        console.log('Adding profile link for:', name, 'with ID:', profileId);
                         const regex = new RegExp(`<li>${name}</li>`, 'g');
-                        const replacement = `<li><a href="javascript:void(0)" class="member-link" data-profile="${profileId}">${name}</a></li>`;
+                        const replacement = `<li><a href="#" class="member-link" data-profile="${profileId}">${name}</a></li>`;
                         html = html.replace(regex, replacement);
                     }
                 });
@@ -765,13 +782,18 @@
                 document.getElementById('membersContent').innerHTML = newHtml;
 
                 // 为所有成员链接添加点击事件监听器
-                document.querySelectorAll('.member-link').forEach(link => {
-                    link.addEventListener('click', function(e) {
+                const links = document.querySelectorAll('.member-link');
+                console.log('Found profile links:', links.length);
+                
+                links.forEach(link => {
+                    console.log('Adding click handler to:', link.textContent);
+                    link.onclick = function(e) {
                         e.preventDefault();
                         const profileId = this.getAttribute('data-profile');
                         console.log('Clicked on profile:', profileId);
                         showProfile(profileId);
-                    });
+                        return false;
+                    };
                 });
             })
             .catch(error => {
