@@ -74,14 +74,69 @@
         .mentor-card {
             background: white;
             border-radius: 20px;
-            padding: 30px;
+            padding: 0;
             margin-bottom: 30px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
         }
 
         .mentor-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(18, 70, 255, 0.15);
+        }
+
+        .mentor-image-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #1246ff 0%, #6c8fff 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mentor-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mentor-card:hover .mentor-image {
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+
+        .mentor-image-placeholder {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1246ff;
+            font-size: 4rem;
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .mentor-content {
+            padding: 25px 30px;
+            background: white;
+            position: relative;
         }
 
         .mentor-name {
@@ -89,6 +144,20 @@
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .mentor-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: #1246ff;
+            border-radius: 2px;
         }
 
         .mentor-title {
@@ -101,10 +170,12 @@
             color: #333;
             font-size: 1.1rem;
             line-height: 1.6;
+            text-align: left;
         }
 
         .mentor-info strong {
             color: #1246ff;
+            font-weight: 600;
         }
 
         .mentor-info ul {
@@ -130,7 +201,16 @@
         }
 
         @media (max-width: 768px) {
-            .mentor-card {
+            .mentor-image-container {
+                height: 240px;
+            }
+
+            .mentor-image, .mentor-image-placeholder {
+                width: 180px;
+                height: 180px;
+            }
+
+            .mentor-content {
                 padding: 20px;
             }
 
@@ -257,16 +337,52 @@
                     const card = document.createElement('div');
                     card.className = 'mentor-card';
                     
+                    // 创建图片容器
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'mentor-image-container';
+                    
+                    // 添加图片
+                    const imageUrl = mentor.content.find(content => content.includes('**图片**：'))?.match(/\/assets\/img\/mentors\/[^"]+/)?.[0];
+                    if (imageUrl) {
+                        const img = document.createElement('img');
+                        img.className = 'mentor-image';
+                        img.src = imageUrl;
+                        img.alt = `${mentor.name}的照片`;
+                        img.onerror = function() {
+                            this.style.display = 'none';
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'mentor-image-placeholder';
+                            placeholder.innerHTML = '👨‍🏫';
+                            imageContainer.appendChild(placeholder);
+                        };
+                        imageContainer.appendChild(img);
+                    } else {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'mentor-image-placeholder';
+                        placeholder.innerHTML = '👨‍🏫';
+                        imageContainer.appendChild(placeholder);
+                    }
+                    
+                    card.appendChild(imageContainer);
+                    
+                    // 创建内容容器
+                    const contentContainer = document.createElement('div');
+                    contentContainer.className = 'mentor-content';
+                    
                     const name = document.createElement('h2');
                     name.className = 'mentor-name';
                     name.textContent = mentor.name;
                     
                     const content = document.createElement('div');
                     content.className = 'mentor-info';
-                    content.innerHTML = mentor.content.join('');
+                    content.innerHTML = mentor.content
+                        .filter(content => !content.includes('**图片**：'))
+                        .join('');
                     
-                    card.appendChild(name);
-                    card.appendChild(content);
+                    contentContainer.appendChild(name);
+                    contentContainer.appendChild(content);
+                    card.appendChild(contentContainer);
+                    
                     col.appendChild(card);
                     container.appendChild(col);
                 });
