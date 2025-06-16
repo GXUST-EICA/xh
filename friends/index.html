@@ -674,7 +674,16 @@
         }
 
         // 修改成员列表渲染逻辑
-        fetch('/friends/members.md')
+        let profileConfig = null;
+
+        // 首先加载配置文件
+        fetch('/friends/profiles/config.json')
+            .then(response => response.json())
+            .then(config => {
+                profileConfig = config;
+                // 然后加载成员列表
+                return fetch('/friends/members.md');
+            })
             .then(response => response.text())
             .then(markdown => {
                 let html = marked.parse(markdown);
@@ -685,118 +694,88 @@
                     return name;
                 }) || [];
 
-                console.log('Found members:', memberNames); // 调试日志
+                console.log('Found members:', memberNames);
 
-                // 检查每个成员是否有对应的简历文件
-                Promise.all(memberNames.map(name => {
-                    const pinyinName = name.toLowerCase().replace(/\s+/g, '');
-                    console.log('Checking profile for:', name, 'pinyin:', pinyinName); // 调试日志
-                    return fetch(`/friends/profiles/${pinyinName}.md`)
-                        .then(response => {
-                            if (response.ok) {
-                                console.log('Found profile for:', name); // 调试日志
-                                return { name, hasProfile: true, pinyinName };
-                            }
-                            console.log('No profile for:', name); // 调试日志
-                            return { name, hasProfile: false, pinyinName };
-                        })
-                        .catch(() => {
-                            console.log('Error checking profile for:', name); // 调试日志
-                            return { name, hasProfile: false, pinyinName };
-                        });
-                }))
-                .then(membersWithProfiles => {
-                    console.log('Members with profiles:', membersWithProfiles); // 调试日志
+                // 为有简历的成员添加点击事件
+                memberNames.forEach(name => {
+                    if (profileConfig.profiles[name]) {
+                        const profileId = profileConfig.profiles[name];
+                        const regex = new RegExp(`<li>${name}</li>`, 'g');
+                        const replacement = `<li><a href="javascript:void(0)" class="member-link" data-profile="${profileId}">${name}</a></li>`;
+                        html = html.replace(regex, replacement);
+                    }
+                });
+
+                // 处理部门布局
+                const sections = html.split('<h2');
+                let newHtml = '';
+                let departmentSection = '';
+                let departmentContent = '';
+                let topSection = '';
+                let topContent = '';
+                
+                sections.forEach((section, index) => {
+                    if (index === 0) {
+                        newHtml += section; // 标题部分
+                        return;
+                    }
                     
-                    // 为有简历的成员添加点击事件
-                    membersWithProfiles.forEach(({ name, hasProfile, pinyinName }) => {
-                        if (hasProfile) {
-                            const regex = new RegExp(`<li>${name}</li>`, 'g');
-                            const replacement = `<li><a href="javascript:void(0)" class="member-link" data-profile="${pinyinName}">${name}</a></li>`;
-                            html = html.replace(regex, replacement);
-                        }
-                    });
-
-                    // 处理部门布局
-                    const sections = html.split('<h2');
-                    let newHtml = '';
-                    let departmentSection = '';
-                    let departmentContent = '';
-                    let topSection = '';
-                    let topContent = '';
+                    const title = section.match(/>(.*?)<\/h2>/)?.[1];
                     
-                    sections.forEach((section, index) => {
-                        if (index === 0) {
-                            newHtml += section; // 标题部分
-                            return;
+                    // 处理会长团和技术部
+                    if (title === '会长团' || title === '技术部') {
+                        if (title === '会长团') {
+                            topSection = '<div class="top-section">';
                         }
-                        
-                        const title = section.match(/>(.*?)<\/h2>/)?.[1];
-                        
-                        // 处理会长团和技术部
-                        if (title === '会长团' || title === '技术部') {
-                            if (title === '会长团') {
-                                topSection = '<div class="top-section">';
-                            }
-                            topContent += `<div class="top-column"><h2${section}</div>`;
-                            if (title === '技术部') {
-                                topSection += topContent + '</div>';
-                                newHtml += topSection;
-                                topSection = '';
-                                topContent = '';
-                            }
+                        topContent += `<div class="top-column"><h2${section}</div>`;
+                        if (title === '技术部') {
+                            topSection += topContent + '</div>';
+                            newHtml += topSection;
+                            topSection = '';
+                            topContent = '';
                         }
-                        // 处理组织部、统筹部、宣传部
-                        else if (title === '组织部' || title === '统筹部' || title === '宣传部') {
-                            if (title === '组织部') {
-                                departmentSection = '<div class="department-section">';
-                            }
-                            departmentContent += `<div class="department-column"><h2${section}</div>`;
-                            if (title === '宣传部') {
-                                departmentSection += departmentContent + '</div>';
-                                newHtml += departmentSection;
-                                departmentSection = '';
-                                departmentContent = '';
-                            }
-                        } else {
-                            if (departmentSection) {
-                                newHtml += departmentSection;
-                                departmentSection = '';
-                                departmentContent = '';
-                            }
-                            if (topSection) {
-                                newHtml += topSection;
-                                topSection = '';
-                                topContent = '';
-                            }
-                            newHtml += `<h2${section}`;
+                    }
+                    // 处理组织部、统筹部、宣传部
+                    else if (title === '组织部' || title === '统筹部' || title === '宣传部') {
+                        if (title === '组织部') {
+                            departmentSection = '<div class="department-section">';
                         }
-                    });
+                        departmentContent += `<div class="department-column"><h2${section}</div>`;
+                        if (title === '宣传部') {
+                            departmentSection += departmentContent + '</div>';
+                            newHtml += departmentSection;
+                            departmentSection = '';
+                            departmentContent = '';
+                        }
+                    } else {
+                        if (departmentSection) {
+                            newHtml += departmentSection;
+                            departmentSection = '';
+                            departmentContent = '';
+                        }
+                        if (topSection) {
+                            newHtml += topSection;
+                            topSection = '';
+                            topContent = '';
+                        }
+                        newHtml += `<h2${section}`;
+                    }
+                });
 
-                    document.getElementById('membersContent').innerHTML = newHtml;
+                document.getElementById('membersContent').innerHTML = newHtml;
 
-                    // 为所有成员链接添加点击事件监听器
-                    document.querySelectorAll('.member-link').forEach(link => {
-                        link.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const profileName = this.getAttribute('data-profile');
-                            console.log('Clicked on profile:', profileName); // 调试日志
-                            showProfile(profileName);
-                        });
+                // 为所有成员链接添加点击事件监听器
+                document.querySelectorAll('.member-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const profileId = this.getAttribute('data-profile');
+                        console.log('Clicked on profile:', profileId);
+                        showProfile(profileId);
                     });
-                })
-                .catch(error => {
-                    console.error('Error checking profiles:', error);
-                    document.getElementById('membersContent').innerHTML = `
-                        <div class="error-message">
-                            <h3>加载失败</h3>
-                            <p>无法加载成员信息，请稍后重试。</p>
-                        </div>
-                    `;
                 });
             })
             .catch(error => {
-                console.error('Error loading members:', error);
+                console.error('Error loading data:', error);
                 document.getElementById('membersContent').innerHTML = `
                     <div class="error-message">
                         <h3>加载失败</h3>
@@ -804,13 +783,6 @@
                     </div>
                 `;
             });
-
-        // 添加一个工具函数来将中文名转换为拼音（如果需要的话）
-        function toPinyin(name) {
-            // 这里可以添加中文转拼音的逻辑
-            // 暂时使用简单的转换：去掉空格，转小写
-            return name.toLowerCase().replace(/\s+/g, '');
-        }
     </script>
 </body>
 
