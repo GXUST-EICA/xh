@@ -718,7 +718,7 @@
                         const profileId = profileConfig.profiles[name];
                         console.log('Adding profile link for:', name, 'with ID:', profileId);
                         const regex = new RegExp(`<li>${name}</li>`, 'g');
-                        const replacement = `<li><a href="#" class="member-link" data-profile="${profileId}">${name}</a></li>`;
+                        const replacement = `<li><button class="member-link" data-profile="${profileId}">${name}</button></li>`;
                         html = html.replace(regex, replacement);
                     }
                 });
@@ -781,19 +781,15 @@
 
                 document.getElementById('membersContent').innerHTML = newHtml;
 
-                // 为所有成员链接添加点击事件监听器
-                const links = document.querySelectorAll('.member-link');
-                console.log('Found profile links:', links.length);
-                
-                links.forEach(link => {
-                    console.log('Adding click handler to:', link.textContent);
-                    link.onclick = function(e) {
+                // 使用事件委托处理点击事件
+                document.getElementById('membersContent').addEventListener('click', function(e) {
+                    const link = e.target.closest('.member-link');
+                    if (link) {
                         e.preventDefault();
-                        const profileId = this.getAttribute('data-profile');
+                        const profileId = link.getAttribute('data-profile');
                         console.log('Clicked on profile:', profileId);
                         showProfile(profileId);
-                        return false;
-                    };
+                    }
                 });
             })
             .catch(error => {
@@ -805,6 +801,41 @@
                     </div>
                 `;
             });
+
+        // 修改样式以适应按钮
+        const style = document.createElement('style');
+        style.textContent = `
+            .member-link {
+                background: none;
+                border: none;
+                padding: 0;
+                color: inherit;
+                cursor: pointer;
+                font: inherit;
+                width: 100%;
+                text-align: left;
+                display: block;
+                transition: all 0.3s ease;
+            }
+
+            .member-link:hover {
+                color: var(--primary-color);
+            }
+
+            .members-content li {
+                padding: 0;
+            }
+
+            .members-content li:hover {
+                transform: translateX(10px);
+                background: var(--primary-color);
+            }
+
+            .members-content li:hover .member-link {
+                color: white;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 
