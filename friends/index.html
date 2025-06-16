@@ -420,6 +420,23 @@
             border-radius: 60px;
             object-fit: cover;
             border: 4px solid var(--primary-color);
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+        }
+
+        .profile-avatar[src="/assets/img/default-avatar.jpg"] {
+            font-family: 'Font Awesome 5 Free';
+            content: '\f007';
+        }
+
+        .profile-avatar[src="/assets/img/default-avatar.jpg"]::before {
+            content: '\f007';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
         }
 
         .profile-info {
@@ -588,10 +605,48 @@
             fetch(`/friends/profiles/${name}.md`)
                 .then(response => response.text())
                 .then(markdown => {
-                    const html = marked.parse(markdown);
-                    modalContent.innerHTML = html;
+                    // 解析 frontmatter
+                    const frontmatterMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
+                    let frontmatter = {};
+                    let content = markdown;
+                    
+                    if (frontmatterMatch) {
+                        const frontmatterText = frontmatterMatch[1];
+                        content = markdown.slice(frontmatterMatch[0].length).trim();
+                        
+                        // 解析 frontmatter 内容
+                        frontmatterText.split('\n').forEach(line => {
+                            const [key, ...values] = line.split(':');
+                            if (key && values.length > 0) {
+                                frontmatter[key.trim()] = values.join(':').trim();
+                            }
+                        });
+                    }
+
+                    // 转换 markdown 内容为 HTML
+                    const contentHtml = marked.parse(content);
+                    
+                    // 构建完整的个人资料 HTML
+                    const profileHtml = `
+                        <div class="profile-header">
+                            <img src="${frontmatter.avatar || '/assets/img/default-avatar.jpg'}" 
+                                 alt="${frontmatter.name || name}" 
+                                 class="profile-avatar"
+                                 onerror="this.src='/assets/img/default-avatar.jpg'">
+                            <div class="profile-info">
+                                <h1 class="profile-name">${frontmatter.name || name}</h1>
+                                <p class="profile-title">${frontmatter.title || ''}</p>
+                            </div>
+                        </div>
+                        <div class="profile-content">
+                            ${contentHtml}
+                        </div>
+                    `;
+                    
+                    modalContent.innerHTML = profileHtml;
                 })
                 .catch(error => {
+                    console.error('Error loading profile:', error);
                     modalContent.innerHTML = `
                         <div class="error-message">
                             <h3>加载失败</h3>
