@@ -274,7 +274,7 @@
     </nav>
 
     <div class="container mt-5">
-        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">👨‍🏫 指导团队 👨‍🏫</h1>
+        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">指导团队</h1>
         <div id="mentors-container" class="row">
             <!-- 导师信息将通过JavaScript动态加载 -->
         </div>
@@ -301,7 +301,7 @@
         });
 
         // 加载并解析Markdown文件
-        fetch('/mentors/jianli/mentors.md')
+        fetch('/mentors/mentors.md')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
