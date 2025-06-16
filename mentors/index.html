@@ -125,6 +125,15 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             background: white;
             padding: 4px;
+            display: block;
+            min-height: 0;
+            min-width: 0;
+        }
+
+        .mentor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .mentor-image-placeholder {
@@ -371,6 +380,9 @@
                         img.className = 'mentor-image';
                         img.src = mentor.image;
                         img.alt = mentor.name;
+                        img.style.width = '100%';
+                        img.style.height = '100%';
+                        img.style.objectFit = 'contain';
                         img.onerror = function() {
                             this.style.display = 'none';
                             const placeholder = document.createElement('div');
