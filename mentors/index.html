@@ -262,10 +262,10 @@
                     
                     let nextElement = h2.nextElementSibling;
                     while (nextElement && nextElement.tagName !== 'H2') {
-                        // 检查是否是图片信息
-                        if (nextElement.textContent.startsWith('**图片**：')) {
-                            currentMentor.image = nextElement.textContent.replace('**图片**：', '').trim();
-                        } else {
+                        // 检查是否是图片注释
+                        if (nextElement.nodeType === Node.COMMENT_NODE && nextElement.textContent.trim().startsWith('图片：')) {
+                            currentMentor.image = nextElement.textContent.trim().replace('图片：', '').trim();
+                        } else if (nextElement.nodeType === Node.ELEMENT_NODE) {
                             currentMentor.content.push(nextElement.outerHTML);
                         }
                         nextElement = nextElement.nextElementSibling;
