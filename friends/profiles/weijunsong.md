@@ -1,7 +1,7 @@
 ---
 name: 韦竣嵩
 title: 嵌入式智控协会技术部副部长
-avatar: /assets/img/profiles/huanghaidong.jpg（这是头像，也可以是你的帅照，这个发给我就行）
+avatar: /assets/img/profiles/weijunsong.jpg
 ---
 
 ## 个人简介
