@@ -1080,27 +1080,24 @@
                     return;
                 }
                 
-                if (this.availableFiles.length > 1) {
-                    yearSelector.style.display = 'block';
-                    yearSelect.innerHTML = '';
-                    
-                    this.availableFiles.forEach(file => {
-                        const option = document.createElement('option');
-                        option.value = file;
-                        option.textContent = this.formatYearDisplay(file);
-                        yearSelect.appendChild(option);
-                    });
-                    
-                    // 设置默认选择最新年份
-                    yearSelect.value = this.availableFiles[0];
-                    
-                    // 添加事件监听
-                    yearSelect.addEventListener('change', (e) => {
-                        this.loadMembersFile(e.target.value);
-                    });
-                    } else {
-                    yearSelector.style.display = 'none';
-                }
+                // 始终显示年份选择器，即使只有一个文件
+                yearSelector.style.display = 'block';
+                yearSelect.innerHTML = '';
+                
+                this.availableFiles.forEach(file => {
+                    const option = document.createElement('option');
+                    option.value = file;
+                    option.textContent = this.formatYearDisplay(file);
+                    yearSelect.appendChild(option);
+                });
+                
+                // 设置默认选择最新年份
+                yearSelect.value = this.availableFiles[0];
+                
+                // 添加事件监听
+                yearSelect.addEventListener('change', (e) => {
+                    this.loadMembersFile(e.target.value);
+                });
             }
 
             // 格式化年份显示
