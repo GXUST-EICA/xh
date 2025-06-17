@@ -890,15 +890,15 @@
                 try {
                     // 尝试多种可能的文件名模式
                     const filePatterns = [
-                        // 年份格式：2425.md, 2324.md 等
-                        ...Array.from({length: 10}, (_, i) => {
-                            const year = 24 - i;
+                        // 年份格式：2526.md, 2425.md, 2324.md 等（更广泛的年份范围）
+                        ...Array.from({length: 20}, (_, i) => {
+                            const year = 25 - i;
                             const nextYear = year + 1;
                             return `${year}${nextYear}.md`;
                         }),
-                        // 完整年份格式：2024-2025.md 等
-                        ...Array.from({length: 10}, (_, i) => {
-                            const year = 2024 - i;
+                        // 完整年份格式：2025-2026.md, 2024-2025.md 等
+                        ...Array.from({length: 20}, (_, i) => {
+                            const year = 2025 - i;
                             const nextYear = year + 1;
                             return `${year}-${nextYear}.md`;
                         }),
@@ -920,6 +920,7 @@
                         }
                     }
                     
+                    console.log('All found files:', files);
                     return files.sort().reverse(); // 按文件名倒序排列，最新的在前面
                 } catch (error) {
                     console.error('Error getting members files:', error);
