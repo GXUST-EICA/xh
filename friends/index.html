@@ -668,7 +668,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
+    <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="600">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
@@ -681,19 +681,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/" data-aos="fade-right" data-aos-duration="1000">主页</a>
+                        <a class="nav-link" href="/" data-aos="fade-right" data-aos-duration="600">主页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/mentors" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="100">指导团队</a>
+                        <a class="nav-link" href="/mentors" data-aos="fade-left" data-aos-duration="600"
+                            data-aos-delay="50">指导团队</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/itl" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="200">协会共建企业联盟</a>
+                        <a class="nav-link" href="/itl" data-aos="fade-left" data-aos-duration="600"
+                            data-aos-delay="100">协会共建企业联盟</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/training" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="300">培训中心</a>
+                        <a class="nav-link" href="/training" data-aos="fade-left" data-aos-duration="600"
+                            data-aos-delay="150">培训中心</a>
                     </li>
                 </ul>
             </div>
@@ -701,7 +701,7 @@
     </nav>
 
     <div class="container mt-5">
-        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">协会成员</h1>
+        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="600">协会成员</h1>
         <div class="members-container">
             <div class="members-content">
                 <div id="yearSelector" class="year-selector" style="display: none;">
@@ -745,9 +745,9 @@
     <script src="/assets/js/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1000,
+            duration: 600,
             once: true,
-            offset: 100
+            offset: 50
         });
         
         window.addEventListener("scroll", function () {
@@ -792,6 +792,14 @@
             
             // 有个人简介，尝试加载
             const profileUrl = `/friends/profiles/${profileId}.md`;
+            
+            // 检查缓存
+            if (membersManager.profileCache.has(profileId)) {
+                const markdown = membersManager.profileCache.get(profileId);
+                processProfileContent(markdown, profileId, memberName);
+                return;
+            }
+            
             fetch(profileUrl)
                 .then(response => {
                     if (!response.ok) {
@@ -801,60 +809,9 @@
                     return response.text();
                 })
                 .then(markdown => {
-                    console.log('Raw markdown:', markdown);
-                    
-                    // 解析 frontmatter
-                    let frontmatter = {};
-                    let content = markdown;
-                    
-                    // 使用更严格的正则表达式匹配frontmatter
-                    const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
-                    const frontmatterMatch = markdown.match(frontmatterRegex);
-                    
-                    if (frontmatterMatch) {
-                        const frontmatterText = frontmatterMatch[1];
-                        // 移除整个frontmatter部分（包括---）
-                        content = markdown.replace(frontmatterRegex, '').trim();
-                        
-                        console.log('Frontmatter text:', frontmatterText);
-                        console.log('Content after removal:', content);
-                        
-                        // 解析 frontmatter 内容
-                        frontmatterText.split('\n').forEach(line => {
-                            const trimmedLine = line.trim();
-                            if (trimmedLine && !trimmedLine.startsWith('#')) {
-                                const colonIndex = trimmedLine.indexOf(':');
-                                if (colonIndex > 0) {
-                                    const key = trimmedLine.substring(0, colonIndex).trim();
-                                    const value = trimmedLine.substring(colonIndex + 1).trim();
-                                    frontmatter[key] = value;
-                                    console.log(`Parsed: ${key} = ${value}`);
-                                }
-                            }
-                        });
-                    }
-
-                    console.log('Final frontmatter:', frontmatter);
-                    console.log('Final content:', content);
-
-                    const contentHtml = marked.parse(content);
-                    const profileHtml = `
-                        <div class="profile-header">
-                            <img src="${frontmatter.avatar || '/assets/img/default-avatar.jpg'}" 
-                                 alt="${frontmatter.name || profileId}" 
-                                 class="profile-avatar"
-                                 onerror="this.onerror=null; this.src='/assets/img/default-avatar.jpg'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="profile-avatar-fallback" style="display: none; width: 120px; height: 120px; border-radius: 60px; background: var(--secondary-color); border: 4px solid var(--primary-color); align-items: center; justify-content: center; font-size: 3rem; color: var(--primary-color);">👤</div>
-                            <div class="profile-info">
-                                <h1 class="profile-name">${frontmatter.name || profileId}</h1>
-                                <p class="profile-title">${frontmatter.title || ''}</p>
-                            </div>
-                        </div>
-                        <div class="profile-content">
-                            ${contentHtml}
-                        </div>
-                    `;
-                    modalContent.innerHTML = profileHtml;
+                    // 缓存结果
+                    membersManager.profileCache.set(profileId, markdown);
+                    processProfileContent(markdown, profileId, memberName);
                 })
                 .catch(error => {
                     // 任何错误都显示暂无个人简介
@@ -873,6 +830,65 @@
                         </div>
                     `;
                 });
+        }
+        
+        // 处理个人简介内容的函数
+        function processProfileContent(markdown, profileId, memberName) {
+            const modalContent = document.getElementById('profileContent');
+            console.log('Raw markdown:', markdown);
+            
+            // 解析 frontmatter
+            let frontmatter = {};
+            let content = markdown;
+            
+            // 使用更严格的正则表达式匹配frontmatter
+            const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+            const frontmatterMatch = markdown.match(frontmatterRegex);
+            
+            if (frontmatterMatch) {
+                const frontmatterText = frontmatterMatch[1];
+                // 移除整个frontmatter部分（包括---）
+                content = markdown.replace(frontmatterRegex, '').trim();
+                
+                console.log('Frontmatter text:', frontmatterText);
+                console.log('Content after removal:', content);
+                
+                // 解析 frontmatter 内容
+                frontmatterText.split('\n').forEach(line => {
+                    const trimmedLine = line.trim();
+                    if (trimmedLine && !trimmedLine.startsWith('#')) {
+                        const colonIndex = trimmedLine.indexOf(':');
+                        if (colonIndex > 0) {
+                            const key = trimmedLine.substring(0, colonIndex).trim();
+                            const value = trimmedLine.substring(colonIndex + 1).trim();
+                            frontmatter[key] = value;
+                            console.log(`Parsed: ${key} = ${value}`);
+                        }
+                    }
+                });
+            }
+
+            console.log('Final frontmatter:', frontmatter);
+            console.log('Final content:', content);
+
+            const contentHtml = marked.parse(content);
+            const profileHtml = `
+                <div class="profile-header">
+                    <img src="${frontmatter.avatar || '/assets/img/default-avatar.jpg'}" 
+                         alt="${frontmatter.name || profileId}" 
+                         class="profile-avatar"
+                         onerror="this.onerror=null; this.src='/assets/img/default-avatar.jpg'; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="profile-avatar-fallback" style="display: none; width: 120px; height: 120px; border-radius: 60px; background: var(--secondary-color); border: 4px solid var(--primary-color); align-items: center; justify-content: center; font-size: 3rem; color: var(--primary-color);">👤</div>
+                    <div class="profile-info">
+                        <h1 class="profile-name">${frontmatter.name || profileId}</h1>
+                        <p class="profile-title">${frontmatter.title || ''}</p>
+                    </div>
+                </div>
+                <div class="profile-content">
+                    ${contentHtml}
+                </div>
+            `;
+            modalContent.innerHTML = profileHtml;
         }
 
         function closeModal() {
@@ -896,6 +912,8 @@
                 this.currentYear = null;
                 this.availableFiles = [];
                 this.currentFile = null;
+                this.cache = new Map(); // 添加缓存
+                this.profileCache = new Map(); // 个人简介缓存
             }
 
             // 获取所有成员名单文件
@@ -903,35 +921,34 @@
                 try {
                     // 尝试多种可能的文件名模式
                     const filePatterns = [
-                        // 年份格式：2526.md, 2425.md, 2324.md 等（更广泛的年份范围）
-                        ...Array.from({length: 20}, (_, i) => {
-                            const year = 25 - i;
-                            const nextYear = year + 1;
-                            return `${year}${nextYear}.md`;
-                        }),
                         // 完整年份格式：2025-2026.md, 2024-2025.md 等
                         ...Array.from({length: 20}, (_, i) => {
                             const year = 2025 - i;
                             const nextYear = year + 1;
                             return `${year}-${nextYear}.md`;
                         }),
-                        // 其他可能的文件名
-                        'members.md', 'current.md', 'latest.md'
                     ];
                     
                     const files = [];
+                    const promises = [];
                     
+                    // 并行请求所有文件
                     for (const file of filePatterns) {
-                        try {
-                            const response = await fetch(`/friends/menbers/${file}`);
-                            if (response.ok) {
-                                files.push(file);
-                                console.log(`Found member file: ${file}`);
-                            }
-                        } catch (error) {
-                            // 静默处理文件不存在的情况
-                        }
+                        const promise = fetch(`/friends/menbers/${file}`)
+                            .then(response => {
+                                if (response.ok) {
+                                    files.push(file);
+                                    console.log(`Found member file: ${file}`);
+                                }
+                            })
+                            .catch(() => {
+                                // 静默处理文件不存在的情况
+                            });
+                        promises.push(promise);
                     }
+                    
+                    // 等待所有请求完成
+                    await Promise.all(promises);
                     
                     console.log('All found files:', files);
                     return files.sort().reverse(); // 按文件名倒序排列，最新的在前面
@@ -939,6 +956,57 @@
                     console.error('Error getting members files:', error);
                     return [];
                 }
+            }
+
+            // 缓存成员文件内容
+            async getCachedMembersFile(filename) {
+                if (this.cache.has(filename)) {
+                    return this.cache.get(filename);
+                }
+                
+                const response = await fetch(`/friends/menbers/${filename}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${filename}`);
+                }
+                
+                const content = await response.text();
+                this.cache.set(filename, content);
+                return content;
+            }
+
+            // 缓存个人简介
+            async getCachedProfile(profileId) {
+                if (this.profileCache.has(profileId)) {
+                    return this.profileCache.get(profileId);
+                }
+                
+                const response = await fetch(`/friends/profiles/${profileId}.md`);
+                if (!response.ok) {
+                    throw new Error('Profile not found');
+                }
+                
+                const content = await response.text();
+                this.profileCache.set(profileId, content);
+                return content;
+            }
+
+            // 预加载个人简介
+            async preloadProfiles() {
+                if (!this.profileConfig) return;
+                
+                const profileIds = Object.values(this.profileConfig.profiles);
+                const promises = profileIds.map(async (profileId) => {
+                    try {
+                        await this.getCachedProfile(profileId);
+                    } catch (error) {
+                        // 静默处理加载失败的情况
+                    }
+                });
+                
+                // 后台预加载，不阻塞主流程
+                Promise.all(promises).then(() => {
+                    console.log('Profiles preloaded');
+                });
             }
 
             // 解析成员名单文件
@@ -1142,23 +1210,19 @@
                         throw new Error('Members content element not found');
                     }
                     
-                    // 添加淡出动画
+                    // 减少动画时间，提升响应速度
                     membersContent.style.opacity = 1;
-                    membersContent.style.transition = 'opacity 0.3s';
+                    membersContent.style.transition = 'opacity 0.15s';
                     membersContent.style.opacity = 0;
-                    await new Promise(res => setTimeout(res, 300));
+                    await new Promise(res => setTimeout(res, 150));
                     membersContent.innerHTML = `
                         <div class="loading">
                             <div class="loading-spinner"></div>
                         </div>
                     `;
 
-                    const response = await fetch(`/friends/menbers/${filename}`);
-                    if (!response.ok) {
-                        throw new Error(`Failed to load ${filename}`);
-                    }
-
-                    const content = await response.text();
+                    // 使用缓存获取文件内容
+                    const content = await this.getCachedMembersFile(filename);
                     const parsedData = this.parseMembersFile(content, filename);
                     console.log('Parsed data:', parsedData);
 
@@ -1184,7 +1248,7 @@
                                 <p>错误信息: ${error.message}</p>
                             </div>
                         `;
-                        }
+                    }
                 }
             }
 
@@ -1208,15 +1272,18 @@
                         throw new Error('Members content element not found in DOM');
                     }
                     
-                    // 加载配置文件
-                    const configResponse = await fetch('/friends/profiles/config.json');
+                    // 并行加载配置文件和成员文件列表
+                    const [configResponse, availableFiles] = await Promise.all([
+                        fetch('/friends/profiles/config.json'),
+                        this.getMembersFiles()
+                    ]);
+                    
                     if (configResponse.ok) {
                         this.profileConfig = await configResponse.json();
                         console.log('Loaded profile config:', this.profileConfig);
                     }
 
-                    // 获取成员文件列表
-                    this.availableFiles = await this.getMembersFiles();
+                    this.availableFiles = availableFiles;
                     console.log('Found member files:', this.availableFiles);
 
                     if (this.availableFiles.length === 0) {
@@ -1230,6 +1297,9 @@
                     const latestFile = this.availableFiles[0];
                     console.log('Loading latest file:', latestFile);
                     await this.loadMembersFile(latestFile);
+                    
+                    // 后台预加载个人简介
+                    this.preloadProfiles();
 
                 } catch (error) {
                     console.error('Error initializing members:', error);
