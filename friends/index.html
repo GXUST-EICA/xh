@@ -162,17 +162,56 @@
         }
 
         .members-content li {
-            margin: 10px 0;
-            padding: 10px 20px;
-            background: var(--secondary-color);
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            margin: 12px 0;
+            padding: 0;
+            background: none;
+            border-radius: 0;
+            transition: color 0.2s;
+            text-align: center;
         }
 
         .members-content li:hover {
-            transform: translateX(10px);
-            background: var(--primary-color);
-            color: white;
+            background: none;
+        }
+
+        .member-link, .members-content li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .member-link {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--primary-color);
+            cursor: pointer;
+            font: inherit;
+            width: 100%;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+            border-radius: 0;
+            transition: color 0.2s;
+            font-family: inherit;
+        }
+
+        .member-link:hover {
+            color: var(--accent-color);
+            background: none;
+        }
+
+        .members-content li:hover .member-link {
+            color: var(--accent-color);
+            background: none;
+        }
+
+        /* h3字体风格 */
+        .member-link, .members-content li {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: inherit;
         }
 
         /* 部门布局样式 */
@@ -508,6 +547,123 @@
                 padding: 20px;
             }
         }
+
+        /* 年份选择器样式 */
+        .year-selector {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,249,255,0.95) 100%);
+            padding: 20px 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(18,70,255,0.12);
+            margin-bottom: 32px;
+            border: 1px solid rgba(18,70,255,0.15);
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        
+        .year-selector-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .year-selector-header span {
+            font-size: 1.1rem;
+        }
+        
+        .year-selector-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .year-selector-control label {
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
+        
+        .year-selector-control select {
+            border: 2px solid rgba(18,70,255,0.2);
+            border-radius: 10px;
+            padding: 10px 40px 10px 16px;
+            font-size: 1rem;
+            color: var(--text-color);
+            background: white url('data:image/svg+xml;utf8,<svg fill="%231246ff" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7.293 7.293a1 1 0 011.414 0L10 8.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"/></svg>') no-repeat right 12px center/16px 16px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            box-shadow: 0 2px 8px rgba(18,70,255,0.08);
+            transition: all 0.3s ease;
+            min-width: 140px;
+            cursor: pointer;
+        }
+        
+        .year-selector-control select:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(18,70,255,0.15);
+        }
+        
+        .year-selector-control select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        @media (max-width: 600px) {
+            .year-selector {
+                padding: 16px 20px;
+                max-width: 95%;
+            }
+            
+            .year-selector-control {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+            
+            .year-selector-control select {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        .member-link.disabled-member {
+            color: #bbb !important;
+            background: none !important;
+            cursor: not-allowed !important;
+            border: none;
+            opacity: 1;
+            pointer-events: none;
+            font-weight: 700;
+        }
+
+        .profile-header .profile-avatar[style] {
+            background: var(--secondary-color);
+            border: 4px solid #eee;
+            color: #bbb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-header .profile-info .profile-name {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+        }
+        .profile-content .error-message {
+            color: #888;
+            background: #f7f7f7;
+            border: 1px solid #eee;
+            margin: 24px 0 0 0;
+        }
     </style>
 </head>
 
@@ -545,9 +701,20 @@
     </nav>
 
     <div class="container mt-5">
-        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">👥 协会成员 👥</h1>
+        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">协会成员</h1>
         <div class="members-container">
             <div class="members-content">
+                <div id="yearSelector" class="year-selector" style="display: none;">
+                    <div class="year-selector-header">
+                        <span>📅 选择学年</span>
+                    </div>
+                    <div class="year-selector-control">
+                        <label for="yearSelect">学年：</label>
+                        <select id="yearSelect">
+                            <!-- 年份选项将通过JavaScript动态添加 -->
+                        </select>
+                    </div>
+                </div>
                 <div id="membersContent">
                     <div class="loading">
                         <div class="loading-spinner"></div>
@@ -597,25 +764,43 @@
         const modalContent = document.getElementById('profileContent');
         const closeBtn = document.querySelector('.close-modal');
 
-        function showProfile(profileId) {
-            console.log('Showing profile for ID:', profileId);
+        // 优化showProfile函数，支持无profileId弹窗
+        function showProfile(profileId, memberName) {
+            const modal = document.getElementById('profileModal');
+            const modalContent = document.getElementById('profileContent');
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
             
-            // 加载成员简介
-            const profileUrl = `/friends/profiles/${profileId}.md`;
-            console.log('Fetching profile from:', profileUrl);
+            if (!profileId) {
+                // 无个人简介，显示提示
+                modalContent.innerHTML = `
+                    <div class="profile-header">
+                        <div class="profile-avatar" style="font-size:3rem;">👤</div>
+                        <div class="profile-info">
+                            <h1 class="profile-name">${memberName || '成员'}</h1>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="error-message">
+                            <h3>暂无个人简介</h3>
+                            <p>该成员暂未填写个人简介。</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
             
+            // 有个人简介，尝试加载
+            const profileUrl = `/friends/profiles/${profileId}.md`;
             fetch(profileUrl)
                 .then(response => {
-                    console.log('Profile response status:', response.status);
                     if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                        // 文件不存在，显示暂无个人简介
+                        throw new Error('Profile not found');
                     }
                     return response.text();
                 })
                 .then(markdown => {
-                    console.log('Profile content loaded');
                     // 解析 frontmatter
                     const frontmatterMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
                     let frontmatter = {};
@@ -623,21 +808,24 @@
                     
                     if (frontmatterMatch) {
                         const frontmatterText = frontmatterMatch[1];
-                        content = markdown.slice(frontmatterMatch[0].length).trim();
+                        // 移除整个frontmatter部分（包括---）
+                        content = markdown.replace(/^---\n[\s\S]*?\n---\n/, '').trim();
                         
                         // 解析 frontmatter 内容
                         frontmatterText.split('\n').forEach(line => {
-                            const [key, ...values] = line.split(':');
-                            if (key && values.length > 0) {
-                                frontmatter[key.trim()] = values.join(':').trim();
+                            const trimmedLine = line.trim();
+                            if (trimmedLine && !trimmedLine.startsWith('#')) {
+                                const colonIndex = trimmedLine.indexOf(':');
+                                if (colonIndex > 0) {
+                                    const key = trimmedLine.substring(0, colonIndex).trim();
+                                    const value = trimmedLine.substring(colonIndex + 1).trim();
+                                    frontmatter[key] = value;
+                                }
                             }
                         });
                     }
 
-                    // 转换 markdown 内容为 HTML
                     const contentHtml = marked.parse(content);
-                    
-                    // 构建完整的个人资料 HTML
                     const profileHtml = `
                         <div class="profile-header">
                             <img src="${frontmatter.avatar || '/assets/img/default-avatar.jpg'}" 
@@ -653,16 +841,22 @@
                             ${contentHtml}
                         </div>
                     `;
-                    
                     modalContent.innerHTML = profileHtml;
                 })
                 .catch(error => {
-                    console.error('Error loading profile:', error);
+                    // 任何错误都显示暂无个人简介
                     modalContent.innerHTML = `
+                        <div class="profile-header">
+                            <div class="profile-avatar" style="font-size:3rem;">👤</div>
+                            <div class="profile-info">
+                                <h1 class="profile-name">${memberName || '成员'}</h1>
+                            </div>
+                        </div>
+                        <div class="profile-content">
                         <div class="error-message">
-                            <h3>加载失败</h3>
-                            <p>无法加载成员简介，请稍后重试。</p>
-                            <p>错误信息: ${error.message}</p>
+                                <h3>暂无个人简介</h3>
+                                <p>该成员暂未填写个人简介。</p>
+                            </div>
                         </div>
                     `;
                 });
@@ -681,126 +875,394 @@
             }
         }
 
-        // 修改成员列表渲染逻辑
-        let profileConfig = null;
+        // 自动检测和加载成员名单
+        class MembersManager {
+            constructor() {
+                this.membersData = {};
+                this.profileConfig = null;
+                this.currentYear = null;
+                this.availableFiles = [];
+                this.currentFile = null;
+            }
 
-        // 首先加载配置文件
-        fetch('/friends/profiles/config.json')
-            .then(response => {
-                console.log('Config response status:', response.status);
-                return response.json();
-            })
-            .then(config => {
-                console.log('Loaded config:', config);
-                profileConfig = config;
-                // 然后加载成员列表
-                return fetch('/friends/members.md');
-            })
-            .then(response => {
-                console.log('Members response status:', response.status);
-                return response.text();
-            })
-            .then(markdown => {
-                let html = marked.parse(markdown);
+            // 获取所有成员名单文件
+            async getMembersFiles() {
+                try {
+                    // 尝试多种可能的文件名模式
+                    const filePatterns = [
+                        // 年份格式：2425.md, 2324.md 等
+                        ...Array.from({length: 10}, (_, i) => {
+                            const year = 24 - i;
+                            const nextYear = year + 1;
+                            return `${year}${nextYear}.md`;
+                        }),
+                        // 完整年份格式：2024-2025.md 等
+                        ...Array.from({length: 10}, (_, i) => {
+                            const year = 2024 - i;
+                            const nextYear = year + 1;
+                            return `${year}-${nextYear}.md`;
+                        }),
+                        // 其他可能的文件名
+                        'members.md', 'current.md', 'latest.md'
+                    ];
+                    
+                    const files = [];
+                    
+                    for (const file of filePatterns) {
+                        try {
+                            const response = await fetch(`/friends/menbers/${file}`);
+                            if (response.ok) {
+                                files.push(file);
+                                console.log(`Found member file: ${file}`);
+                            }
+                        } catch (error) {
+                            // 静默处理文件不存在的情况
+                        }
+                    }
+                    
+                    return files.sort().reverse(); // 按文件名倒序排列，最新的在前面
+                } catch (error) {
+                    console.error('Error getting members files:', error);
+                    return [];
+                }
+            }
+
+            // 解析成员名单文件
+            parseMembersFile(content, filename) {
+                const year = filename.replace('.md', '');
+                const sections = {};
+                let currentSection = '';
+                let currentSubsection = '';
+
+                const lines = content.split('\n');
                 
-                // 获取所有成员名字
-                const memberNames = html.match(/<li>(.*?)<\/li>/g)?.map(li => {
-                    const name = li.replace(/<li>|<\/li>/g, '').trim();
-                    return name;
-                }) || [];
-
-                console.log('Found members:', memberNames);
-                console.log('Profile config:', profileConfig);
-
-                // 为有简历的成员添加点击事件
-                memberNames.forEach(name => {
-                    if (profileConfig.profiles[name]) {
-                        const profileId = profileConfig.profiles[name];
-                        console.log('Adding profile link for:', name, 'with ID:', profileId);
-                        const regex = new RegExp(`<li>${name}</li>`, 'g');
-                        const replacement = `<li><button class="member-link" data-profile="${profileId}">${name}</button></li>`;
-                        html = html.replace(regex, replacement);
+                for (const line of lines) {
+                    const trimmedLine = line.trim();
+                    
+                    if (trimmedLine.startsWith('## ')) {
+                        // 主部门
+                        currentSection = trimmedLine.replace('## ', '');
+                        currentSubsection = '';
+                        sections[currentSection] = {};
+                    } else if (trimmedLine.startsWith('### ')) {
+                        // 子部门
+                        currentSubsection = trimmedLine.replace('### ', '');
+                        if (currentSection && !sections[currentSection]) {
+                            sections[currentSection] = {};
+                        }
+                        if (currentSection) {
+                            sections[currentSection][currentSubsection] = [];
+                        }
+                    } else if (trimmedLine.startsWith('- ') && currentSection) {
+                        // 成员
+                        const memberName = trimmedLine.replace('- ', '');
+                        if (currentSubsection && sections[currentSection][currentSubsection]) {
+                            sections[currentSection][currentSubsection].push(memberName);
+                        } else if (!currentSubsection) {
+                            if (!sections[currentSection].members) {
+                                sections[currentSection].members = [];
+                            }
+                            sections[currentSection].members.push(memberName);
+                    }
+                    }
+                }
+                
+                return { year, sections };
+            }
+            
+            // 渲染成员列表
+            renderMembers(data) {
+                // 格式化年份显示
+                const displayYear = this.formatYearDisplay(data.year);
+                let html = `<h1>${displayYear}协会成员名单</h1>`;
+                
+                // 统一处理所有部门
+                const allSections = ['会长团', '技术部', '组织部', '统筹部', '宣传部'];
+                let sectionsData = [];
+                
+                allSections.forEach(sectionName => {
+                    if (data.sections[sectionName]) {
+                        sectionsData.push({ title: sectionName, data: data.sections[sectionName] });
                     }
                 });
-
-                // 处理部门布局
-                const sections = html.split('<h2');
-                let newHtml = '';
-                let departmentSection = '';
-                let departmentContent = '';
-                let topSection = '';
-                let topContent = '';
                 
-                sections.forEach((section, index) => {
-                    if (index === 0) {
-                        newHtml += section; // 标题部分
-                        return;
+                if (sectionsData.length > 0) {
+                    // 会长团和技术部使用顶部布局
+                    const topSections = sectionsData.filter(section => 
+                        section.title === '会长团' || section.title === '技术部'
+                    );
+                    
+                    if (topSections.length > 0) {
+                        html += '<div class="top-section">';
+                        topSections.forEach(section => {
+                            html += `<div class="top-column">`;
+                            html += `<h2>${section.title}</h2>`;
+                            
+                            if (section.data.members) {
+                                html += '<ul>';
+                                section.data.members.forEach(member => {
+                                    const profileId = this.getProfileId(member);
+                                    html += `<li><button class=\"member-link\" data-profile=\"${profileId || ''}\" data-name=\"${member}\">${member}</button></li>`;
+                                });
+                                html += '</ul>';
+                            } else {
+                                // 处理子部门
+                                Object.entries(section.data).forEach(([subtitle, members]) => {
+                                    html += `<h3>${subtitle}</h3>`;
+                                    html += '<ul>';
+                                    members.forEach(member => {
+                                        const profileId = this.getProfileId(member);
+                                        html += `<li><button class=\"member-link\" data-profile=\"${profileId || ''}\" data-name=\"${member}\">${member}</button></li>`;
+                                    });
+                                    html += '</ul>';
+                                });
+                            }
+                            html += '</div>';
+                        });
+                        html += '</div>';
                     }
                     
-                    const title = section.match(/>(.*?)<\/h2>/)?.[1];
+                    // 其他部门使用三列布局
+                    const otherSections = sectionsData.filter(section => 
+                        section.title === '组织部' || section.title === '统筹部' || section.title === '宣传部'
+                    );
                     
-                    // 处理会长团和技术部
-                    if (title === '会长团' || title === '技术部') {
-                        if (title === '会长团') {
-                            topSection = '<div class="top-section">';
-                        }
-                        topContent += `<div class="top-column"><h2${section}</div>`;
-                        if (title === '技术部') {
-                            topSection += topContent + '</div>';
-                            newHtml += topSection;
-                            topSection = '';
-                            topContent = '';
-                        }
+                    if (otherSections.length > 0) {
+                        html += '<div class="department-section">';
+                        otherSections.forEach(section => {
+                            html += `<div class="department-column">`;
+                            html += `<h2>${section.title}</h2>`;
+                            
+                            if (section.data.members) {
+                                html += '<ul>';
+                                section.data.members.forEach(member => {
+                                    const profileId = this.getProfileId(member);
+                                    html += `<li><button class=\"member-link\" data-profile=\"${profileId || ''}\" data-name=\"${member}\">${member}</button></li>`;
+                                });
+                                html += '</ul>';
+                            } else {
+                                // 处理子部门
+                                Object.entries(section.data).forEach(([subtitle, members]) => {
+                                    html += `<h3>${subtitle}</h3>`;
+                                    html += '<ul>';
+                                    members.forEach(member => {
+                                        const profileId = this.getProfileId(member);
+                                        html += `<li><button class=\"member-link\" data-profile=\"${profileId || ''}\" data-name=\"${member}\">${member}</button></li>`;
+                                    });
+                                    html += '</ul>';
+                                });
+                            }
+                            html += '</div>';
+                        });
+                        html += '</div>';
                     }
-                    // 处理组织部、统筹部、宣传部
-                    else if (title === '组织部' || title === '统筹部' || title === '宣传部') {
-                        if (title === '组织部') {
-                            departmentSection = '<div class="department-section">';
-                        }
-                        departmentContent += `<div class="department-column"><h2${section}</div>`;
-                        if (title === '宣传部') {
-                            departmentSection += departmentContent + '</div>';
-                            newHtml += departmentSection;
-                            departmentSection = '';
-                            departmentContent = '';
-                        }
+                }
+                
+                return html;
+            }
+
+            // 获取成员的profile ID
+            getProfileId(memberName) {
+                if (this.profileConfig && this.profileConfig.profiles[memberName]) {
+                    return this.profileConfig.profiles[memberName];
+                }
+                return null;
+            }
+
+            // 设置年份选择器
+            setupYearSelector() {
+                const yearSelector = document.getElementById('yearSelector');
+                const yearSelect = document.getElementById('yearSelect');
+                
+                if (!yearSelector || !yearSelect) {
+                    console.error('Year selector elements not found');
+                    return;
+                }
+                
+                if (this.availableFiles.length > 1) {
+                    yearSelector.style.display = 'block';
+                    yearSelect.innerHTML = '';
+                    
+                    this.availableFiles.forEach(file => {
+                        const option = document.createElement('option');
+                        option.value = file;
+                        option.textContent = this.formatYearDisplay(file);
+                        yearSelect.appendChild(option);
+                    });
+                    
+                    // 设置默认选择最新年份
+                    yearSelect.value = this.availableFiles[0];
+                    
+                    // 添加事件监听
+                    yearSelect.addEventListener('change', (e) => {
+                        this.loadMembersFile(e.target.value);
+                    });
                     } else {
-                        if (departmentSection) {
-                            newHtml += departmentSection;
-                            departmentSection = '';
-                            departmentContent = '';
-                        }
-                        if (topSection) {
-                            newHtml += topSection;
-                            topSection = '';
-                            topContent = '';
-                        }
-                        newHtml += `<h2${section}`;
-                    }
-                });
+                    yearSelector.style.display = 'none';
+                }
+            }
 
-                document.getElementById('membersContent').innerHTML = newHtml;
-
-                // 使用事件委托处理点击事件
-                document.getElementById('membersContent').addEventListener('click', function(e) {
-                    const link = e.target.closest('.member-link');
-                    if (link) {
-                        e.preventDefault();
-                        const profileId = link.getAttribute('data-profile');
-                        console.log('Clicked on profile:', profileId);
-                        showProfile(profileId);
+            // 格式化年份显示
+            formatYearDisplay(filename) {
+                const year = filename.replace('.md', '');
+                if (year.includes('-')) {
+                    // 2024-2025 -> 24-25届
+                    const parts = year.split('-');
+                    if (parts.length === 2) {
+                        const startYear = parts[0].substring(2); // 取后两位
+                        const endYear = parts[1].substring(2);   // 取后两位
+                        return `${startYear}-${endYear}届`;
                     }
-                });
-            })
-            .catch(error => {
-                console.error('Error loading data:', error);
-                document.getElementById('membersContent').innerHTML = `
+                    return year;
+                } else if (year.length === 4) {
+                    // 2425 -> 24-25届
+                    const startYear = year.substring(0, 2);
+                    const endYear = year.substring(2, 4);
+                    return `${startYear}-${endYear}届`;
+                }
+                return year;
+            }
+
+            // 加载指定的成员文件
+            async loadMembersFile(filename) {
+                try {
+                    const membersContent = document.getElementById('membersContent');
+                    if (!membersContent) {
+                        throw new Error('Members content element not found');
+                    }
+                    
+                    // 添加淡出动画
+                    membersContent.style.opacity = 1;
+                    membersContent.style.transition = 'opacity 0.3s';
+                    membersContent.style.opacity = 0;
+                    await new Promise(res => setTimeout(res, 300));
+                    membersContent.innerHTML = `
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    `;
+
+                    const response = await fetch(`/friends/menbers/${filename}`);
+                    if (!response.ok) {
+                        throw new Error(`Failed to load ${filename}`);
+                    }
+
+                    const content = await response.text();
+                    const parsedData = this.parseMembersFile(content, filename);
+                    console.log('Parsed data:', parsedData);
+
+                    // 渲染成员列表
+                    const html = this.renderMembers(parsedData);
+                    membersContent.innerHTML = html;
+
+                    // 重新添加事件监听
+                    this.addEventListeners();
+
+                    // 添加淡入动画
+                    setTimeout(() => {
+                        membersContent.style.opacity = 1;
+                    }, 10);
+                } catch (error) {
+                    console.error('Error loading members file:', error);
+                    const membersContent = document.getElementById('membersContent');
+                    if (membersContent) {
+                        membersContent.innerHTML = `
+                            <div class="error-message">
+                                <h3>加载失败</h3>
+                                <p>无法加载成员信息，请稍后重试。</p>
+                                <p>错误信息: ${error.message}</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            // 初始化
+            async init() {
+                try {
+                    console.log('Initializing MembersManager...');
+
+                    // 检查DOM元素是否存在
+                    const membersContent = document.getElementById('membersContent');
+                    const yearSelector = document.getElementById('yearSelector');
+                    const yearSelect = document.getElementById('yearSelect');
+                    
+                    console.log('DOM elements check:', {
+                        membersContent: !!membersContent,
+                        yearSelector: !!yearSelector,
+                        yearSelect: !!yearSelect
+                    });
+                    
+                    if (!membersContent) {
+                        throw new Error('Members content element not found in DOM');
+                    }
+                    
+                    // 加载配置文件
+                    const configResponse = await fetch('/friends/profiles/config.json');
+                    if (configResponse.ok) {
+                        this.profileConfig = await configResponse.json();
+                        console.log('Loaded profile config:', this.profileConfig);
+                    }
+
+                    // 获取成员文件列表
+                    this.availableFiles = await this.getMembersFiles();
+                    console.log('Found member files:', this.availableFiles);
+
+                    if (this.availableFiles.length === 0) {
+                        throw new Error('No member files found');
+                    }
+
+                    // 设置年份选择器
+                    this.setupYearSelector();
+
+                    // 加载最新的成员文件
+                    const latestFile = this.availableFiles[0];
+                    console.log('Loading latest file:', latestFile);
+                    await this.loadMembersFile(latestFile);
+
+                } catch (error) {
+                    console.error('Error initializing members:', error);
+                    const membersContent = document.getElementById('membersContent');
+                    if (membersContent) {
+                        membersContent.innerHTML = `
                     <div class="error-message">
                         <h3>加载失败</h3>
                         <p>无法加载成员信息，请稍后重试。</p>
+                                <p>错误信息: ${error.message}</p>
                     </div>
                 `;
+                    }
+                }
+            }
+
+            // 添加事件监听器
+            addEventListeners() {
+                const membersContent = document.getElementById('membersContent');
+                if (membersContent) {
+                    membersContent.addEventListener('click', (e) => {
+                        const link = e.target.closest('.member-link');
+                        if (link) {
+                            e.preventDefault();
+                            const profileId = link.getAttribute('data-profile');
+                            const memberName = link.getAttribute('data-name');
+                            showProfile(profileId, memberName);
+                        }
+                    });
+                }
+            }
+        }
+
+        // 初始化成员管理器
+        const membersManager = new MembersManager();
+        
+        // 确保DOM完全加载后再初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                membersManager.init();
             });
+        } else {
+            membersManager.init();
+        }
 
         // 修改样式以适应按钮
         const style = document.createElement('style');
