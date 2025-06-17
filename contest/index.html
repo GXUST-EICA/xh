@@ -4,24 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>嵌入式智控协会</title>
-    <link href="assets\css\bootstrap.min.css" rel="stylesheet">
-    <link href="assets\css\aos.css" rel="stylesheet">
+    <title>嵌入式智控协会 - 竞赛项目</title>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/aos.css" rel="stylesheet">
 
     <!-- 自定义样式 -->
     <style>
-        html,
         body {
-            height: 100%;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f9ff;
+            color: #333;
             margin: 0;
-            position: relative;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-            display: flex;
-            flex-direction: column;
+            padding: 0;
         }
 
         .navbar {
@@ -62,7 +56,7 @@
             background-color: #1246ff;
             padding: 10px 20px;
             border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             transition: background-color 0.3s ease;
         }
 
@@ -73,11 +67,14 @@
         .notification-bar {
             background-color: #f1ecff;
             color: #3f532f;
-            padding: 5px 0;
+            padding: 10px 0;
             text-align: center;
             position: relative;
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .notification-bar a {
@@ -86,60 +83,120 @@
         }
 
         .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
-            margin-top: 100px;
+            padding: 40px 0;
+            min-height: 70vh;
         }
 
-        .animate-fade-in {
-            opacity: 0;
-            animation: fadeIn 1s forwards;
+        .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #1246ff;
+            text-align: center;
+            font-weight: 700;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30px;
+            background-color: #ffffff;
+        }
 
-            to {
-                opacity: 1;
-            }
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-title {
+            color: #1246ff;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .competition-item {
+            background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1246ff;
+            transition: all 0.3s ease;
+        }
+
+        .competition-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(18, 70, 255, 0.2);
+        }
+
+        .competition-title {
+            color: #1246ff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .competition-time {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #1246ff;
+            border-color: #1246ff;
+            border-radius: 100px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0d38e0;
+            border-color: #0d38e0;
+            transform: translateY(-2px);
         }
 
         .footer {
             background-color: #1246ff;
             color: white;
-            padding: 20px 0;
+            padding: 40px 0;
             text-align: center;
-            border-radius: 10px;
-            margin-top: auto;
-        }
-
-        .custom-text {
-            font-family: Arial, sans-serif;
-            color: #000000;
-            text-align: left;
-        }
-
-        .btn-custom {
-            background-color: #ec6767;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            padding: 5px 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .btn-custom:hover {
-            background-color: #d9dadd;
+            margin-top: 40px;
+            border-radius: 20px;
         }
 
         .footer p {
             margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .hero-image {
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+
+        .update-notice {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            color: #856404;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         @media (max-width: 768px) {
@@ -157,7 +214,15 @@
             }
 
             .notification-bar {
-                font-size: 0.9rem;
+                font-size: 1rem;
+            }
+
+            .section-heading {
+                font-size: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
             }
         }
 
@@ -176,7 +241,11 @@
             }
 
             .notification-bar {
-                font-size: 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .section-heading {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -186,7 +255,10 @@
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
-            <a class="navbar-brand" href="/">嵌入式智控协会</a>
+            <a class="navbar-brand" href="/">
+                <img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
+                嵌入式智控协会
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -194,63 +266,87 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/index.html" data-aos="fade-right"
-                            data-aos-duration="1000">主页</a>
+                        <a class="nav-link" href="/" data-aos="fade-right" data-aos-duration="1000">主页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://jnjnjnn.cn" data-aos="fade-right" data-aos-duration="1000"
-                            data-aos-delay="100">小东同学工具箱</a>
+                        <a class="nav-link" href="/mentors" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="100">指导团队</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link forum-button" href="/lyb" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="200">留言板</a>
+                        <a class="nav-link" href="/itd" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">协会共建企业联盟</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/training" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">培训中心</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- 通知栏 -->
+    <div class="notification-bar" data-aos="fade-up" data-aos-duration="1000">
+        🏆 欢迎参加各类科技竞赛！让我们一起挑战自我，追求卓越！🏆
+    </div>
+
     <!-- 主要内容 -->
     <div class="main-content">
-        <div class="container text-center" data-aos="fade-up" data-aos-duration="1000">
-            <div class="row animate-fade-in">
-                <div class="col-lg-6">
-                    <a href="/contest/1.html">
-                        <img src="https://pic.imgdb.cn/item/66fb5fc0f21886ccc0882174.png" alt="Placeholder Image"
-                            class="img-fluid mb-3">
-                    </a>
+        <div class="container" data-aos="fade-up" data-aos-duration="1000">
+            <h2 class="section-heading">🏅 广西科技大学大学生科技竞赛时间表 🏅</h2>
+            
+            <div class="row">
+                <div class="col-lg-5" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="text-center mb-4">
+                        <a href="/contest/1.html">
+                            <img src="https://pic.imgdb.cn/item/66fb5fc0f21886ccc0882174.png" alt="竞赛海报" 
+                                 class="img-fluid hero-image">
+                        </a>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="card shadow-sm" style="border-radius: 15px;">
+                
+                <div class="col-lg-7" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title mb-4">广西科技大学大学生科技竞赛时间表</h2>
-                            <h4 class="card-title mb-4">本校某些众所周知的原因的科技竞赛就不列出本名单</h4>
-                            <h4>1. “粤嵌杯”</h4>
-                            <p>时间待定</p>
-                            <a href="#forum" class="btn btn-custom mb-3">立即了解更多</a>
-                            <hr>
-                            <h4>2. 全国大学生电子设计竞赛</h4>
-                            <p>时间待定</p>
-                            <a href="https://www.nuedc-training.com.cn/" class="btn btn-custom mb-3">立即了解更多</a>
-                            <hr>
-                            <h4>3.ICAN创新创业大赛</h4>
-                            <p>时间待定</p>
-                            <a href="http://g-ican.com/home/index" class="btn btn-custom mb-3">立即了解更多</a>
-                            <hr>
-                            <h4>4. 全国大学生数学建模竞赛</h4>
-                            <p>时间待定</p>
-                            <a href="https://www.mcm.edu.cn/" class="btn btn-custom mb-3">立即了解更多</a>
-                            <hr>
-                            <h4>5. 嵌入式芯片与系统设计竞赛</h4>
-                            <p>时间待定</p>
-                            <a href="http://www.socchina.net/" class="btn btn-custom mb-3">立即了解更多</a>
-                            <hr>
-                            <h4>6. 广西科技大学物联网创新应用设计竞赛</h4>
-                            <p>报名截止时间:2024.11.18</p>
-                            <a href="https://www.nuedc-training.com.cn/" class="btn btn-custom mb-3">立即了解更多</a>
-                            <hr>
-                            <h4>更新中。。。</h4>
+                            <h3 class="card-title">📋 竞赛项目列表</h3>
+                            <p class="text-muted mb-4">本校某些众所周知的原因的科技竞赛就不列出本名单</p>
+                            
+                            <div class="competition-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                                <div class="competition-title">🥇 "粤嵌杯"</div>
+                                <div class="competition-time">⏰ 时间待定</div>
+                                <a href="#forum" class="btn btn-primary">立即了解更多</a>
+                            </div>
 
+                            <div class="competition-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                                <div class="competition-title">🥈 全国大学生电子设计竞赛</div>
+                                <div class="competition-time">⏰ 时间待定</div>
+                                <a href="https://www.nuedc-training.com.cn/" class="btn btn-primary">立即了解更多</a>
+                            </div>
+
+                            <div class="competition-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                                <div class="competition-title">🥉 ICAN创新创业大赛</div>
+                                <div class="competition-time">⏰ 时间待定</div>
+                                <a href="http://g-ican.com/home/index" class="btn btn-primary">立即了解更多</a>
+                            </div>
+
+                            <div class="competition-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                                <div class="competition-title">🏆 全国大学生数学建模竞赛</div>
+                                <div class="competition-time">⏰ 时间待定</div>
+                                <a href="https://www.mcm.edu.cn/" class="btn btn-primary">立即了解更多</a>
+                            </div>
+
+                            <div class="competition-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+                                <div class="competition-title">💻 嵌入式芯片与系统设计竞赛</div>
+                                <div class="competition-time">⏰ 时间待定</div>
+                                <a href="http://www.socchina.net/" class="btn btn-primary">立即了解更多</a>
+                            </div>
+
+                            <div class="competition-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+                                <div class="competition-title">🌐 广西科技大学物联网创新应用设计竞赛</div>
+                                <div class="competition-time">⏰ 报名截止时间: 2024.11.18</div>
+                                <a href="https://www.nuedc-training.com.cn/" class="btn btn-primary">立即了解更多</a>
+                            </div>
+
+                            <div class="update-notice" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700">
+                                🔄 更多竞赛信息持续更新中... 🔄
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -259,25 +355,26 @@
     </div>
 
     <!-- 页脚 -->
-    <div class="footer">
-        <p>&copy;2024 广西科技大学嵌入式智控协会</p>
-    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 广西科技大学嵌入式智控协会</p>
+        </div>
+    </footer>
 
-    <script src="assets\js\jquery.min.js"></script>
-    <script src="assets\js\bootstrap.bundle.min.js"></script>
-    <script src="assets\js\aos.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/aos.js"></script>
     <script>
         AOS.init(); // 初始化AOS动画
 
         // 确保滚动时navbar效果
-        const navbar = document.querySelector('.navbar');
-        window.onscroll = function () {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                navbar.classList.add('scrolled');
+        window.addEventListener("scroll", function () {
+            var navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
             } else {
-                navbar.classList.remove('scrolled');
+                navbar.classList.remove("scrolled");
             }
-        };
+        });
     </script>
 </body>
 
