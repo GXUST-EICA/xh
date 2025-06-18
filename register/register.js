@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('date').value = today;
 });
 
-document.getElementById('registerForm').addEventListener('submit', function(e) {
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
 	e.preventDefault();
 	
 	const successMsg = document.getElementById('successMsg');
@@ -25,43 +25,64 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
 	submitBtn.disabled = true;
 	submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 保存中...';
 
-	// 发送数据到服务器
-	fetch('save_record.php', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(formData)
-	})
-	.then(response => {
-		if (!response.ok) {
-			throw new Error('网络响应不正常');
-		}
-		return response.json();
-	})
-	.then(data => {
-		if (data.success) {
-			successMsg.classList.remove('d-none');
-			successMsg.classList.remove('alert-danger');
-			successMsg.classList.add('alert-success');
-			successMsg.textContent = '登记成功！记录已保存';
-			this.reset();
-			// 重新设置当前日期
-			document.getElementById('date').value = new Date().toISOString().split('T')[0];
+	try {
+		// 1. 首先获取现有文件内容
+		const response = await fetch('records.md');
+		let content = '';
+		
+		if (response.ok) {
+			content = await response.text();
 		} else {
-			throw new Error(data.message || '保存失败');
+			// 如果文件不存在，创建新的内容
+			content = "# 嵌入式智控协会元器件使用登记表\n\n| 姓名 | 元器件名称 | 操作类型 | 日期 | 备注 |\n|---|---|---|---|---|\n";
 		}
-	})
-	.catch(error => {
+
+		// 2. 添加新记录
+		const newRecord = `| ${formData.name} | ${formData.component} | ${formData.action} | ${formData.date} | ${formData.remark} |\n`;
+		const updatedContent = content + newRecord;
+
+		// 3. 创建 Blob 对象并生成下载
+		const blob = new Blob([updatedContent], { type: 'text/markdown' });
+		const downloadUrl = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = downloadUrl;
+		a.download = 'records.md';
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+		URL.revokeObjectURL(downloadUrl);
+
+		// 显示成功消息
+		successMsg.classList.remove('d-none', 'alert-danger');
+		successMsg.classList.add('alert-success');
+		successMsg.innerHTML = `
+			<div>登记成功！新记录已生成。</div>
+			<div class="mt-2 small">
+				<strong>注意：</strong> 由于这是静态网站，您需要：
+				<ol class="mb-0">
+					<li>下载生成的 records.md 文件</li>
+					<li>将文件提交到 GitHub 仓库的 register 目录中</li>
+				</ol>
+			</div>
+		`;
+		
+		// 重置表单
+		this.reset();
+		document.getElementById('date').value = new Date().toISOString().split('T')[0];
+		
+	} catch (error) {
 		console.error('Error:', error);
-		successMsg.classList.remove('d-none');
-		successMsg.classList.remove('alert-success');
+		successMsg.classList.remove('d-none', 'alert-success');
 		successMsg.classList.add('alert-danger');
-		successMsg.textContent = '保存失败：' + error.message;
-	})
-	.finally(() => {
+		successMsg.innerHTML = `
+			<div>保存失败：${error.message}</div>
+			<div class="mt-2 small">
+				<strong>提示：</strong> 这是一个静态网站，不支持直接保存到服务器。请按照上述步骤手动更新文件。
+			</div>
+		`;
+	} finally {
 		// 恢复按钮状态
 		submitBtn.disabled = false;
 		submitBtn.innerHTML = originalBtnText;
-	});
+	}
 }); 
