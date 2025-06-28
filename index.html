@@ -16,13 +16,23 @@
 		content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
 	<meta name="robots" content="index,follow">
 	<title>嵌入式智控协会</title>
-	<!-- Font Awesome CSS -->
+	
+	<!-- 预加载关键资源 -->
+	<link rel="preload" href="assets/css/all.min.css" as="style">
+	<link rel="preload" href="assets/css/bootstrap.min.css" as="style">
+	<link rel="preload" href="assets/css/aos.css" as="style">
+	<link rel="preload" href="assets/js/bootstrap.bundle.min.js" as="script">
+	<link rel="preload" href="assets/js/aos.js" as="script">
+	<link rel="preload" href="assets/img/logo.png" as="image">
+	
+	<!-- CSS 文件 -->
 	<link href="assets/css/all.min.css" rel="stylesheet">
-	<!-- Bootstrap 5 CSS -->
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
-	<!-- AOS CSS -->
 	<link href="assets/css/aos.css" rel="stylesheet">
+	
+	<!-- 内联关键CSS -->
 	<style>
+		/* 首屏关键CSS */
 		body {
 			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
 			background-color: #f0f9ff;
@@ -345,6 +355,9 @@
 			}
 		}
 	</style>
+	
+	<!-- 延迟加载的非关键CSS -->
+	<link rel="stylesheet" href="assets/css/non-critical.css" media="print" onload="this.media='all'">
 </head>
 
 <body>
@@ -352,7 +365,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
 		<div class="container">
 			<a class="navbar-brand" href="/">
-				<img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
+				<img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2" fetchpriority="high">
 				嵌入式智控协会
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -385,14 +398,14 @@
 
 	<header class="header">
 		<div data-aos="fade-up" data-aos-duration="1000">
-			<img src="assets/img/logo.png" alt="嵌入式智控协会 Logo">
+			<img src="assets/img/logo.png" alt="嵌入式智控协会 Logo" fetchpriority="high">
 			<h1>嵌入式智控协会</h1>
 			<p><b>Embedded Intelligent Control Association</b></p>
 			<br>
 			<h3>追求创新&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共同探索<br>提升能力&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重在实践
 			</h3>
 		</div>
-		<img src="assets/img/down2.png" alt="向下箭头" class="arrow">
+		<img src="assets/img/down2.png" alt="向下箭头" class="arrow" loading="lazy">
 	</header>
 
 	<section class="notification-carousel" data-aos="fade-up" data-aos-duration="1000">
@@ -462,7 +475,7 @@
 				<div class="col-md-3" data-aos="fade-up" data-aos-duration="1000">
 					<div class="card">
 						<a href="https://qm.qq.com/q/VNOlUmIpSa">
-							<img src="assets/img/join-us.png" class="card-img-top" alt="加入我们">
+							<img src="assets/img/join-us.png" class="card-img-top" alt="加入我们" loading="lazy">
 						</a>
 						<div class="card-body">
 							<h5 class="card-title">加入我们</h5>
@@ -613,18 +626,75 @@
 		</div>
 	</footer>
 
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/aos.js"></script>
+	<!-- 延迟加载JavaScript -->
+	<script src="assets/js/bootstrap.bundle.min.js" defer></script>
+	<script src="assets/js/aos.js" defer></script>
 
 	<script>
-		AOS.init();
-		window.addEventListener("scroll", function () {
-			var navbar = document.querySelector(".navbar");
-			if (window.scrollY > 100) {
-				navbar.classList.add("scrolled");
+		// 等待DOM加载完成
+		document.addEventListener('DOMContentLoaded', function() {
+			// 初始化AOS
+			AOS.init({
+				// 减少动画以提高性能
+				once: true,
+				offset: 100
+			});
+			
+			// 导航栏滚动效果
+			const navbar = document.querySelector(".navbar");
+			let scrollThrottleTimer;
+			
+			window.addEventListener("scroll", function() {
+				// 使用节流优化滚动事件
+				if (!scrollThrottleTimer) {
+					scrollThrottleTimer = setTimeout(function() {
+						if (window.scrollY > 100) {
+							navbar.classList.add("scrolled");
+						} else {
+							navbar.classList.remove("scrolled");
+						}
+						scrollThrottleTimer = null;
+					}, 100);
+				}
+			});
+			
+			// 延迟加载图片
+			const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+			if ('loading' in HTMLImageElement.prototype) {
+				// 浏览器支持原生懒加载
+				lazyImages.forEach(img => {
+					img.setAttribute('loading', 'lazy');
+				});
 			} else {
-				navbar.classList.remove("scrolled");
+				// 回退到Intersection Observer
+				const imageObserver = new IntersectionObserver((entries, observer) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							const img = entry.target;
+							img.src = img.dataset.src;
+							observer.unobserve(img);
+						}
+					});
+				});
+				
+				lazyImages.forEach(img => {
+					imageObserver.observe(img);
+				});
 			}
+			
+			// 卡片动画
+			const cards = document.querySelectorAll('.card');
+			const cardObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('loaded');
+					}
+				});
+			}, { threshold: 0.1 });
+			
+			cards.forEach(card => {
+				cardObserver.observe(card);
+			});
 		});
 	</script>
 
