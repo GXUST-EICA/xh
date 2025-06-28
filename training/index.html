@@ -15,23 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
     <meta name="robots" content="index,follow">
     <title>嵌入式智控协会 - 培训中心</title>
-
-    <!-- 资源预加载 -->
-    <link rel="preload" href="/assets/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="/assets/js/marked.min.js" as="script">
-    <link rel="preload" href="/assets/img/logo.png" as="image">
-    
-    <!-- 预连接第三方域名 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- 关键CSS -->
+    <!-- Font Awesome CSS -->
+    <link href="/assets/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- 非关键CSS异步加载 -->
-    <link href="/assets/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="/assets/css/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
-    
-    <!-- 内联关键CSS -->
+    <!-- AOS CSS -->
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <!-- Marked.js -->
+    <script src="/assets/js/marked.min.js"></script>
     <style>
         :root {
             --primary-color: #1246ff;
@@ -42,7 +33,6 @@
             --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
         }
 
-        /* 首屏关键样式 */
         body {
             font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
@@ -50,23 +40,6 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        body.loaded {
-            opacity: 1;
-        }
-
-        .course-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .course-card.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .navbar {
@@ -459,9 +432,6 @@
             }
         }
     </style>
-
-    <!-- Marked.js 延迟加载 -->
-    <script src="/assets/js/marked.min.js" defer></script>
 </head>
 
 <body>
@@ -512,157 +482,39 @@
         </div>
     </footer>
 
-    <!-- 延迟加载JavaScript -->
-    <script src="/assets/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/assets/js/aos.js" defer></script>
-
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/aos.js"></script>
     <script>
-        // 等待DOM加载完成
-        document.addEventListener('DOMContentLoaded', function() {
-            // 标记页面已加载
-            document.body.classList.add('loaded');
-
-            // 初始化AOS，减少动画数量提高性能
-            AOS.init({
-                once: true,
-                offset: 100,
-                disable: window.innerWidth < 768
-            });
-
-            // 导航栏滚动效果
-            const navbar = document.querySelector(".navbar");
-            let scrollThrottleTimer;
-            
-            window.addEventListener("scroll", function() {
-                if (!scrollThrottleTimer) {
-                    scrollThrottleTimer = setTimeout(function() {
-                        if (window.scrollY > 100) {
-                            navbar.classList.add("scrolled");
-                        } else {
-                            navbar.classList.remove("scrolled");
-                        }
-                        scrollThrottleTimer = null;
-                    }, 100);
-                }
-            });
-
-            // 懒加载图片
-            const images = document.querySelectorAll('img[data-src]');
-            if ('loading' in HTMLImageElement.prototype) {
-                // 浏览器支持原生懒加载
-                images.forEach(img => {
-                    img.setAttribute('loading', 'lazy');
-                });
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        window.addEventListener("scroll", function () {
+            var navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
             } else {
-                // 回退到Intersection Observer
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                images.forEach(img => {
-                    imageObserver.observe(img);
-                });
+                navbar.classList.remove("scrolled");
             }
-
-            // 课程卡片动画
-            const courseCards = document.querySelectorAll('.course-card');
-            const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        cardObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            courseCards.forEach(card => {
-                cardObserver.observe(card);
-            });
-
-            // 异步加载课程内容
-            const loadCourseContent = async () => {
-                try {
-                    const response = await fetch('courses/index.json');
-                    const courses = await response.json();
-                    
-                    const container = document.getElementById('courses-container');
-                    const fragment = document.createDocumentFragment();
-                    
-                    courses.forEach((course, index) => {
-                        const card = createCourseCard(course, index);
-                        fragment.appendChild(card);
-                    });
-                    
-                    container.appendChild(fragment);
-                    
-                    // 重新初始化卡片动画
-                    const newCards = container.querySelectorAll('.course-card');
-                    newCards.forEach(card => cardObserver.observe(card));
-                } catch (error) {
-                    console.error('Error loading courses:', error);
-                    document.getElementById('courses-container').innerHTML = `
-                        <div class="col-12 text-center">
-                            <div class="alert alert-danger" role="alert">
-                                加载课程信息失败，请稍后重试
-                            </div>
-                        </div>
-                    `;
-                }
-            };
-
-            loadCourseContent();
         });
 
-        // 创建课程卡片的辅助函数
-        function createCourseCard(course, index) {
-            const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-4';
-            col.setAttribute('data-aos', 'fade-up');
-            col.setAttribute('data-aos-duration', '1000');
-            col.setAttribute('data-aos-delay', index * 100);
-
-            const card = document.createElement('div');
-            card.className = 'course-card';
-
-            const name = document.createElement('h2');
-            name.className = 'course-name';
-            name.textContent = course.name;
-
-            const content = document.createElement('div');
-            content.className = 'course-info';
-            content.innerHTML = marked.parse(course.description);
-
-            if (course.image) {
-                const img = document.createElement('img');
-                img.src = course.image;
-                img.alt = course.name;
-                img.loading = 'lazy';
-                content.insertBefore(img, content.firstChild);
-            }
-
-            if (course.link) {
-                const link = document.createElement('a');
-                link.href = course.link;
-                link.className = 'btn btn-primary mt-3';
-                link.textContent = '查看课程';
-                content.appendChild(link);
-            }
-
-            card.appendChild(name);
-            card.appendChild(content);
-            col.appendChild(card);
-
-            return col;
-        }
+        // 加载课程目录
+        fetch('/training/courses/index.md')
+            .then(response => response.text())
+            .then(markdown => {
+                const html = marked.parse(markdown);
+                document.getElementById('courseDirectory').innerHTML = html;
+            })
+            .catch(error => {
+                document.getElementById('courseDirectory').innerHTML = `
+                    <div class="error-message">
+                        <h3>加载失败</h3>
+                        <p>无法加载课程目录，请稍后重试。</p>
+                    </div>
+                `;
+            });
     </script>
 </body>
 

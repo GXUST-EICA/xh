@@ -15,23 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
     <meta name="robots" content="index,follow">
     <title>嵌入式智控协会 - 协会共建企业联盟</title>
-
-    <!-- 资源预加载 -->
-    <link rel="preload" href="/assets/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="/assets/js/marked.min.js" as="script">
-    <link rel="preload" href="/assets/img/logo.png" as="image">
-    
-    <!-- 预连接第三方域名 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- 关键CSS -->
+    <!-- Font Awesome CSS -->
+    <link href="/assets/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- 非关键CSS异步加载 -->
-    <link href="/assets/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="/assets/css/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
-    
-    <!-- 内联关键CSS -->
+    <!-- AOS CSS -->
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <!-- Marked.js -->
+    <script src="/assets/js/marked.min.js"></script>
     <style>
         :root {
             --primary-color: #1246ff;
@@ -44,7 +35,6 @@
             --gradient-end: #ffffff;
         }
 
-        /* 首屏关键样式 */
         body {
             font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
@@ -53,23 +43,6 @@
             padding: 0;
             min-height: 100vh;
             line-height: 1.6;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        body.loaded {
-            opacity: 1;
-        }
-
-        .company-card {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .company-card.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .container {
@@ -375,9 +348,6 @@
             background: #0d3bcc;
         }
     </style>
-
-    <!-- Marked.js 延迟加载 -->
-    <script src="/assets/js/marked.min.js" defer></script>
 </head>
 
 <body>
@@ -424,161 +394,98 @@
         </div>
     </footer>
 
-    <!-- 延迟加载JavaScript -->
-    <script src="/assets/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/assets/js/aos.js" defer></script>
-
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/aos.js"></script>
     <script>
-        // 等待DOM加载完成
-        document.addEventListener('DOMContentLoaded', function() {
-            // 标记页面已加载
-            document.body.classList.add('loaded');
-
-            // 初始化AOS，减少动画数量提高性能
-            AOS.init({
-                once: true,
-                offset: 100,
-                disable: window.innerWidth < 768
-            });
-
-            // 导航栏滚动效果
-            const navbar = document.querySelector(".navbar");
-            let scrollThrottleTimer;
-            
-            window.addEventListener("scroll", function() {
-                if (!scrollThrottleTimer) {
-                    scrollThrottleTimer = setTimeout(function() {
-                        if (window.scrollY > 100) {
-                            navbar.classList.add("scrolled");
-                        } else {
-                            navbar.classList.remove("scrolled");
-                        }
-                        scrollThrottleTimer = null;
-                    }, 100);
-                }
-            });
-
-            // 懒加载图片
-            const images = document.querySelectorAll('img[data-src]');
-            if ('loading' in HTMLImageElement.prototype) {
-                // 浏览器支持原生懒加载
-                images.forEach(img => {
-                    img.setAttribute('loading', 'lazy');
-                });
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        window.addEventListener("scroll", function () {
+            var navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
             } else {
-                // 回退到Intersection Observer
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                images.forEach(img => {
-                    imageObserver.observe(img);
-                });
+                navbar.classList.remove("scrolled");
             }
-
-            // 企业卡片动画
-            const companyCards = document.querySelectorAll('.company-card');
-            const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        cardObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            companyCards.forEach(card => {
-                cardObserver.observe(card);
-            });
-
-            // 异步加载企业内容
-            const loadCompanyContent = async () => {
-                try {
-                    const response = await fetch('itd.md');
-                    const text = await response.text();
-                    const content = marked.parse(text);
-                    
-                    const container = document.getElementById('companies-container');
-                    const fragment = document.createDocumentFragment();
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = content;
-                    
-                    // 处理内容并添加到fragment
-                    Array.from(tempDiv.children).forEach((element, index) => {
-                        if (element.tagName === 'H2') {
-                            const card = createCompanyCard(element, index);
-                            fragment.appendChild(card);
-                        }
-                    });
-                    
-                    // 一次性添加所有卡片
-                    container.appendChild(fragment);
-                    
-                    // 重新初始化卡片动画
-                    const newCards = container.querySelectorAll('.company-card');
-                    newCards.forEach(card => cardObserver.observe(card));
-                } catch (error) {
-                    console.error('Error loading company info:', error);
-                    document.getElementById('companies-container').innerHTML = `
-                        <div class="col-12 text-center">
-                            <div class="alert alert-danger" role="alert">
-                                加载企业信息失败，请稍后重试
-                            </div>
-                        </div>
-                    `;
-                }
-            };
-
-            loadCompanyContent();
         });
 
-        // 创建企业卡片的辅助函数
-        function createCompanyCard(titleElement, index) {
-            const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-4';
-            col.setAttribute('data-aos', 'fade-up');
-            col.setAttribute('data-aos-duration', '1000');
-            col.setAttribute('data-aos-delay', index * 100);
-
-            const card = document.createElement('div');
-            card.className = 'company-card';
-
-            const name = document.createElement('h2');
-            name.className = 'company-name';
-            name.textContent = titleElement.textContent;
-
-            const content = document.createElement('div');
-            content.className = 'company-info';
-
-            let currentElement = titleElement.nextElementSibling;
-            while (currentElement && currentElement.tagName !== 'H2') {
-                const clone = currentElement.cloneNode(true);
+        // 加载并解析Markdown文件
+        fetch('/itd/itd.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                const html = marked.parse(markdown);
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
                 
-                // 处理图片
-                if (currentElement.tagName === 'P' && currentElement.querySelector('img')) {
-                    const img = clone.querySelector('img');
-                    img.loading = 'lazy';
+                const companies = [];
+                let currentCompany = null;
+                
+                // 解析HTML内容
+                tempDiv.querySelectorAll('h1').forEach(h1 => {
+                    if (currentCompany) {
+                        companies.push(currentCompany);
+                    }
+                    
+                    currentCompany = {
+                        name: h1.textContent,
+                        content: []
+                    };
+                    
+                    let nextElement = h1.nextElementSibling;
+                    while (nextElement && nextElement.tagName !== 'H1') {
+                        currentCompany.content.push(nextElement.outerHTML);
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                });
+                
+                if (currentCompany) {
+                    companies.push(currentCompany);
                 }
                 
-                content.appendChild(clone);
-                currentElement = currentElement.nextElementSibling;
-            }
-
-            card.appendChild(name);
-            card.appendChild(content);
-            col.appendChild(card);
-
-            return col;
-        }
+                // 生成企业卡片
+                const container = document.getElementById('companies-container');
+                companies.forEach((company, index) => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6 col-lg-3 mb-4';
+                    col.setAttribute('data-aos', 'fade-up');
+                    col.setAttribute('data-aos-duration', '1000');
+                    col.setAttribute('data-aos-delay', index * 200);
+                    
+                    const card = document.createElement('div');
+                    card.className = 'company-card h-100';
+                    
+                    const name = document.createElement('h2');
+                    name.className = 'company-name';
+                    name.textContent = company.name;
+                    
+                    const content = document.createElement('div');
+                    content.className = 'company-info';
+                    content.innerHTML = company.content.join('');
+                    
+                    card.appendChild(name);
+                    card.appendChild(content);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading markdown:', error);
+                document.getElementById('companies-container').innerHTML = `
+                    <div class="col-12 text-center">
+                        <div class="alert alert-danger" role="alert">
+                            加载企业信息失败，请稍后重试
+                        </div>
+                    </div>
+                `;
+            });
     </script>
 </body>
 

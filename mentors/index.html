@@ -15,37 +15,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
     <meta name="robots" content="index,follow">
     <title>嵌入式智控协会 - 指导团队</title>
-
-    <!-- 资源预加载 -->
-    <link rel="preload" href="/assets/css/bootstrap.min.css" as="style">
-    <link rel="preload" href="/assets/js/marked.min.js" as="script">
-    <link rel="preload" href="/assets/img/logo.png" as="image">
-    
-    <!-- 预连接第三方域名 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- 关键CSS -->
+    <!-- Font Awesome CSS -->
+    <link href="/assets/css/all.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- 非关键CSS异步加载 -->
-    <link href="/assets/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="/assets/css/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
-    
-    <!-- 内联关键CSS -->
+    <!-- AOS CSS -->
+    <link href="/assets/css/aos.css" rel="stylesheet">
+    <!-- Marked.js -->
+    <script src="/assets/js/marked.min.js"></script>
     <style>
-        /* 首屏关键样式 */
         body {
             font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
             background-color: #f0f9ff;
             color: #333;
             margin: 0;
             padding: 0;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        body.loaded {
-            opacity: 1;
         }
 
         .navbar {
@@ -99,13 +83,6 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .mentor-card.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .mentor-card:hover {
@@ -263,9 +240,6 @@
             }
         }
     </style>
-
-    <!-- Marked.js 延迟加载 -->
-    <script src="/assets/js/marked.min.js" defer></script>
 </head>
 
 <body>
@@ -312,153 +286,133 @@
         </div>
     </footer>
 
-    <!-- 延迟加载JavaScript -->
-    <script src="/assets/js/bootstrap.bundle.min.js" defer></script>
-    <script src="/assets/js/aos.js" defer></script>
-
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/aos.js"></script>
     <script>
-        // 等待DOM加载完成
-        document.addEventListener('DOMContentLoaded', function() {
-            // 标记页面已加载
-            document.body.classList.add('loaded');
-
-            // 初始化AOS，减少动画数量提高性能
-            AOS.init({
-                once: true,
-                offset: 100,
-                disable: window.innerWidth < 768
-            });
-
-            // 导航栏滚动效果
-            const navbar = document.querySelector(".navbar");
-            let scrollThrottleTimer;
-            
-            window.addEventListener("scroll", function() {
-                if (!scrollThrottleTimer) {
-                    scrollThrottleTimer = setTimeout(function() {
-                        if (window.scrollY > 100) {
-                            navbar.classList.add("scrolled");
-                        } else {
-                            navbar.classList.remove("scrolled");
-                        }
-                        scrollThrottleTimer = null;
-                    }, 100);
-                }
-            });
-
-            // 懒加载图片
-            const images = document.querySelectorAll('img[data-src]');
-            if ('loading' in HTMLImageElement.prototype) {
-                // 浏览器支持原生懒加载
-                images.forEach(img => {
-                    img.setAttribute('loading', 'lazy');
-                });
+        AOS.init();
+        
+        window.addEventListener("scroll", function () {
+            var navbar = document.querySelector(".navbar");
+            if (window.scrollY > 100) {
+                navbar.classList.add("scrolled");
             } else {
-                // 回退到Intersection Observer
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-
-                images.forEach(img => {
-                    imageObserver.observe(img);
-                });
+                navbar.classList.remove("scrolled");
             }
-
-            // 导师卡片动画
-            const mentorCards = document.querySelectorAll('.mentor-card');
-            const cardObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        cardObserver.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            mentorCards.forEach(card => {
-                cardObserver.observe(card);
-            });
-
-            // 异步加载Markdown内容
-            fetch('mentors.md')
-                .then(response => response.text())
-                .then(text => {
-                    const content = marked.parse(text);
-                    const container = document.getElementById('mentors-container');
-                    
-                    // 使用DocumentFragment提高性能
-                    const fragment = document.createDocumentFragment();
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = content;
-                    
-                    // 处理内容并添加到fragment
-                    Array.from(tempDiv.children).forEach((element, index) => {
-                        if (element.tagName === 'H2') {
-                            const card = createMentorCard(element, index);
-                            fragment.appendChild(card);
-                        }
-                    });
-                    
-                    // 一次性添加所有卡片
-                    container.appendChild(fragment);
-                    
-                    // 重新初始化卡片动画
-                    const newCards = container.querySelectorAll('.mentor-card');
-                    newCards.forEach(card => cardObserver.observe(card));
-                })
-                .catch(error => {
-                    console.error('Error loading markdown:', error);
-                    document.getElementById('mentors-container').innerHTML = `
-                        <div class="col-12 text-center">
-                            <div class="alert alert-danger" role="alert">
-                                加载导师信息失败，请稍后重试
-                            </div>
-                        </div>
-                    `;
-                });
         });
 
-        // 创建导师卡片的辅助函数
-        function createMentorCard(titleElement, index) {
-            const col = document.createElement('div');
-            col.className = 'col-md-6 col-lg-4';
-            col.setAttribute('data-aos', 'fade-up');
-            col.setAttribute('data-aos-duration', '1000');
-            col.setAttribute('data-aos-delay', index * 100);
-
-            const card = document.createElement('div');
-            card.className = 'mentor-card';
-
-            // 添加标题
-            const name = document.createElement('h2');
-            name.className = 'mentor-name';
-            name.textContent = titleElement.textContent;
-
-            // 添加内容
-            const content = document.createElement('div');
-            content.className = 'mentor-info';
-
-            let currentElement = titleElement.nextElementSibling;
-            while (currentElement && currentElement.tagName !== 'H2') {
-                content.appendChild(currentElement.cloneNode(true));
-                currentElement = currentElement.nextElementSibling;
-            }
-
-            card.appendChild(name);
-            card.appendChild(content);
-            col.appendChild(card);
-
-            return col;
-        }
+        // 加载并解析Markdown文件
+        fetch('/mentors/mentors.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                const html = marked.parse(markdown);
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                const mentors = [];
+                let currentMentor = null;
+                
+                // 解析HTML内容
+                tempDiv.querySelectorAll('h2').forEach(h2 => {
+                    if (currentMentor) {
+                        mentors.push(currentMentor);
+                    }
+                    
+                    currentMentor = {
+                        name: h2.textContent,
+                        image: '',
+                        content: []
+                    };
+                    
+                    let nextElement = h2.nextElementSibling;
+                    while (nextElement && nextElement.tagName !== 'H2') {
+                        // 检查是否是图片链接
+                        if (nextElement.tagName === 'P' && nextElement.textContent.startsWith('[图片:')) {
+                            currentMentor.image = nextElement.textContent.match(/\[图片:(.*?)\]/)[1];
+                        } else if (nextElement.tagName === 'P' && nextElement.textContent.trim() !== '') {
+                            // 只添加非空的段落内容
+                            currentMentor.content.push(nextElement.outerHTML);
+                        }
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                });
+                
+                if (currentMentor) {
+                    mentors.push(currentMentor);
+                }
+                
+                // 生成导师卡片
+                const container = document.getElementById('mentors-container');
+                mentors.forEach((mentor, index) => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6 col-lg-4';
+                    col.setAttribute('data-aos', 'fade-up');
+                    col.setAttribute('data-aos-duration', '1000');
+                    col.setAttribute('data-aos-delay', index * 100);
+                    
+                    const card = document.createElement('div');
+                    card.className = 'mentor-card';
+                    
+                    // 添加图片容器
+                    const imageContainer = document.createElement('div');
+                    imageContainer.className = 'mentor-image-container';
+                    
+                    // 添加图片包装器
+                    const imageWrapper = document.createElement('div');
+                    imageWrapper.className = 'mentor-image-wrapper';
+                    
+                    // 添加图片
+                    if (mentor.image) {
+                        const img = document.createElement('img');
+                        img.className = 'mentor-image';
+                        img.src = mentor.image;
+                        img.alt = mentor.name;
+                        img.onerror = function() {
+                            this.style.display = 'none';
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'mentor-image-placeholder';
+                            placeholder.innerHTML = '👨‍🏫';
+                            imageWrapper.appendChild(placeholder);
+                        };
+                        imageWrapper.appendChild(img);
+                    } else {
+                        const placeholder = document.createElement('div');
+                        placeholder.className = 'mentor-image-placeholder';
+                        placeholder.innerHTML = '👨‍🏫';
+                        imageWrapper.appendChild(placeholder);
+                    }
+                    
+                    imageContainer.appendChild(imageWrapper);
+                    card.appendChild(imageContainer);
+                    
+                    const name = document.createElement('h2');
+                    name.className = 'mentor-name';
+                    name.textContent = mentor.name;
+                    
+                    const content = document.createElement('div');
+                    content.className = 'mentor-info';
+                    content.innerHTML = mentor.content.join('');
+                    
+                    card.appendChild(name);
+                    card.appendChild(content);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading markdown:', error);
+                document.getElementById('mentors-container').innerHTML = `
+                    <div class="col-12 text-center">
+                        <div class="alert alert-danger" role="alert">
+                            加载导师信息失败，请稍后重试
+                        </div>
+                    </div>
+                `;
+            });
     </script>
 </body>
 
