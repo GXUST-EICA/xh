@@ -1,7 +1,7 @@
 # 校内导师团队
 
 ## 高远
-[图片:assets/img/mentors/gaoyuan.png]
+[图片:https://pic1.imgdb.cn/item/68501fff58cb8da5c8516aac.png]
 
 **职位**：教授
 
