@@ -3,738 +3,136 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="keywords" content="粤嵌·软通杯嵌入式设计大赛">
-	<meta name="description" content="粤嵌·软通杯嵌入式设计大赛官方网站">
-	<meta name="author" content="粤嵌·软通杯嵌入式设计大赛组委会">
-	<meta name="copyright" content="粤嵌·软通杯嵌入式设计大赛组委会">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta itemprop="name" content="粤嵌·软通杯嵌入式设计大赛" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
-	<meta name="robots" content="index,follow">
-	<title>粤嵌·软通杯嵌入式设计大赛</title>
-	<meta itemprop="image" content="https://pic.imgdb.cn/item/66fb7183f21886ccc097445b.png" />
-	<link rel="icon" href="https://pic.imgdb.cn/item/66feb15f335a200d6ad36a35.png" type="image/x-icon" />
-	<link href="assets\css\bootstrap.min.css" rel="stylesheet">
-	<link href="assets/css/aos.css" rel="stylesheet">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>重定向中 - 嵌入式智控协会</title>
+	<link href="/assets/css/all.min.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 	<style>
-		html,
-		body {
-			height: 100%;
-			margin: 0;
+		:root {
+			--primary-color: #1246ff;
+			--secondary-color: #f0f9ff;
+			--accent-color: #ff6b6b;
+			--text-color: #333;
+			--card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 		}
 
 		body {
 			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-			background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-			display: flex;
-			flex-direction: column;
-		}
-
-		.navbar {
-			background-color: rgba(255, 255, 255, 0.9);
-			backdrop-filter: blur(10px);
-			padding: 20px 0;
-			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			transition: background-color 0.3s ease, box-shadow 0.3s ease;
-			border-radius: 0 0 15px 15px;
-			z-index: 1000;
-		}
-
-		.navbar-brand {
-			font-weight: 700;
-			font-size: 1.7rem;
-			color: #1246ff;
-		}
-
-		.nav-link {
-			font-size: 1rem;
-			margin-left: 15px;
-			color: #333;
-		}
-
-		.nav-link.register-button {
-			color: white;
-			background-color: #ff4646;
-			padding: 10px 20px;
-			border-radius: 20px;
-			font-weight: 700;
-			transition: background-color 0.3s ease;
-		}
-
-		.nav-link.register-button:hover {
-			background-color: #e03838;
-		}
-
-		.main-content {
-			flex: 1;
-			padding: 40px 0;
-		}
-
-		.competition-card {
-			background: rgba(255, 255, 255, 0.95);
-			border-radius: 15px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			padding: 2rem;
-			margin-bottom: 2rem;
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-			border: 1px solid rgba(0, 0, 0, 0.1);
-		}
-
-		.competition-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-		}
-
-		.timeline {
-			position: relative;
-			padding: 20px 0;
+			background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+			color: var(--text-color);
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			width: 100%;
+			justify-content: center;
 		}
 
-		.timeline-item {
-			position: relative;
-			padding: 20px 20px 20px 2rem;
-			border-left: 3px solid #1246ff;
-			background: white;
-			border-radius: 10px;
-			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-			width: 100%;
-			margin: 10px 0;
+		.redirect-container {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			padding: 40px;
+			box-shadow: var(--card-shadow);
 			text-align: center;
+			max-width: 500px;
+			width: 90%;
+			margin: 20px;
 		}
 
-		.timeline-item h5 {
-			color: #1246ff;
-			margin-bottom: 0.5rem;
-			font-weight: bold;
+		.logo {
+			width: 80px;
+			height: 80px;
+			margin-bottom: 20px;
 		}
 
-		.timeline-item p {
-			margin-bottom: 0;
-			color: #666;
+		h1 {
+			color: var(--primary-color);
+			font-size: 2rem;
+			margin-bottom: 20px;
 		}
 
-		.timeline-item:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-		}
-
-		.prize-card {
-			position: relative;
-			overflow: hidden;
-			background: linear-gradient(145deg, #ffffff, #f0f0f0);
-			padding: 2rem;
-			border-radius: 15px;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			transition: all 0.3s ease;
-			margin-bottom: 1.5rem;
-			padding-left: 3.5rem;
-		}
-
-		.prize-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-		}
-
-		.prize-card::before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 4px;
-			background: #1246ff;
-		}
-
-		.prize-card::after {
-			position: absolute;
-			left: 1rem;
-			top: 1rem;
-			font-size: 1.5rem;
-		}
-
-		.prize-card.gold::after {
-			content: ' ';
-		}
-
-		.prize-card.silver::after {
-			content: ' ';
-		}
-
-		.prize-card.bronze::after {
-			content: ' ';
-		}
-
-		h2 {
-			color: #1246ff;
-			font-weight: 700;
-			margin-bottom: 1.5rem;
-			position: relative;
-			display: inline-block;
-		}
-
-		h2::after {
-			content: '';
-			position: absolute;
-			bottom: -5px;
-			left: 0;
-			width: 100%;
-			height: 2px;
-			background: linear-gradient(90deg, #1246ff, transparent);
-		}
-
-		.lead {
+		p {
+			color: var(--text-color);
 			font-size: 1.1rem;
-			line-height: 1.8;
-			color: #444;
+			margin-bottom: 30px;
+			line-height: 1.6;
 		}
 
-		.footer {
-			background-color: #1246ff;
+		.redirect-link {
+			display: inline-flex;
+			align-items: center;
+			padding: 12px 30px;
+			background: var(--primary-color);
 			color: white;
-			padding: 20px 0;
-			text-align: center;
-			border-radius: 10px 10px 0 0;
-		}
-
-		@media (max-width: 768px) {
-			.navbar-brand {
-				font-size: 1.3rem;
-			}
-
-			.nav-link {
-				font-size: 0.9rem;
-				margin: 5px 0;
-				text-align: center;
-			}
-
-			.nav-link.register-button,
-			.nav-link.join-qq-button {
-				margin: 10px auto;
-				width: 200px;
-				display: block;
-			}
-
-			.competition-card {
-				padding: 1rem;
-				margin-bottom: 1rem;
-			}
-
-			.prize-card {
-				margin-bottom: 1rem;
-				padding: 1.5rem;
-			}
-
-			h2 {
-				font-size: 1.5rem;
-			}
-
-			h4 {
-				font-size: 1.2rem;
-			}
-
-			.timeline-item {
-				padding: 15px;
-				margin: 8px 0;
-			}
-
-			.card {
-				margin-bottom: 1rem;
-			}
-
-			.card-header {
-				padding: 0.75rem;
-			}
-
-			.card-body {
-				padding: 1rem;
-			}
-
-			.list-group-item {
-				padding: 0.75rem;
-			}
-
-			.lead {
-				font-size: 1rem;
-				line-height: 1.6;
-			}
-
-			.register-btn {
-				padding: 12px 30px;
-				font-size: 1rem;
-			}
-
-			.img-container {
-				margin: 1rem 0;
-			}
-
-			.alert {
-				padding: 0.75rem;
-				margin-bottom: 1rem;
-			}
-
-			.mt-4 {
-				margin-top: 1.5rem !important;
-			}
-
-			.mb-4 {
-				margin-bottom: 1.5rem !important;
-			}
-
-			.footer {
-				padding: 15px 0;
-				font-size: 0.9rem;
-			}
-		}
-
-		@media (max-width: 576px) {
-			.navbar-brand {
-				font-size: 1.1rem;
-			}
-
-			.competition-card {
-				padding: 0.75rem;
-			}
-
-			h2 {
-				font-size: 1.3rem;
-			}
-
-			.lead {
-				font-size: 0.9rem;
-			}
-
-			.list-group-item h6 {
-				font-size: 0.9rem;
-			}
-
-			.list-group-item p {
-				font-size: 0.8rem;
-			}
-		}
-
-		.register-btn-container {
-			text-align: center;
-			margin: 50px 0 30px 0;
-		}
-
-		.register-btn {
-			display: inline-block;
-			padding: 20px 50px;
-			color: white;
+			border-radius: 30px;
 			text-decoration: none;
-			border-radius: 35px;
-			font-weight: bold;
-			font-size: 1.2rem;
+			font-weight: 600;
 			transition: all 0.3s ease;
-			margin: 0 15px;
-			min-width: 250px;
-			transform: translateY(0);
 		}
 
-		/* 报名按钮样式 */
-		.register-btn:not(.join-qq-btn) {
-			background: linear-gradient(45deg, #1246ff, #4e7bff);
-			box-shadow: 0 6px 20px rgba(18, 70, 255, 0.3);
-		}
-
-		/* QQ群按钮样式 */
-		.register-btn.join-qq-btn {
-			background: linear-gradient(45deg, #ff4646, #ff6b6b);
-			box-shadow: 0 6px 20px rgba(255, 70, 70, 0.3);
-		}
-
-		/* 统一的悬停效果 */
-		.register-btn:hover {
-			transform: translateY(-5px);
+		.redirect-link:hover {
+			background: #0d3bcc;
 			color: white;
+			transform: translateY(-2px);
 		}
 
-		/* 报名按钮悬停效果 */
-		.register-btn:not(.join-qq-btn):hover {
-			background: linear-gradient(45deg, #ff3636, #ff5b5b);
-			box-shadow: 0 8px 25px rgba(255, 70, 70, 0.4);
+		.redirect-link i {
+			margin-right: 8px;
 		}
 
-		/* QQ群按钮悬停效果 */
-		.register-btn.join-qq-btn:hover {
-			background: linear-gradient(45deg, #0035e0, #3d6dff);
-			box-shadow: 0 8px 25px rgba(18, 70, 255, 0.4);
+		.spinner {
+			width: 40px;
+			height: 40px;
+			border: 4px solid #f3f3f3;
+			border-top: 4px solid var(--primary-color);
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin: 20px auto;
 		}
 
-		@media (max-width: 768px) {
-			.register-btn {
-				display: block;
-				margin: 15px auto;
-				width: 90%;
-				max-width: 300px;
-				padding: 15px 30px;
-				font-size: 1.1rem;
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
 			}
 		}
 	</style>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="500">
-		<div class="container">
-			<a class="navbar-brand" href="/">"粤嵌·软通杯"嵌入式设计大赛</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="#about">大赛简介</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#schedule">赛程安排</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#prizes">奖项设置</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="https://kdocs.cn/l/cjQ2YHM7ggGx">立即报名</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link register-button" href="https://www.eica.fun">嵌入式智控协会</a>
-					</li>
-
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<div class="main-content">
-		<div class="container">
-			<div class="timeline" data-aos="fade-up" id="schedule">
-				<h2 class="text-center mb-4">赛程安排</h2>
-				<div class="timeline-item">
-					<h5>报名阶段</h5>
-					<p>2025年3月19日 - 2025年4月25日</p>
-				</div>
-				<div class="timeline-item">
-					<h5>提交作品</h5>
-					<p>2025年4月26日-2025年5月30日</p>
-					<p>具体时间请关注比赛通知QQ群</p>
-				</div>
-				<div class="timeline-item">
-					<h5>比赛答辩</h5>
-					<p>2025年6月7日</p>
-					<p>具体时间请关注比赛通知QQ群</p>
-				</div>
-				<div class="register-btn-container">
-					<a href="https://kdocs.cn/l/cjQ2YHM7ggGx" class="register-btn">立即报名</a>
-					<a href="https://qm.qq.com/q/gV47xtE9Dq" class="register-btn join-qq-btn" target="_blank">加入比赛通知QQ群</a>
-				</div>
-			</div>
-
-			<div class="row" data-aos="fade-up" id="prizes">
-				<div class="competition-card">
-					<h2 class="text-center mb-4">奖项设置</h2>
-					
-					<!-- 自主赛道奖项 -->
-					<div class="prize-track mb-5">
-						<h4 class="text-center mb-4" style="color: #1246ff;">自主命题赛道</h4>
-						<div class="row">
-							<div class="col-md-3">
-								<div class="prize-card gold">
-									<h4 class="text-center">第一、二名</h4>
-									<p class="text-center mb-2">奖金：500元</p>
-									<p class="text-center mb-0">校级获奖证书</p>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="prize-card silver">
-									<h4 class="text-center">第三、四、五、六名</h4>
-									<p class="text-center mb-2">奖金：300元</p>
-									<p class="text-center mb-0">校级获奖证书</p>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="prize-card bronze">
-									<h4 class="text-center">第七、八、九、十、十一、十二名</h4>
-									<p class="text-center mb-2">奖金：200元</p>
-									<p class="text-center mb-0">校级获奖证书</p>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="prize-card">
-									<h4 class="text-center">优秀奖</h4>
-									<p class="text-center mb-2"><br></p>
-									<p class="text-center mb-0">校级获奖证书</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- 企业赛道奖项 -->
-					<div class="prize-track">
-						<h4 class="text-center mb-4" style="color: #1246ff;">企业命题赛道</h4>
-						<div class="row justify-content-center">
-							<div class="col-md-4">
-								<div class="prize-card">
-									<h4 class="text-center">优胜奖</h4>
-									<p class="text-center mb-2">奖金：300元</p>
-									<p class="text-center mb-0">校级获奖证书</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<hr class="my-5"
-				style="border: 0; height: 1px; background: linear-gradient(to right, transparent, #1246ff, transparent);">
-
-			<div class="competition-card mt-4" data-aos="fade-up">
-				<h2 class="text-center mb-4">竞赛主题</h2>
-				<div class="row d-flex align-items-stretch">
-					<div class="col-md-6 mb-4 d-flex">
-						<div class="card w-100 shadow-sm border-primary" style="border-width: 2px;">
-							<div class="card-header bg-primary text-white text-center py-3">
-								<h4 class="mb-0">自主命题赛道</h4>
-							</div>
-							<div class="card-body">
-								<div class="alert alert-light border">
-									<i class="fas fa-info-circle text-primary me-2"></i>
-									参赛团队可自主选择以下方向进行创新设计，发挥创意，打造具有实用价值的创新作品。
-								</div>
-								
-								<h5 class="mt-4 text-primary">
-									<i class="fas fa-list-alt me-2"></i>作品方向参考
-								</h5>
-								<p class="text-muted small mb-3">以下方向仅供参考，参赛团队可根据兴趣和专长选择或自行拓展其他创新方向：</p>
-								
-								<ul class="list-group list-group-flush">
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-city me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">智能城市与交通</h6>
-												<p class="mb-0 text-muted small">智慧城市解决方案、智能交通系统等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-home me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">智能家居与生活</h6>
-												<p class="mb-0 text-muted small">智能家居控制、生活便利设备等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-heartbeat me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">智能医疗与健康</h6>
-												<p class="mb-0 text-muted small">医疗监测设备、健康管理系统等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-tree me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">智能农林与环境</h6>
-												<p class="mb-0 text-muted small">农业监测系统、环境保护设备等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-graduation-cap me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">智能教育与文化</h6>
-												<p class="mb-0 text-muted small">教育辅助设备、文化传播系统等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-industry me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">智能制造与工业互联网</h6>
-												<p class="mb-0 text-muted small">工业自动化、智能制造系统等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-cube me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">三维建模与虚拟现实</h6>
-												<p class="mb-0 text-muted small">VR/AR应用、3D建模系统等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-language me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">自然语言处理</h6>
-												<p class="mb-0 text-muted small">语音识别、文本处理系统等</p>
-											</div>
-										</div>
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-image me-2 text-primary"></i>
-											<div>
-												<h6 class="mb-1 text-primary">图像处理与模式识别</h6>
-												<p class="mb-0 text-muted small">计算机视觉、图像识别系统等</p>
-											</div>
-										</div>
-									</li>
-								</ul>
-
-								<div class="alert alert-primary mt-4">
-									<i class="fas fa-lightbulb me-2"></i>
-									<strong>创新建议：</strong>
-									<ul class="mb-0 mt-2">
-										<li>注重作品的实用性和创新性</li>
-										<li>可以跨领域融合，打造独特解决方案</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6 mb-4 d-flex">
-						<div class="card w-100 shadow-sm border-danger" style="border-width: 2px;">
-							<div class="card-header bg-danger text-white text-center py-3">
-								<h4 class="mb-0">企业命题赛道 - 多功能智能药盒</h4>
-							</div>
-							<div class="card-body">
-								<div class="alert alert-light border">
-									<i class="fas fa-info-circle text-danger me-2"></i>
-									使用通晓开发板进行作品的开发设计
-								</div>
-								
-								<h5 class="mt-4 text-danger">
-									<i class="fas fa-file-alt me-2"></i>赛题简介
-								</h5>
-								<p class="text-muted">多功能智能药盒是一种运用了网络互联、社交、光学、声学等前沿科技的智能家居设备，主要解决老人忘记吃药、儿童乱吃药及药品过期等问题，实现了药品管理的智能化和个性化，为用户提供了更加便捷、安全的用药体验。</p>
-
-								<h5 class="mt-4 text-danger">
-									<i class="fas fa-tasks me-2"></i>主要功能建议但不限于如下
-								</h5>
-								<div class="list-group">
-									<div class="list-group-item">
-										<h6 class="mb-1 text-danger">定时提醒</h6>
-										<p class="mb-0 text-muted">智能药盒具备提醒功能，可设置多个定时器，根据用户设定的用药计划自动提醒。</p>
-									</div>
-									<div class="list-group-item">
-										<h6 class="mb-1 text-danger">分装功能</h6>
-										<p class="mb-0 text-muted">具有多个分装格子，可根据医嘱将不同药物分别放入不同格子。</p>
-									</div>
-									<div class="list-group-item">
-										<h6 class="mb-1 text-danger">提醒形式</h6>
-										<p class="mb-0 text-muted">包含声音提醒（音量可调）、指示灯提醒、屏幕显示提醒等多种形式。</p>
-									</div>
-									<div class="list-group-item">
-										<h6 class="mb-1 text-danger">错过提醒</h6>
-										<p class="mb-0 text-muted">错过服药时间后，每隔3分钟重新提醒，直到检测到服药行为。</p>
-									</div>
-									<div class="list-group-item">
-										<h6 class="mb-1 text-danger">药盒寻找</h6>
-										<p class="mb-0 text-muted">可激活声音提醒功能，辅助寻找丢失的药盒。</p>
-									</div>
-								</div>
-
-								<h5 class="mt-4 text-danger">
-									<i class="fas fa-microchip me-2"></i>开发平台介绍
-								</h5>
-								<div class="text-center mb-4">
-									<img src="https://pic1.imgdb.cn/item/67c6ab85d0e0a243d40b7a8d.png" 
-										 alt="通晓开发板实物图" 
-										 class="img-fluid rounded shadow" 
-										 style="max-width: 100%; height: auto;">
-									<p class="text-muted mt-2">软通教育通晓系列开发板（TX-SMART-R）实物图</p>
-								</div>
-								<p>软通教育通晓系列开发板（TX-SMART-R）：</p>
-								<ul class="list-group">
-									<li class="list-group-item d-flex align-items-center">
-										<i class="fas fa-microchip me-2 text-danger"></i>
-										主控采用国产芯片
-									</li>
-									<li class="list-group-item d-flex align-items-center">
-										<i class="fas fa-cog me-2 text-danger"></i>
-										运行OpenHarmony轻量级操作系统
-									</li>
-									<li class="list-group-item">
-										<div class="d-flex align-items-center">
-											<i class="fas fa-puzzle-piece me-2 text-danger"></i>
-											一体化设计，搭载丰富外设：
-										</div>
-										<ul class="list-unstyled ms-4 mt-2 mb-0">
-											<li><i class="fas fa-thermometer-half me-2 text-danger"></i>温湿度传感器</li>
-											<li><i class="fas fa-tachometer-alt me-2 text-danger"></i>加速度传感器</li>
-											<li><i class="fas fa-user me-2 text-danger"></i>人体红外传感器</li>
-											<li><i class="fas fa-tv me-2 text-danger"></i>显示屏</li>
-											<li><i class="fas fa-volume-up me-2 text-danger"></i>蜂鸣器</li>
-											<li><i class="fas fa-cogs me-2 text-danger"></i>电机等受控性外设</li>
-										</ul>
-									</li>
-									<li class="list-group-item d-flex align-items-center">
-										<i class="fas fa-wifi me-2 text-danger"></i>
-										支持WiFi联网，可实现MQTT协议连接物联网平台
-									</li>
-									<li class="list-group-item d-flex align-items-center">
-										<i class="fas fa-ruler me-2 text-danger"></i>
-										整板大小不超过100 × 135mm
-									</li>
-									<li class="list-group-item d-flex align-items-center">
-										<i class="fas fa-graduation-cap me-2 text-danger"></i>
-										适用于OpenHarmony开发者学习、DIY使用及高校相关课程教学
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="competition-card" data-aos="fade-up">
-				<h2 class="text-center mb-4">联系方式</h2>
-				<h4 class="text-center">
-					<h3 style="color: #1246ff;">比赛细则文件请见比赛通知QQ群</h3><br>
-					未尽事宜，请与嵌入式智控协会负责人联系<br>
-					联系人：廖俊峰<br>
-					电话：15278300117<br>
-					QQ：2786232976<br>
-					比赛通知QQ群：1036993513
-				</h4>
-			</div>
-		</div>
+	<div class="redirect-container">
+		<img src="/assets/img/logo.png" alt="Logo" class="logo">
+		<h1>页面已迁移</h1>
+		<p>培训中心页面已迁移至新地址，正在为您跳转...</p>
+		<p style="color: var(--primary-color); font-size: 0.9rem; margin-bottom: 20px;">
+			新地址：<code style="background: rgba(18, 70, 255, 0.1); padding: 4px 8px; border-radius: 4px;"
+				id="newUrl"></code>
+		</p>
+		<div class="spinner"></div>
+		<a href="https://eica.cc/yqb/" class="redirect-link" id="redirectLink">
+			点击立即跳转
+		</a>
 	</div>
 
-	<footer class="footer">
-		<div class="container">
-			<p class="fw-bold">主办单位：</p>
-			<p>广西科技大学自动化学院</p>
-			<p>广西科技大学嵌入式智控协会</p>
-			<p class="fw-bold">协办单位：</p>
-			<p>广州粤嵌通信科技股份有限公司</p>
-			<p class="mt-3">&copy; 粤嵌·软通杯嵌入式设计大赛组委会</p>
-		</div>
-	</footer>
+	<script>
+		// 获取当前域名并设置跳转地址
+		const currentDomain = window.location.hostname;
+		const newUrl = `https://${currentDomain}/yqb`;
+		document.getElementById('newUrl').textContent = newUrl;
+		document.getElementById('redirectLink').href = 'https://eica.cc/yqb/';
 
-	<script src="assets/js/bootstrap.bundle.min.js"></script>
-	<script src="assets/js/aos.js"></script>
-	<script>
-		AOS.init();
+		// 3秒后自动跳转
+		setTimeout(() => {
+			window.location.href = 'https://eica.cc/yqb/';
+		}, 3000);
 	</script>
+
 	<script>
-	window.location.href = "https://eica.cc/yqb/";
+		window.location.href = "https://eica.cc/yqb/";
 	</script>
 </body>
 

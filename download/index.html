@@ -1,110 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
-        <meta charset="UTF-8">
-        <title>小东同学的下载中心</title>
-        <meta name="keywords" content="小东同学">
-        <meta name="description" content="小东同学">
-        <meta name="author" content="小东同学">
-        <meta name="copyright" content="小东同学">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta http-equiv="cache-control" content="no-cache">
-        <meta itemprop="name" content="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" />
-        <meta itemprop="image" content="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" />
-        <meta name="description" itemprop="description" content="Sun's Homepage" />
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
-        <link rel="icon" href="https://pic.imgdb.cn/item/659e7a14871b83018a852c61.png" type="image/x-icon" />
-        <meta name="robots" content="index,follow">
-    <title>下载中心</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://pic.imgdb.cn/item/65d2cc689f345e8d039b01a1.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>重定向中 - 嵌入式智控协会</title>
+	<link href="/assets/css/all.min.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		:root {
+			--primary-color: #1246ff;
+			--secondary-color: #f0f9ff;
+			--accent-color: #ff6b6b;
+			--text-color: #333;
+			--card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+		}
 
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            /* 使用半透明的白色作为背景 */
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-            /* 添加毛玻璃效果 */
-            min-width: 300px;
-            /* 设置最小宽度 */
-            width: 60%;
-            /* 设置容器宽度 */
-            max-width: 600px;
-            /* 设置最大宽度 */
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            overflow: auto;
-            /* 添加滚动 */
-        }
+		body {
+			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+			background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+			color: var(--text-color);
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 
-        h1 {
-            text-align: center;
-        }
+		.redirect-container {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			padding: 40px;
+			box-shadow: var(--card-shadow);
+			text-align: center;
+			max-width: 500px;
+			width: 90%;
+			margin: 20px;
+		}
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+		.logo {
+			width: 80px;
+			height: 80px;
+			margin-bottom: 20px;
+		}
 
-        li {
-            margin-bottom: 20px;
-            /* 增加间距 */
-        }
+		h1 {
+			color: var(--primary-color);
+			font-size: 2rem;
+			margin-bottom: 20px;
+		}
 
-        a {
-            text-decoration: none;
-            color: #007bff;
-            /* 修改链接颜色 */
-            font-size: 20px;
-            /* 修改字体大小 */
-            display: block;
-            /* 将链接设置为块级元素，使其占据整行 */
-            transition: color 0.3s ease;
-        }
+		p {
+			color: var(--text-color);
+			font-size: 1.1rem;
+			margin-bottom: 30px;
+			line-height: 1.6;
+		}
 
-        a:hover {
-            color: #0056b3;
-            /* 修改鼠标悬停颜色 */
-        }
-    </style>
+		.redirect-link {
+			display: inline-flex;
+			align-items: center;
+			padding: 12px 30px;
+			background: var(--primary-color);
+			color: white;
+			border-radius: 30px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
+
+		.redirect-link:hover {
+			background: #0d3bcc;
+			color: white;
+			transform: translateY(-2px);
+		}
+
+		.redirect-link i {
+			margin-right: 8px;
+		}
+
+		.spinner {
+			width: 40px;
+			height: 40px;
+			border: 4px solid #f3f3f3;
+			border-top: 4px solid var(--primary-color);
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin: 20px auto;
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
 </head>
 
 <body>
+	<div class="redirect-container">
+		<img src="/assets/img/logo.png" alt="Logo" class="logo">
+		<h1>页面已迁移</h1>
+		<p>培训中心页面已迁移至新地址，正在为您跳转...</p>
+		<p style="color: var(--primary-color); font-size: 0.9rem; margin-bottom: 20px;">
+			新地址：<code style="background: rgba(18, 70, 255, 0.1); padding: 4px 8px; border-radius: 4px;"
+				id="newUrl"></code>
+		</p>
+		<div class="spinner"></div>
+		<a href="https://eica.cc/downloads/" class="redirect-link" id="redirectLink">
+			点击立即跳转
+		</a>
+	</div>
 
-    <div class="container">
-        <h1>下载中心</h1>
-        <hr>
-        <li><strong>点进下载页后，点击下载按钮下载文件</strong></li>
-        <hr>
+	<script>
+		// 获取当前域名并设置跳转地址
+		const currentDomain = window.location.hostname;
+		const newUrl = `https://${currentDomain}/downloads`;
+		document.getElementById('newUrl').textContent = newUrl;
+		document.getElementById('redirectLink').href = 'https://eica.cc/downloads/';
 
-        <ul>
-            <li><a href="download\xj.html"><strong>STM32循迹小车代码</strong></a></li>
-            <li><a href="download\STM32.html"><strong>STM32CubeMX与STM32CubeIDE</strong></a></li>
-            <li><a href="download\TI.html"><strong>TI德州仪器开发组件</strong></a></li>
-            <li><a href="download\swj.html"><strong>上位机</strong></a></li>
-            <li><a href="download\Keil5.html"><strong>Keil5 MDK</strong></a></li>
-            <li><a href="download\com.html"><strong>串口助手与各种驱动</strong></a></li>
-            <li><a href="download\vs.html"><strong>vscode</strong></a></li>
-			<li><a href="download\win32.html"><strong>win32diskimager</strong></a></li>
-        </ul>
-    </div>
+		// 3秒后自动跳转
+		setTimeout(() => {
+			window.location.href = 'https://eica.cc/downloads/';
+		}, 3000);
+	</script>
 
+	<script>
+		window.location.href = "https://eica.cc/downloads/";
+	</script>
 </body>
 
 </html>

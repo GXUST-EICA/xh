@@ -2,520 +2,138 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="嵌入式智控协会,广西科技大学,培训中心">
-    <meta name="description" content="嵌入式智控协会培训中心">
-    <meta name="author" content="嵌入式智控协会">
-    <meta name="copyright" content="嵌入式智控协会">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta itemprop="name" content="嵌入式智控协会培训中心" />
-    <meta itemprop="image" content="/assets/img/logo.png" />
-    <link rel="icon" href="/assets/img/logo.png" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no minimal-ui">
-    <meta name="robots" content="index,follow">
-    <title>嵌入式智控协会 - 培训中心</title>
-    <!-- Font Awesome CSS -->
-    <link href="/assets/css/all.min.css" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- AOS CSS -->
-    <link href="/assets/css/aos.css" rel="stylesheet">
-    <!-- Marked.js -->
-    <script src="/assets/js/marked.min.js"></script>
-    <style>
-        :root {
-            --primary-color: #1246ff;
-            --secondary-color: #f0f9ff;
-            --accent-color: #ff6b6b;
-            --text-color: #333;
-            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            --hover-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>重定向中 - 嵌入式智控协会</title>
+	<link href="/assets/css/all.min.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		:root {
+			--primary-color: #1246ff;
+			--secondary-color: #f0f9ff;
+			--accent-color: #ff6b6b;
+			--text-color: #333;
+			--card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+		}
 
-        body {
-            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
+		body {
+			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+			background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+			color: var(--text-color);
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 
-        .navbar {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            border-radius: 0 0 15px 15px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+		.redirect-container {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			padding: 40px;
+			box-shadow: var(--card-shadow);
+			text-align: center;
+			max-width: 500px;
+			width: 90%;
+			margin: 20px;
+		}
 
-        .navbar.scrolled {
-            background-color: var(--primary-color);
-            box-shadow: var(--hover-shadow);
-        }
+		.logo {
+			width: 80px;
+			height: 80px;
+			margin-bottom: 20px;
+		}
 
-        .navbar.scrolled .nav-link,
-        .navbar.scrolled .navbar-brand {
-            color: white !important;
-        }
+		h1 {
+			color: var(--primary-color);
+			font-size: 2rem;
+			margin-bottom: 20px;
+		}
 
-        .section-heading {
-            font-size: 2.8rem;
-            margin-bottom: 40px;
-            color: var(--text-color);
-            text-align: center;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 20px;
-        }
+		p {
+			color: var(--text-color);
+			font-size: 1.1rem;
+			margin-bottom: 30px;
+			line-height: 1.6;
+		}
 
-        .section-heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            border-radius: 2px;
-        }
+		.redirect-link {
+			display: inline-flex;
+			align-items: center;
+			padding: 12px 30px;
+			background: var(--primary-color);
+			color: white;
+			border-radius: 30px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
 
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.7rem;
-            color: var(--primary-color);
-            transition: color 0.3s ease;
-        }
+		.redirect-link:hover {
+			background: #0d3bcc;
+			color: white;
+			transform: translateY(-2px);
+		}
 
-        .nav-link {
-            font-size: 1.1rem;
-            margin-left: 20px;
-            color: var(--text-color);
-            position: relative;
-            transition: color 0.3s ease;
-        }
+		.redirect-link i {
+			margin-right: 8px;
+		}
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
+		.spinner {
+			width: 40px;
+			height: 40px;
+			border: 4px solid #f3f3f3;
+			border-top: 4px solid var(--primary-color);
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin: 20px auto;
+		}
 
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
 
-        .nav-link.active,
-        .nav-link:hover {
-            color: var(--primary-color);
-        }
-
-        .course-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .course-name {
-            color: var(--primary-color);
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 15px;
-            flex-shrink: 0;
-        }
-
-        .course-name::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-color);
-            border-radius: 1.5px;
-        }
-
-        .course-info {
-            color: var(--text-color);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            flex-grow: 1;
-        }
-
-        .course-info strong {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .course-info ul {
-            padding-left: 20px;
-            list-style-type: none;
-        }
-
-        .course-info li {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .course-info li::before {
-            content: '•';
-            color: var(--accent-color);
-            font-size: 1.5em;
-            position: absolute;
-            left: 0;
-            top: -0.2em;
-        }
-
-        .course-info a {
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .course-info a:hover {
-            color: var(--accent-color);
-        }
-
-        .course-info h2 {
-            margin: 15px 0;
-            font-size: 1.4rem;
-            text-align: center;
-        }
-
-        .course-info img {
-            width: 100%;
-            height: 120px;
-            object-fit: contain;
-            margin: 10px 0;
-            background-color: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #2a5fff 100%);
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-            margin-top: 60px;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-        }
-
-        .footer p {
-            margin-bottom: 0;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 200px;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error-message {
-            text-align: center;
-            color: var(--accent-color);
-            padding: 20px;
-            background: rgba(255, 107, 107, 0.1);
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .error-message h3 {
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .error-message p {
-            margin-bottom: 0;
-            color: var(--text-color);
-        }
-
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            padding: 10px 20px;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .back-button:hover {
-            background: #0d3bcc;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .back-button i {
-            margin-right: 8px;
-        }
-
-        .course-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .course-content {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .course-content h1 {
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            text-align: center;
-        }
-
-        .course-content h2 {
-            color: var(--primary-color);
-            margin: 30px 0 20px;
-            font-size: 1.8rem;
-        }
-
-        .course-content h3 {
-            color: var(--text-color);
-            margin: 25px 0 15px;
-            font-size: 1.4rem;
-        }
-
-        .course-content p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .course-content ul, .course-content ol {
-            margin-bottom: 20px;
-            padding-left: 20px;
-        }
-
-        .course-content li {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        .course-content code {
-            background: #f8f9fa;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .course-content pre {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            overflow-x: auto;
-            margin: 20px 0;
-        }
-
-        .course-content pre code {
-            background: none;
-            padding: 0;
-        }
-
-        .course-content blockquote {
-            border-left: 4px solid var(--primary-color);
-            padding-left: 20px;
-            margin: 20px 0;
-            color: #666;
-        }
-
-        .course-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .course-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .course-content th, .course-content td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-        .course-content th {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .course-content tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        @media (max-width: 768px) {
-            .course-content {
-                padding: 20px;
-            }
-
-            .course-content h1 {
-                font-size: 2rem;
-            }
-
-            .course-content h2 {
-                font-size: 1.6rem;
-            }
-
-            .course-content h3 {
-                font-size: 1.3rem;
-            }
-        }
-    </style>
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" data-aos="fade-down" data-aos-duration="1000">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
-                嵌入式智控协会
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/" data-aos="fade-right" data-aos-duration="1000">主页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/mentors" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="100">指导团队</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/itd" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="200">协会共建企业联盟</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/training" data-aos="fade-left" data-aos-duration="1000"
-                            data-aos-delay="300">培训中心</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<div class="redirect-container">
+		<img src="/assets/img/logo.png" alt="Logo" class="logo">
+		<h1>页面已迁移</h1>
+		<p>培训中心页面已迁移至新地址，正在为您跳转...</p>
+		<p style="color: var(--primary-color); font-size: 0.9rem; margin-bottom: 20px;">
+			新地址：<code style="background: rgba(18, 70, 255, 0.1); padding: 4px 8px; border-radius: 4px;"
+				id="newUrl"></code>
+		</p>
+		<div class="spinner"></div>
+		<a href="https://eica.cc/training/" class="redirect-link" id="redirectLink">
+			点击立即跳转
+		</a>
+	</div>
 
-    <div class="container mt-5">
-        <h1 class="section-heading" data-aos="fade-up" data-aos-duration="1000">📚 培训中心 📚</h1>
-        <div id="courseDirectory">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-            </div>
-        </div>
-    </div>
+	<script>
+		// 获取当前域名并设置跳转地址
+		const currentDomain = window.location.hostname;
+		const newUrl = `https://${currentDomain}/training`;
+		document.getElementById('newUrl').textContent = newUrl;
+		document.getElementById('redirectLink').href = 'https://eica.cc/training/';
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 广西科技大学 嵌入式智控协会</p>
-        </div>
-    </footer>
+		// 3秒后自动跳转
+		setTimeout(() => {
+			window.location.href = 'https://eica.cc/training/';
+		}, 3000);
+	</script>
 
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/js/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 100
-        });
-        
-        window.addEventListener("scroll", function () {
-            var navbar = document.querySelector(".navbar");
-            if (window.scrollY > 100) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
-        });
-
-        // 加载课程目录
-        fetch('/training/courses/index.md')
-            .then(response => response.text())
-            .then(markdown => {
-                const html = marked.parse(markdown);
-                document.getElementById('courseDirectory').innerHTML = html;
-            })
-            .catch(error => {
-                document.getElementById('courseDirectory').innerHTML = `
-                    <div class="error-message">
-                        <h3>加载失败</h3>
-                        <p>无法加载课程目录，请稍后重试。</p>
-                    </div>
-                `;
-            });
-    </script>
+	<script>
+		window.location.href = "https://eica.cc/training/";
+	</script>
 </body>
 
-</html> 
+</html>

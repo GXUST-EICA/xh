@@ -2,224 +2,138 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>协会展示与实验室地点导航</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>重定向中 - 嵌入式智控协会</title>
+	<link href="/assets/css/all.min.css" rel="stylesheet">
+	<link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		:root {
+			--primary-color: #1246ff;
+			--secondary-color: #f0f9ff;
+			--accent-color: #ff6b6b;
+			--text-color: #333;
+			--card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+		}
 
-    <link href="assets\css\bootstrap.min.css" rel="stylesheet">
-    <link href="assets\css\all.min.css" rel="stylesheet">
+		body {
+			font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+			background: linear-gradient(135deg, var(--secondary-color) 0%, #ffffff 100%);
+			color: var(--text-color);
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
 
-    <style>
-        /* 通用样式 */
-        body {
-            background: linear-gradient(135deg, #ffcc00, #ff6699);
-            color: #333;
-            font-family:'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            position: relative;
-        }
+		.redirect-container {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			padding: 40px;
+			box-shadow: var(--card-shadow);
+			text-align: center;
+			max-width: 500px;
+			width: 90%;
+			margin: 20px;
+		}
 
-        .navbar .navbar-brand {
-            color: #1246ff;
-            font-weight: 800;
-        }
+		.logo {
+			width: 80px;
+			height: 80px;
+			margin-bottom: 20px;
+		}
 
-        /* 动态渐变背景 */
-        #gradient-background {
-            animation: gradient 15s ease infinite;
-            background: linear-gradient(135deg, #d7ff48, #e6f8e1, #6523ff);
-            background-size: 300% 300%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+		h1 {
+			color: var(--primary-color);
+			font-size: 2rem;
+			margin-bottom: 20px;
+		}
 
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
+		p {
+			color: var(--text-color);
+			font-size: 1.1rem;
+			margin-bottom: 30px;
+			line-height: 1.6;
+		}
 
-            50% {
-                background-position: 100% 50%;
-            }
+		.redirect-link {
+			display: inline-flex;
+			align-items: center;
+			padding: 12px 30px;
+			background: var(--primary-color);
+			color: white;
+			border-radius: 30px;
+			text-decoration: none;
+			font-weight: 600;
+			transition: all 0.3s ease;
+		}
 
-            100% {
-                background-position: 0% 50%;
-            }
-        }
+		.redirect-link:hover {
+			background: #0d3bcc;
+			color: white;
+			transform: translateY(-2px);
+		}
 
-        /* 卡片样式 */
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 5px solid #ff6699;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            position: relative;
-            overflow: hidden;
-            margin: 20px 0;
-        }
+		.redirect-link i {
+			margin-right: 8px;
+		}
 
-        .card img {
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
+		.spinner {
+			width: 40px;
+			height: 40px;
+			border: 4px solid #f3f3f3;
+			border-top: 4px solid var(--primary-color);
+			border-radius: 50%;
+			animation: spin 1s linear infinite;
+			margin: 20px auto;
+		}
 
-        .carousel-item img {
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
 
-        /* 动画按钮 */
-        .btn-animate {
-            border-radius: 25px;
-            background-color: #5bbb52;
-            color: white;
-            font-weight: bold;
-            padding: 10px 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-animate:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            background-color: #ff3385;
-        }
-
-        /* 手绘图案 */
-        .hand-drawn-pattern {
-            background-image: url('https://www.transparenttextures.com/patterns/polaroid.png');
-            opacity: 0.1;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* 雪花样式 */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: rgb(255, 255, 255);
-            font-size: 1em;
-            opacity: 0.8;
-            pointer-events: none;
-        }
-    </style>
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
 </head>
 
 <body>
-    <!-- 渐变背景 -->
-    <div id="gradient-background"></div>
+	<div class="redirect-container">
+		<img src="/assets/img/logo.png" alt="Logo" class="logo">
+		<h1>页面已迁移</h1>
+		<p>培训中心页面已迁移至新地址，正在为您跳转...</p>
+		<p style="color: var(--primary-color); font-size: 0.9rem; margin-bottom: 20px;">
+			新地址：<code style="background: rgba(18, 70, 255, 0.1); padding: 4px 8px; border-radius: 4px;"
+				id="newUrl"></code>
+		</p>
+		<div class="spinner"></div>
+		<a href="https://eica.cc/show/" class="redirect-link" id="redirectLink">
+			点击立即跳转
+		</a>
+	</div>
 
-    <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-        <div class="container-fluid">
-			<a class="navbar-brand" href="/">
-				<img src="/assets/img/logo.png" alt="Logo" height="40" class="d-inline-block align-text-top me-2">
-				嵌入式智控协会
-			</a>
-        </div>
-    </nav>
+	<script>
+		// 获取当前域名并设置跳转地址
+		const currentDomain = window.location.hostname;
+		const newUrl = `https://${currentDomain}/show`;
+		document.getElementById('newUrl').textContent = newUrl;
+		document.getElementById('redirectLink').href = 'https://eica.cc/show/';
 
-    <!-- 实验室地点卡片 -->
-    <div class="container my-5">
-        <div class="row">
-            <!-- 实验室 1 -->
-            
-                <div class="card mb-3">
-                    <div class="hand-drawn-pattern"></div> <!-- 手绘图案背景 -->
-                    <div id="lab1Carousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="https://pic.imgdb.cn/item/67111c4dd29ded1a8c5d1ecc.png" class="d-block w-100"
-                                    alt="实验室1图片1">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://pic.imgdb.cn/item/67111bded29ded1a8c5cbb11.png" class="d-block w-100"
-                                    alt="实验室1图片2">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://pic.imgdb.cn/item/67111c86d29ded1a8c5d4a23.png" class="d-block w-100"
-                                    alt="实验室1图片3">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#lab1Carousel"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">上一张</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#lab1Carousel"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">下一张</span>
-                        </button>
-                    </div>
-                    <div class="card-body text-center"> <!-- 添加文案区域 -->
-                        <h5 class="card-title">实验室地点与设备介绍</h5>
-                        <p class="card-text">本实验室配备了基础的设备，为我们的研究项目提供全面支持。欢迎有志于学习的小伙伴前来参观和交流！</p>
-                    </div>
-                </div>
-            </div>
-        
-    </div>
+		// 3秒后自动跳转
+		setTimeout(() => {
+			window.location.href = 'https://eica.cc/show/';
+		}, 3000);
+	</script>
 
-<!-- 视频介绍 -->
-<div class="container my-5">
-    <div class="card text-center">
-        <div class="card-body">
-            <h2>嵌入式智控协会<br>2024年实验室考核片选<br></h2>
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);">
-                <iframe 
-                    src="https://player.bilibili.com/player.html?bvid=BV12qkqYhEo8&cid=27471252245&autoplay=0&page=1" 
-                    scrolling="no" 
-                    border="0" 
-                    frameborder="no" 
-                    framespacing="0" 
-                    allowfullscreen="true" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                </iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-    
-    <div class="container my-5">
-        <div class="card text-center">
-            <div class="card-body">
-                <h2>实验室在哪里？</h2>
-                <h2>↓</h2>
-                <button class="btn btn-animate" onclick="goToLab('address')">路线导航</button>
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <script src="assets\js\popper.min.js"></script>
-    <script src="assets\js\bootstrap.bundle.min.js"></script>
-    <script>
-        function goToLab(url) {
-            window.location.href = url;
-        }
-    </script>
-    <script>
-    window.location.href = "https://eica.cc/show/";
-    </script>
+	<script>
+		window.location.href = "https://eica.cc/show/";
+	</script>
 </body>
 
 </html>
